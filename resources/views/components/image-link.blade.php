@@ -1,0 +1,1 @@
+<img {{ $attributes }} class="d-block w-100 img-fluid" alt="...">

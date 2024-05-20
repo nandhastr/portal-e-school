@@ -1,0 +1,1 @@
+<a {{ $attributes }} aria-current="page">{{ $slot }}</a>
