@@ -34,7 +34,7 @@
     {{-- container album --}}
     <div class="row justify-content-center align-items-center  border banner-album mb-2">
         <div class="col-md-6 col-sm-12 text-center ">
-            <h1 class="text-primary">Album SMK PGRI Pamijahan </h1>
+            <h1 class="text-primary">Album SMK PGRI Pamijahan 2024 </h1>
             <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quae.</p>
         </div>
     </div>
