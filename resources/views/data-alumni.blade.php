@@ -28,7 +28,7 @@
         </div>
     </div>
     <x-carousel-banner></x-carousel-banner>
-    <x-partials.navbar class="navbar navbar-expand-lg " style="background-image: linear-gradient(to left, blue, white)">
+    <x-partials.navbar class="navbar navbar-expand-lg ">
     </x-partials.navbar>
 
     {{-- container album --}}
@@ -52,7 +52,7 @@
             </div>
         </div>
         <h1 class="text-center m-2">Data Alumni</h1>
-            <x-collaps></x-collaps>
+        <x-collaps></x-collaps>
         <div class="row justify-content-center mt-4">
             <div class="col col-md-3 col-sm-6">
                 <x-card-home>

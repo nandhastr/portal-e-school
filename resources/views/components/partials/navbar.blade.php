@@ -2,9 +2,9 @@
 <nav {{ $attributes }}>
     <div class="container-fluid">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button class="navbar-toggler text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon text-dark"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
@@ -31,16 +31,24 @@
                         </x-nav-link>
                     </li>
                     <li class="nav-item">
-                        <x-nav-link href="/alimni"
+                        <x-nav-link href="/alumni"
                             class="nav-link {{ request()->is('alumni') ? 'active' : '' }}px-5 a-nav">
                             Alumni
                         </x-nav-link>
                     </li>
-                    <li class="nav-item">
-                        <x-nav-link href="/lain"
-                            class="nav-link {{ request()->is('lainnya') ? 'active' : '' }}px-5 a-nav">
-                            lainnya
-                        </x-nav-link>
+                    <li class="nav-item d-flex justify-content-center align-items-center">
+                        <div class="dropdown a-nav">
+                            <x-nav-link
+                                class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
+                                href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                lainnya
+                            </x-nav-link>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Tips Berjualan</a></li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Trik Marketing</a></li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Cuan Di Sekolah</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>

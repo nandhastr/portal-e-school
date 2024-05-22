@@ -28,7 +28,7 @@
         </div>
     </div>
     <x-carousel-banner></x-carousel-banner>
-    <x-partials.navbar class="navbar navbar-expand-lg " style="background-image: linear-gradient(to left, blue, white)">
+    <x-partials.navbar class="navbar navbar-expand-lg ">
     </x-partials.navbar>
 
     {{-- container album --}}
