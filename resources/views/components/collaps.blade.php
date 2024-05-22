@@ -1,7 +1,8 @@
 <div class="d-flex justify-content-center align-items-center">
-    <button class="btn btn-outline-info " type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Lihat Data
-      </button>
+  <button class="btn btn-outline-info btn-show-data-alumni" type="button" data-bs-toggle="collapse"
+    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Lihat Data
+  </button>
 </div>
 <div class="collapse" id="collapseExample">
   <div class="d-flex justify-content-center align-items-center">
