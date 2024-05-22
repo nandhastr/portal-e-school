@@ -11,3 +11,6 @@ Route::get('/', function () {
 Route::get('album', function () {
     return view('album', ['title' => 'album']);
 });
+Route::get('alumni', function () {
+    return view('data-alumni', ['title' => 'Data alumni']);
+});
