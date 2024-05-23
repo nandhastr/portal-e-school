@@ -1,9 +1,8 @@
 <x-main.app>
-    <x-slot name="title">{{ $title }}</x-slot>
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
 
-            <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
+            <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
                 <x-card-home class="card-home">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">Profile Sekolah</h5>
@@ -17,13 +16,16 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-6 col-md-12 col-sm-12 ml-3 mb-4 col-wide">
-                <h1 class="text-center pb-1">Pengumuman</h1>
-                <x-card-home class="card-home">
-                    <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-pengumuman" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold text-pengumuman">nama pengumuman</h5>
-                        <p class="card-text">
+            <div class="col col-lg-6 col-md-12 col-sm-12 mb-4 col-wide">
+                {{-- <h1 class="text-center pb-1">Berita</h1> --}}
+                <x-card-home class="card-berita">
+
+                    <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-berita img-banner3 ml-"
+                        alt="...">
+
+                    <div class="card-body ">
+                        <h5 class="card-title fw-bold text-berita">judul Berita</h5>
+                        <p class="card-text text-berita">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste et exercitationem nesciunt
                             assumenda consequuntur error quia totam molestiae. In recusandae sed, quisquam accusamus
                             consequatur aliquam distinctio quo porro rerum eaque eligendi reprehenderit voluptatibus,
@@ -33,8 +35,8 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-2 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
+            <div class="col col-lg-2 col-md-12 col-sm-12 mb-4">
+                <x-card-home class="card-berita">
                     <img src="{{ asset('assets/img/user1.jpg') }}" class="card-img-top img-fluid" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Kepala Sekolah</h5>
@@ -45,23 +47,11 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-12 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
+            <div class="col col-lg-12 col-md-12 col-sm-12 mb-4">
+                <x-card-home class="card-berita">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </x-card-home>
-            </div>
-            <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">Youtube</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the
                             card's content.</p>
@@ -70,10 +60,22 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-home">
+                <x-card-home class="card-berita">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
+                        <h5 class="card-title">Tranding topik</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </x-card-home>
+            </div>
+            <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
+                <x-card-home class="card-berita">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Artikel Terkini</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the
                             card's content.</p>

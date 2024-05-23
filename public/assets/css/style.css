@@ -1,5 +1,12 @@
+:root {
+    --bg-white: #ffff;
+    --primary-color: #43b0d2;
+    --waring-color: #fdd503;
+    --underline-gradient: linear-gradient(to right, #3498db, #2ecc71, #e74c3c);
+}
 /* styles.css */
 /* dark mode body */
+
 #theme-container {
     transition: background-color 0.9s, color 0.8s, background-image 1.5s;
 }
@@ -31,8 +38,27 @@
     height: 20rem;
     width: 100%;
 }
+
+.top-bar {
+    background-color: var(--primary-color);
+}
 .navbar {
-    background-image: linear-gradient(to left top, #1259b8, #dfdfdf, #1259b8);
+    background-color: var(--primary-color);
+    /* background-image: linear-gradient(
+        to left top,
+        var(--primary-color),
+        #ffffff 
+    );*/
+}
+
+.active {
+    height: auto;
+    /* background-color: var(--bg-white); */
+    /* text-decoration: underline; */
+    /* text-decoration-color: var(--underline-linear-color); */
+    color: var(--waring-color) !important;
+    border-radius: 20px;
+    filter: drop-shadow(2px 3px 3px var(--waring-color));
 }
 /* Mengubah warna ikon hamburger menjadi hitam */
 .navbar-toggler-icon {
@@ -46,6 +72,7 @@
 
 .a-nav {
     font-weight: bold;
+    z-index: 10;
 }
 .a-nav2 {
     color: rgb(75, 75, 75) !important;
@@ -87,7 +114,7 @@
 }
 .card-home {
     border-radius: 20px;
-    box-shadow: 3px 3px 20px #000;
+    box-shadow: 3px 3px 6px #000;
 }
 .card-app {
     border-radius: 20px;
@@ -98,6 +125,27 @@
     box-shadow: 4px 4px 9px #000;
     transform: scale(1.1) rotate(-2deg);
     transition: 0.6s;
+}
+.card-berita {
+    /* position: relative; */
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 3px 3px 6px #000;
+}
+.img-berita {
+    /* border: 2px solid black; */
+    width: 10rem;
+    /* position: absolute; */
+    /* margin-left: 30% !important; */
+    z-index: -1;
+
+    opacity: 0.5;
+}
+.text-berita {
+    top: 0;
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-show-data-alumni {

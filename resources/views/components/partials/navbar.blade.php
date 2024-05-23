@@ -21,8 +21,12 @@
                     <li class="nav-item">
                         <x-nav-link href="/album"
                             class="nav-link {{ request()->is('album') ? 'active' : '' }} px-5 a-nav">
-                            Album
-                            Foto</x-nav-link>
+                            Album Foto</x-nav-link>
+                    </li>
+                    <li class="nav-item">
+                        <x-nav-link href="/alumni"
+                            class="nav-link {{ request()->is('alumni') ? 'active' : '' }} px-5 a-nav">
+                            Alumni</x-nav-link>
                     </li>
                     <li class="nav-item">
                         <x-nav-link href="/berita"
@@ -30,12 +34,7 @@
                             Berita
                         </x-nav-link>
                     </li>
-                    <li class="nav-item">
-                        <x-nav-link href="/alumni"
-                            class="nav-link {{ request()->is('alumni') ? 'active' : '' }}px-5 a-nav">
-                            Alumni
-                        </x-nav-link>
-                    </li>
+
                     <li class="nav-item d-flex justify-content-center align-items-center">
                         <div class="dropdown a-nav">
                             <x-nav-link
