@@ -16,7 +16,7 @@
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-    <div class="footer-menu ">
+    <div class="footer-menu  ">
         <div class="container-fluid py-2">
             <div class="row m-4 row-footer ">
                 <div class="col col-footer col-md-3  text-light">
