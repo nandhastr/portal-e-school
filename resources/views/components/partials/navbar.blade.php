@@ -30,9 +30,8 @@
                     </li>
                     <li class="nav-item">
                         <x-nav-link href="/berita"
-                            class="nav-link {{ request()->is('berita') ? 'active' : '' }}px-5 a-nav">
-                            Berita
-                        </x-nav-link>
+                            class="nav-link {{ request()->is('berita') ? 'active' : '' }} px-5 a-nav">
+                            Berita</x-nav-link>
                     </li>
 
                     <li class="nav-item d-flex justify-content-center align-items-center">
