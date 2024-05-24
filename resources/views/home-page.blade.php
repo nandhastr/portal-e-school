@@ -1,18 +1,17 @@
-<x-main.app>
+<x-main.app class="navbar navbar-expand-lg ">
     <x-slot name="title">{{ $title }}</x-slot>
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
-
             <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
                 <x-card-home class="card-home">
                     <div class="card-body">
                         <h5 class="card-title fw-bold">Profile Sekolah</h5>
                         <p class="card-text">
-                            <li class="mt-1"><a href="">Sejarah Sekolah</a></li>
-                            <li class="mt-1"><a href="">Visi & Misi</a></li>
-                            <li class="mt-1"><a href="">Struktur Organisasi</a></li>
-                            <li class="mt-1"><a href="">Guru Dan Karyawan</a></li>
-                            <li class="mt-1"><a href="">Program Sekolah</a></li>
+                            <li class="mt-1"><a href="/sejarah">Sejarah Sekolah</a></li>
+                            <li class="mt-1"><a href="/visi">Visi & Misi</a></li>
+                            <li class="mt-1"><a href="/struktur-organisasi">Struktur Organisasi</a></li>
+                            <li class="mt-1"><a href="/tendik">Guru Dan Karyawan</a></li>
+                            <li class="mt-1"><a href="/program">Program Sekolah</a></li>
                         </p>
                     </div>
                 </x-card-home>
@@ -35,7 +34,10 @@
             </div>
             <div class="col col-lg-2 col-md-12 col-sm-12 ml-3 mb-4">
                 <x-card-home class="card-home">
-                    <img src="{{ asset('assets/img/user1.jpg') }}" class="card-img-top img-fluid" alt="...">
+                    <div class="gallery-item">
+                        <img src="{{ asset('assets/img/user1.jpg') }}"
+                            class="card-img-top img-fluid img-kepsek gallery-img" alt="...">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Kepala Sekolah</h5>
                         <p class="card-text">

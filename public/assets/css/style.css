@@ -172,7 +172,7 @@
     text-decoration: underline;
     text-transform: capitalize;
 }
-.img-fluid {
+.img-kepsek {
     border: 6px solid transparent;
     border-image: linear-gradient(
             to left top,
@@ -181,5 +181,68 @@
             rgb(0, 0, 0)
         )
         1;
-    /* border-radius: 8%; */
 }
+.img-sejarah {
+    position: relative;
+    animation: moveImage 5s infinite alternate ease-in-out;
+}
+@keyframes moveImage {
+    0% {
+        transform: translateY(0);
+        /* transform: scale(1.1); */
+    }
+    100% {
+        transform: translateY(-20px);
+        filter: drop-shadow(3px 5px 6px rgb(113, 113, 113));
+    }
+}
+.sejarah-page,
+.tendik-page,
+.visi-page {
+    margin-top: 10rem;
+    margin-bottom: 15rem;
+}
+.p-sejarah {
+    margin-top: 3rem;
+
+    justify-content: center;
+}
+
+/* galery tendik */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-img {
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* end galery tendik */

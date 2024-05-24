@@ -1,4 +1,4 @@
-<x-main.app>
+<x-main.app class="navbar navbar-expand-lg ">
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
 

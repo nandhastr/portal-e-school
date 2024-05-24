@@ -1,4 +1,4 @@
-<x-main.app>
+<x-main.app class="navbar navbar-expand-lg ">
     {{-- container album --}}
     <div class="row justify-content-center align-items-center  border banner-album mb-2">
         <div class="col-md-6 col-sm-12 text-center ">
