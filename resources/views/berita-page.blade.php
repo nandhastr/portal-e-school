@@ -3,18 +3,7 @@
         <div class="row justify-content-center">
 
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-home">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Profile Sekolah</h5>
-                        <p class="card-text">
-                            <li class="mt-1"><a href="">Sejarah Sekolah</a></li>
-                            <li class="mt-1"><a href="">Visi & Misi</a></li>
-                            <li class="mt-1"><a href="">Struktur Organisasi</a></li>
-                            <li class="mt-1"><a href="">Guru Dan Karyawan</a></li>
-                            <li class="mt-1"><a href="">Program Sekolah</a></li>
-                        </p>
-                    </div>
-                </x-card-home>
+                <x-profile-sekolah></x-profile-sekolah>
             </div>
             <div class="col col-lg-6 col-md-12 col-sm-12 mb-4 col-wide">
                 {{-- <h1 class="text-center pb-1">Berita</h1> --}}

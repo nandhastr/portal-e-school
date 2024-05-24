@@ -1,7 +1,7 @@
 {{ $slot }}
 {{-- content --}}
 <!-- Content Wrapper. Contains page content -->
-<div class="p-2 fixed top-bar">
+<div class="p-2 fixed top-bar ">
     <div class="container-fluid pl-5">
         <div class="row justify-content-center align-items-center">
             <div class="col-md-2 col-sm-2 brand text-white text-xl">E-School</div>
@@ -15,7 +15,7 @@
     </div>
 </div>
 <div id="theme-container ">
-    <div class="row ">
+    <div class="row">
         <div class="col ">
             <x-image-link src="{{ asset('assets\dist\img\photo4.jpg') }}" class="img-banner">
             </x-image-link>
