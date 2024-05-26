@@ -6,7 +6,9 @@
 }
 /* styles.css */
 /* dark mode body */
-
+summary {
+    color: var(--primary-color);
+}
 #theme-container {
     transition: background-color 0.9s, color 0.8s, background-image 1.5s;
 }
@@ -43,12 +45,15 @@
     background-color: var(--primary-color);
 }
 .navbar {
+    position: sticky;
+    z-index: 100;
+    top: 1px;
     background-color: var(--primary-color);
-    /* background-image: linear-gradient(
-        to left top,
-        var(--primary-color),
-        #ffffff 
-    );*/
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.navbar-scroll {
+    filter: drop-shadow(3px 3px 6px #f000);
 }
 
 .active {
@@ -111,6 +116,13 @@
 }
 .card {
     border-radius: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 .card-home {
     border-radius: 20px;
@@ -198,7 +210,8 @@
 }
 .sejarah-page,
 .tendik-page,
-.visi-page {
+.visi-page,
+.article-page {
     margin-top: 10rem;
     margin-bottom: 15rem;
 }
@@ -246,3 +259,22 @@
 }
 
 /* end galery tendik */
+
+/* article  */
+.article-page p {
+    text-align: justify;
+}
+#img-articel-jualan {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    position: relative;
+    animation: moveImage 5s infinite alternate ease-in-out;
+    border-radius: 20px;
+}
+
+#img-articel-jualan:hover {
+    opacity: 0.5;
+}
+
+/* end articel */

@@ -82,6 +82,7 @@
 </script>
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.min.js"></script>
+<script src="{{ asset('assets/js/script.js') }}"></script>
 </body>
 
 </html>

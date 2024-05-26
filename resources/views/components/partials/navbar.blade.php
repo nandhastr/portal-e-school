@@ -42,9 +42,12 @@
                                 lainnya
                             </x-nav-link>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Tips Berjualan</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Trik Marketing</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="#">Cuan Di Sekolah</a></li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-berjualan">Tips
+                                        Berjualan</a></li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-marketing">Trik
+                                        Marketing</a></li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-bisnis">Cuan Di
+                                        Sekolah</a></li>
                             </ul>
                         </div>
                     </li>
