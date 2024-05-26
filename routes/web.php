@@ -40,6 +40,15 @@ Route::get('/tendik', function () {
 Route::get('/program', function () {
     return view('program-page', ['title' => 'Halaman Program Sekolah']);
 });
+Route::get('/article-berjualan', function () {
+    return view('article-berjualan-page', ['title' => 'Halaman Program Sekolah']);
+});
+Route::get('/article-marketing', function () {
+    return view('article-marketing-page', ['title' => 'Halaman Program Sekolah']);
+});
+Route::get('/article-bisnis', function () {
+    return view('article-bisnis-page', ['title' => 'Halaman Program Sekolah']);
+});
 
 
 

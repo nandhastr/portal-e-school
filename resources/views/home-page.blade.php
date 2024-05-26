@@ -1,4 +1,4 @@
-<x-main.app class="navbar navbar-expand-lg ">
+<x-main.app class="navbar navbar-expand-lg">
     <x-slot name="title">{{ $title }}</x-slot>
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
@@ -6,8 +6,8 @@
                 <x-profile-sekolah></x-profile-sekolah>
             </div>
             <div class="col col-lg-6 col-md-12 col-sm-12 ml-3 mb-4 col-wide">
-                <h1 class="text-center pb-1">Pengumuman</h1>
-                <x-card-home class="card-home">
+                <x-card-home class="card card-home ">
+                    <h1 class="text-center ">Pengumuman</h1>
                     <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-pengumuman" alt="...">
                     <div class="card-body">
                         <h5 class="card-title fw-bold text-pengumuman">nama pengumuman</h5>
@@ -22,7 +22,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-2 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
+                <x-card-home class="card card-home ">
                     <div class="gallery-item">
                         <img src="{{ asset('assets/img/user1.jpg') }}"
                             class="card-img-top img-fluid img-kepsek gallery-img" alt="...">
@@ -37,7 +37,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-12 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
+                <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -49,7 +49,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card-home">
+                <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -61,7 +61,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-home">
+                <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -74,5 +74,4 @@
             </div>
         </div>
     </div>
-
 </x-main.app>

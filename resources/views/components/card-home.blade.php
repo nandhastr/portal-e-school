@@ -1,3 +1,3 @@
-<div  {{$attributes}} class="card card-app" >
+<div {{$attributes}} class="card card-app">
     {{ $slot }}
 </div>

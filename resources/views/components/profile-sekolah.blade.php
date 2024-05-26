@@ -1,4 +1,4 @@
-<x-card-home class="card-home">
+<x-card-home class="card card-home">
     <div class="card-body">
         <h5 class="card-title fw-bold">Profile Sekolah</h5>
         <p class="card-text">
