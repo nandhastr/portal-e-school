@@ -2,10 +2,11 @@
     <x-slot name="title">{{ $title }}</x-slot>
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
-            <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
+            <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
+                <x-card-kepsek></x-card-kepsek>
                 <x-profile-sekolah></x-profile-sekolah>
             </div>
-            <div class="col col-lg-6 col-md-12 col-sm-12 ml-3 mb-4 col-wide">
+            <div class="col col-lg-9 col-md-12 col-sm-12  mb-4 col-wide">
                 <x-card-home class="card card-home ">
                     <h1 class="text-center ">Pengumuman</h1>
                     <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-pengumuman" alt="...">
@@ -21,22 +22,8 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-2 col-md-12 col-sm-12 ml-3 mb-4">
-                <x-card-home class="card card-home ">
-                    <div class="gallery-item">
-                        <img src="{{ asset('assets/img/user1.jpg') }}"
-                            class="card-img-top img-fluid img-kepsek gallery-img" alt="...">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Kepala Sekolah</h5>
-                        <p class="card-text">
-                            <b>Nama Kepala sekolah</b>
-                        </p>
-                        <a href="#" class="btn btn-outline-info">Lihat Profile</a>
-                    </div>
-                </x-card-home>
-            </div>
-            <div class="col col-lg-12 col-md-12 col-sm-12 ml-3 mb-4">
+
+            <div class="col col-lg-12 col-md-12 col-sm-12  mb-4">
                 <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
@@ -48,7 +35,7 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-3 col-md-12 col-sm-12 ml-3 mb-4">
+            <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
                 <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">

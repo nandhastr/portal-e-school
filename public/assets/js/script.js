@@ -1,46 +1,44 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const toggleButton = document.getElementById("dark-mode-toggle");
-    const themeContainer = document.getElementById("theme-container");
+$(document).ready(function () {
+    // Dark mode toggle
+    const $toggleButton = $("#dark-mode-toggle");
+    const $themeContainer = $("#theme-container");
 
-    // Check for saved user preference, if any, on load of the website
+    // cek history user , agar tetap dimode yang sama ketika user merefresh
     const currentTheme = localStorage.getItem("theme");
     if (currentTheme) {
-        themeContainer.classList.add(currentTheme);
+        $themeContainer.addClass(currentTheme);
     } else {
-        themeContainer.classList.add("light-mode");
+        $themeContainer.addClass("light-mode");
     }
 
-    toggleButton.addEventListener("click", () => {
-        themeContainer.classList.toggle("dark-mode");
-        themeContainer.classList.toggle("light-mode");
+    $toggleButton.on("click", function () {
+        $themeContainer.toggleClass("dark-mode light-mode");
 
         let theme = "light-mode";
-        if (themeContainer.classList.contains("dark-mode")) {
+        if ($themeContainer.hasClass("dark-mode")) {
             theme = "dark-mode";
         }
         localStorage.setItem("theme", theme);
     });
-});
-//  scroll navbar
-document.addEventListener("DOMContentLoaded", function () {
-    const navbar = document.querySelector(".navbar");
 
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 0) {
-            navbar.classList.add("navbar-scroll");
+    // Scroll navbar
+    const $navbar = $(".navbar");
+
+    $(window).on("scroll", function () {
+        if ($(this).scrollTop() > 0) {
+            $navbar.addClass("navbar-scroll");
         } else {
-            navbar.classList.remove("navbar-scroll");
+            $navbar.removeClass("navbar-scroll");
         }
     });
-});
 
-// end scroll navbar
-// animasi card dan img
-document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".card");
+    // Animasi card dan img
+    const $elements = $(
+        ".card, .h-sejarah, .p-sejarah, .img-sejarah, .h-berjualan, .p-berjualan, .h-cuan, .p-cuan, .h-market, .p-market "
+    );
 
-    function isInViewport(element) {
-        const rect = element.getBoundingClientRect();
+    function isInViewport($element) {
+        const rect = $element[0].getBoundingClientRect();
         return (
             rect.top >= 0 &&
             rect.left >= 0 &&
@@ -52,14 +50,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function showCard() {
-        cards.forEach((card) => {
-            if (isInViewport(card)) {
-                card.classList.add("show");
+        $elements.each(function () {
+            const $card = $(this);
+            if (isInViewport($card)) {
+                $card.addClass("show");
             }
         });
     }
-    showCard();
-    window.addEventListener("scroll", showCard);
-});
 
-// end animasi card img
+    showCard();
+    $(window).on("scroll", showCard);
+});
