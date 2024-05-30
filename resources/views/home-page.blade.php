@@ -1,5 +1,5 @@
 <x-main.app class="navbar navbar-expand-lg">
-    <x-slot name="title">{{ $title }}</x-slot>
+    {{-- <x-slot name="title">{{ $title }}</x-slot> --}}
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
             <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
