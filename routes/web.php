@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ElearningController;
 use App\Http\Controllers\portalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -14,21 +15,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// route view
-Route::get('/', [portalController::class,'index'])->name('/');
-Route::get('/album', [portalController::class,'album'])->name('album');
-Route::get('/alumni', [portalController::class,'alumni'])->name('alumni');
-Route::get('/berita', [portalController::class,'berita'])->name('berita');
-Route::get('/sejarah', [portalController::class,'sejarah'])->name('sejarah');
-Route::get('/visi', [portalController::class,'visi'])->name('visi');
-Route::get('/struktur-organisasi', [portalController::class,'struktur_organisasi'])->name('struktur-organisasi');
-Route::get('/tendik', [portalController::class,'tendik'])->name('tendik');
-Route::get('/program', [portalController::class,'program'])->name('program');
-Route::get('/program', [portalController::class,'program'])->name('program');
-Route::get('/article-berjualan', [portalController::class,'article_berjualan'])->name('article-berjualan');
-Route::get('/article-marketing', [portalController::class,'article_marketing'])->name('article-marketing');
-Route::get('/article-bisnis', [portalController::class,'article_bisnis'])->name('article-bisnis');
+// route view portal
+Route::get('/', [portalController::class, 'index'])->name('/');
+Route::get('/album', [portalController::class, 'album'])->name('album');
+Route::get('/alumni', [portalController::class, 'alumni'])->name('alumni');
+Route::get('/berita', [portalController::class, 'berita'])->name('berita');
+Route::get('/sejarah', [portalController::class, 'sejarah'])->name('sejarah');
+Route::get('/visi', [portalController::class, 'visi'])->name('visi');
+Route::get('/struktur-organisasi', [portalController::class, 'struktur_organisasi'])->name('struktur-organisasi');
+Route::get('/tendik', [portalController::class, 'tendik'])->name('tendik');
+Route::get('/program', [portalController::class, 'program'])->name('program');
+Route::get('/program', [portalController::class, 'program'])->name('program');
+Route::get('/article-berjualan', [portalController::class, 'article_berjualan'])->name('article-berjualan');
+Route::get('/article-marketing', [portalController::class, 'article_marketing'])->name('article-marketing');
+Route::get('/article-bisnis', [portalController::class, 'article_bisnis'])->name('article-bisnis');
 
-
+// view e-learning
+Route::get('/e-learning', [ElearningController::class, 'index'])->name('e-learning');
 
 require __DIR__ . '/auth.php';

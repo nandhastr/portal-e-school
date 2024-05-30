@@ -8,9 +8,9 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
-            <div class="row mb-2">
+            {{-- <div class="row mb-2">
                 <div class="col-sm-6">
-                    {{-- disini nama judul halaman --}}
+                    disini nama judul halaman
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -18,7 +18,7 @@
                         <li class="breadcrumb-item active">{{ $title }}</li>
                     </ol>
                 </div><!-- /.col -->
-            </div><!-- /.row -->
+            </div><!-- /.row --> --}}
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
