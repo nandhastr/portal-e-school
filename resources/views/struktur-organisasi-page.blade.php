@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="CodeHim">
-    <title> Responsive organogram flow chart CSS only Example </title>
+    <title> E-school </title>
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css2/style2.css') }}">
     <!-- Demo CSS (No need to include it into your project) -->
