@@ -16,6 +16,12 @@ Route::middleware('auth')->group(function () {
 Route::get('/', function () {
     return view('home-page', ['title' => 'Home']);
 });
+Route::get('/e-learning', function () {
+    return view('elearning.dashboard-page', [
+        'title' => 'dashboard',
+        'name' => 'Nanda'
+    ]);
+});
 Route::get('/album', function () {
     return view('album-page', ['title' => 'album']);
 });
