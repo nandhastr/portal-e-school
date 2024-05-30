@@ -4,13 +4,22 @@
 <div class="p-2 fixed top-bar ">
     <div class="container-fluid pl-5">
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-2 col-sm-2 brand text-white text-xl">E-School</div>
-            <div class="col-md-2 col-sm-4 ms-auto text-white">
-                <span>Email: email@gmail.com</span>
-            </div>
-            <div class="col-md-6 col-sm-4 text-white">
-                <span>Telp: +6241434234</span>
-            </div>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-white text-xl" href="#">E-School</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <div class="navbar-nav">
+                            <span class="nav-link">Email: email@gmail.com</span>
+                            <span class="nav-link">Telp: +6241434234</span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </div>
     </div>
 </div>

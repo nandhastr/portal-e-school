@@ -34,7 +34,7 @@
                             Berita</x-nav-link>
                     </li>
 
-                    <li class="nav-item d-flex justify-content-center align-items-center">
+                    <li class="nav-item ">
                         <div class="dropdown a-nav">
                             <x-nav-link
                                 class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"

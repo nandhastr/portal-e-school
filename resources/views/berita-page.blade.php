@@ -1,17 +1,13 @@
 <x-main.app class="navbar navbar-expand-lg ">
     <div class="container mt-5 mb-5">
         <div class="row justify-content-center">
-
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
                 <x-profile-sekolah></x-profile-sekolah>
             </div>
-            <div class="col col-lg-6 col-md-12 col-sm-12 mb-4 col-wide">
-                {{-- <h1 class="text-center pb-1">Berita</h1> --}}
-                <x-card-home class="card-berita">
-
+            <div class="col col-lg-9 col-md-12 col-sm-12 mb-4 col-wide">
+                <x-card-home class="card card-berita">
                     <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-berita img-banner3 ml-"
                         alt="...">
-
                     <div class="card-body ">
                         <h5 class="card-title fw-bold text-berita">judul Berita</h5>
                         <p class="card-text text-berita">
@@ -24,20 +20,9 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-2 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-berita">
-                    <img src="{{ asset('assets/img/user1.jpg') }}" class="card-img-top img-fluid" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Kepala Sekolah</h5>
-                        <p class="card-text">
-                            <b>Nama Kepala sekolah</b>
-                        </p>
-                        <a href="#" class="btn btn-outline-info">Lihat Profile</a>
-                    </div>
-                </x-card-home>
-            </div>
+
             <div class="col col-lg-12 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-berita">
+                <x-card-home class="card card-berita">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Youtube</h5>
@@ -49,7 +34,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-berita">
+                <x-card-home class="card card-berita">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Tranding topik</h5>
@@ -61,7 +46,7 @@
                 </x-card-home>
             </div>
             <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
-                <x-card-home class="card-berita">
+                <x-card-home class="card card-berita">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Artikel Terkini</h5>
