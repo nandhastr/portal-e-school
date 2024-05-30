@@ -43,6 +43,19 @@ summary {
 
 .top-bar {
     background-color: var(--primary-color);
+    color: var(--bg-white) !important;
+}
+.sidebar {
+    background-color: var(--primary-color);
+}
+.main-sidebar {
+    background-color: var(--primary-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1000;
 }
 .navbar {
     position: sticky;

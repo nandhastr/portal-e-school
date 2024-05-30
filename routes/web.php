@@ -30,4 +30,5 @@ Route::get('/article-marketing', [portalController::class,'article_marketing'])-
 Route::get('/article-bisnis', [portalController::class,'article_bisnis'])->name('article-bisnis');
 
 
+
 require __DIR__ . '/auth.php';

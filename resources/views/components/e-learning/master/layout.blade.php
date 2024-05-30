@@ -1,6 +1,6 @@
-<x-header></x-header>
-<x-navbar></x-navbar>
-<x-sidebar></x-sidebar>
+<x-partials.header :title="$title"></x-partials.header>
+<x-e-learning.partials.navbar></x-e-learning.partials.navbar>
+<x-e-learning.partials.sidebar></x-e-learning.partials.sidebar>
 
 {{-- content --}}
 <!-- Content Wrapper. Contains page content -->
@@ -10,19 +10,25 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    {{ $slot }}
+                    {{-- disini nama judul halaman --}}
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Starter Page</li>
+                        <li class="breadcrumb-item active">{{ $title }}</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            {{ $slot }}
+        </div>
+    </section>
 </div>
 
 
-<x-footer></x-footer>
+<x-e-learning.partials.footer></x-e-learning.partials.footer>
