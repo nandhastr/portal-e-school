@@ -17,6 +17,19 @@ class ElearningController extends Controller
         ]);
     }
 
+    public function all_class()
+    {
+        return view('elearning.all-class-page', [
+            'title' => 'Semua Kelas'
+        ]);
+    }
+    public function my_class()
+    {
+        return view('elearning.my-class-page', [
+            'title' => 'Kelas Saya'
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
