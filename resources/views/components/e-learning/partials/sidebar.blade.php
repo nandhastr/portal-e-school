@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary fixed-top elevation-4 ">
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ route('/') }}" class="brand-link">
         <img src="{{ asset('assets/dist/img/avatar.png') }}" alt="" class="brand-image img-circle elevation-3"
@@ -8,10 +8,9 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar ">
+    <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
             <div class="info">
                 <a href="{{ route('/') }}" class="d-block">SMK PGRI Pamijahan Bogor</a>
             </div>
@@ -20,24 +19,19 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <x-nav-link href="/e-learning" class="nav-link {{ request()->is('e-learning') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Dashboard
-                        </p>
+                        <p>Dashboard</p>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
                     <x-nav-link href="/akademi" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
                         <i class="fa-solid fa-graduation-cap"></i>
-                        <p>
-                            Akademi
-                            <i class="fas fa-angle-left right"></i>
-                        </p>
+                        <p>Akademi<i class="fas fa-angle-left right"></i></p>
                     </x-nav-link>
+                    {{-- ini side bar untuk siswa --}}
+                    @if($user->role !== 'admin' && $user->role !== 'guru')
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <x-nav-link href="/all-class"
@@ -49,10 +43,69 @@
                         <li class="nav-item">
                             <x-nav-link href="/ujian" class="nav-link {{ request()->is('ujian') ? 'active' : '' }}">
                                 <i class="fa-regular fa-pen-to-square"></i>
-                                <p>Ujian</p>
+                                <p>Ujian<i class="fas fa-angle-left right"></i></p>
+                            </x-nav-link>
+                            <ul class="nav nav-treeview px-4">
+                                <li class="nav-item">
+                                    <form id="formJenisUjian">
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="uts">
+                                                <x-nav-link href="/uts" class="nav-link">
+                                                    <i class="fa-solid fa-swatchbook px-2"></i>
+                                                    <p>UTS</p>
+                                                </x-nav-link>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="uas">
+                                                <x-nav-link href="/uas" class="nav-link">
+                                                    <i class="fa-solid fa-swatchbook px-2"></i>
+                                                    <p>UAS</p>
+                                                </x-nav-link>
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="un">
+                                                <x-nav-link href="/un" class="nav-link">
+                                                    <i class="fa-solid fa-swatchbook px-2"></i>
+                                                    <p>UN</p>
+                                                </x-nav-link>
+                                            </label>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    @endif
+                    {{-- end side bar siswa --}}
+
+
+                    {{-- side bar admin --}}
+                    @if($user->role !== 'siswa' && $user->role !== 'guru')
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <x-nav-link href="/all-class"
+                                class="nav-link {{ request()->is('all-class') ? 'active' : '' }}">
+                                <i class="fa-solid fa-swatchbook"></i>
+                                <p>side admin</p>
                             </x-nav-link>
                         </li>
                     </ul>
+                    @endif
+                    {{-- end sidebar admin --}}
+                    {{-- side bar guru --}}
+                    @if($user->role !== 'siswa' && $user->role !== 'admin')
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <x-nav-link href="/all-class"
+                                class="nav-link {{ request()->is('all-class') ? 'active' : '' }}">
+                                <i class="fa-solid fa-swatchbook"></i>
+                                <p>side guru</p>
+                            </x-nav-link>
+                        </li>
+                    </ul>
+                    @endif
                 </li>
             </ul>
         </nav>

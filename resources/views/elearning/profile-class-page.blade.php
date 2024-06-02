@@ -67,9 +67,10 @@
                             <div class="card " style="height: auto">
                                 <h5 class="card-text bg-info px-2">{{ 'Nilai' }}</h5>
                                 <div class="row mb-4 px-2">
-                                    <div class="col-4 px-2"><a href="" class="btn link-nilai-tugas">Tugas</a></div>
-                                    <div class="col-4 px-2"><a href="" class="btn link-nilai-uts">UTS</a></div>
-                                    <div class="col-4 px-2"><a href="" class="btn link-nilai-uas">UAS</a></div>
+                                    <div class="col-3 px-2"><a href="" class="btn link-nilai-tugas">Tugas</a></div>
+                                    <div class="col-3 px-2"><a href="" class="btn link-nilai-uts">UTS</a></div>
+                                    <div class="col-3 px-2"><a href="" class="btn link-nilai-uas">UAS</a></div>
+                                    <div class="col-3 px-2"><a href="" class="btn link-nilai-un">UN</a></div>
                                 </div>
                                 <div class="row modal-nilai-tugas" style="display: none">
                                     <div class="col col-12  ">
@@ -116,6 +117,21 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="row modal-nilai-un" style="display: none">
+                                    <div class="col col-12  ">
+                                        <h6 class="px-2 fw-bold ">Nilai UN</h6>
+                                        <table class="table">
+                                            <th>Mata Pelajaran</th>
+                                            <th>Nilai</th>
+                                            <th>tanggal pelaksanaan</th>
+                                            <tr>
+                                                <td>Matematika</td>
+                                                <td>90</td>
+                                                <td>2022-02-02</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -139,18 +155,28 @@
             $('.modal-nilai-tugas').toggle();
             $('.modal-nilai-uts').hide();
             $('.modal-nilai-uas').hide();
+            $('.modal-nilai-un').hide();
             });
             $('.link-nilai-uts').click(function (e) { 
                 e.preventDefault();
             $('.modal-nilai-uts').toggle();
             $('.modal-nilai-tugas').hide();
             $('.modal-nilai-uas').hide();
+            $('.modal-nilai-un').hide();
             });
             $('.link-nilai-uas').click(function (e) { 
                 e.preventDefault();
             $('.modal-nilai-uas').toggle();
             $('.modal-nilai-uts').hide();
             $('.modal-nilai-tugas').hide();
+            $('.modal-nilai-un').hide();
+            });
+            $('.link-nilai-un').click(function (e) { 
+                e.preventDefault();
+            $('.modal-nilai-un').toggle();
+            $('.modal-nilai-uts').hide();
+            $('.modal-nilai-tugas').hide();
+            $('.modal-nilai-uas').hide();
             });
         })
 </script>
