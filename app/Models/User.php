@@ -45,13 +45,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function student()
+    public function siswa()
     {
-        return $this->hasOne(students::class);
+        return $this->hasOne(Siswa::class);
     }
 
-    public function teacher()
+    public function guru()
     {
-        return $this->hasOne(teachers::class);
+        return $this->hasOne(Guru::class);
     }
 }

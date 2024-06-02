@@ -8,45 +8,77 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     */
-    public function up(): void
+     */ public function up(): void
     {
-        // Tabel untuk menyimpan data siswa
-        Schema::create('students', function (Blueprint $table) {
+        // Tabel untuk menyimpan data kelas
+        Schema::create('tbl_kelas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('class_id')->nullable();
-            $table->string('batch')->nullable();
-            $table->string('internship_status')->nullable();
+            $table->string('nama');
+            $table->string('tingkat');
+            $table->timestamps();
+        });
+
+        // Tabel untuk menyimpan data siswa
+        Schema::create('tbl_siswa', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('id_kelas')->nullable(); // Tambahkan kolom untuk kelas
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade'); // Relasi ke tabel kelas
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->string('angkatan')->nullable();
+            $table->string('status')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('nama_ibu')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('sekolah_sebelumnya')->nullable();
+            $table->string('nisn')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
+            $table->year('tahun_masuk')->nullable();
+            $table->string('kelas_sekarang')->nullable();
+            $table->string('status_beasiswa')->nullable();
+            $table->text('catatan_prestasi')->nullable();
+            $table->text('catatan_disiplin')->nullable();
+            $table->text('informasi_kesehatan')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan data guru
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('specialization')->nullable();
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->string('spesialisasi')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('phone')->nullable();
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
+            $table->string('photo')->nullable();
+            $table->date('tanggal_mulai')->nullable();
+            $table->string('kualifikasi')->nullable();
+            $table->integer('pengalaman')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan materi-materi mata pelajaran
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('tbl_materi', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content')->nullable();
-            $table->string('subject')->nullable();
+            $table->string('judul');
+            $table->text('konten')->nullable();
+            $table->string('mata_pelajaran')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan tugas-tugas yang diunggah oleh siswa
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('tbl_tugas', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('title');
-            $table->text('description')->nullable();
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
             $table->string('file_path')->nullable();
             $table->date('deadline')->nullable();
             $table->string('status');
@@ -54,142 +86,153 @@ return new class extends Migration
         });
 
         // Tabel untuk menyimpan informasi ujian pilihan ganda
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('tbl_ujian', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('subject')->nullable();
-            $table->integer('duration')->nullable();
-            $table->dateTime('start_time')->nullable();
-            $table->dateTime('end_time')->nullable();
+            $table->string('judul');
+            $table->string('mata_pelajaran')->nullable();
+            $table->integer('durasi')->nullable();
+            $table->dateTime('waktu_mulai')->nullable();
+            $table->dateTime('waktu_selesai')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan pertanyaan-pertanyaan dalam ujian
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('tbl_pertanyaan', function (Blueprint $table) {
             $table->id();
-            $table->text('question');
+            $table->text('pertanyaan');
             $table->timestamps();
         });
 
         // Tabel penyambung untuk menyimpan keterhubungan antara ujian dan pertanyaan
-        Schema::create('exam_questions', function (Blueprint $table) {
+        Schema::create('tbl_ujian_pertanyaan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
+            $table->unsignedBigInteger('id_ujian');
+            $table->foreign('id_ujian')->references('id')->on('tbl_ujian')->onDelete('cascade');
+            $table->unsignedBigInteger('id_pertanyaan');
+            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan opsi jawaban untuk setiap pertanyaan
-        Schema::create('options', function (Blueprint $table) {
+        Schema::create('tbl_opsi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->text('option');
-            $table->boolean('is_correct')->default(false);
+            $table->unsignedBigInteger('id_pertanyaan');
+            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
+            $table->text('opsi');
+            $table->boolean('benar')->default(false);
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan jawaban yang diberikan oleh siswa untuk setiap pertanyaan
-        Schema::create('user_answers', function (Blueprint $table) {
+        Schema::create('tbl_jawaban_pengguna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
-            $table->unsignedBigInteger('option_id')->nullable();
-            $table->foreign('option_id')->references('id')->on('options')->onDelete('cascade');
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->unsignedBigInteger('id_pertanyaan');
+            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
+            $table->unsignedBigInteger('id_opsi')->nullable();
+            $table->foreign('id_opsi')->references('id')->on('tbl_opsi')->onDelete('cascade');
             $table->timestamps();
         });
 
-
-
         // Tabel untuk menyimpan kegiatan yang diikuti oleh siswa
-        Schema::create('user_activities', function (Blueprint $table) {
+        Schema::create('tbl_kegiatan_pengguna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('activity');
-            $table->date('activity_date');
-            $table->text('description')->nullable();
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->string('kegiatan');
+            $table->date('tanggal_kegiatan');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan penghargaan yang diterima oleh siswa
-        Schema::create('awards', function (Blueprint $table) {
+        Schema::create('tbl_penghargaan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->date('date_received');
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal_diterima');
             $table->timestamps();
         });
 
-        // Tabel untuk menyimpan informasi tentang kompetisi yang diikuti oleh siswa
-        Schema::create('competitions', function (Blueprint $table) {
+        // tabel mneyiimpan informasi tentang kompetisi yang diikuti oleh siswa
+        Schema::create('tbl_kompetisi', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->date('date_participated');
-            $table->string('result')->nullable();
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal_partisipasi');
+            $table->string('hasil')->nullable();
             $table->timestamps();
         });
-
         // Tabel untuk menyimpan informasi tentang acara yang diikuti oleh siswa
-        Schema::create('events', function (Blueprint $table) {
+        Schema::create('tbl_acara', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->date('event_date');
-            $table->string('location')->nullable();
+            $table->unsignedBigInteger('id_siswa');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->date('tanggal_acara');
+            $table->string('lokasi')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan log kegiatan pengguna
-        Schema::create('user_logs', function (Blueprint $table) {
+        Schema::create('tbl_log_pengguna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('action');
-            $table->text('description')->nullable();
+            $table->unsignedBigInteger('id_pengguna');
+            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->string('aksi');
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan pengumuman
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('tbl_pengumuman', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('content');
+            $table->string('judul');
+            $table->text('konten');
             $table->timestamps();
         });
-    }
+        // Tabel untuk menyimpan nilai
+        Schema::create('tbl_nilai', function (Blueprint $table) {
+            $table->id();
+            $table->enum('jenis', ['tugas', 'UTS', 'UAS', 'UN'])->nullable();
+            $table->unsignedBigInteger('id_siswa');
+            $table->unsignedBigInteger('id_materi');
+            $table->unsignedBigInteger('id_ujian')->nullable();
+            $table->unsignedBigInteger('id_tugas')->nullable();
+            $table->decimal('nilai', 5, 2);
+            $table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     */
+            // Konstrain kunci asing
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
+            $table->foreign('id_ujian')->references('id')->on('tbl_ujian')->onDelete('cascade')->nullOnDelete(); // Tambahkan nullOnDelete
+            $table->foreign('id_tugas')->references('id')->on('tbl_tugas')->onDelete('cascade')->nullOnDelete(); // Tambahkan nullOnDelete
+        });
+    }
     public function down(): void
     {
-        Schema::dropIfExists('students');
-        Schema::dropIfExists('teachers');
-        Schema::dropIfExists('materials');
-        Schema::dropIfExists('tasks');
-        Schema::dropIfExists('exams');
-        Schema::dropIfExists('questions');
-        Schema::dropIfExists('exam_questions');
-        Schema::dropIfExists('user_answers');
-        Schema::dropIfExists('options');
-        Schema::dropIfExists('user_activities');
-        Schema::dropIfExists('awards');
-        Schema::dropIfExists('competitions');
-        Schema::dropIfExists('events');
-        Schema::dropIfExists('user_logs');
-        Schema::dropIfExists('announcements');
-        
+        Schema::dropIfExists('tbl_nilai');
+        Schema::dropIfExists('tbl_pengumuman');
+        Schema::dropIfExists('tbl_log_pengguna');
+        Schema::dropIfExists('tbl_acara');
+        Schema::dropIfExists('tbl_kompetisi');
+        Schema::dropIfExists('tbl_penghargaan');
+        Schema::dropIfExists('tbl_kegiatan_pengguna');
+        Schema::dropIfExists('tbl_jawaban_pengguna');
+        Schema::dropIfExists('tbl_opsi');
+        Schema::dropIfExists('tbl_ujian_pertanyaan');
+        Schema::dropIfExists('tbl_pertanyaan');
+        Schema::dropIfExists('tbl_ujian');
+        Schema::dropIfExists('tbl_tugas');
+        Schema::dropIfExists('tbl_materi');
+        Schema::dropIfExists('tbl_guru');
+        Schema::dropIfExists('tbl_siswa');
+        Schema::dropIfExists('tbl_kelas');
     }
 };

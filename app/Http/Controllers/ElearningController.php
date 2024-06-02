@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\awards;
+use App\Models\Ujian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ElearningController extends Controller
 {
@@ -13,7 +16,8 @@ class ElearningController extends Controller
     public function index()
     {
         return view('elearning.dashboard-page', [
-            'penghargaan' => awards::all(),
+            'user' => Auth::user(),
+            'awards' => Ujian::all(),
             'title' => 'Dashboard',
             'name' => 'nanda'
         ]);
@@ -25,10 +29,22 @@ class ElearningController extends Controller
             'title' => 'Semua Kelas'
         ]);
     }
-    public function ujian()
+    public function uts()
     {
         return view('elearning.ujian-page', [
-            'title' => 'Ujian'
+            'title' => 'Halaman Ujian Tengah Semester'
+        ]);
+    }
+    public function uas()
+    {
+        return view('elearning.ujian-page', [
+            'title' => 'Halaman Ujian Akhir Semester'
+        ]);
+    }
+    public function un()
+    {
+        return view('elearning.ujian-page', [
+            'title' => 'Halaman Ujian Nasional'
         ]);
     }
     public function profile_class()

@@ -7,7 +7,9 @@
                 <div class="inner">
                     <x-image-link src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-md p-1 img-fluid">
                     </x-image-link>
-                    <h3 class="text-light fs-1 fs-md-2 fs-lg-3 fs-xl-4 text-capitalize">Selamat Datang, {{ $name }}</h3>
+                    <h3 class="text-light fs-1 fs-md-2 fs-lg-3 fs-xl-4 text-capitalize">Selamat Datang, {{
+                        Auth::user()->name }}
+                    </h3>
                     <span class="text-dark">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti culpa
                         sequi
                         veritatis commodi
@@ -90,7 +92,7 @@
                     <h3 class="text-info">Penghargaan</h3>
                 </div>
                 <div class="row ">
-                    @foreach ($penghargaan as $award )
+                    @foreach ($awards as $award )
                     <div class="col-6">
                         <ul>
                             <li>{{ $award->title }}</li>

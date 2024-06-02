@@ -31,9 +31,11 @@ Route::get('/article-marketing', [portalController::class, 'article_marketing'])
 Route::get('/article-bisnis', [portalController::class, 'article_bisnis'])->name('article-bisnis');
 
 // view e-learning
-Route::get('/e-learning', [ElearningController::class, 'index'])->name('e-learning');
+Route::get('/e-learning', [ElearningController::class, 'index'])->name('e-learning')->middleware(['auth']);
 Route::get('/all-class', [ElearningController::class, 'all_class'])->name('all-class');
-Route::get('/ujian', [ElearningController::class, 'ujian'])->name('ujian');
+Route::get('/uts', [ElearningController::class, 'uts'])->name('uts');
+Route::get('/uas', [ElearningController::class, 'uas'])->name('uas');
+Route::get('/un', [ElearningController::class, 'un'])->name('un');
 Route::get('/profile-class', [ElearningController::class, 'profile_class'])->name('profile-class');
 
 require __DIR__ . '/auth.php';
