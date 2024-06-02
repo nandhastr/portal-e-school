@@ -43,13 +43,6 @@
                             <x-nav-link href="/all-class"
                                 class="nav-link {{ request()->is('all-class') ? 'active' : '' }}">
                                 <i class="fa-solid fa-swatchbook"></i>
-                                <p>Semua Kelas</p>
-                            </x-nav-link>
-                        </li>
-                        <li class="nav-item">
-                            <x-nav-link href="/my-class"
-                                class="nav-link {{ request()->is('my-class') ? 'active' : '' }}">
-                                <i class="fa-regular fa-address-book"></i>
                                 <p>Kelas Saya</p>
                             </x-nav-link>
                         </li>

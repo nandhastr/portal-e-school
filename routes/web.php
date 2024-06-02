@@ -33,6 +33,7 @@ Route::get('/article-bisnis', [portalController::class, 'article_bisnis'])->name
 // view e-learning
 Route::get('/e-learning', [ElearningController::class, 'index'])->name('e-learning');
 Route::get('/all-class', [ElearningController::class, 'all_class'])->name('all-class');
-Route::get('/my-class', [ElearningController::class, 'my_class'])->name('my-class');
+Route::get('/ujian', [ElearningController::class, 'ujian'])->name('ujian');
+Route::get('/profile-class', [ElearningController::class, 'profile_class'])->name('profile-class');
 
 require __DIR__ . '/auth.php';

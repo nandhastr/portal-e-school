@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\awards;
 use Illuminate\Http\Request;
 
 class ElearningController extends Controller
@@ -12,6 +13,7 @@ class ElearningController extends Controller
     public function index()
     {
         return view('elearning.dashboard-page', [
+            'penghargaan' => awards::all(),
             'title' => 'Dashboard',
             'name' => 'nanda'
         ]);
@@ -23,12 +25,20 @@ class ElearningController extends Controller
             'title' => 'Semua Kelas'
         ]);
     }
-    public function my_class()
+    public function ujian()
     {
-        return view('elearning.my-class-page', [
-            'title' => 'Kelas Saya'
+        return view('elearning.ujian-page', [
+            'title' => 'Ujian'
         ]);
     }
+    public function profile_class()
+    {
+        return view('elearning.profile-class-page', [
+            'title' => 'Profile Kelas'
+        ]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

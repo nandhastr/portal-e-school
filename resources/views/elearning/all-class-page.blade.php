@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <hr>
-                    <a href="#" class="btn btn-info w-100 bg-sky-400">Lihat Nilai</a>
+                    <a href="{{ route('profile-class') }}" class="btn btn-info w-100 bg-sky-400">Lihat</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <hr>
-                    <a href="#" class="btn btn-info w-100 bg-sky-400">Lihat Nilai</a>
+                    <a href="#" class="btn btn-info w-100 bg-sky-400">Lihat</a>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
                         </div>
                     </div>
                     <hr>
-                    <a href="#" class="btn btn-info w-100 bg-sky-400">Lihat Nilai</a>
+                    <a href="#" class="btn btn-info w-100 bg-sky-400">Lihat</a>
                 </div>
             </div>
         </div>

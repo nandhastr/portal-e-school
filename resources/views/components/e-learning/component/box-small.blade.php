@@ -88,33 +88,15 @@
             <div class="small-box border">
                 <div class="inner">
                     <h3 class="text-info">Penghargaan</h3>
-
-                    <span class="text-dark">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium,
-                        sint.</span>
                 </div>
                 <div class="row ">
-                    {{-- <span class="text-dark"><i class="fa-solid fa-file-pen"></i>Extrakulikuler</span> --}}
+                    @foreach ($penghargaan as $award )
                     <div class="col-6">
                         <ul>
-                            <li>Lomba puisi</li>
-                        </ul>
-
-                    </div>
-                    <div class="col-6">
-                        <ul>
-                            <li>Lomba Menggambar</li>
+                            <li>{{ $award->title }}</li>
                         </ul>
                     </div>
-                    <div class="col-6">
-                        <ul>
-                            <li>Lomba menyanyi</li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul>
-                            <li>Lomba lari</li>
-                        </ul>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
