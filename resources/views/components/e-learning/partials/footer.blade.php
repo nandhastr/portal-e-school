@@ -1,8 +1,9 @@
-<footer class="main-footer">
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+<footer class=" footer-elearning">
+    <strong class="text-sm">Copyright &copy; {{ date('Y') }} <a href="https://adminlte.io">SMK PGRI Pamijahan
+            Bogor</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-        <b>Version</b> 3.2.0
+        <b>Version</b> 1.0.0
     </div>
 </footer>
 
@@ -15,6 +16,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('assets/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
@@ -45,9 +47,9 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('assets/dist/js/adminlte.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="{{ asset('assets/dist/js/demo.js') }}"></script>
+{{-- <script src="{{ asset('assets/dist/js/demo.js') }}"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script>
+{{-- <script src="{{ asset('assets/dist/js/pages/dashboard.js') }}"></script> --}}
 {{-- my js --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
 </body>

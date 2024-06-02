@@ -16,6 +16,7 @@ summary {
 .light-mode {
     background-image: linear-gradient(to left top, #1259b8, #dfdfdf, #1259b8);
     color: black;
+    background-attachment: fixed;
 }
 
 .dark-mode {
@@ -25,7 +26,92 @@ summary {
 .btn-them {
     cursor: pointer;
 }
+/* hover tombol */
+.btn {
+    --color: #00a97f;
+    --color2: rgb(10, 25, 30);
+    background-color: transparent;
+    border-radius: 6px;
+    border: 0.3px solid var(--color);
+    transition: 0.6s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-family: "Roboto", "Segoe UI", sans-serif;
+    color: var(--color);
+}
 
+.btn::after,
+.btn::before {
+    content: "";
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: 0.6s ease-out;
+    background-color: var(--primary-color);
+}
+
+.btn::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+}
+
+.btn:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+}
+
+.btn:hover {
+    color: var(--color2);
+    filter: drop-shadow(3px 3px 3px #000);
+}
+
+.btn:active {
+    filter: brightness(0.7);
+    transform: scale(0.98);
+}
+/* end hover btn */
+/* button back */
+.btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+}
+
+.btn-back > svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.btn-back:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.btn-back:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+/* end button back */
 .img-banner {
     height: 7rem;
     width: 100%;
@@ -57,6 +143,7 @@ summary {
     overflow: hidden;
     z-index: 1000;
 }
+
 .navbar {
     position: sticky;
     z-index: 100;
@@ -120,6 +207,13 @@ summary {
     height: auto;
     color: #fff;
 }
+.footer-elearning,
+strong,
+b {
+    height: 5px;
+    text-align: center;
+    color: rgb(143, 141, 141);
+}
 
 .banner-album {
     background-image: linear-gradient(to left top, #0e2d59, #2c3f42);
@@ -148,6 +242,9 @@ summary {
     transform: translateY(0);
 }
 /* end */
+/* .card-profile-class {
+    width: auto !important;
+} */
 .card-home {
     border-radius: 20px;
     border: 1px solid var(--primary-color);
@@ -232,6 +329,9 @@ summary {
         filter: drop-shadow(3px 5px 6px rgb(113, 113, 113));
     }
 }
+hr {
+    border: 1px solid #676767;
+}
 .sejarah-page,
 .tendik-page,
 .visi-page,
@@ -302,3 +402,9 @@ summary {
 }
 
 /* end articel */
+
+/* e-learning area */
+
+.modal-tugas {
+    display: none;
+}

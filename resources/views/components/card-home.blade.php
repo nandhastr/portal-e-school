@@ -1,3 +1,3 @@
-<div {{$attributes}} class="card card-app">
+<div {{ $attributes->merge(['class'=>'card']) }} >
     {{ $slot }}
 </div>

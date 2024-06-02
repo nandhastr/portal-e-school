@@ -1,1 +1,1 @@
-<img {{ $attributes }} class="d-block w-100 img-fluid" alt="...">
+<img {{ $attributes->merge(['class'=>'d-block img-fluid card-img-top']) }} alt="...">
