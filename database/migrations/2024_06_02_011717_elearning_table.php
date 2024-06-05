@@ -23,8 +23,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_kelas')->nullable(); // Tambahkan kolom untuk kelas
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade'); // Relasi ke tabel kelas
-            $table->unsignedBigInteger('id_pengguna');
-            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('angkatan')->nullable();
             $table->string('status')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -48,8 +48,8 @@ return new class extends Migration
         // Tabel untuk menyimpan data guru
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pengguna');
-            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('spesialisasi')->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
@@ -183,8 +183,8 @@ return new class extends Migration
         // Tabel untuk menyimpan log kegiatan pengguna
         Schema::create('tbl_log_pengguna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_pengguna');
-            $table->foreign('id_pengguna')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('aksi');
             $table->text('deskripsi')->nullable();
             $table->timestamps();

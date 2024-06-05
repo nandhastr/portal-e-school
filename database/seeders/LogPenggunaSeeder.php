@@ -14,13 +14,13 @@ class LogPenggunaSeeder extends Seeder
     public function run(): void
     {
         Log_pengguna::create([
-            'id_pengguna' => 1,
+            'user_id' => 1,
             'aksi' => 'Login',
             'deskripsi' => 'Pengguna berhasil login.',
         ]);
 
         Log_pengguna::create([
-            'id_pengguna' => 2,
+            'user_id' => 2,
             'aksi' => 'Logout',
             'deskripsi' => 'Pengguna berhasil logout.',
         ]);

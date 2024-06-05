@@ -7,44 +7,39 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <h6 class="nav-link">Hallo, {{ Auth::user()->name }}</h6>
+            <h6 class="nav-link"><a href="{{ route('profile.edit') }}"> Hallo, {{
+                    Auth::user()->name }}</a>
+            </h6>
         </li>
-
     </ul>
+
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <!-- Right navbar links -->
-            <ul class="navbar-nav ml-auto">
-                {{-- nav rata kanan --}}
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <h5 class="fw-bold text-danger">
-                                    {{ Auth::user()->name }}
-                                </h5>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile')
-                                    }}</a>
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="nav-link fa-solid fa-user"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                        <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Account')
+                            }}</a>
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
 
-                                    <x-dropdown-link class="dropdown-item" :href="route('logout')" onclick="event.preventDefault();
+                            <x-dropdown-link class="dropdown-item" :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-                            </div>
-                        </li>
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
                     </div>
-                </div>
-            </ul>
-        </li>
+                </li>
+            </div>
+        </div>
     </ul>
+
 </nav>
 <!-- /.navbar -->

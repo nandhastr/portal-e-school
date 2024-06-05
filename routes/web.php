@@ -37,5 +37,8 @@ Route::get('/uts', [ElearningController::class, 'uts'])->name('uts');
 Route::get('/uas', [ElearningController::class, 'uas'])->name('uas');
 Route::get('/un', [ElearningController::class, 'un'])->name('un');
 Route::get('/profile-class', [ElearningController::class, 'profile_class'])->name('profile-class');
+Route::get('/mapel-page', [ElearningController::class, 'mapel_page'])->name('mapel-page');
+Route::get('/kelas-page', [ElearningController::class, 'kelas_page'])->name('kelas-page');
+Route::get('/siswa-page', [ElearningController::class, 'siswa_page'])->name('siswa-page');
 
 require __DIR__ . '/auth.php';

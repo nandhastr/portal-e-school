@@ -31,6 +31,12 @@ class Siswa extends Model
         'informasi_kesehatan',
     ];
 
+    public function penghargaan()
+    {
+        return $this->hasMany(Penghargaan::class, 'id_siswa');
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -43,7 +49,7 @@ class Siswa extends Model
 
     public function kegiatan_pengguna()
     {
-        return $this->hasMany(Kegiatan_pengguna::class);
+        return $this->hasMany(Kegiatan_pengguna::class, 'id_siswa');
     }
 
     public function ujian()

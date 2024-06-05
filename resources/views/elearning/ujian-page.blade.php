@@ -1,4 +1,4 @@
-<x-e-learning.master.layout :title="$title">
+<x-e-learning.master.layout :title="$title" :user="$user">
     <hr class="border">
     <div class="container-fluid bg-white h-100">
         <div class="row">
