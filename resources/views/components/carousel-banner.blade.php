@@ -1,7 +1,7 @@
-<div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+<div id="carouselExampleInterval" class="carousel slide fixed-carousel" data-bs-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="10000">
-            <x-image-link class="img-carousel" src="{{ asset('assets/img/student.png') }}"></x-image-link>
+            <x-image-link class="img-carousel" src="{{ asset('assets/img/banner.jpg') }}"></x-image-link>
         </div>
         <div class="carousel-item" data-bs-interval="2000">
             <x-image-link class="img-carousel" src="{{ asset('assets/dist/img/photo1.png') }}"></x-image-link>
@@ -19,3 +19,14 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<style>
+    .fixed-carousel {
+        /* height: 50rem !important;     */
+        /* position: absolute;
+        top: 10;
+        left: 0;
+        width: 100%;
+        z-index: -1; */
+        /* Ensure it stays on top of other elements */
+    }
+</style>

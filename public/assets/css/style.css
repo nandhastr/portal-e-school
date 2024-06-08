@@ -6,6 +6,7 @@
 }
 /* styles.css */
 /* dark mode body */
+
 summary {
     color: var(--primary-color);
 }
@@ -19,8 +20,7 @@ summary {
     background-attachment: fixed;
 }
 a {
-    text-decoration: none;
-    color: black;
+    text-decoration: none !important;
 }
 .dark-mode {
     background-image: linear-gradient(to left top, #333, #000);
@@ -30,7 +30,7 @@ a {
     cursor: pointer;
 }
 /* hover tombol */
-.btn {
+/* .btn {
     --color: #00a97f;
     --color2: rgb(10, 25, 30);
     background-color: transparent;
@@ -82,7 +82,7 @@ a {
 .btn:active {
     filter: brightness(0.7);
     transform: scale(0.98);
-}
+} */
 /* end hover btn */
 /* button back */
 .btn-back {

@@ -15,6 +15,7 @@ class TugasSeeder extends Seeder
     {
         Tugas::create([
             'id_siswa' => 1,
+            'id_kelas' => 1,
             'judul' => 'Tugas Matematika 1',
             'deskripsi' => 'Tugas mengenai operasi bilangan dasar.',
             'file_path' => 'tugas1.pdf',
@@ -24,6 +25,7 @@ class TugasSeeder extends Seeder
 
         Tugas::create([
             'id_siswa' => 2,
+            'id_kelas' => 2,
             'judul' => 'Tugas Bahasa Inggris 1',
             'deskripsi' => 'Tugas tentang pengenalan kata-kata dasar dalam bahasa Inggris.',
             'file_path' => 'tugas2.pdf',

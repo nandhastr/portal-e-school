@@ -13,33 +13,33 @@
         </a>
         <ul class="nav nav-treeview">
             <li class="nav-item">
-                <a href="/mapel-page" class="nav-link {{ request()->is('mapel-page') ? 'active' : '' }}">
+                <a href="/data-mapel-page" class="nav-link {{ request()->is('data-mapel-page') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Mata Pelajaran</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/kelas-page" class="nav-link {{ request()->is('kelas-page') ? 'active' : '' }}">
+                <a href="/data-kelas-page" class="nav-link {{ request()->is('data-kelas-page') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Kelas</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="/siswa-page" class="nav-link {{ request()->is('siswa-page*') ? 'active' : '' }}">
+                <a href="/data-siswa-page" class="nav-link {{ request()->is('data-siswa-page*') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Siswa/I</p>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="/soal-page" class="nav-link {{ request()->is('soal-page*') ? 'active' : '' }}">
+            {{-- <li class="nav-item">
+                <a href="/data-soal-page" class="nav-link {{ request()->is('data-soal-page') ? 'active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Soal</p>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </li>
-    <li class="nav-item">
-        <a href="/admin/exam" class="nav-link {{ request()->is('admin/exam*') ? 'active' : '' }}">
+    {{-- <li class="nav-item">
+        <a href="/data-ujian-page" class="nav-link {{ request()->is('data-ujian-page') ? 'active' : '' }}">
             <i class="fas fa-file nav-icon"></i>
             <p>Ujian</p>
         </a>
@@ -49,6 +49,6 @@
             <i class="nav-icon fas fa-copy"></i>
             <p>Hasil Ujian</p>
         </a>
-    </li>
+    </li> --}}
     </li>
 </ul>

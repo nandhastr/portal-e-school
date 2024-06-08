@@ -17,8 +17,9 @@ class NilaiSeeder extends Seeder
             'jenis' => 'tugas',
             'id_siswa' => 1,
             'id_materi' => 1,
-            'id_ujian' => null,
+            'id_pertanyaan' => 1,
             'id_tugas' => 1,
+            'id_kelas' => 1,
             'nilai' => 85.00,
         ]);
 
@@ -26,8 +27,9 @@ class NilaiSeeder extends Seeder
             'jenis' => 'UTS',
             'id_siswa' => 2,
             'id_materi' => 2,
-            'id_ujian' => 1,
-            'id_tugas' => null,
+            'id_pertanyaan' => 2,
+            'id_tugas' => 2,
+            'id_kelas' => 2,
             'nilai' => 90.50,
         ]);
     }

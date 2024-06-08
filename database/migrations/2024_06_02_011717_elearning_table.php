@@ -66,52 +66,47 @@ return new class extends Migration
         // Tabel untuk menyimpan materi-materi mata pelajaran
         Schema::create('tbl_materi', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('judul');
             $table->text('konten')->nullable();
             $table->string('mata_pelajaran')->nullable();
+            $table->string('file_path')->nullable();
             $table->timestamps();
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
         });
 
         // Tabel untuk menyimpan tugas-tugas yang diunggah oleh siswa
         Schema::create('tbl_tugas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->unsignedBigInteger('id_kelas');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->string('file_path')->nullable();
             $table->date('deadline')->nullable();
             $table->string('status');
             $table->timestamps();
-        });
 
-        // Tabel untuk menyimpan informasi ujian pilihan ganda
-        Schema::create('tbl_ujian', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
-            $table->string('mata_pelajaran')->nullable();
-            $table->integer('durasi')->nullable();
-            $table->dateTime('waktu_mulai')->nullable();
-            $table->dateTime('waktu_selesai')->nullable();
-            $table->timestamps();
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
         });
 
         // Tabel untuk menyimpan pertanyaan-pertanyaan dalam ujian
         Schema::create('tbl_pertanyaan', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_materi')->nullable();
+            $table->enum('type', ['UTS', 'UAS', 'UN'])->nullable();
             $table->text('pertanyaan');
+            $table->integer('durasi');
+            $table->dateTime('waktu_mulai');
+            $table->dateTime('waktu_selesai');
             $table->timestamps();
+            // Menambahkan foreign key constraint
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
+            $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
         });
 
-        // Tabel penyambung untuk menyimpan keterhubungan antara ujian dan pertanyaan
-        Schema::create('tbl_ujian_pertanyaan', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_ujian');
-            $table->foreign('id_ujian')->references('id')->on('tbl_ujian')->onDelete('cascade');
-            $table->unsignedBigInteger('id_pertanyaan');
-            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
-            $table->timestamps();
-        });
 
         // Tabel untuk menyimpan opsi jawaban untuk setiap pertanyaan
         Schema::create('tbl_opsi', function (Blueprint $table) {
@@ -203,16 +198,17 @@ return new class extends Migration
             $table->enum('jenis', ['tugas', 'UTS', 'UAS', 'UN'])->nullable();
             $table->unsignedBigInteger('id_siswa');
             $table->unsignedBigInteger('id_materi');
-            $table->unsignedBigInteger('id_ujian')->nullable();
+            $table->unsignedBigInteger('id_pertanyaan')->nullable();
             $table->unsignedBigInteger('id_tugas')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->decimal('nilai', 5, 2);
             $table->timestamps();
 
-            // Konstrain kunci asing
             $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
-            $table->foreign('id_ujian')->references('id')->on('tbl_ujian')->onDelete('cascade')->nullOnDelete(); // Tambahkan nullOnDelete
-            $table->foreign('id_tugas')->references('id')->on('tbl_tugas')->onDelete('cascade')->nullOnDelete(); // Tambahkan nullOnDelete
+            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
+            $table->foreign('id_tugas')->references('id')->on('tbl_tugas')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
         });
     }
     public function down(): void
@@ -226,9 +222,7 @@ return new class extends Migration
         Schema::dropIfExists('tbl_kegiatan_pengguna');
         Schema::dropIfExists('tbl_jawaban_pengguna');
         Schema::dropIfExists('tbl_opsi');
-        Schema::dropIfExists('tbl_ujian_pertanyaan');
         Schema::dropIfExists('tbl_pertanyaan');
-        Schema::dropIfExists('tbl_ujian');
         Schema::dropIfExists('tbl_tugas');
         Schema::dropIfExists('tbl_materi');
         Schema::dropIfExists('tbl_guru');

@@ -32,7 +32,7 @@
                     <div class="card-body">
                         {{-- tabel mata pelajaran dashboard admin --}}
 
-                        <table id="example" class="display" style="width:100%">
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -48,8 +48,12 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row['nama'] }}</td>
                                     <td>{{ $row['tingkat'] }}</td>
-                                    <td><a class="btn bg-success" href="">Edit</a> | <a class="btn bg-warning"
-                                            href="">Delete</a></td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                    </td>
                                 </tr>
                                 @endforeach
                                 @else

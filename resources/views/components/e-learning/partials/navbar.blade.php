@@ -7,8 +7,7 @@
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <h6 class="nav-link"><a href="{{ route('profile.edit') }}"> Hallo, {{
-                    Auth::user()->name }}</a>
+            <h6 class="nav-link"><a href="{{ route('profile.edit') }}"> Hallo, {{ Auth::user()->name ?? 'Guest' }}</a>
             </h6>
         </li>
     </ul>

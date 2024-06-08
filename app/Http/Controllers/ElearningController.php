@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\awards;
 use App\Models\Kelas;
 use App\Models\Materi;
+use App\Models\Opsi;
 use App\Models\Penghargaan;
+use App\Models\Pertanyaan;
 use App\Models\Siswa;
 use App\Models\Ujian;
 use Illuminate\Http\Request;
@@ -20,17 +22,19 @@ class ElearningController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // Periksa apakah pengguna memiliki relasi siswa
+        // Periksa apakah pengguna memiliki relasi 
         $siswa = $user->siswa ?? null;
         // Inisialisasi variabel menjadi array kosong
         $penghargaan = [];
         $kegiatan = [];
+        $nilai = [];
+
         // Jika pengguna memiliki relasi siswa, ambil penghargaan siswa
         if ($siswa) {
             $penghargaan = $siswa->penghargaan;
 
             // Ambil data dari tabel nilai melalui relasi siswa
-            $nilai = $siswa->Nilai;
+            $nilai = $siswa->nilai;
 
             // Ambil data dari tabel kegiatan melalui relasi siswa
             $kegiatan = $siswa->kegiatan_pengguna;
@@ -38,7 +42,7 @@ class ElearningController extends Controller
             // // Ambil data dari tabel ujian melalui relasi siswa
             // $ujian = $siswa->ujian;
         }
-        // dd($kegiatan);
+
         return view('elearning.dashboard-page', [
             'user' => $user,
             'siswa' => $siswa,
@@ -50,37 +54,38 @@ class ElearningController extends Controller
         ]);
     }
 
+
     public function all_class()
     {
-        return view('elearning.all-class-page', [
+        return view('elearning.siswa.all-class-page', [
             'user' => Auth::user(),
             'title' => 'Semua Kelas'
         ]);
     }
     public function uts()
     {
-        return view('elearning.ujian-page', [
+        return view('elearning.siswa.ujian-page', [
             'user' => Auth::user(),
             'title' => 'Halaman Ujian Tengah Semester'
         ]);
     }
     public function uas()
     {
-        return view('elearning.ujian-page', [
+        return view('elearning.siswa.ujian-page', [
             'user' => Auth::user(),
             'title' => 'Halaman Ujian Akhir Semester'
         ]);
     }
     public function un()
     {
-        return view('elearning.ujian-page', [
+        return view('elearning.siswa.ujian-page', [
             'user' => Auth::user(),
             'title' => 'Halaman Ujian Nasional'
         ]);
     }
     public function profile_class()
     {
-        return view('elearning.profile-class-page', [
+        return view('elearning.siswa.profile-class-page', [
             'user' => Auth::user(),
             'title' => 'Profile Kelas'
         ]);
@@ -95,7 +100,7 @@ class ElearningController extends Controller
             'user' => $user,
         ];
         // \dd($data);
-        return view('elearning.mapel-page', $data);
+        return view('elearning.data-mapel-page', $data);
     }
 
     public function kelas_page()
@@ -107,7 +112,7 @@ class ElearningController extends Controller
             'kelas' => Kelas::all(),
             'user' => $user,
         ];
-        return view('elearning.kelas-page', $data);
+        return view('elearning.data-kelas-page', $data);
     }
 
 
@@ -123,7 +128,7 @@ class ElearningController extends Controller
 
         ];
         // \dd($data);
-        return view('elearning.siswa-page', $data);
+        return view('elearning.data-siswa-page', $data);
     }
 
 
