@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ElearningController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\portalController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -37,5 +38,14 @@ Route::get('/uts', [ElearningController::class, 'uts'])->name('uts');
 Route::get('/uas', [ElearningController::class, 'uas'])->name('uas');
 Route::get('/un', [ElearningController::class, 'un'])->name('un');
 Route::get('/profile-class', [ElearningController::class, 'profile_class'])->name('profile-class');
+Route::get('/data-mapel-page', [ElearningController::class, 'mapel_page'])->name('data-mapel-page');
+Route::get('/data-kelas-page', [ElearningController::class, 'kelas_page'])->name('data-kelas-page');
+Route::get('/data-siswa-page', [ElearningController::class, 'siswa_page'])->name('data-siswa-page');
+
+// gurucontroller
+Route::get('/materi-upload-page', [GuruController::class, 'materi_upload'])->name('materi-upload-page');
+Route::get('/tugas-upload-page', [GuruController::class, 'tugas_upload'])->name('tugas-upload-page');
+Route::get('/soal-upload-page', [GuruController::class, 'soal_page'])->name('soal-upload-page');
+// Route::get('/ujian-upload-page', [GuruController::class, 'ujian_page'])->name('ujian-upload-page');
 
 require __DIR__ . '/auth.php';

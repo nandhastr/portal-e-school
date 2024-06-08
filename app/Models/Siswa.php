@@ -12,6 +12,7 @@ class Siswa extends Model
     protected $fillable = [
         'user_id',
         'id_kelas',
+        'id_tugas',
         'angkatan',
         'status',
         'tempat_lahir',
@@ -31,24 +32,31 @@ class Siswa extends Model
         'informasi_kesehatan',
     ];
 
+    public function penghargaan()
+    {
+        return $this->hasMany(Penghargaan::class, 'id_siswa');
+    }
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
-
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
+    }
     public function tugas()
     {
-        return $this->hasMany(Tugas::class);
+        return $this->hasMany(Tugas::class, 'id_siswa');
     }
-
+    public function siswa()
+    {
+        return $this->belongsTo(Siswa::class, 'id_siswa');
+    }
     public function kegiatan_pengguna()
     {
-        return $this->hasMany(Kegiatan_pengguna::class);
-    }
-
-    public function ujian()
-    {
-        return $this->hasMany(Ujian::class);
+        return $this->hasMany(Kegiatan_pengguna::class, 'id_siswa');
     }
 
     public function kompetisi()

@@ -15,13 +15,43 @@ class kelasSeeder extends Seeder
     {
 
         Kelas::create([
-            'nama' => 'Kelas A',
+            'nama' => 'A',
             'tingkat' => 'X',
         ]);
 
         Kelas::create([
-            'nama' => 'Kelas B',
+            'nama' => 'B',
+            'tingkat' => 'X',
+        ]);
+        Kelas::create([
+            'nama' => 'C',
+            'tingkat' => 'X',
+        ]);
+        Kelas::create([
+            'nama' => 'A',
             'tingkat' => 'XI',
+        ]);
+
+        Kelas::create([
+            'nama' => 'B',
+            'tingkat' => 'XI',
+        ]);
+        Kelas::create([
+            'nama' => 'C',
+            'tingkat' => 'XI',
+        ]);
+        Kelas::create([
+            'nama' => 'A',
+            'tingkat' => 'XII',
+        ]);
+
+        Kelas::create([
+            'nama' => 'B',
+            'tingkat' => 'XII',
+        ]);
+        Kelas::create([
+            'nama' => 'C',
+            'tingkat' => 'XII',
         ]);
     }
 }

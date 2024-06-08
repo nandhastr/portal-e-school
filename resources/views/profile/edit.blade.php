@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
+            <a class="btn" href="{{route('e-learning')}}"><i class="fas fa-arrow-circle-left"></i>Back</a>
         </h2>
     </x-slot>
 
@@ -26,4 +26,14 @@
             </div>
         </div>
     </div>
+
+    <!-- Authentication -->
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+
+        <a class="dropdown-item" :href="route('logout')" onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+            {{ __('Log Out') }}
+        </a>
+    </form>
 </x-app-layout>

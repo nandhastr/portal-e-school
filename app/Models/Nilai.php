@@ -9,13 +9,11 @@ class Nilai extends Model
 {
     use HasFactory;
 
-
     protected $table = 'tbl_nilai';
     protected $fillable = [
-        'id_siswa', 'id_materi', 'jenis', 'id_ujian', 'id_tugas', 'nilai',
+        'id_siswa', 'id_materi', 'jenis', 'id_ujian', 'id_tugas', 'id_kelas', 'nilai',
     ];
 
-    // Define the relationships
     public function siswa()
     {
         return $this->belongsTo(Siswa::class, 'id_siswa');
@@ -26,13 +24,13 @@ class Nilai extends Model
         return $this->belongsTo(Materi::class, 'id_materi');
     }
 
-    public function ujian()
-    {
-        return $this->belongsTo(Ujian::class, 'id_ujian');
-    }
-
     public function tugas()
     {
         return $this->belongsTo(Tugas::class, 'id_tugas');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class, 'id_kelas');
     }
 }

@@ -15,6 +15,6 @@ class Opsi extends Model
 
     public function pertanyaan()
     {
-        return $this->belongsTo(Pertanyaan::class);
+        return $this->belongsTo(Pertanyaan::class, 'id_pertanyaan');
     }
 }

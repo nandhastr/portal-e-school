@@ -6,6 +6,7 @@
 }
 /* styles.css */
 /* dark mode body */
+
 summary {
     color: var(--primary-color);
 }
@@ -18,7 +19,9 @@ summary {
     color: black;
     background-attachment: fixed;
 }
-
+a {
+    text-decoration: none !important;
+}
 .dark-mode {
     background-image: linear-gradient(to left top, #333, #000);
     color: white;
@@ -27,7 +30,7 @@ summary {
     cursor: pointer;
 }
 /* hover tombol */
-.btn {
+/* .btn {
     --color: #00a97f;
     --color2: rgb(10, 25, 30);
     background-color: transparent;
@@ -79,7 +82,7 @@ summary {
 .btn:active {
     filter: brightness(0.7);
     transform: scale(0.98);
-}
+} */
 /* end hover btn */
 /* button back */
 .btn-back {
@@ -146,6 +149,7 @@ summary {
 
 .navbar {
     position: sticky;
+    color: #000;
     z-index: 100;
     top: 1px;
     background-color: var(--primary-color);
@@ -210,7 +214,7 @@ summary {
 .footer-elearning,
 strong,
 b {
-    height: 5px;
+    height: auto;
     text-align: center;
     color: rgb(143, 141, 141);
 }
