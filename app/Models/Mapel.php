@@ -11,7 +11,7 @@ class Mapel extends Model
     protected $table = 'tbl_mapel';
 
     protected $fillable = [
-        'id_kelas', 'user_id', 'mata_pelajaran',  'deskripsi',
+        'id_kelas', 'mata_pelajaran',  'deskripsi',
     ];
 
     // Relasi mapel ke Kelas (mapel belongs to Kelas)
@@ -19,10 +19,7 @@ class Mapel extends Model
     {
         return $this->belongsTo(Kelas::class, 'id_kelas');
     }
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
+
     public function nilai()
     {
         return $this->hasMany(Nilai::class, 'id_mapel');

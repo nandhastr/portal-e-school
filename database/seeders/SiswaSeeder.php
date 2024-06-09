@@ -15,7 +15,7 @@ class SiswaSeeder extends Seeder
     {
         Siswa::create([
             'id_kelas' => 1,
-            'user_id' => 1,
+            'user_id' => 2,
             'id_ruangKelas' => 1,
             'angkatan' => '2022',
             'status' => 'Aktif',
@@ -27,13 +27,10 @@ class SiswaSeeder extends Seeder
             'sekolah_sebelumnya' => 'SMP Negeri 1 Jakarta',
             'nisn' => '1234567890',
             'phone' => '081234567890',
+            'email' => 'andisiswa@gmail.com',
             'gender' => 'Laki-laki',
             'tahun_masuk' => '2022',
             'kelas_sekarang' => 'XII',
-            'status_beasiswa' => 'Aktif',
-            'catatan_prestasi' => 'Juara 1 Olimpiade Matematika',
-            'catatan_disiplin' => 'Siswa yang patuh dan rajin',
-            'informasi_kesehatan' => 'Tidak memiliki riwayat penyakit serius',
         ]);
 
         Siswa::create([
@@ -50,13 +47,10 @@ class SiswaSeeder extends Seeder
             'sekolah_sebelumnya' => 'SMP Negeri 2 Bandung',
             'nisn' => '0987654321',
             'phone' => '085678901234',
+            'email' => 'joko@gmail.com',
             'gender' => 'Perempuan',
             'tahun_masuk' => '2023',
             'kelas_sekarang' => 'XI',
-            'status_beasiswa' => 'Tidak Aktif',
-            'catatan_prestasi' => 'Juara 2 Lomba Cerdas Cermat',
-            'catatan_disiplin' => 'Siswa yang sopan dan ramah',
-            'informasi_kesehatan' => 'Alergi terhadap udara dingin',
         ]);
     }
 }

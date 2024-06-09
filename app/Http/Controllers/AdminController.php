@@ -21,9 +21,11 @@ class AdminController extends Controller
     public function mapel_page()
     {
         $user = Auth::user();
+        $materi = Materi::with(['mapel', 'kelas'])->get();
         $data = [
             'title' => 'Halaman Data Mata Pelajaran',
-            'mapel' => Materi::all(),
+            'materi' => $materi,
+            'kelas' => Kelas::all(),
             'user' => $user,
         ];
         // \dd($data);
@@ -39,6 +41,7 @@ class AdminController extends Controller
             'kelas' => Kelas::all(),
             'user' => $user,
         ];
+        // dd($data);
         return view('elearning.admin.data-kelas-page', $data);
     }
 
@@ -46,11 +49,11 @@ class AdminController extends Controller
     public function siswa_page()
     {
         $user = Auth::user();
-
+        $siswa = Siswa::with(['kelas'])->get();
         $data = [
             'title' => 'Halaman Data Siswa',
-            'siswa' => Siswa::all(),
             'kelas' => Kelas::all(),
+            'siswa' => $siswa,
             'user' => $user
 
         ];
