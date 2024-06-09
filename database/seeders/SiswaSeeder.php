@@ -16,6 +16,7 @@ class SiswaSeeder extends Seeder
         Siswa::create([
             'id_kelas' => 1,
             'user_id' => 1,
+            'id_ruangKelas' => 1,
             'angkatan' => '2022',
             'status' => 'Aktif',
             'tempat_lahir' => 'Jakarta',
@@ -38,6 +39,7 @@ class SiswaSeeder extends Seeder
         Siswa::create([
             'id_kelas' => 2,
             'user_id' => 2,
+            'id_ruangKelas' => 2,
             'angkatan' => '2023',
             'status' => 'Aktif',
             'tempat_lahir' => 'Bandung',

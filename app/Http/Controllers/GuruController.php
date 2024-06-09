@@ -9,6 +9,7 @@ use App\Models\Tugas;
 use App\Models\Materi;
 use App\Models\Nilai;
 use App\Models\Pertanyaan;
+use App\Models\RuangKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,8 +20,9 @@ class GuruController extends Controller
      */
     public function tugas_upload()
     {
+
         $user = Auth::user();
-        $tugas = Nilai::with(['kelas', 'siswa', 'materi', 'tugas'])->get();
+        $tugas = Nilai::with(['kelas.ruangKelas', 'siswa', 'materi', 'tugas'])->get();
         $data = [
             'tugas' => $tugas,
             'user' => $user,
@@ -31,9 +33,12 @@ class GuruController extends Controller
 
     public function materi_upload()
     {
+
         $user = Auth::user();
-        $materi = Materi::with('kelas')->get();
+        $materi = Materi::with(['kelas.ruangKelas', 'mapel'])->get();
         $data = [
+            'kelas' => Kelas::all(),
+            'ruang' => RuangKelas::all(),
             'materi' => $materi,
             // 'materi' => Materi::all(),
             'user' => $user,
@@ -45,10 +50,12 @@ class GuruController extends Controller
 
     public function soal_page()
     {
+
         $user = Auth::user();
-        $soal = Pertanyaan::with(['kelas', 'opsi', 'materi'])->get();
+        $soal = Pertanyaan::with(['kelas.ruangKelas', 'opsi', 'mapel'])->get();
         $data = [
             'title' => 'Halaman Data Soal',
+            'kelas' => Kelas::all(),
             'soal' => $soal,
             'user' => $user
 
@@ -58,9 +65,8 @@ class GuruController extends Controller
     }
     public function review_page()
     {
-
         $user = Auth::user();
-        $Qna = Jawaban_pengguna::with(['siswa', 'materi', 'pertanyaan', 'kelas', 'tugas', 'opsi'])->get();
+        $Qna = Jawaban_pengguna::with(['siswa', 'materi', 'pertanyaan', 'kelas.ruangKelas', 'tugas', 'opsi'])->get();
         $data = [
             'title' => 'Halaman Review ',
             'qna' => $Qna,

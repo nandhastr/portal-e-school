@@ -107,13 +107,13 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->siswa->user->name }}</td>
                                     <td>
-                                        @if ($row->siswa->kelas)
-                                        {{ $row->kelas->tingkat }} - {{ $row->kelas->nama }}
+                                        @if ($row->kelas)
+                                        {{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}
                                         @else
                                         Belum ditentukan
                                         @endif
                                     </td>
-                                    <td>Agama</td>
+                                    <td>{{ $row->materi->mapel->mata_pelajaran}}</td>
                                     <td><a href="blank" download="{{ $row->tugas->file_path }}">{{
                                             $row->tugas->file_path }}</a></td>
                                     <td>{{ $row->nilai }}</td>

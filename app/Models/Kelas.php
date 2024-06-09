@@ -11,7 +11,7 @@ class Kelas extends Model
 
     protected $table = 'tbl_kelas';
     protected $fillable = [
-        'nama', 'tingkat',
+        'tingkat',
     ];
 
     public function materi()
@@ -32,5 +32,18 @@ class Kelas extends Model
     public function nilai()
     {
         return $this->hasMany(Nilai::class, 'id_kelas');
+    }
+    public function mapel()
+    {
+        return $this->hasMany(Mapel::class, 'id_kelas');
+    }
+    public function ruangKelas()
+    {
+        return $this->hasMany(RuangKelas::class, 'id_kelas');
+    }
+
+    public function guru()
+    {
+        return $this->hasMany(Guru::class, 'id_kelas');
     }
 }

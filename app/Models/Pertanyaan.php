@@ -10,7 +10,7 @@ class Pertanyaan extends Model
     use HasFactory;
     protected $table = 'tbl_pertanyaan';
     protected $fillable = [
-        'id_kelas', 'id_materi', 'type', 'pertanyaan', 'durasi', 'waktu_mulai', 'waktu_selesai',
+        'id_kelas', 'id_mapel', 'type', 'pertanyaan', 'durasi', 'waktu_mulai', 'waktu_selesai',
     ];
 
     public function opsi()
@@ -23,8 +23,12 @@ class Pertanyaan extends Model
         return $this->belongsTo(Kelas::class, 'id_kelas');
     }
 
-    public function materi()
+    public function mapel()
     {
-        return $this->belongsTo(Materi::class, 'id_materi');
+        return $this->belongsTo(Mapel::class, 'id_mapel');
+    }
+    public function ruangKelas()
+    {
+        return $this->belongsTo(RuangKelas::class, 'id_kelas');
     }
 }

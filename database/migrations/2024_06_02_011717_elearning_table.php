@@ -13,18 +13,24 @@ return new class extends Migration
         // Tabel untuk menyimpan data kelas
         Schema::create('tbl_kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->string('tingkat');
+            $table->timestamps();
+        });
+        // tabel untuk menyimpan nama ruanga kelas
+        Schema::create('tbl_ruangKelas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('set null');
             $table->timestamps();
         });
 
         // Tabel untuk menyimpan data siswa
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_kelas')->nullable(); // Tambahkan kolom untuk kelas
-            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade'); // Relasi ke tabel kelas
+            $table->unsignedBigInteger('id_kelas')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->string('angkatan')->nullable();
             $table->string('status')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -43,12 +49,17 @@ return new class extends Migration
             $table->text('catatan_disiplin')->nullable();
             $table->text('informasi_kesehatan')->nullable();
             $table->timestamps();
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
+            $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
 
         // Tabel untuk menyimpan data guru
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
+            $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('spesialisasi')->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -62,31 +73,49 @@ return new class extends Migration
             $table->integer('pengalaman')->nullable();
             $table->timestamps();
         });
+        Schema::create('tbl_mapel', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->string('mata_pelajaran');
+            $table->text('deskripsi')->nullable();
+            $table->timestamps();
+
+            // Create a foreign key constraint linking to the users table
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('set null');
+        });
 
         // Tabel untuk menyimpan materi-materi mata pelajaran
         Schema::create('tbl_materi', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_mapel')->nullable();
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->string('judul');
             $table->text('konten')->nullable();
-            $table->string('mata_pelajaran')->nullable();
             $table->string('file_path')->nullable();
             $table->timestamps();
+
+            $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
+            $table->foreign('id_mapel')->references('id')->on('tbl_mapel')->onDelete('cascade');
         });
+
 
         // Tabel untuk menyimpan tugas-tugas yang diunggah oleh siswa
         Schema::create('tbl_tugas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_siswa');
             $table->unsignedBigInteger('id_kelas');
+            $table->unsignedBigInteger('id_mapel');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->string('file_path')->nullable();
             $table->date('deadline')->nullable();
             $table->string('status');
             $table->timestamps();
-
+            $table->foreign('id_mapel')->references('id')->on('tbl_mapel')->onDelete('cascade');
             $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
         });
@@ -95,7 +124,7 @@ return new class extends Migration
         Schema::create('tbl_pertanyaan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_kelas')->nullable();
-            $table->unsignedBigInteger('id_materi')->nullable();
+            $table->unsignedBigInteger('id_mapel')->nullable();
             $table->enum('type', ['UTS', 'UAS', 'UN'])->nullable();
             $table->text('pertanyaan');
             $table->integer('durasi');
@@ -104,7 +133,7 @@ return new class extends Migration
             $table->timestamps();
             // Menambahkan foreign key constraint
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
-            $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
+            $table->foreign('id_mapel')->references('id')->on('tbl_mapel')->onDelete('cascade');
         });
 
 
@@ -121,12 +150,12 @@ return new class extends Migration
         // Tabel untuk menyimpan jawaban yang diberikan oleh siswa untuk setiap pertanyaan
         Schema::create('tbl_jawaban_pengguna', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_siswa');
-            $table->unsignedBigInteger('id_materi');
-            $table->unsignedBigInteger('id_pertanyaan');
-            $table->unsignedBigInteger('id_kelas');
-            $table->unsignedBigInteger('id_tugas');
-            $table->unsignedBigInteger('id_opsi');
+            $table->unsignedBigInteger('id_siswa')->nullable();
+            $table->unsignedBigInteger('id_materi')->nullable();
+            $table->unsignedBigInteger('id_pertanyaan')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_tugas')->nullable();
+            $table->unsignedBigInteger('id_opsi')->nullable();
             $table->text('jawaban')->nullable();
             $table->decimal('nilai', 5, 2)->nullable();
             $table->enum('status', ['lulus', 'tidak lulus']);
@@ -198,6 +227,7 @@ return new class extends Migration
         // Tabel untuk menyimpan pengumuman
         Schema::create('tbl_pengumuman', function (Blueprint $table) {
             $table->id();
+            $table->enum('jenis', ['portal', 'elearning']);
             $table->string('judul');
             $table->text('konten');
             $table->timestamps();
@@ -206,19 +236,21 @@ return new class extends Migration
         Schema::create('tbl_nilai', function (Blueprint $table) {
             $table->id();
             $table->enum('jenis', ['tugas', 'UTS', 'UAS', 'UN'])->nullable();
+            $table->decimal('nilai', 5, 2);
             $table->unsignedBigInteger('id_siswa');
             $table->unsignedBigInteger('id_materi');
             $table->unsignedBigInteger('id_pertanyaan')->nullable();
             $table->unsignedBigInteger('id_tugas')->nullable();
             $table->unsignedBigInteger('id_kelas')->nullable();
-            $table->decimal('nilai', 5, 2);
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->timestamps();
 
             $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
             $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
             $table->foreign('id_tugas')->references('id')->on('tbl_tugas')->onDelete('cascade');
-            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('set null');
+            $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
         });
     }
     public function down(): void
@@ -234,9 +266,11 @@ return new class extends Migration
         Schema::dropIfExists('tbl_opsi');
         Schema::dropIfExists('tbl_pertanyaan');
         Schema::dropIfExists('tbl_tugas');
+        Schema::dropIfExists('tbl_mapel');
         Schema::dropIfExists('tbl_materi');
         Schema::dropIfExists('tbl_guru');
         Schema::dropIfExists('tbl_siswa');
         Schema::dropIfExists('tbl_kelas');
+        Schema::dropIfExists('tbl_ruangKelas');
     }
 };

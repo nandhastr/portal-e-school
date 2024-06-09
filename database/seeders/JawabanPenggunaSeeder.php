@@ -25,11 +25,11 @@ class JawabanPenggunaSeeder extends Seeder
         ]);
 
         Jawaban_pengguna::create([
-            'id_siswa' => 1,
+            'id_siswa' => 2,
             'id_materi' => 2,
             'id_pertanyaan' => 2,
-            'id_kelas' => 1,
-            'id_tugas' => 1,
+            'id_kelas' => 2,
+            'id_tugas' => 2,
             'id_opsi' => 4,
             'jawaban' => 'apel',
             'nilai' => 85,
@@ -38,11 +38,11 @@ class JawabanPenggunaSeeder extends Seeder
 
         Jawaban_pengguna::create([
             'id_siswa' => 2,
-            'id_materi' => 1,
-            'id_pertanyaan' => 1,
-            'id_kelas' => 1,
-            'id_tugas' => 1,
-            'id_opsi' => 1,
+            'id_materi' => 3,
+            'id_pertanyaan' => 2,
+            'id_kelas' => 3,
+            'id_tugas' => 2,
+            'id_opsi' => 3,
             'jawaban' => '2',
             'nilai' => 95,
             'status' => 'tidak lulus'
@@ -52,7 +52,7 @@ class JawabanPenggunaSeeder extends Seeder
             'id_siswa' => 2,
             'id_materi' => 2,
             'id_pertanyaan' => 2,
-            'id_kelas' => 1,
+            'id_kelas' => 2,
             'id_tugas' => 1,
             'id_opsi' => 4,
             'jawaban' => 'apel',

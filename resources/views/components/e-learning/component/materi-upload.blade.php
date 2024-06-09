@@ -30,13 +30,14 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {{-- tabel mata pelajaran dashboard admin --}}
+                        <h6 class="text-center text-warning text-decoration-underline">Data Materi Yang di Upload</h6>
 
                         <table id="example" class="display table-hover text-xs" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama Mata Pelajaran Yang Telah di Upload</th>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Judul</th>
                                     <th>Untuk Kelas</th>
                                     <th>Tanggal</th>
                                     <th>File</th>
@@ -48,10 +49,11 @@
                                 @foreach ($materi as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->mata_pelajaran }}</td>
+                                    <td>{{ $row->mapel->mata_pelajaran }}</td>
+                                    <td>{{ $row->judul}}</td>
                                     <td>
                                         @if ($row->kelas)
-                                        {{ $row->kelas->tingkat }} {{ $row->kelas->nama }}
+                                        {{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}
                                         @else
                                         Belum ditentukan
                                         @endif
@@ -59,14 +61,9 @@
                                     <td>{{ $row->created_at }}</td>
                                     <td>{{ $row->file_path }}</td>
                                     <td>
-                                        {{-- <a class="btn bg-success btn-edit" href="#" data-id="{{ $row->id }}"
-                                            data-subject="{{ $row->mata_pelajaran }}" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a class="btn bg-warning btn-delete" href="#" data-id="{{ $row->id }}"
-                                            data-toggle="modal" data-target="#modal-delete"><i
-                                                class="fa-regular fa-trash-can"></i></a> --}}
-                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <button class="btn bg-success btn-edit" data-toggle="modal"
+                                            data-target="#updateMateriModal{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></button>
                                         <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
                                             data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
                                     </td>
@@ -85,6 +82,7 @@
     </div>
 
     {{-- Modal Create Materi --}}
+    {{-- Modal Create Materi --}}
     <div class="modal fade" id="modal-create-materi">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -95,40 +93,42 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="createMateriForm">
+                    <form action="" method="POST" enctype="multipart/form-data" id="createMateriForm">
                         @csrf
                         <div class="modal-body">
                             <label for="subject">Mata Pelajaran</label>
-                            <select name="" id="" class="form-control">
+                            <select name="id_mapel" class="form-control">
                                 <option value="">Pilih Mata Pelajaran</option>
-                                <option value="">mtk</option>
-                                <option value="">indo</option>
-                                <option value="">ipa</option>
+                                @foreach ($materi as $row)
+                                <option value="">{{ $row->mapel->mata_pelajaran }}</option>
+                                @endforeach
                             </select>
                             <label for="judul">Judul Materi</label>
-                            <textarea name="" id="" cols="30" rows="2" class="form-control"
+                            <textarea name="judul" cols="30" rows="2" class="form-control"
                                 placeholder="Enter Judul Materi"></textarea>
-                            {{-- <input type="text" name="judul" id="judul" placeholder="Enter Judul Materi"
-                                class="form-control" required> --}}
+
                             <label for="deskripsi">Deskripsi Singkat</label>
-                            <textarea name="deskripsi" id="deskripsi" cols="10" rows="4"
-                                placeholder="Enter Deskripsi Singkat Materi" class="form-control"></textarea>
+                            <textarea name="deskripsi" cols="10" rows="4" placeholder="Enter Deskripsi Singkat Materi"
+                                class="form-control"></textarea>
+
                             <label for="tingkat_kelas">Untuk Tingkat Kelas</label>
-                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                <option value="X/XI/XII" class="disabled">X/XI/XII</option>
-                                <option value="X">X</option>
-                                <option value="XI">XI</option>
-                                <option value="XII">XII</option>
+                            <select name="tingkat_kelas" class="form-control">
+                                <option value="">Pilih Kelas</option>
+                                @foreach ($kelas as $row)
+                                <option value="">{{ $row->tingkat }}</option>
+                                @endforeach
                             </select>
+
+
                             <label for="kelas">Ruang</label>
-                            <select name="kelas" id="kelas" class="form-control">
-                                <option value="A/B/C" class="disabled">A/B/C</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
+                            <select name="id_kelas" class="form-control">
+                                <option value="">Pilih Ruang Kelas</option>
+                                @foreach ($ruang as $row)
+                                <option value="">{{ $row->nama }}</option>
+                                @endforeach
                             </select>
-                            <label for="">Pilih Dokumen Materi</label>
-                            <input type="file" name='' id='' placeholder="pilih file" class="form-control">
+                            <label for="file_path">Pilih Dokumen Materi</label>
+                            <input type="file" name="file_path" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -139,9 +139,9 @@
             </div>
         </div>
     </div>
-
+    @foreach ($materi as $row)
     {{-- Modal update --}}
-    <div class="modal fade" id="modal-update">
+    <div class="modal fade" id="updateMateriModal{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -151,51 +151,56 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="createMateriForm">
+                    <form action="" method="POST" enctype="multipart/form-data" id="updateMateriForm_{{ $row->id }}">
                         @csrf
                         <div class="modal-body">
                             <label for="subject">Mata Pelajaran</label>
-                            <select name="" id="" class="form-control">
+                            <select name="id_mapel" class="form-control">
                                 <option value="">Pilih Mata Pelajaran</option>
-                                <option value="">mtk</option>
-                                <option value="">indo</option>
-                                <option value="">ipa</option>
+                                @foreach ($materi as $materi_item)
+                                <option value="{{ $materi_item->id }}" @if ($materi_item->id == $row->id) selected
+                                    @endif>{{
+                                    $materi_item->mapel->mata_pelajaran }}</option>
+                                @endforeach
                             </select>
                             <label for="judul">Judul Materi</label>
-                            <textarea name="" id="" cols="30" rows="2" class="form-control"
-                                placeholder="Enter Judul Materi"></textarea>
-                            {{-- <input type="text" name="judul" id="judul" placeholder="Enter Judul Materi"
-                                class="form-control" required> --}}
+                            <textarea name="judul" cols="30" rows="2" class="form-control"
+                                placeholder="Enter Judul Materi">{{ $row->judul }}</textarea>
+
                             <label for="deskripsi">Deskripsi Singkat</label>
-                            <textarea name="deskripsi" id="deskripsi" cols="10" rows="4"
-                                placeholder="Enter Deskripsi Singkat Materi" class="form-control"></textarea>
+                            <textarea name="deskripsi" cols="10" rows="4" placeholder="Enter Deskripsi Singkat Materi"
+                                class="form-control">{{ $row->deskripsi }}</textarea>
+
                             <label for="tingkat_kelas">Untuk Tingkat Kelas</label>
-                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                <option value="X/XI/XII" class="disabled">X/XI/XII</option>
-                                <option value="X">X</option>
-                                <option value="XI">XI</option>
-                                <option value="XII">XII</option>
+                            <select name="tingkat_kelas" class="form-control">
+                                <option value="">Pilih Kelas</option>
+                                @foreach ($kelas as $kelas_item)
+                                <option value="{{ $kelas_item->id }}" @if ($kelas_item->id == $row->id_kelas) selected
+                                    @endif>{{ $kelas_item->tingkat }}</option>
+                                @endforeach
                             </select>
+
                             <label for="kelas">Ruang</label>
-                            <select name="kelas" id="kelas" class="form-control">
-                                <option value="A/B/C" class="disabled">A/B/C</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
+                            <select name="id_kelas" class="form-control">
+                                <option value="">Pilih Ruang Kelas</option>
+                                @foreach ($ruang as $ruang_item)
+                                <option value="{{ $ruang_item->id }}" @if ($ruang_item->id == $row->id_kelas) selected
+                                    @endif>{{ $ruang_item->nama }}</option>
+                                @endforeach
                             </select>
-                            <label for="">Pilih Dokumen Materi</label>
-                            <input type="file" name='' id='' placeholder="pilih file" class="form-control">
+                            <label for="file_path">Pilih Dokumen Materi</label>
+                            <input type="file" name="file_path" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    @endforeach
     {{-- Modal delete --}}
     <div class="modal fade" id="modal-delete">
         <div class="modal-dialog modal-lg">

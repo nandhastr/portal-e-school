@@ -12,12 +12,20 @@ class Materi extends Model
     protected $table = 'tbl_materi';
 
     protected $fillable = [
-        'id_kelas', 'judul', 'konten', 'mata_pelajaran', 'file_path',
+        'id_kelas', 'id_mapel', 'id_ruangKelas', 'judul', 'konten', 'file_path',
     ];
 
     // Relasi Materi ke Kelas (Materi belongs to Kelas)
     public function kelas()
     {
         return $this->belongsTo(Kelas::class, 'id_kelas', 'id');
+    }
+    public function mapel()
+    {
+        return $this->belongsTo(Mapel::class, 'id_mapel');
+    }
+    public function ruangKelas()
+    {
+        return $this->belongsTo(RuangKelas::class, 'id_ruangKelas');
     }
 }
