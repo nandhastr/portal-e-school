@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\UserSeeder;
+use Database\Seeders\JawabanPenggunaSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // Panggil seeder lain di sini
+        // Panggil seeder 
         $this->call([
             UserSeeder::class,
             KelasSeeder::class,

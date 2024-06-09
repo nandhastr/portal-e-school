@@ -46,6 +46,6 @@ Route::get('/data-siswa-page', [ElearningController::class, 'siswa_page'])->name
 Route::get('/materi-upload-page', [GuruController::class, 'materi_upload'])->name('materi-upload-page');
 Route::get('/tugas-upload-page', [GuruController::class, 'tugas_upload'])->name('tugas-upload-page');
 Route::get('/soal-upload-page', [GuruController::class, 'soal_page'])->name('soal-upload-page');
-// Route::get('/ujian-upload-page', [GuruController::class, 'ujian_page'])->name('ujian-upload-page');
+Route::get('/review-ujian-page', [GuruController::class, 'review_page'])->name('review-ujian-page');
 
 require __DIR__ . '/auth.php';

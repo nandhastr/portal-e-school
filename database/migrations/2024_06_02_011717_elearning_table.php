@@ -122,13 +122,23 @@ return new class extends Migration
         Schema::create('tbl_jawaban_pengguna', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->unsignedBigInteger('id_materi');
             $table->unsignedBigInteger('id_pertanyaan');
-            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
-            $table->unsignedBigInteger('id_opsi')->nullable();
-            $table->foreign('id_opsi')->references('id')->on('tbl_opsi')->onDelete('cascade');
+            $table->unsignedBigInteger('id_kelas');
+            $table->unsignedBigInteger('id_tugas');
+            $table->unsignedBigInteger('id_opsi');
+            $table->text('jawaban')->nullable();
+            $table->decimal('nilai', 5, 2)->nullable();
+            $table->enum('status', ['lulus', 'tidak lulus']);
             $table->timestamps();
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
+            $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
+            $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
+            $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
+            $table->foreign('id_tugas')->references('id')->on('tbl_tugas')->onDelete('cascade');
+            $table->foreign('id_opsi')->references('id')->on('tbl_opsi')->onDelete('cascade');
         });
+
 
         // Tabel untuk menyimpan kegiatan yang diikuti oleh siswa
         Schema::create('tbl_kegiatan_pengguna', function (Blueprint $table) {

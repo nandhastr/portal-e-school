@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jawaban_pengguna;
 use App\Models\Opsi;
 use App\Models\Kelas;
 use App\Models\Tugas;
-use App\Models\Ujian;
 use App\Models\Materi;
 use App\Models\Nilai;
 use App\Models\Pertanyaan;
@@ -20,7 +20,7 @@ class GuruController extends Controller
     public function tugas_upload()
     {
         $user = Auth::user();
-        $tugas = Nilai::with(['kelas', 'siswa', 'materi', 'ujian', 'tugas'])->get();
+        $tugas = Nilai::with(['kelas', 'siswa', 'materi', 'tugas'])->get();
         $data = [
             'tugas' => $tugas,
             'user' => $user,
@@ -55,6 +55,19 @@ class GuruController extends Controller
         ];
         // \dd($data);
         return view('elearning.guru.soal-upload-page', $data);
+    }
+    public function review_page()
+    {
+
+        $user = Auth::user();
+        $Qna = Jawaban_pengguna::with(['siswa', 'materi', 'pertanyaan', 'kelas', 'tugas', 'opsi'])->get();
+        $data = [
+            'title' => 'Halaman Review ',
+            'qna' => $Qna,
+            'user' => $user,
+        ];
+        // dd($data['qna']);
+        return view('elearning.guru.review-ujian-page', $data);
     }
 
 
