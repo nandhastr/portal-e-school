@@ -32,7 +32,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->string('angkatan')->nullable();
-            $table->string('status')->nullable();
+            $table->enum('status', ['aktif', 'tidak aktif'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
@@ -41,13 +41,10 @@ return new class extends Migration
             $table->string('sekolah_sebelumnya')->nullable();
             $table->string('nisn')->nullable();
             $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->year('tahun_masuk')->nullable();
             $table->string('kelas_sekarang')->nullable();
-            $table->string('status_beasiswa')->nullable();
-            $table->text('catatan_prestasi')->nullable();
-            $table->text('catatan_disiplin')->nullable();
-            $table->text('informasi_kesehatan')->nullable();
             $table->timestamps();
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
             $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
@@ -75,14 +72,14 @@ return new class extends Migration
         });
         Schema::create('tbl_mapel', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
+            // $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('mata_pelajaran');
             $table->text('deskripsi')->nullable();
             $table->timestamps();
 
             // Create a foreign key constraint linking to the users table
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('set null');
         });
 

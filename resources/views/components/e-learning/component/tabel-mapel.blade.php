@@ -37,22 +37,23 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama Mata Pelajaran</th>
-                                    <th>Judul</th>
                                     <th>Deskripsi</th>
+                                    <th>Mata Pelajaran Kelas</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($mapel))
-                                @foreach ($mapel as $row)
+                                @if(!empty($materi))
+                                @foreach ($materi as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row['mata_pelajaran'] }}</td>
-                                    <td>{{ $row['judul'] }}</td>
-                                    <td>{{ $row['konten'] }}</td>
+                                    <td>{{ $row->mapel->mata_pelajaran }}</td>
+                                    <td>{{ $row->mapel->deskripsi }}</td>
+                                    <td>{{ $row->kelas->tingkat }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
                                         <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
                                             data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
                                     </td>
@@ -81,25 +82,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="createSubject">
+                    <form action="" method="POST">
                         @csrf
-                        <div class="modal-body">
-                            <label for="">Mata Pelajaran</label>
-                            <input type="text" name="subject" placeholder="Enter Nama Mata Pelajaran"
-                                class="form-control" required>
+                        <div class="form-group">
+                            <label for="nama">Nama Mata Pelajaran</label>
+                            <input type="text" name="nama" id="nama" class="form-control"
+                                placeholder="Masukkan Nama Mata Pelajaran" required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
+                                placeholder="Masukkan Deskripsi Mata Pelajaran"></textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="tingkat_kelas">Mata Pelajaran Kelas</label>
+                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
+                                <option value="">Pilih Tingkat Kelas</option>
+                                @foreach ($kelas as $row )
+                                <option value="{{ $row->tingkat }}">{{ $row->tingkat }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tambah Mata Pelajaran</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    @foreach ($materi as $row)
     {{-- Modal update --}}
-    <div class="modal fade" id="modal-update">
+    <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -109,24 +121,36 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="updateSubject">
+                    <form action="" method="POST">
                         @csrf
-                        <div class="modal-body">
-                            <label for="">Mata Pelajaran</label>
-                            <input type="text" name="subject" placeholder="Enter Subject Name" id="update_subject"
-                                required class="form-control">
-                            <input type="hidden" name="id" id="update_subject_id">
+                        <div class="form-group">
+                            <label for="nama">Nama Mata Pelajaran</label>
+                            <input type="text" name="nama" id="nama" class="form-control"
+                                placeholder="{{ $row->mapel->mata_pelajaran }}" required>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Edit</button>
+                        <div class="form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
+                                placeholder="Masukkan Deskripsi Mata Pelajaran">
+                                {{ $row->mapel->deskripsi }}
+                            </textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="tingkat_kelas">Mata Pelajaran Kelas</label>
+                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
+                                <option value="">{{ $row->kelas->tingkat }}</option>
+                                @foreach ($kelas as $row )
+                                <option value="{{ $row->tingkat }}">{{ $row->tingkat }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ubah Mata Pelajaran</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    @endforeach
     {{-- Modal delete --}}
     <div class="modal fade" id="modal-delete">
         <div class="modal-dialog modal-lg">

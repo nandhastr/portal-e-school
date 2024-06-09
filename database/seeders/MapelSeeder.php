@@ -14,7 +14,7 @@ class MapelSeeder extends Seeder
     public function run(): void
     {
         Mapel::create([
-            'user_id' => 3,
+            // 'user_id' => 3,
             'id_kelas' => 1,
             'mata_pelajaran' => 'Matematika',
             'deskripsi' => 'Pelajaran Matematika dasar untuk tingkat SMA',
@@ -22,7 +22,7 @@ class MapelSeeder extends Seeder
             'updated_at' => now(),
         ]);
         Mapel::create([
-            'user_id' => 3,
+            // 'user_id' => 3,
             'id_kelas' => 2,
             'mata_pelajaran' => 'Fisika',
             'deskripsi' => 'Pelajaran Fisika dasar untuk tingkat SMA',
@@ -30,7 +30,7 @@ class MapelSeeder extends Seeder
             'updated_at' => now(),
         ]);
         Mapel::create([
-            'user_id' => 3,
+            // 'user_id' => 3,
             'id_kelas' => 1,
             'mata_pelajaran' => 'Kimia',
             'deskripsi' => 'Pelajaran Kimia dasar untuk tingkat SMA',
@@ -38,7 +38,7 @@ class MapelSeeder extends Seeder
             'updated_at' => now(),
         ]);
         Mapel::create([
-            'user_id' => 3,
+            // 'user_id' => 3,
             'id_kelas' => 3,
             'mata_pelajaran' => 'Biologi',
             'deskripsi' => 'Pelajaran Biologi dasar untuk tingkat SMA',
@@ -46,7 +46,7 @@ class MapelSeeder extends Seeder
             'updated_at' => now(),
         ]);
         Mapel::create([
-            'user_id' => 3,
+            // 'user_id' => 3,
             'id_kelas' => 2,
             'mata_pelajaran' => 'Bahasa Inggris',
             'deskripsi' => 'Pelajaran Bahasa Inggris dasar untuk tingkat SMA',

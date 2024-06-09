@@ -36,28 +36,29 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Nama Kelas</th>
                                     <th>Tingkat</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {{-- {{ dd($kelas)}} --}}
                                 @if(!empty($kelas))
                                 @foreach ($kelas as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row['nama'] }}</td>
-                                    <td>{{ $row['tingkat'] }}</td>
+                                    <td>{{ $row->tingkat }}</td>
                                     <td>
-                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
+                                        <button class="btn bg-success btn-edit" data-toggle="modal"
+                                            data-target="#modal-update" data-kelasid="{{ $row->id }}"
+                                            data-tingkat="{{ $row->tingkat }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></button>
                                         <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
                                             data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                                 @else
-                                <p>tidak ada mata pelajaran</p>
+                                <p>tidak ada kelas</p>
                                 @endif
                             </tbody>
                         </table>
@@ -73,7 +74,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Mata Pelajaran</h4>
+                    <h4 class="modal-title">Tambah Data Kelas</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -82,9 +83,13 @@
                     <form action="" id="createSubject">
                         @csrf
                         <div class="modal-body">
-                            <label for="">Mata Pelajaran</label>
-                            <input type="text" name="subject" placeholder="Enter Nama Mata Pelajaran"
-                                class="form-control" required>
+                            <label for="">Kelas</label>
+                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
+                                <option value="">Pilih Tingkat Kelas</option>
+                                @foreach (['X', 'XI', 'XII'] as $kelas)
+                                <option value="{{ $kelas }}">{{ $kelas }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -95,38 +100,42 @@
             </div>
         </div>
     </div>
-
-    {{-- Modal update --}}
+    {{-- {{ dd($kelas) }} --}}
+    <!-- Modal Update -->
     <div class="modal fade" id="modal-update">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Mata Pelajaran</h4>
+                    <h4 class="modal-title">Ubah Data Kelas</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form id="updateSubject">
-                        @csrf
-                        <div class="modal-body">
-                            <label for="">Mata Pelajaran</label>
-                            <input type="text" name="subject" placeholder="Enter Subject Name" id="update_subject"
-                                required class="form-control">
-                            <input type="hidden" name="id" id="update_subject_id">
+                <form action="" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="kelas_id" id="kelas_id">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="tingkat_kelas">Tingkat</label>
+                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
+                            </select>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
     {{-- Modal delete --}}
-    <div class="modal fade" id="modal-delete">
+    <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -139,7 +148,7 @@
                     <form id="deleteSubject">
                         @csrf
                         <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus Mata Pelajaran?</p>
+                            <p>Apakah Anda yakin ingin menghapus Kelas ini?</p>
                             <input type="hidden" name="id" id="delete_subject_id">
                         </div>
                         <div class="modal-footer">
@@ -160,6 +169,14 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+
+        // script untuk kirim id ke modal
+        $('.btn-edit').click(function () {
+        var kelas_id = $(this).data('kelasid');
+        var tingkat_kelas = $(this).data('tingkat');
+        $('#kelas_id').val(kelas_id);
+        $('#tingkat_kelas').val(tingkat_kelas);
+        });
     });
 </script>
 

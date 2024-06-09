@@ -24,13 +24,10 @@ class Siswa extends Model
         'sekolah_sebelumnya',
         'nisn',
         'phone',
+        'email',
         'gender',
         'tahun_masuk',
         'kelas_sekarang',
-        'status_beasiswa',
-        'catatan_prestasi',
-        'catatan_disiplin',
-        'informasi_kesehatan',
     ];
 
     public function penghargaan()
