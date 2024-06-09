@@ -32,17 +32,10 @@
                     <p>Soal</p>
                 </a>
             </li>
-            {{-- <li class="nav-item">
-                <a href="/ujian-upload-page" class="nav-link {{ request()->is('ujian-upload-page') ? 'active' : '' }}">
-                    <i class="fas fa-file nav-icon"></i>
-                    <p>Ujian</p>
-                </a>
-            </li> --}}
             <li class="nav-item">
-                <a href="/guru/review-ujian-page"
-                    class="nav-link {{ request()->is('guru/review-ujian-page*') ? 'active' : '' }}">
+                <a href="/review-ujian-page" class="nav-link {{ request()->is('review-ujian-page*') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Hasil Ujian</p>
+                    <p>Penilaian</p>
                 </a>
             </li>
         </ul>

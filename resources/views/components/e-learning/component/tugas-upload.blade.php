@@ -6,7 +6,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-auto">
-                                <button type="button" class="btn btn-primary btn-jawabanTugas">
+                                <button type="button" class="btn btn-success btn-jawabanTugas">
                                     Jawaban Tugas Siswa
                                 </button>
                             </div>
@@ -17,7 +17,7 @@
                                 </button>
                             </div>
                             <div class="col">
-                                <button type="butto" class="btn btn-primary btn-list-tugas">
+                                <button type="butto" class="btn btn-info btn-list-tugas">
                                     Lihat Data Tugas
                                 </button>
                             </div>
@@ -49,7 +49,7 @@
                                     <th>No.</th>
                                     <th>Tugas di Upload</th>
                                     <th>Untuk Kelas</th>
-                                    <th>File</th>
+                                    <th>File Materi</th>
                                     <th>Tanggal</th>
                                     <th>aksi</th>
                                 </tr>
@@ -92,7 +92,7 @@
                                     <th>Nama Siswa</th>
                                     <th>Kelas</th>
                                     <th>Mata Pelajaran</th>
-                                    <th>File</th>
+                                    <th>File Jawaban</th>
                                     <th>Nilai</th>
                                     <th>Jenis Tugas</th>
                                     <th>Tanggal</th>
@@ -102,6 +102,7 @@
                             <tbody>
                                 @if(!empty($tugas))
                                 @foreach ($tugas as $row)
+                                @if (in_array($row->jenis, ['tugas']))
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->siswa->user->name }}</td>
@@ -119,7 +120,7 @@
                                     <td>{{$row->jenis}}</td>
                                     <td>{{ $row->created_at }}</td>
                                     <td>
-                                        <a class="btn bg-success btn-create-nilai" href="#"
+                                        <a class="btn bg-info btn-create-nilai" href="#"
                                             data-id_siswa="{{ $row->siswa->id }}" data-id_materi="{{ $row->id_materi }}"
                                             data-jenis="{{ $row->jenis }}" data-id_ujian="{{ $row->id_ujian }}"
                                             data-id_tugas="{{ $row->id }}" data-id_kelas="{{ $row->kelas->id }}"
@@ -135,6 +136,7 @@
                                             data-target="#modal-delete-nilai">Delete</a>
                                     </td>
                                 </tr>
+                                @endif
                                 @endforeach
                                 @else
                                 <p>tidak ada mata pelajaran</p>
@@ -380,7 +382,7 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
-
+      
 // show & hidden tabel
        $('.btn-list-tugas').click(function() {
         $('.tbl-tugas').show(); 

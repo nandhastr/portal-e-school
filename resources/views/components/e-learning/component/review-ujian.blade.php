@@ -1,4 +1,3 @@
-@section('content')
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -6,15 +5,15 @@
                 <div class="card card-outline">
                     <div class="card-header">
                         <h3 class="card-title mt-2">
-                            <a href="{{ route('exportPdf', ['search' => $request->get('search')]) }}"
+                            {{-- <a href="{{ route('exportPdf', ['search' => $request->get('search')]) }}"
                                 class="btn btn-primary">
                                 Export Data
-                            </a>
+                            </a> --}}
                         </h3>
 
                         <div class="card-tools">
                             <div class="input-group mt-2">
-                                <form action="{{ route('reviewExams')}}" method="GET">
+                                {{-- <form action="{{ route('reviewExams')}}" method="GET">
                                     @csrf
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control float-right"
@@ -26,83 +25,84 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form>
+                                </form> --}}
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>KKM</th>
-                                    <th>Benar</th>
-                                    <th>Salah</th>
-                                    <th>Nilai</th>
-                                    <th>Status</th>
-                                    <th>Review</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- @if (count($attemps) > 0)
-                                @foreach ($attemps as $attempt)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $attempt->user->name }}</td>
-                                    <td>{{ $attempt->exam->subjects->subject }}</td>
-                                    <td>{{ $attempt->exam->pass_marks }}</td>
-                                    <td class="total-correct-answers" data-attempt-id="{{ $attempt->id }}"></td>
-                                    <td class="total-incorrect-answers" data-attempt-id="{{ $attempt->id }}"></td>
-                                    <td class="total-score" data-attempt-id="{{ $attempt->id }}"></td>
-                                    <td>
-                                        @if ($attempt->status == 0)
-                                        <span style="color:red">Tidak Lulus</span>
-                                        <a href="" data-id="{{ $attempt->id }}" data-toggle="modal"
-                                            data-target="#reviewExamModal" class="reviewExam"
-                                            style="display:none">Review & Approved</a>
-                                        @else
-                                        <span style="color: green">Lulus</span>
-                                        <a href="" data-id="{{ $attempt->id }}" data-toggle="modal"
-                                            data-target="#reviewExamModal" class="reviewExam"
-                                            style="display:none">Review & Approved</a>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($attempt->status == 0)
-                                        <a href="" data-id="{{ $attempt->id }}" data-toggle="modal"
-                                            data-target="#reviewExamModal" class="reviewExam">Review & Approved</a>
-                                        @else
-                                        Completed
-                                        @endif
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="9" class="text-center">Students not attempt exams!</td>
-                                </tr>
-                                @endif --}}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>KKM</th>
-                                    <th>Benar</th>
-                                    <th>Salah</th>
-                                    <th>Nilai</th>
-                                    <th>Status</th>
-                                    <th>Review</th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="btn-group">
+                            <div class="btn-group mr-2" role="group">
+                                <label class="btn btn-info">
+                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                        value="all" checked>
+                                    Semua
+                                </label>
+                                <label class="btn btn-info">
+                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                        value="UTS">
+                                    UTS
+                                </label>
+                                <label class="btn btn-info">
+                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                        value="UAS">
+                                    UAS
+                                </label>
+                                <label class="btn btn-info">
+                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                        value="UN">
+                                    UN
+                                </label>
+                            </div>
+                        </div>
                     </div>
+                    <table id="example" class="display table-hover text-xs" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Jenis</th>
+                                <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Mata Pelajaran</th>
+                                <th>Pertanyaan</th>
+                                <th>Jawaban Benar</th>
+                                <th>Jawaban Siswa</th>
+                                <th>Nilai</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if(!empty($qna))
+                            @foreach ($qna as $row )
+                            {{-- {{ dd($row) }} --}}
+                            <tr>
+                                <td>{{ $loop->iteration}}</td>
+                                <td>{{ $row->pertanyaan->type}}</td>
+                                <td>{{ $row->siswa->user->name}}</td>
+                                <td>{{ $row->kelas->tingkat}} - {{ $row->kelas->nama }}</td>
+                                <td>{{ $row->materi->mata_pelajaran }}</td>
+                                <td>{{ $row->pertanyaan->pertanyaan }}</td>
+                                <td>{{ $row->opsi->opsi}}</td>
+                                <td>{{ $row->jawaban }}</td>
+                                <td>{{ $row->nilai }}</td>
+                                <td>{{ $row->status }}</td>
+                                <td>
+                                    <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                        data-target="#reviewExamModal"><i class="fa-regular fa-pen-to-square"></i></a>
+                                    <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                        data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @else
+                            Tidak ada data
+                            @endif
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     {{-- Modal --}}
@@ -132,125 +132,47 @@
     </div>
 
 </section>
+@section('script')
+{{-- cdn dataable --}}
+<script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
-    $(document).ready(function(){
-        $('.reviewExam').each(function () {
-            var attemptId = $(this).attr('data-id');
-            fetchTotalCorrectAnswers(attemptId);
-        });
-
-        $('.reviewExam').click(function () {
-            var id = $(this).attr('data-id');
-            $('#attempt_id').val(id);
-
-            $.ajax({
-                url: "{{ route('reviewQna') }}",
-                type: "GET",
-                data: { attempt_id: id },
-                success: function (data) {
-                    var html = '';
-                    var totalCorrectAnswers = 0;
-                    var totalIncorrectAnswers = 0;
-
-                    if (data.success == true) {
-                        var data = data.msg;
-                        if (data.length > 0) {
-                            for (let i = 0; i < data.length; i++) {
-                                let is_correct = `<span class="fas fa-times" style="color:red;"></span>`;
-
-                                if (data[i]['answer']['is_correct'] == 1) {
-                                    is_correct = `<span class="fa fa-check" style="color:green;"></span>`;
-                                    totalCorrectAnswers++;
-                                } else {
-                                    totalIncorrectAnswers++;
-                                }
-
-                                let answer = data[i]['answer']['answer'];
-                                html += `
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h6>Q(${i + 1}). ${data[i]['question']['question']}</h6>
-                                            <p>Ans: ${answer} ${is_correct}</p>
-                                        </div>
-                                    </div>
-                                `;
-                            }
-                        } else {
-                            html += `
-                                <h6>Siswa belum menjawab pertanyaan apapun!</h6>
-                                <p>Jika Anda menyetujui ujian ini, siswa akan gagal!</p>
-                            `;
-                        }
-                        $('.review-exam').html(html);
-
-                        $('.total-correct-answers[data-attempt-id="' + id + '"]').text(totalCorrectAnswers);
-                        $('.total-incorrect-answers[data-attempt-id="' + id + '"]').text(totalIncorrectAnswers);
-                    }
-                }
+    $(document).ready(function () {
+        // datatabel
+        new DataTable('#example');
+            // filter tipe ujian
+            // Tangani perubahan pada radio button filter
+            $('.filter-radio').change(function() {
+            // Dapatkan nilai filter yang dipilih
+            var filterValue = $(this).val();
+            // Terapkan filter
+            filterTableRows(filterValue);
             });
-        });
-
-        $('#reviewForm').submit(function (e) {
-            e.preventDefault();
-
-            var formData = $(this).serialize();
-
-            $.ajax({
-                url: "{{ route('approvedQna') }}",
-                type: "POST",
-                data: formData,
-                success: function (data) {
-                    if (data.success == true) {
-                        location.reload();
-                    } else {
-                        alert(data.msg);
+            
+            // Fungsi untuk menampilkan/menyembunyikan baris tabel berdasarkan filter
+            function filterTableRows(filterValue) {
+            // Loop melalui setiap baris tabel
+            $('tbody tr').each(function() {
+            // Dapatkan jenis ujian dari kolom tabel
+            var examType = $(this).find('td:nth-child(2)').text();
+            
+            // Periksa apakah jenis ujian sesuai dengan filterValue
+            if (filterValue === 'all' || examType === filterValue) {
+            // Jika sesuai, tampilkan baris tabel
+                $(this).show();
+                } else {
+            // Jika tidak sesuai, sembunyikan baris tabel
+                    $(this).hide();
                     }
-                }
+                });
+            }
+            $('#filter-all').change(function() {
+            // Jika radio button "Semua" dipilih
+                if ($(this).is(':checked')) {
+                    // Tampilkan semua baris tabel
+                    $('tbody tr').show();
+                 }
             });
-        });
-
-        function fetchTotalCorrectAnswers(attemptId) {
-            $.ajax({
-                url: "{{ route('reviewQna') }}",
-                type: "GET",
-                data: { attempt_id: attemptId },
-                success: function (data) {
-                    var html = '';
-                    var totalCorrectAnswers = 0;
-                    var totalIncorrectAnswers = 0;
-                    var totalQuestions = 0;
-
-                    if (data.success == true) {
-                        var data = data.msg;
-                        if (data.length > 0) {
-                            totalQuestions = data.length;
-
-                            for (let i = 0; i < totalQuestions; i++) {
-                                if (data[i]['answer']['is_correct'] == 1) {
-                                    totalCorrectAnswers++;
-                                } else {
-                                    totalIncorrectAnswers++;
-                                }
-                            }
-                        }
-                    }
-                    $('.total-correct-answers[data-attempt-id="' + attemptId + '"]').text(totalCorrectAnswers);
-                    $('.total-incorrect-answers[data-attempt-id="' + attemptId + '"]').text(totalIncorrectAnswers);
-
-                    var totalScore = calculateTotalScore(totalCorrectAnswers, totalQuestions);
-                    $('.total-score[data-attempt-id="' + attemptId + '"]').text(totalScore);
-                }
-            });
-        }
-
-        function calculateTotalScore(totalCorrect, totalQuestions) {
-            var totalScore = (totalCorrect * 100) / totalQuestions;
-
-            totalScore = Math.max(0, Math.min(totalScore));
-            totalScore = Math.round(totalScore);
-
-            return totalScore;
-        }
     });
 </script>
+
 @endsection
