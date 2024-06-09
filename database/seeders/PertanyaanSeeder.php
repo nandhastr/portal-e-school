@@ -15,7 +15,7 @@ class PertanyaanSeeder extends Seeder
     {
         Pertanyaan::create([
             'id_kelas' => 1,
-            'id_materi' => 1,
+            'id_mapel' => 1,
             'pertanyaan' => 'Apa hasil dari 2 + 2?',
             'type' => 'UTS',
             'durasi' => 60,
@@ -25,7 +25,7 @@ class PertanyaanSeeder extends Seeder
 
         Pertanyaan::create([
             'id_kelas' => 2,
-            'id_materi' => 2,
+            'id_mapel' => 2,
             'pertanyaan' => 'Terjemahkan kata "apple" ke dalam bahasa Indonesia.',
             'type' => 'UAS',
             'durasi' => 90,

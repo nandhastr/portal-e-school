@@ -42,4 +42,8 @@ class Jawaban_pengguna extends Model
     {
         return $this->belongsTo(Opsi::class, 'id_opsi');
     }
+    public function ruangKelas()
+    {
+        return $this->belongsTo(RuangKelas::class, 'id_kelas');
+    }
 }

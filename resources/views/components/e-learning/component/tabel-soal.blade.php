@@ -52,9 +52,9 @@
                                 @foreach ($soal as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->kelas->tingkat }} {{ $row->kelas->nama }}</td>
+                                    <td>{{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}</td>
                                     <td>{{ $row->type }}</td>
-                                    <td>{{ $row->materi->mata_pelajaran }}</td>
+                                    <td>{{ $row->mapel->mata_pelajaran }}</td>
                                     <td>{{ $row->pertanyaan }}</td>
                                     <td>
                                         @foreach ($row->opsi as $opsi)
@@ -69,7 +69,8 @@
 
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
                                         <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
                                             data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
                                     </td>
@@ -145,7 +146,8 @@
     </div>
 
     <!-- Modal Update Soal -->
-    <div class="modal fade" id="modal-update">
+    @foreach ($soal as $row )
+    <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -160,19 +162,36 @@
                         <div class="modal-body">
                             <label for="kelas_update">Kelas</label>
                             <select name="kelas" id="kelas_update" class="form-control" required>
-                                <option value="">X</option>
+                                @foreach ($kelas as $kelasItem)
+                                <option value="">{{ $kelasItem->tingkat }}</option>
+                                @endforeach
+                                {{-- <option value="">X</option>
                                 <option value="">XI</option>
-                                <option value="">XII</option>
+                                <option value="">XII</option> --}}
+
+                            </select>
+                            <label for="kelas_update">Ruang</label>
+                            <select name="kelas" id="kelas_update" class="form-control" required>
+                                <option value="">{{ $row->kelas->nama }}</option>
+                                <option value="">A</option>
+                                <option value="">B</option>
+                                <option value="">C</option>
+
                             </select>
                             <label for="jenis_ujian_update">Jenis Ujian</label>
                             <select name="jenis_ujian" id="jenis_ujian_update" class="form-control" required>
+                                <option value="">{{ $row->type }}</option>
                                 <option value="UTS">UTS</option>
                                 <option value="UAS">UAS</option>
                                 <option value="UN">UN</option>
                             </select>
                             <label for="mata_pelajaran_update">Mata Pelajaran</label>
-                            <input type="text" name="mata_pelajaran" id="mata_pelajaran_update" class="form-control"
-                                required>
+                            <select name="" id="" class="form-control" required>
+                                <option value="">{{ $row->mapel->mata_pelajaran }}</option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
                             <label for="pertanyaan_update">Pertanyaan</label>
                             <textarea name="pertanyaan" id="pertanyaan_update" class="form-control" required></textarea>
                             <label for="jawaban_benar_update">Jawaban Benar</label>
@@ -197,6 +216,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 
     <!-- Modal Delete Soal -->
     <div class="modal fade" id="modal-delete">

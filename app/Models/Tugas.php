@@ -11,7 +11,7 @@ class Tugas extends Model
 
     protected $table = 'tbl_tugas';
     protected $fillable = [
-        'id_siswa', 'id_kelas', 'judul', 'deskripsi', 'file_path', 'deadline', 'status',
+        'id_siswa', 'id_kelas', 'id_mapel', 'judul', 'deskripsi', 'file_path', 'deadline', 'status',
     ];
 
     public function siswa()

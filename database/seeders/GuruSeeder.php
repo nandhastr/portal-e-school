@@ -15,6 +15,7 @@ class GuruSeeder extends Seeder
     {
         Guru::create([
             'user_id' => 1,
+            'id_ruangKelas' => 1,
             'spesialisasi' => 'Matematika',
             'tempat_lahir' => 'Surabaya',
             'tanggal_lahir' => '1980-10-20',
@@ -29,6 +30,7 @@ class GuruSeeder extends Seeder
 
         Guru::create([
             'user_id' => 2,
+            'id_ruangKelas' => 2,
             'spesialisasi' => 'Bahasa Inggris',
             'tempat_lahir' => 'Semarang',
             'tanggal_lahir' => '1975-03-15',

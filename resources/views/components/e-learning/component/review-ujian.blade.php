@@ -12,8 +12,8 @@
                         </h3>
 
                         <div class="card-tools">
-                            <div class="input-group mt-2">
-                                {{-- <form action="{{ route('reviewExams')}}" method="GET">
+                            {{-- <div class="input-group mt-2">
+                                <form action="{{ route('reviewExams')}}" method="GET">
                                     @csrf
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control float-right"
@@ -25,13 +25,13 @@
                                             </button>
                                         </div>
                                     </div>
-                                </form> --}}
-                            </div>
+                                </form>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="btn-group">
-                            <div class="btn-group mr-2" role="group">
+                            <div class="btn-group" role="group">
                                 <label class="btn btn-info">
                                     <input type="radio" class="form-check-input filter-radio" name="filterOption"
                                         value="all" checked>
@@ -54,59 +54,63 @@
                                 </label>
                             </div>
                         </div>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Jenis</th>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
+                                    <th>Mata Pelajaran</th>
+                                    <th>Pertanyaan</th>
+                                    <th>Jawaban Benar</th>
+                                    <th>Jawaban Siswa</th>
+                                    <th>Nilai</th>
+                                    <th>Status</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($qna))
+                                @foreach ($qna as $row )
+                                {{-- {{ dd($row) }} --}}
+                                <tr>
+                                    <td>{{ $loop->iteration}}</td>
+                                    <td>{{ $row->pertanyaan->type}}</td>
+                                    <td>{{ $row->siswa->user->name}}</td>
+                                    <td>{{ $row->kelas->tingkat}} - {{ $row->ruangKelas->nama }}</td>
+                                    <td>{{ $row->materi->mapel->mata_pelajaran }}</td>
+                                    <td>{{ $row->pertanyaan->pertanyaan }}</td>
+                                    <td>{{ $row->opsi->opsi}}</td>
+                                    <td>{{ $row->jawaban }}</td>
+                                    <td>{{ $row->nilai }}</td>
+                                    <td
+                                        class="{{ $row->status == 'lulus' ? 'text-success fw-bold' : 'text-danger fw-bold' }}">
+                                        {{ $row->status }}
+                                    </td>
+                                    <td>
+                                        <button class="btn bg-success btn-edit" data-toggle="modal"
+                                            data-target="#reviewExamModal_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="btn bg-danger btn-delete" data-toggle="modal"
+                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                Tidak ada data
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
-                    <table id="example" class="display table-hover text-xs" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Jenis</th>
-                                <th>Nama</th>
-                                <th>Kelas</th>
-                                <th>Mata Pelajaran</th>
-                                <th>Pertanyaan</th>
-                                <th>Jawaban Benar</th>
-                                <th>Jawaban Siswa</th>
-                                <th>Nilai</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if(!empty($qna))
-                            @foreach ($qna as $row )
-                            {{-- {{ dd($row) }} --}}
-                            <tr>
-                                <td>{{ $loop->iteration}}</td>
-                                <td>{{ $row->pertanyaan->type}}</td>
-                                <td>{{ $row->siswa->user->name}}</td>
-                                <td>{{ $row->kelas->tingkat}} - {{ $row->kelas->nama }}</td>
-                                <td>{{ $row->materi->mata_pelajaran }}</td>
-                                <td>{{ $row->pertanyaan->pertanyaan }}</td>
-                                <td>{{ $row->opsi->opsi}}</td>
-                                <td>{{ $row->jawaban }}</td>
-                                <td>{{ $row->nilai }}</td>
-                                <td>{{ $row->status }}</td>
-                                <td>
-                                    <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                        data-target="#reviewExamModal"><i class="fa-regular fa-pen-to-square"></i></a>
-                                    <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                        data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @else
-                            Tidak ada data
-                            @endif
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
-    </div>
 
     {{-- Modal --}}
-    <div class="modal fade" id="reviewExamModal">
+    @foreach ($qna as $row )
+    <div class="modal fade" id="reviewExamModal_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -115,22 +119,64 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="reviewForm">
+                <form action="" method="POST">
                     @csrf
-                    <input type="hidden" name="attempt_id" id="attempt_id">
-                    <div class="modal-body review-exam">
-                        loading...
+                    @method('PUT')
+                    <div class="modal-body">
+                        <label class="text-sm" for="jenis">Jenis:</label>
+                        <input disabled type="text" class="form-control" id="jenis" name="jenis"
+                            value="{{ $row->pertanyaan->type }}">
                     </div>
-                    <div class="modal-footer">
-                        <span class="error" style="color:red;"></span>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Approved</button>
+                    <div class="modal-body">
+                        <label class="text-sm" for="nama">Nama:</label>
+                        <input disabled type="text" class="form-control" id="nama" name="nama"
+                            value="{{ $row->siswa->user->name }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="kelas">Kelas:</label>
+                        <input disabled type="text" class="form-control" id="kelas" name="kelas"
+                            value="{{ $row->kelas->tingkat }} - {{ $row->kelas->nama }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="mata_pelajaran">Mata Pelajaran:</label>
+                        <input disabled type="text" class="form-control" id="mata_pelajaran" name="mata_pelajaran"
+                            value="{{ $row->materi->mapel->mata_pelajaran }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="pertanyaan">Pertanyaan:</label>
+                        <input disabled type="text" class="form-control" id="pertanyaan" name="pertanyaan"
+                            value="{{ $row->pertanyaan->pertanyaan }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="jawaban_benar">Jawaban Benar:</label>
+                        <input disabled type="text" class="form-control" id="jawaban_benar" name="jawaban_benar"
+                            value="{{ $row->opsi->opsi }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="jawaban_siswa">Jawaban Siswa:</label>
+                        <input disabled type="text" class="form-control" id="jawaban_siswa" name="jawaban_siswa"
+                            value="{{ $row->jawaban }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="nilai">Nilai:</label>
+                        <input type="number" class="form-control" id="nilai" name="nilai" value="{{ $row->nilai }}">
+                    </div>
+                    <div class="modal-body">
+                        <label class="text-sm" for="status">Status:</label>
+                        <select name="" id="" class="form-control">
+                            <option value="">Lulus/Tidak Lulus</option>
+                            <option value="">Lulus</option>
+                            <option value="">Tidak Lulus</option>
+                        </select>
+                    </div>
+                    <div class="modal-body">
+                        <button type="submit" class="btn btn-primary ">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
+    @endforeach
 </section>
 @section('script')
 {{-- cdn dataable --}}
@@ -139,6 +185,8 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+
+        
             // filter tipe ujian
             // Tangani perubahan pada radio button filter
             $('.filter-radio').change(function() {
