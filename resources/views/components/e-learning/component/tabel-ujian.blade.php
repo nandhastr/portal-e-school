@@ -29,60 +29,63 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="card-body">
-                        {{-- tabel mata pelajaran dashboard admin --}}
+                    <div style="overflow-x:auto; overflow-y:auto;">
+                        <div class="card-body">
+                            {{-- tabel mata pelajaran dashboard admin --}}
 
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tipe Ujan</th>
-                                    <th>Judul</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Kelas</th>
-                                    <th>Waktu Mulai</th>
-                                    <th>Waktu Selesai</th>
-                                    <th>Durasi</th>
-                                    <th>aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(!empty($ujian))
-                                @foreach ($ujian as $row)
-                                {{-- {{ dd($row) }} --}}
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->type }}</td>
-                                    <td>{{ $row->judul }}</td>
-                                    <td>@if ($row->materi)
-                                        {{ $row->materi->mata_pelajaran }}
-                                        @else
-                                        tidak ditemukan
-                                        @endif</td>
-                                    <td>
-                                        @if ($row->kelas)
-                                        {{ $row->kelas->tingkat }} {{ $row->kelas->nama }}
-                                        @else
-                                        Belum ditentukan
-                                        @endif
-                                    </td>
-                                    <td>{{ $row->waktu_mulai }}</td>
-                                    <td>{{ $row->waktu_selesai }}</td>
-                                    <td>{{ $row->durasi }}</td>
-                                    <td>
-                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <p>tidak ada mata pelajaran</p>
-                                @endif
-                            </tbody>
-                        </table>
+                            <table id="example" class="display table-hover text-xs" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Tipe Ujan</th>
+                                        <th>Judul</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>Kelas</th>
+                                        <th>Waktu Mulai</th>
+                                        <th>Waktu Selesai</th>
+                                        <th>Durasi</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($ujian))
+                                    @foreach ($ujian as $row)
+                                    {{-- {{ dd($row) }} --}}
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->type }}</td>
+                                        <td>{{ $row->judul }}</td>
+                                        <td>@if ($row->materi)
+                                            {{ $row->materi->mata_pelajaran }}
+                                            @else
+                                            tidak ditemukan
+                                            @endif</td>
+                                        <td>
+                                            @if ($row->kelas)
+                                            {{ $row->kelas->tingkat }} {{ $row->kelas->nama }}
+                                            @else
+                                            Belum ditentukan
+                                            @endif
+                                        </td>
+                                        <td>{{ $row->waktu_mulai }}</td>
+                                        <td>{{ $row->waktu_selesai }}</td>
+                                        <td>{{ $row->durasi }}</td>
+                                        <td>
+                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                                data-target="#modal-update"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    <p>tidak ada mata pelajaran</p>
+                                    @endif
+                                </tbody>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
             </div>

@@ -3,12 +3,21 @@
         <div class="col-lg-8 col-md-6 col-12">
             <!-- small box -->
             <div class="small-box border">
-                <div class="inner">
-                    <x-image-link src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class="img-md p-1 img-fluid">
-                    </x-image-link>
-                    <h3 class="text-light fs-1 fs-md-2 fs-lg-3 fs-xl-4 text-capitalize">Selamat Datang, {{
-                        Auth::user()->name }}
-                    </h3>
+                <div class="row">
+
+                    <div class="col-auto">
+                        <div class="inner">
+                            <x-image-link src="{{ asset('assets/dist/img/user2-160x160.jpg') }}" class=" p-1 img-fluid "
+                                style="width: 8em">
+                            </x-image-link>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <h3 class="text-light text-wrap fs-1 fs-md-2 fs-lg-3 fs-xl-4 text-capitalize py-2">Selamat
+                            Datang, {{
+                            Auth::user()->name }}
+                        </h3>
+                    </div>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>

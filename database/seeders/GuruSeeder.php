@@ -14,33 +14,33 @@ class GuruSeeder extends Seeder
     public function run(): void
     {
         Guru::create([
-            'user_id' => 1,
-            'id_ruangKelas' => 1,
-            'spesialisasi' => 'Matematika',
+            'nipn' => '123634636',
+            'user_id' => 3,
+            'photo' => 'guru1.jpg',
+            'gender' => 'Laki-laki',
             'tempat_lahir' => 'Surabaya',
             'tanggal_lahir' => '1980-10-20',
             'alamat' => 'Jl. Kebon Sirih No. 789',
             'phone' => '087654321098',
-            'gender' => 'Laki-laki',
-            'photo' => 'guru1.jpg',
-            'tanggal_mulai' => '2010-08-01',
+            'pendidikan_terakhir' => 's2',
+            'spesialisasi' => 'Matematika',
             'kualifikasi' => 'S2 Pendidikan Matematika',
-            'pengalaman' => 10,
+            'pengalaman' => '2 tahun',
         ]);
 
         Guru::create([
-            'user_id' => 2,
-            'id_ruangKelas' => 2,
-            'spesialisasi' => 'Bahasa Inggris',
+            'nipn' => '145445463',
+            'user_id' => 3,
+            'photo' => 'guru2.jpg',
+            'gender' => 'Perempuan',
             'tempat_lahir' => 'Semarang',
             'tanggal_lahir' => '1975-03-15',
             'alamat' => 'Jl. Diponegoro No. 123',
             'phone' => '082345678901',
-            'gender' => 'Perempuan',
-            'photo' => 'guru2.jpg',
-            'tanggal_mulai' => '2005-05-01',
+            'pendidikan_terakhir' => 's1',
+            'spesialisasi' => 'Bahasa Inggris',
             'kualifikasi' => 'S1 Pendidikan Bahasa Inggris',
-            'pengalaman' => 15,
+            'pengalaman' => '5 tahun',
         ]);
     }
 }

@@ -29,59 +29,59 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="card-body">
-                        {{-- tabel mata pelajaran dashboard guru --}}
+                    <div style="overflow-x:auto; overflow-y:auto;">
+                        <div class="card-body">
+                            {{-- tabel mata pelajaran dashboard guru --}}
+                            <table id="example" class="display table-hover text-xs" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Kelas</th>
+                                        <th>Jenis Ujian</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Jawaban Benar</th>
+                                        <th>Durasi</th>
+                                        <th>Waktu Mulai</th>
+                                        <th>Waktu Selesai</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($soal))
+                                    @foreach ($soal as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}</td>
+                                        <td>{{ $row->type }}</td>
+                                        <td>{{ $row->mapel->mata_pelajaran }}</td>
+                                        <td>{{ $row->pertanyaan }}</td>
+                                        <td>
+                                            @foreach ($row->opsi as $opsi)
+                                            @if ($opsi->benar == 1)
+                                            <li>{{ $opsi->opsi }}</li>
+                                            @endif
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $row->durasi }}</td>
+                                        <td>{{ $row->waktu_mulai }}</td>
+                                        <td>{{ $row->waktu_selesai }}</td>
 
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Kelas</th>
-                                    <th>Jenis Ujian</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Pertanyaan</th>
-                                    <th>Jawaban Benar</th>
-                                    <th>Durasi</th>
-                                    <th>Waktu Mulai</th>
-                                    <th>Waktu Selesai</th>
-                                    <th>aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(!empty($soal))
-                                @foreach ($soal as $row)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}</td>
-                                    <td>{{ $row->type }}</td>
-                                    <td>{{ $row->mapel->mata_pelajaran }}</td>
-                                    <td>{{ $row->pertanyaan }}</td>
-                                    <td>
-                                        @foreach ($row->opsi as $opsi)
-                                        @if ($opsi->benar == 1)
-                                        <li>{{ $opsi->opsi }}</li>
-                                        @endif
-                                        @endforeach
-                                    </td>
-                                    <td>{{ $row->durasi }}</td>
-                                    <td>{{ $row->waktu_mulai }}</td>
-                                    <td>{{ $row->waktu_selesai }}</td>
-
-                                    <td>
-                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update_{{ $row->id }}"><i
-                                                class="fa-regular fa-pen-to-square"></i></a>
-                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <p>tidak ada mata pelajaran</p>
-                                @endif
-                            </tbody>
-                        </table>
-
+                                        <td>
+                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                                data-target="#modal-update_{{ $row->id }}"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    <p>tidak ada mata pelajaran</p>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -42,6 +42,11 @@ Route::get('/e-learning', [ElearningController::class, 'index'])->name('e-learni
 Route::get('/data-mapel-page', [AdminController::class, 'mapel_page'])->name('data-mapel-page');
 Route::get('/data-kelas-page', [AdminController::class, 'kelas_page'])->name('data-kelas-page');
 Route::get('/data-siswa-page', [AdminController::class, 'siswa_page'])->name('data-siswa-page');
+Route::get('/data-guru-page', [AdminController::class, 'guru_page'])->name('data-guru-page');
+Route::get('/data-ruangan-page', [AdminController::class, 'ruangan_page'])->name('data-ruangan-page');
+Route::get('/data-pengumuman-page', [AdminController::class, 'pengumuman_page'])->name('data-pengumuman-page');
+Route::get('/data-penghargaan-page', [AdminController::class, 'penghargaan_page'])->name('data-penghargaan-page');
+Route::get('/data-kegiatan-page', [AdminController::class, 'kegiatan_page'])->name('data-kegiatan-page');
 
 //route gurucontroller
 Route::get('/materi-upload-page', [GuruController::class, 'materi_upload'])->name('materi-upload-page');

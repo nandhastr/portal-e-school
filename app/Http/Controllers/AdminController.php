@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Guru;
+use App\Models\Kegiatan_pengguna;
 use App\Models\Kelas;
 use App\Models\Siswa;
 use App\Models\Materi;
+use App\Models\Penghargaan;
+use App\Models\Pengumuman;
+use App\Models\RuangKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,32 +23,20 @@ class AdminController extends Controller
         //
     }
 
-    public function mapel_page()
+
+    public function guru_page()
     {
         $user = Auth::user();
-        $materi = Materi::with(['mapel', 'kelas'])->get();
         $data = [
-            'title' => 'Halaman Data Mata Pelajaran',
-            'materi' => $materi,
-            'kelas' => Kelas::all(),
-            'user' => $user,
+            'title' => 'Halaman Data Guru',
+            'guru' => Guru::all(),
+            'user' => $user
+
         ];
         // \dd($data);
-        return view('elearning.admin.data-mapel-page', $data);
+        return view('elearning.admin.data-guru-page', $data);
     }
 
-    public function kelas_page()
-    {
-
-        $user = Auth::user();
-        $data = [
-            'title' => 'Halaman Data kelas',
-            'kelas' => Kelas::all(),
-            'user' => $user,
-        ];
-        // dd($data);
-        return view('elearning.admin.data-kelas-page', $data);
-    }
 
 
     public function siswa_page()
@@ -60,6 +53,92 @@ class AdminController extends Controller
         // \dd($data);
         return view('elearning.admin.data-siswa-page', $data);
     }
+
+
+
+    public function mapel_page()
+    {
+        $user = Auth::user();
+        $materi = Materi::with(['mapel', 'kelas'])->get();
+        $data = [
+            'title' => 'Halaman Data Mata Pelajaran',
+            'materi' => $materi,
+            'kelas' => Kelas::all(),
+            'user' => $user,
+        ];
+        // \dd($data);
+        return view('elearning.admin.data-mapel-page', $data);
+    }
+
+
+
+    public function kelas_page()
+    {
+
+        $user = Auth::user();
+        $data = [
+            'title' => 'Halaman Data kelas',
+            'kelas' => Kelas::all(),
+            'user' => $user,
+        ];
+        // dd($data);
+        return view('elearning.admin.data-kelas-page', $data);
+    }
+
+
+    public function ruangan_page()
+    {
+        $ruang = RuangKelas::with('kelas')->get();
+        $user = Auth::user();
+        $data = [
+            'title' => 'Halaman Data Ruang Kelas',
+            'ruang' => $ruang,
+            'user' => $user,
+        ];
+        // dd($data);
+        return view('elearning.admin.data-ruangan-page', $data);
+    }
+
+
+    public function pengumuman_page()
+    {
+        $user = Auth::user();
+        $data = [
+            'title' => 'Halaman Data Pengumuman',
+            'pengumuman' => Pengumuman::all(),
+            'user' => $user,
+        ];
+        // dd($data);
+        return view('elearning.admin.data-pengumuman-page', $data);
+    }
+
+
+    public function penghargaan_page()
+    {
+        $user = Auth::user();
+        $data = [
+            'title' => 'Halaman Data Penghargaan',
+            'reward' => Penghargaan::all(),
+            'user' => $user,
+        ];
+        // dd($data);
+        return view('elearning.admin.data-penghargaan-page', $data);
+    }
+
+
+    public function kegiatan_page()
+    {
+        $user = Auth::user();
+        $data = [
+            'title' => 'Halaman Data Kegiatan',
+            'kegiatan' => Kegiatan_pengguna::all(),
+            'user' => $user,
+        ];
+        // dd($data);
+        return view('elearning.admin.data-kegiatan-page', $data);
+    }
+
+
 
 
 

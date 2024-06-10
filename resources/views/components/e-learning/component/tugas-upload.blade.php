@@ -40,109 +40,114 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="card-body">
-                        {{-- tabel upload tugas untuk siswa --}}
-                        <table id="example" class="display table-hover text-xs tbl-tugas"
-                            style="width:100%; display: none">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tugas di Upload</th>
-                                    <th>Untuk Kelas</th>
-                                    <th>File Materi</th>
-                                    <th>Tanggal</th>
-                                    <th>aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(!empty($tugas))
-                                @foreach ($tugas as $row)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->materi->judul }}</td>
-                                    <td>
-                                        @if ($row->siswa->kelas)
-                                        {{ $row->siswa->kelas->tingkat }} - {{ $row->siswa->kelas->nama }}
-                                        @else
-                                        Belum ditentukan
-                                        @endif
-                                    </td>
-                                    <td><a href="blank" download="{{ $row->tugas->file_path }}">{{
-                                            $row->tugas->file_path }}</a></td>
-                                    <td>{{ $row->created_at }}</td>
-                                    <td>
-                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                            data-target="#modal-update"><i class="fa-regular fa-pen-to-square"></i></a>
-                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <p>tidak ada mata pelajaran</p>
-                                @endif
-                            </tbody>
-                        </table>
+                    <div style="overflow-x:auto; overflow-y:auto;">
+                        <div class="card-body">
+                            {{-- tabel upload tugas untuk siswa --}}
+                            <table id="example" class="display table-hover text-xs tbl-tugas"
+                                style="width:100%; display: none">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Tugas di Upload</th>
+                                        <th>Untuk Kelas</th>
+                                        <th>File Materi</th>
+                                        <th>Tanggal</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($tugas))
+                                    @foreach ($tugas as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->materi->judul }}</td>
+                                        <td>
+                                            @if ($row->siswa->kelas)
+                                            {{ $row->siswa->kelas->tingkat }} - {{ $row->siswa->kelas->nama }}
+                                            @else
+                                            Belum ditentukan
+                                            @endif
+                                        </td>
+                                        <td><a href="blank" download="{{ $row->tugas->file_path }}">{{
+                                                $row->tugas->file_path }}</a></td>
+                                        <td>{{ $row->created_at }}</td>
+                                        <td>
+                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                                data-target="#modal-update"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    <p>tidak ada mata pelajaran</p>
+                                    @endif
+                                </tbody>
+                            </table>
 
-                        {{-- tabel jwaban siswa --}}
-                        <table id="example" class="display table-hover text-xs tbl-jawabanTugas" style="width:100%;">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Kelas</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>File Jawaban</th>
-                                    <th>Nilai</th>
-                                    <th>Jenis Tugas</th>
-                                    <th>Tanggal</th>
-                                    <th>aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(!empty($tugas))
-                                @foreach ($tugas as $row)
-                                @if (in_array($row->jenis, ['tugas']))
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->siswa->user->name }}</td>
-                                    <td>
-                                        @if ($row->kelas)
-                                        {{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}
-                                        @else
-                                        Belum ditentukan
-                                        @endif
-                                    </td>
-                                    <td>{{ $row->materi->mapel->mata_pelajaran}}</td>
-                                    <td><a href="blank" download="{{ $row->tugas->file_path }}">{{
-                                            $row->tugas->file_path }}</a></td>
-                                    <td>{{ $row->nilai }}</td>
-                                    <td>{{$row->jenis}}</td>
-                                    <td>{{ $row->created_at }}</td>
-                                    <td>
-                                        <a class="btn bg-info btn-create-nilai" href="#"
-                                            data-id_siswa="{{ $row->siswa->id }}" data-id_materi="{{ $row->id_materi }}"
-                                            data-jenis="{{ $row->jenis }}" data-id_ujian="{{ $row->id_ujian }}"
-                                            data-id_tugas="{{ $row->id }}" data-id_kelas="{{ $row->kelas->id }}"
-                                            data-toggle="modal" data-target="#modal-create-nilai">Nilai</a>
-                                        <a class="btn bg-success btn-update-nilai" href="#"
-                                            data-id_siswa="{{ $row->siswa->id }}" data-id_materi="{{ $row->id_materi }}"
-                                            data-jenis="{{ $row->jenis }}" data-id_ujian="{{ $row->id_ujian }}"
-                                            data-id_tugas="{{ $row->id }}" data-id_kelas="{{ $row->kelas->id }}"
-                                            data-nilai="{{ $row->nilai }}" data-toggle="modal"
-                                            data-target="#modal-update-nilai">Edit</a>
-                                        <a class="btn bg-danger btn-delete-nilai" href="#"
-                                            data-id_tugas="{{ $row->id }}" data-toggle="modal"
-                                            data-target="#modal-delete-nilai">Delete</a>
-                                    </td>
-                                </tr>
-                                @endif
-                                @endforeach
-                                @else
-                                <p>tidak ada mata pelajaran</p>
-                                @endif
-                            </tbody>
-                        </table>
+                            {{-- tabel jwaban siswa --}}
+                            <table id="example" class="display table-hover text-xs tbl-jawabanTugas"
+                                style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Nama Siswa</th>
+                                        <th>Kelas</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>File Jawaban</th>
+                                        <th>Nilai</th>
+                                        <th>Jenis Tugas</th>
+                                        <th>Tanggal</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($tugas))
+                                    @foreach ($tugas as $row)
+                                    @if (in_array($row->jenis, ['tugas']))
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->siswa->user->name }}</td>
+                                        <td>
+                                            @if ($row->kelas)
+                                            {{ $row->kelas->tingkat }} {{ $row->ruangKelas->nama }}
+                                            @else
+                                            Belum ditentukan
+                                            @endif
+                                        </td>
+                                        <td>{{ $row->materi->mapel->mata_pelajaran}}</td>
+                                        <td><a href="blank" download="{{ $row->tugas->file_path }}">{{
+                                                $row->tugas->file_path }}</a></td>
+                                        <td>{{ $row->nilai }}</td>
+                                        <td>{{$row->jenis}}</td>
+                                        <td>{{ $row->created_at }}</td>
+                                        <td>
+                                            <a class="btn bg-info btn-create-nilai" href="#"
+                                                data-id_siswa="{{ $row->siswa->id }}"
+                                                data-id_materi="{{ $row->id_materi }}" data-jenis="{{ $row->jenis }}"
+                                                data-id_ujian="{{ $row->id_ujian }}" data-id_tugas="{{ $row->id }}"
+                                                data-id_kelas="{{ $row->kelas->id }}" data-toggle="modal"
+                                                data-target="#modal-create-nilai">Nilai</a>
+                                            <a class="btn bg-success btn-update-nilai" href="#"
+                                                data-id_siswa="{{ $row->siswa->id }}"
+                                                data-id_materi="{{ $row->id_materi }}" data-jenis="{{ $row->jenis }}"
+                                                data-id_ujian="{{ $row->id_ujian }}" data-id_tugas="{{ $row->id }}"
+                                                data-id_kelas="{{ $row->kelas->id }}" data-nilai="{{ $row->nilai }}"
+                                                data-toggle="modal" data-target="#modal-update-nilai">Edit</a>
+                                            <a class="btn bg-danger btn-delete-nilai" href="#"
+                                                data-id_tugas="{{ $row->id }}" data-toggle="modal"
+                                                data-target="#modal-delete-nilai">Delete</a>
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <p>tidak ada mata pelajaran</p>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

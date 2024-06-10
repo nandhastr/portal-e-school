@@ -14,7 +14,7 @@ class PenghargaanSeeder extends Seeder
     public function run(): void
     {
         Penghargaan::create([
-            'id_siswa' => 1,
+            'id_siswa' => 2,
             'judul' => 'Juara 1 Olimpiade Matematika',
             'deskripsi' => 'Memenangkan juara pertama dalam olimpiade matematika tingkat nasional.',
             'tanggal_diterima' => '2023-05-20',
