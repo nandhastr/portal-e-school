@@ -30,8 +30,6 @@ class DatabaseSeeder extends Seeder
             JawabanPenggunaSeeder::class,
             KegiatanPenggunaSeeder::class,
             PenghargaanSeeder::class,
-            KompetisiSeeder::class,
-            AcaraSeeder::class,
             LogPenggunaSeeder::class,
             PengumumanSeeder::class,
             NilaiSeeder::class,

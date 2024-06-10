@@ -24,7 +24,6 @@ class Siswa extends Model
         'sekolah_sebelumnya',
         'nisn',
         'phone',
-        'email',
         'gender',
         'tahun_masuk',
         'kelas_sekarang',
@@ -53,16 +52,6 @@ class Siswa extends Model
     public function kegiatan_pengguna()
     {
         return $this->hasMany(Kegiatan_pengguna::class, 'id_siswa');
-    }
-
-    public function kompetisi()
-    {
-        return $this->hasMany(Kompetisi::class);
-    }
-
-    public function acara()
-    {
-        return $this->hasMany(Acara::class);
     }
 
     public function jawaban_pengguna()

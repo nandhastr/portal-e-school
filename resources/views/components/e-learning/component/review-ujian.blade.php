@@ -29,79 +29,82 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="btn-group">
-                            <div class="btn-group" role="group">
-                                <label class="btn btn-info">
-                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
-                                        value="all" checked>
-                                    Semua
-                                </label>
-                                <label class="btn btn-info">
-                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
-                                        value="UTS">
-                                    UTS
-                                </label>
-                                <label class="btn btn-info">
-                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
-                                        value="UAS">
-                                    UAS
-                                </label>
-                                <label class="btn btn-info">
-                                    <input type="radio" class="form-check-input filter-radio" name="filterOption"
-                                        value="UN">
-                                    UN
-                                </label>
+                    <div style="overflow-x:auto; overflow-y:auto;">
+                        <div class="card-body">
+                            <div class="btn-group">
+                                <div class="btn-group" role="group">
+                                    <label class="btn btn-info">
+                                        <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                            value="all" checked>
+                                        Semua
+                                    </label>
+                                    <label class="btn btn-info">
+                                        <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                            value="UTS">
+                                        UTS
+                                    </label>
+                                    <label class="btn btn-info">
+                                        <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                            value="UAS">
+                                        UAS
+                                    </label>
+                                    <label class="btn btn-info">
+                                        <input type="radio" class="form-check-input filter-radio" name="filterOption"
+                                            value="UN">
+                                        UN
+                                    </label>
+                                </div>
                             </div>
+                            <table id="example" class="display table-hover text-xs" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Jenis</th>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>Mata Pelajaran</th>
+                                        <th>Pertanyaan</th>
+                                        <th>Jawaban Benar</th>
+                                        <th>Jawaban Siswa</th>
+                                        <th>Nilai</th>
+                                        <th>Status</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if(!empty($qna))
+                                    @foreach ($qna as $row )
+                                    {{-- {{ dd($row) }} --}}
+                                    <tr>
+                                        <td>{{ $loop->iteration}}</td>
+                                        <td>{{ $row->pertanyaan->type}}</td>
+                                        <td>{{ $row->siswa->user->name}}</td>
+                                        <td>{{ $row->kelas->tingkat}} - {{ $row->ruangKelas->nama }}</td>
+                                        <td>{{ $row->materi->mapel->mata_pelajaran }}</td>
+                                        <td>{{ $row->pertanyaan->pertanyaan }}</td>
+                                        <td>{{ $row->opsi->opsi}}</td>
+                                        <td>{{ $row->jawaban }}</td>
+                                        <td>{{ $row->nilai }}</td>
+                                        <td
+                                            class="{{ $row->status == 'lulus' ? 'text-success fw-bold' : 'text-danger fw-bold' }}">
+                                            {{ $row->status }}
+                                        </td>
+                                        <td>
+                                            <button class="btn bg-success btn-edit" data-toggle="modal"
+                                                data-target="#reviewExamModal_{{ $row->id }}"><i
+                                                    class="fa-regular fa-pen-to-square"></i></button>
+                                            <button class="btn bg-danger btn-delete" data-toggle="modal"
+                                                data-target="#modal-delete"><i
+                                                    class="fa-regular fa-trash-can"></i></button>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    Tidak ada data
+                                    @endif
+                                </tbody>
+                            </table>
                         </div>
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Jenis</th>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
-                                    <th>Mata Pelajaran</th>
-                                    <th>Pertanyaan</th>
-                                    <th>Jawaban Benar</th>
-                                    <th>Jawaban Siswa</th>
-                                    <th>Nilai</th>
-                                    <th>Status</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if(!empty($qna))
-                                @foreach ($qna as $row )
-                                {{-- {{ dd($row) }} --}}
-                                <tr>
-                                    <td>{{ $loop->iteration}}</td>
-                                    <td>{{ $row->pertanyaan->type}}</td>
-                                    <td>{{ $row->siswa->user->name}}</td>
-                                    <td>{{ $row->kelas->tingkat}} - {{ $row->ruangKelas->nama }}</td>
-                                    <td>{{ $row->materi->mapel->mata_pelajaran }}</td>
-                                    <td>{{ $row->pertanyaan->pertanyaan }}</td>
-                                    <td>{{ $row->opsi->opsi}}</td>
-                                    <td>{{ $row->jawaban }}</td>
-                                    <td>{{ $row->nilai }}</td>
-                                    <td
-                                        class="{{ $row->status == 'lulus' ? 'text-success fw-bold' : 'text-danger fw-bold' }}">
-                                        {{ $row->status }}
-                                    </td>
-                                    <td>
-                                        <button class="btn bg-success btn-edit" data-toggle="modal"
-                                            data-target="#reviewExamModal_{{ $row->id }}"><i
-                                                class="fa-regular fa-pen-to-square"></i></button>
-                                        <button class="btn bg-danger btn-delete" data-toggle="modal"
-                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></button>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                Tidak ada data
-                                @endif
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>

@@ -29,40 +29,42 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div class="card-body">
-                        {{-- tabel mata pelajaran dashboard admin --}}
+                    <div style="overflow-x:auto; overflow-y:auto;">
+                        <div class="card-body">
+                            {{-- tabel mata pelajaran dashboard admin --}}
 
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Tingkat</th>
-                                    <th>aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {{-- {{ dd($kelas)}} --}}
-                                @if(!empty($kelas))
-                                @foreach ($kelas as $row)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $row->tingkat }}</td>
-                                    <td>
-                                        <button class="btn bg-success btn-edit" data-toggle="modal"
-                                            data-target="#modal-update" data-kelasid="{{ $row->id }}"
-                                            data-tingkat="{{ $row->tingkat }}"><i
-                                                class="fa-regular fa-pen-to-square"></i></button>
-                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                            data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                    </td>
-                                </tr>
-                                @endforeach
-                                @else
-                                <p>tidak ada kelas</p>
-                                @endif
-                            </tbody>
-                        </table>
+                            <table id="example" class="display table-hover text-xs" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Tingkat</th>
+                                        <th>aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{-- {{ dd($kelas)}} --}}
+                                    @if(!empty($kelas))
+                                    @foreach ($kelas as $row)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $row->tingkat }}</td>
+                                        <td>
+                                            <button class="btn bg-success btn-edit" data-toggle="modal"
+                                                data-target="#modal-update" data-kelasid="{{ $row->id }}"
+                                                data-tingkat="{{ $row->tingkat }}"><i
+                                                    class="fa-regular fa-pen-to-square"></i></button>
+                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                    <p>tidak ada kelas</p>
+                                    @endif
+                                </tbody>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,9 +121,9 @@
                         <div class="form-group">
                             <label for="tingkat_kelas">Tingkat</label>
                             <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                <option value="X">X</option>
-                                <option value="XI">XI</option>
-                                <option value="XII">XII</option>
+                                @foreach (['X', 'XI', 'XII'] as $kelas)
+                                <option value="{{ $kelas }}">{{ $kelas }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>

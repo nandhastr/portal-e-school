@@ -51,7 +51,6 @@
                                         <th>Asal Sekolah</th>
                                         <th>Alamat</th>
                                         <th>No Telpon</th>
-                                        <th>Email</th>
                                         <th>aksi</th>
                                     </tr>
                                 </thead>
@@ -74,7 +73,6 @@
                                         <td>{{ $row->sekolah_sebelumnya}}</td>
                                         <td>{{ $row->alamat }}</td>
                                         <td>{{ $row->phone }}</td>
-                                        <td>{{ $row->email }}</td>
 
                                         <td>
                                             <button class="btn bg-success btn-edit" data-toggle="modal"
@@ -129,8 +127,8 @@
                                 <label for="kelas">Kelas</label>
                                 <select name="kelas" id="kelas" class="form-control" required>
                                     <option value="">Pilih Kelas</option>
-                                    @foreach ($kelas as $kelas)
-                                    <option value="{{ $kelas->id }}">{{ $kelas->tingkat }}</option>
+                                    @foreach ((['X','XI','XII']) as $kelas)
+                                    <option value=" {{ $kelas }}">{{ $kelas }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -185,10 +183,7 @@
                                 <label for="phone">No Telpon</label>
                                 <input type="text" name="phone" id="phone" class="form-control" required>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" required>
-                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -302,11 +297,7 @@
                                 <input type="text" name="phone" id="phone" class="form-control"
                                     value="{{ $row->phone }}" required>
                             </div>
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control"
-                                    value="{{ $row->user->email }}" required>
-                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

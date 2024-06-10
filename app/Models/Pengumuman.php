@@ -10,6 +10,6 @@ class Pengumuman extends Model
     use HasFactory;
     protected $table = 'tbl_pengumuman';
     protected $fillable = [
-        'judul', 'konten',
+        'gambar', 'jenis', 'judul', 'konten',
     ];
 }

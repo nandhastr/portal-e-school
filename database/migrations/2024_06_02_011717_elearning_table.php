@@ -28,23 +28,22 @@ return new class extends Migration
         // Tabel untuk menyimpan data siswa
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->string('foto')->nullable();
+            $table->string('nisn')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('id_ruangKelas')->nullable();
-            $table->string('angkatan')->nullable();
-            $table->enum('status', ['aktif', 'tidak aktif'])->nullable();
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('nama_ibu')->nullable();
-            $table->string('foto')->nullable();
-            $table->string('sekolah_sebelumnya')->nullable();
-            $table->string('nisn')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
+            $table->string('angkatan')->nullable();
+            $table->enum('status', ['aktif', 'tidak aktif'])->nullable();
             $table->year('tahun_masuk')->nullable();
+            $table->string('sekolah_sebelumnya')->nullable();
             $table->string('kelas_sekarang')->nullable();
+            $table->string('phone')->nullable();
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->timestamps();
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
             $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
@@ -54,21 +53,20 @@ return new class extends Migration
         // Tabel untuk menyimpan data guru
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
+            $table->string('nipn')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('id_ruangKelas')->nullable();
-            $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('spesialisasi')->nullable();
+            $table->string('photo')->nullable();
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('phone')->nullable();
-            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
-            $table->string('photo')->nullable();
-            $table->date('tanggal_mulai')->nullable();
+            $table->string('pendidikan_terakhir')->nullable();
+            $table->string('spesialisasi')->nullable();
             $table->string('kualifikasi')->nullable();
-            $table->integer('pengalaman')->nullable();
+            $table->string('pengalaman')->nullable();
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
         Schema::create('tbl_mapel', function (Blueprint $table) {
             $table->id();
@@ -188,28 +186,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        // tabel mneyiimpan informasi tentang kompetisi yang diikuti oleh siswa
-        Schema::create('tbl_kompetisi', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
-            $table->string('judul');
-            $table->text('deskripsi')->nullable();
-            $table->date('tanggal_partisipasi');
-            $table->string('hasil')->nullable();
-            $table->timestamps();
-        });
-        // Tabel untuk menyimpan informasi tentang acara yang diikuti oleh siswa
-        Schema::create('tbl_acara', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
-            $table->string('judul');
-            $table->text('deskripsi')->nullable();
-            $table->date('tanggal_acara');
-            $table->string('lokasi')->nullable();
-            $table->timestamps();
-        });
+
 
         // Tabel untuk menyimpan log kegiatan pengguna
         Schema::create('tbl_log_pengguna', function (Blueprint $table) {
@@ -224,6 +201,7 @@ return new class extends Migration
         // Tabel untuk menyimpan pengumuman
         Schema::create('tbl_pengumuman', function (Blueprint $table) {
             $table->id();
+            $table->string('gambar');
             $table->enum('jenis', ['portal', 'elearning']);
             $table->string('judul');
             $table->text('konten');
@@ -255,10 +233,8 @@ return new class extends Migration
         Schema::dropIfExists('tbl_nilai');
         Schema::dropIfExists('tbl_pengumuman');
         Schema::dropIfExists('tbl_log_pengguna');
-        Schema::dropIfExists('tbl_acara');
         Schema::dropIfExists('tbl_kompetisi');
         Schema::dropIfExists('tbl_penghargaan');
-        Schema::dropIfExists('tbl_kegiatan_pengguna');
         Schema::dropIfExists('tbl_jawaban_pengguna');
         Schema::dropIfExists('tbl_opsi');
         Schema::dropIfExists('tbl_pertanyaan');

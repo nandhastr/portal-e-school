@@ -11,8 +11,9 @@ class Guru extends Model
     protected $table = 'tbl_guru';
 
     protected $fillable = [
+        'nipn',
         'user_id',
-        'id_ruangKelas',
+        'gambar',
         'spesialisasi',
         'tempat_lahir',
         'tanggal_lahir',
@@ -20,7 +21,7 @@ class Guru extends Model
         'phone',
         'gender',
         'photo',
-        'tanggal_mulai',
+        'pendidikan_terakhir',
         'kualifikasi',
         'pengalaman',
     ];
