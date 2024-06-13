@@ -1,6 +1,6 @@
 <x-main.app class="navbar navbar-expand-lg">
     {{-- <x-slot name="title">{{ $title }}</x-slot> --}}
-    <div class="container mt-5 mb-5">
+    <div class="container mt-5 mb-5 container-home">
         <div class="row justify-content-center">
             <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
                 <x-card-kepsek></x-card-kepsek>
@@ -62,3 +62,9 @@
         </div>
     </div>
 </x-main.app>
+
+<style>
+    .container-home {
+        background-color: #fff !important;
+    }
+</style>

@@ -1,4 +1,4 @@
-<x-partials.header></x-partials.header>
+{{-- <x-partials.header></x-partials.header> --}}
 <nav {{ $attributes }}>
     <div class="container-fluid">
         <div class="container">
@@ -15,7 +15,7 @@
                     </li>
                     <li class="nav-item">
                         <x-nav-link href="/e-learning"
-                            class="nav-link {{ request()->is('e-learning') ? 'active' : '' }} px-5 a-nav">E-Learning
+                            class="nav-link {{ request()->is('e-learning') ? 'active' : '' }} px-5 a-nav">Academy
                         </x-nav-link>
                     </li>
                     <li class="nav-item">

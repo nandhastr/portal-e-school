@@ -21,7 +21,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -35,7 +35,7 @@
                 </x-card-home>
             </div>
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -49,7 +49,7 @@
                 </x-card-home>
             </div>
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -63,7 +63,7 @@
                 </x-card-home>
             </div>
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -77,7 +77,7 @@
                 </x-card-home>
             </div>
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -91,7 +91,7 @@
                 </x-card-home>
             </div>
             <div class="col col-md-3 col-sm-6">
-                <x-card-home>
+                <x-card-home class="card-app">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
@@ -106,8 +106,4 @@
             </div>
         </div>
     </div>
-
-
-
-
 </x-main.app>

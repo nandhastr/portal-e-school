@@ -6,6 +6,7 @@
 }
 /* styles.css */
 /* dark mode body */
+
 summary {
     color: var(--primary-color);
 }
@@ -16,8 +17,11 @@ summary {
 .light-mode {
     background-image: linear-gradient(to left top, #1259b8, #dfdfdf, #1259b8);
     color: black;
+    background-attachment: fixed;
 }
-
+a {
+    text-decoration: none !important;
+}
 .dark-mode {
     background-image: linear-gradient(to left top, #333, #000);
     color: white;
@@ -25,7 +29,83 @@ summary {
 .btn-them {
     cursor: pointer;
 }
+/* hover tombol */
 
+.btn {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 6em;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+    color: black;
+    background-color: white;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.btn::after {
+    background-color: #fff;
+}
+
+.btn:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+/* end hover btn */
+/* button back */
+.btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #eeeeee4b;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    border: none;
+    background: #fff;
+}
+
+.btn-back > svg {
+    margin-right: 5px;
+    margin-left: 5px;
+    font-size: 20px;
+    transition: all 0.4s ease-in;
+}
+
+.btn-back:hover > svg {
+    font-size: 1.2em;
+    transform: translateX(-5px);
+}
+
+.btn-back:hover {
+    box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
+    transform: translateY(-2px);
+}
+/* end button back */
 .img-banner {
     height: 7rem;
     width: 100%;
@@ -43,9 +123,24 @@ summary {
 
 .top-bar {
     background-color: var(--primary-color);
+    color: var(--bg-white) !important;
 }
+.sidebar {
+    background-color: var(--primary-color);
+}
+.main-sidebar {
+    background-color: var(--primary-color);
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1000;
+}
+
 .navbar {
     position: sticky;
+    color: #000;
     z-index: 100;
     top: 1px;
     background-color: var(--primary-color);
@@ -107,6 +202,13 @@ summary {
     height: auto;
     color: #fff;
 }
+.footer-elearning,
+strong,
+b {
+    height: auto;
+    text-align: center;
+    color: rgb(143, 141, 141);
+}
 
 .banner-album {
     background-image: linear-gradient(to left top, #0e2d59, #2c3f42);
@@ -135,6 +237,9 @@ summary {
     transform: translateY(0);
 }
 /* end */
+/* .card-profile-class {
+    width: auto !important;
+} */
 .card-home {
     border-radius: 20px;
     border: 1px solid var(--primary-color);
@@ -219,6 +324,9 @@ summary {
         filter: drop-shadow(3px 5px 6px rgb(113, 113, 113));
     }
 }
+hr {
+    border: 1px solid #676767;
+}
 .sejarah-page,
 .tendik-page,
 .visi-page,
@@ -289,3 +397,9 @@ summary {
 }
 
 /* end articel */
+
+/* e-learning area */
+
+.modal-tugas {
+    display: none;
+}
