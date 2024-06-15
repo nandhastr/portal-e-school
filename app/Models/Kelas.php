@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Kelas extends Model
 {
@@ -16,7 +17,7 @@ class Kelas extends Model
 
     public function materi()
     {
-        return $this->hasMany(Materi::class, 'id_kelas', 'id');
+        return $this->hasMany(Materi::class, 'id_kelas');
     }
 
     public function pertanyaan()
@@ -33,10 +34,12 @@ class Kelas extends Model
     {
         return $this->hasMany(Nilai::class, 'id_kelas');
     }
+
     public function mapel()
     {
         return $this->hasMany(Mapel::class, 'id_kelas');
     }
+
     public function ruangKelas()
     {
         return $this->hasMany(RuangKelas::class, 'id_kelas');
@@ -45,5 +48,9 @@ class Kelas extends Model
     public function guru()
     {
         return $this->hasMany(Guru::class, 'id_kelas');
+    }
+    public function siswa(): BelongsToMany
+    {
+        return $this->belongsToMany(Siswa::class, 'tbl_pivot_siswa_kelas', 'id_kelas', 'id_siswa');
     }
 }

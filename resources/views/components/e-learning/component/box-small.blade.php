@@ -3,7 +3,8 @@
 
 {{-- ini dashboard untuk siswa --}}
 @if($user->role !== 'admin' && $user->role !== 'guru')
-<x-e-learning.component.dashboard-siswa></x-e-learning.component.dashboard-siswa>
+<x-e-learning.component.dashboard-siswa :kelas="$kelas" :user="$user" :penghargaan="$penghargaan" :siswa="$siswa"
+    :nilai="$nilai" :kegiatan="$kegiatan"> </x-e-learning.component.dashboard-siswa>
 @endif
 {{-- dashboard admin --}}
 @if($user->role !== 'siswa' && $user->role !== 'guru')

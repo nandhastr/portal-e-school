@@ -96,7 +96,7 @@
                         </div>
                         <div class="form-group">
                             <label for="jenis">Pengumuman untuk :</label>
-                            <select name="jenis" id="jenis">
+                            <select name="jenis" id="jenis" class="form-control">
                                 @foreach ((['portal','elearning']) as $row )
                                 <option value="{{ $row }}">{{ $row }}</option>
                                 @endforeach

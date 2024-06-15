@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Guru;
 use App\Models\Kegiatan_pengguna;
 use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Models\Siswa;
 use App\Models\Materi;
 use App\Models\Penghargaan;
@@ -12,6 +13,7 @@ use App\Models\Pengumuman;
 use App\Models\RuangKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
@@ -59,10 +61,10 @@ class AdminController extends Controller
     public function mapel_page()
     {
         $user = Auth::user();
-        $materi = Materi::with(['mapel', 'kelas'])->get();
+        $mapel = Mapel::with(['siswa', 'kelas'])->get();
         $data = [
             'title' => 'Halaman Data Mata Pelajaran',
-            'materi' => $materi,
+            'mapel' => $mapel,
             'kelas' => Kelas::all(),
             'user' => $user,
         ];
@@ -93,6 +95,7 @@ class AdminController extends Controller
         $data = [
             'title' => 'Halaman Data Ruang Kelas',
             'ruang' => $ruang,
+            'kelas' => Kelas::all(),
             'user' => $user,
         ];
         // dd($data);
@@ -155,7 +158,6 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**

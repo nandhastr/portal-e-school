@@ -20,9 +20,10 @@
         <div class="container-fluid py-2">
             <div class="row m-4 row-footer ">
                 <div class="col col-footer col-md-3  text-light">
-                    <img src="" alt="Logo Sekolah">
+                    <x-image-link src="{{ asset('assets/img/smklogo.png') }}" class="img-thumbnail" style="width: 8em">
+                    </x-image-link>
                     <p>
-                        Sejarah singkat
+                        Sekolah Menengah Kejuruan Terakreditasi "B" Yang Menjadikannya Sekolah Favorit
                     </p>
                 </div>
                 <div class="col col-footer col-md-3  text-light">

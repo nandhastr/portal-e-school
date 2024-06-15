@@ -3,10 +3,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\MapelController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\portalController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CrudKelasController;
+use App\Http\Controllers\CrudSiswaController;
 use App\Http\Controllers\ElearningController;
+use App\Http\Controllers\CrudRuanganController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -47,6 +52,26 @@ Route::get('/data-ruangan-page', [AdminController::class, 'ruangan_page'])->name
 Route::get('/data-pengumuman-page', [AdminController::class, 'pengumuman_page'])->name('data-pengumuman-page');
 Route::get('/data-penghargaan-page', [AdminController::class, 'penghargaan_page'])->name('data-penghargaan-page');
 Route::get('/data-kegiatan-page', [AdminController::class, 'kegiatan_page'])->name('data-kegiatan-page');
+// crud admin
+// mapel
+Route::post('/mapel-store', [MapelController::class, 'store'])->name('mapel-store');
+Route::post('/mapel-update/{id}', [MapelController::class, 'update'])->name('mapel-update');
+Route::post('/mapel-delete/{id}', [MapelController::class, 'destroy'])->name('mapel-delete');
+// kelas
+Route::post('/kelas-store', [CrudKelasController::class, 'store'])->name('kelas-store');
+Route::post('/kelas-update/{id}', [CrudKelasController::class, 'update'])->name('kelas-update');
+Route::post('/kelas-delete/{id}', [CrudKelasController::class, 'destroy'])->name('kelas-delete');
+//siswa
+Route::post('/siswa-store', [CrudSiswaController::class, 'store'])->name('siswa-store');
+
+
+// ruang kelas
+Route::post('/ruang-store', [CrudRuanganController::class, 'store'])->name('ruang-store');
+Route::post('/ruang-update/{id}', [CrudRuanganController::class, 'update'])->name('ruang-update');
+Route::post('/ruang-delete/{id}', [CrudKelasController::class, 'destroy'])->name('ruang-delete');
+
+
+
 
 //route gurucontroller
 Route::get('/materi-upload-page', [GuruController::class, 'materi_upload'])->name('materi-upload-page');

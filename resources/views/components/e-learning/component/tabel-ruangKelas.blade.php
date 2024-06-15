@@ -52,10 +52,11 @@
                                         <td>{{ $row->nama }}</td>
                                         <td>
                                             <button class="btn bg-success btn-edit" data-toggle="modal"
-                                                data-target="#modal-update"><i
+                                                data-target="#modal-update_{{ $row->id }}"><i
                                                     class="fa-regular fa-pen-to-square"></i></button>
                                             <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                                data-target="#modal-delete_{{ $row->id }}"><i
+                                                    class="fa-regular fa-trash-can"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -71,7 +72,7 @@
             </div>
         </div>
     </div>
-
+    \
     {{-- Modal Create --}}
     <div class="modal fade" id="modal-create">
         <div class="modal-dialog modal-lg">
@@ -83,15 +84,26 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="createSubject">
+                    <form action="{{ route('ruang-store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <label for="">Ruang</label>
-                            <input type="text" class="form-control" placeholder="Masukan Nama Ruangan">
+                            <input type="text" name="nama" class="form-control" placeholder="Masukan Nama Ruangan"
+                                value="{{old('name')}}">
+                        </div>
+                        <div class="modal-body">
+                            <label for="">Kelas</label>
+                            <select name="id_kelas" id="" class="form-control" value="{{old('id_kelas')}}">
+                                <option value="">Pilih Tingkat Kelas</option>
+                                @foreach ($kelas as $row )
+                                <option value="{{ $row->id }}">{{$row->tingkat}}</option>
+
+                                @endforeach
+                            </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
                         </div>
                     </form>
                 </div>
@@ -99,40 +111,46 @@
         </div>
     </div>
     {{-- {{ dd($kelas) }} --}}
+    @foreach ($ruang as $row)
     <!-- Modal Update -->
-    <div class="modal fade" id="modal-update_{{ $row->id }}">
-        <div class="modal-dialog modal-lg">
+    <div class="modal fade" id="modal-update_{{ $row->id }}" tabindex="-1" role="dialog"
+        aria-labelledby="modal-update_{{ $row->id }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ubah Data Ruang Kelas</h4>
+                    <h5 class="modal-title" id="modal-update_{{ $row->id }}Label">Ubah Data Ruang Kelas</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="POST">
+                <form action="{{ route('ruang-update', ['id' => $row->id]) }}" method="POST">
                     @csrf
-                    @method('PUT')
-                    <input type="hidden" name="kelas_id" id="kelas_id">
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="tingkat_kelas">Tingkat</label>
-                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                @foreach (['A', 'B', 'C','D','E'] as $ruang)
-                                <option value="{{ $ruang }}">{{ $ruang }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        <label for="">Ruang</label>
+                        <input type="text" name="nama" class="form-control" placeholder="Masukkan Nama Ruangan"
+                            value="{{ $row->nama }}">
+                    </div>
+                    <div class="modal-body">
+                        <label for="">Kelas</label>
+                        <select name="id_kelas" class="form-control">
+                            <option value="{{ $row->kelas->id }}">{{ $row->kelas->tingkat }}</option>
+                            @foreach ($kelas as $kls)
+                            <option value="{{ $kls->id }}">{{ $kls->tingkat }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    @endforeach
 
     {{-- Modal delete --}}
+    @foreach ($ruang as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -143,11 +161,11 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="deleteSubject">
+                    <form action="{{ route('ruang-delete', ['id' => $row->id]) }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Kelas ini?</p>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <h5>Nama Ruangan : <i>{{$row->nama}}</i></h5>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -158,6 +176,7 @@
             </div>
         </div>
     </div>
+    @endforeach
 </section>
 @section('script')
 {{-- cdn dataable --}}

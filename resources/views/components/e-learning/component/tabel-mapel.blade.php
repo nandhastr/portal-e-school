@@ -29,6 +29,18 @@
                             </div> --}}
                         </div>
                     </div>
+                    {{-- alert --}}
+                    @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: '{{ session('success') }}',
+                            showConfirmButton: false,
+                            timer: 1500
+                            });
+                    </script>
+                    @endif
                     <div style="overflow-x:auto; overflow-y:auto;">
                         <div class="card-body">
                             {{-- tabel mata pelajaran dashboard admin --}}
@@ -44,25 +56,27 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($materi))
-                                    @foreach ($materi as $row)
+                                    @forelse ($mapel as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->mapel->mata_pelajaran }}</td>
-                                        <td>{{ $row->mapel->deskripsi }}</td>
-                                        <td>{{ $row->kelas->tingkat }}</td>
+                                        <td>{{ $row->mata_pelajaran }}</td>
+                                        <td>{{ $row->deskripsi }}</td>
+                                        <td>{{ $row->tingkat_kelas }}</td>
                                         <td>
                                             <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
                                                 data-target="#modal-update_{{ $row->id }}"><i
                                                     class="fa-regular fa-pen-to-square"></i></a>
+
                                             <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
+                                                data-target="#modal-delete_{{ $row->id }}"><i
+                                                    class="fa-regular fa-trash-can"></i></a>
                                         </td>
                                     </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada mata pelajaran</p>
-                                    @endif
+                                    @empty
+                                    <tr>
+                                        <td colspan="5">Tidak ada mata pelajaran</td>
+                                    </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
 
@@ -84,17 +98,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{route('mapel-store')}}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="nama">Nama Mata Pelajaran</label>
-                            <input type="text" name="nama" id="nama" class="form-control"
-                                placeholder="Masukkan Nama Mata Pelajaran" required>
+                            <input type="text" name="mata_pelajaran" id="nama" class="form-control"
+                                placeholder="Masukkan Nama Mata Pelajaran" required value="{{ old('mata_pelajaran') }}">
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea name="deskripsi" id="deskripsi" class="form-control" rows="3"
-                                placeholder="Masukkan Deskripsi Mata Pelajaran"></textarea>
+                                placeholder="Masukkan Deskripsi Mata Pelajaran">{{ old('deskripsi') }}</textarea>
                         </div>
                         <div class="form-group">
                             <label for="tingkat_kelas">Mata Pelajaran Kelas</label>
@@ -111,7 +125,7 @@
             </div>
         </div>
     </div>
-    @foreach ($materi as $row)
+    @foreach ($mapel as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
@@ -123,24 +137,24 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('mapel-update',['id' => $row->id]) }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="nama">Nama Mata Pelajaran</label>
-                            <input type="text" name="nama" id="nama" class="form-control"
-                                placeholder="{{ $row->mapel->mata_pelajaran }}" required>
+                            <input type="text" name="mata_pelajaran" id="nama" class="form-control"
+                                placeholder="{{ $row->mata_pelajaran }}" required value="{{ $row->mata_pelajaran }}">
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">Deskripsi</label>
                             <textarea name="deskripsi" id="deskripsi" class="form-control text-start" rows="3"
-                                placeholder="Masukkan Deskripsi Mata Pelajaran">
-                                {{ $row->mapel->deskripsi }}
+                                placeholder="Masukkan Deskripsi Mata Pelajaran" value="{{ $row->deskripsi }}">
+                                {{ $row->deskripsi }}
                             </textarea>
                         </div>
                         <div class="form-group">
                             <label for="tingkat_kelas">Mata Pelajaran Kelas</label>
                             <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                <option value="">{{ $row->kelas->tingkat }}</option>
+                                <option value="{{ $row->tingkat_kelas }}">{{ $row->tingkat_kelas }}</option>
                                 @foreach ($kelas as $row )
                                 <option value="{{ $row->tingkat }}">{{ $row->tingkat }}</option>
                                 @endforeach
@@ -154,7 +168,8 @@
     </div>
     @endforeach
     {{-- Modal delete --}}
-    <div class="modal fade" id="modal-delete">
+    @foreach ($mapel as $row)
+    <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -164,21 +179,22 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="deleteSubject">
+                    <form action="{{ route('mapel-delete', ['id' => $row->id]) }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Mata Pelajaran?</p>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <input type="hidden" name="id" value="{{ $row->id }}">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 
 </section>
 @section('script')
@@ -189,6 +205,17 @@
         // datatabel
         new DataTable('#example');
     });
+$('.btn-delete').click(function (e) { 
+    e.preventDefault();
+    var id = $(this).data('id');
+    console.log(id);
+    // $('#delete_subject_id').val(id);
+    // $('#modal-delete_' + id).modal('show');
+
+    
+});
+   
+
 </script>
 
 @endsection

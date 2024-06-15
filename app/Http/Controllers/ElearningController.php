@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\awards;
-use App\Models\Kelas;
-use App\Models\Materi;
-use App\Models\Opsi;
-use App\Models\Penghargaan;
-use App\Models\Pertanyaan;
 use App\Models\Siswa;
-use App\Models\Ujian;
+use App\Models\User;
+use App\Models\Penghargaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,37 +16,50 @@ class ElearningController extends Controller
     public function index()
     {
         $user = Auth::user();
-        // Periksa apakah pengguna memiliki relasi 
-        $siswa = $user->siswa ?? null;
-        // Inisialisasi variabel menjadi array kosong
+        $siswa = null; // Variabel $siswa diinisialisasi dengan null
+
+        // Cek apakah pengguna adalah admin atau guru
+        if ($user->role === 'admin' || $user->role === 'guru') {
+            // Jika admin atau guru, ambil data siswa
+            $siswa = Siswa::all();
+        }
+
+        // Inisialisasi variabel penghargaan, kegiatan, nilai, dan kelas
         $penghargaan = [];
         $kegiatan = [];
         $nilai = [];
+        $kelas = [];
 
-        // Jika pengguna memiliki relasi siswa, ambil penghargaan siswa
-        if ($siswa) {
+        // Jika pengguna memiliki relasi siswa, ambil data yang terkait
+        if ($user->role === 'siswa') {
+            $siswa = $user->siswa;
+            $siswa->load('penghargaan', 'nilai', 'kegiatan_pengguna', 'kelas');
+
             $penghargaan = $siswa->penghargaan;
-
-            // Ambil data dari tabel nilai melalui relasi siswa
+            $kelas = $siswa->kelas;
             $nilai = $siswa->nilai;
-
-            // Ambil data dari tabel kegiatan melalui relasi siswa
             $kegiatan = $siswa->kegiatan_pengguna;
-
-            // // Ambil data dari tabel ujian melalui relasi siswa
-            // $ujian = $siswa->ujian;
         }
 
-        return view('elearning.dashboard-page', [
-            'user' => $user,
-            'siswa' => $siswa,
+        // Jika ada siswa yang terkait, ambil semua data penghargaan
+        if ($siswa) {
+            $penghargaan = Penghargaan::all();
+        }
+
+        // Data yang akan dikirimkan ke tampilan
+        $data = [
+            'title' => 'Dashboard',
             'penghargaan' => $penghargaan,
             'nilai' => $nilai,
             'kegiatan' => $kegiatan,
-            // 'ujian' => $ujian,
-            'title' => 'Dashboard',
-        ]);
+            'user' => $user,
+            'kelas' => $kelas,
+            'siswa' => $siswa,
+        ];
+
+        return view('elearning.dashboard-page', $data);
     }
+
 
     /**
      * Show the form for creating a new resource.
