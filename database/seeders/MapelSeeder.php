@@ -14,40 +14,45 @@ class MapelSeeder extends Seeder
     public function run(): void
     {
         Mapel::create([
-            // 'user_id' => 3,
+            'id_siswa' => 2,
             'id_kelas' => 1,
+            'tingkat_kelas' => 'X',
             'mata_pelajaran' => 'Matematika',
             'deskripsi' => 'Pelajaran Matematika dasar untuk tingkat SMA',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         Mapel::create([
-            // 'user_id' => 3,
+            'id_siswa' => 2,
             'id_kelas' => 2,
+            'tingkat_kelas' => 'XI',
             'mata_pelajaran' => 'Fisika',
             'deskripsi' => 'Pelajaran Fisika dasar untuk tingkat SMA',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         Mapel::create([
-            // 'user_id' => 3,
+            'id_siswa' => 2,
             'id_kelas' => 1,
+            'tingkat_kelas' => 'X',
             'mata_pelajaran' => 'Kimia',
             'deskripsi' => 'Pelajaran Kimia dasar untuk tingkat SMA',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         Mapel::create([
-            // 'user_id' => 3,
+            'id_siswa' => 1,
             'id_kelas' => 3,
+            'tingkat_kelas' => 'XII',
             'mata_pelajaran' => 'Biologi',
             'deskripsi' => 'Pelajaran Biologi dasar untuk tingkat SMA',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
         Mapel::create([
-            // 'user_id' => 3,
+            'id_siswa' => 1,
             'id_kelas' => 2,
+            'tingkat_kelas' => 'XI',
             'mata_pelajaran' => 'Bahasa Inggris',
             'deskripsi' => 'Pelajaran Bahasa Inggris dasar untuk tingkat SMA',
             'created_at' => now(),

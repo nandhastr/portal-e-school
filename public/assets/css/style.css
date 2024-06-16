@@ -7,6 +7,12 @@
 /* styles.css */
 /* dark mode body */
 
+.gradient-hr {
+    border: 1;
+    height: 4px;
+    background: linear-gradient(to right, blue, #000);
+}
+
 summary {
     color: var(--primary-color);
 }

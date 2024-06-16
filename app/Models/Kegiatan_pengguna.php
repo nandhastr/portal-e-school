@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Kegiatan_pengguna extends Model
+class kegiatan_pengguna extends Model
 {
     use HasFactory;
     protected $table = 'tbl_kegiatan_pengguna';
@@ -13,7 +14,7 @@ class Kegiatan_pengguna extends Model
         'id_siswa', 'kegiatan', 'tanggal_kegiatan', 'deskripsi',
     ];
 
-    public function siswa()
+    public function siswa(): BelongsTo
     {
         return $this->belongsTo(Siswa::class, 'id_siswa');
     }

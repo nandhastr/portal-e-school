@@ -3,8 +3,10 @@
     <div class="container mt-5 mb-5 container-home">
         <div class="row justify-content-center">
             <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
+
                 <x-card-kepsek></x-card-kepsek>
-                <x-profile-sekolah></x-profile-sekolah>
+
+                {{-- <x-profile-sekolah></x-profile-sekolah> --}}
             </div>
             <div class="col col-lg-9 col-md-12 col-sm-12  mb-4 col-wide">
                 <x-card-home class="card card-home ">
@@ -22,8 +24,25 @@
                     </div>
                 </x-card-home>
             </div>
-
-            <div class="col col-lg-12 col-md-12 col-sm-12  mb-4">
+            <div class="col-12">
+                <x-hr-gradient>
+                    Pengumuman Terbaru
+                </x-hr-gradient>
+            </div>
+            <div class="col col-lg-3 col-md-4 col-12 mb-4">
+                <x-card-home class="card card-home ">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title 1</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the
+                            bulk of
+                            the
+                            card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </x-card-home>
+            </div>
+            <div class="col col-lg-3 col-md-4 col-12 mb-4">
                 <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
@@ -35,19 +54,7 @@
                     </div>
                 </x-card-home>
             </div>
-            <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
-                <x-card-home class="card card-home ">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </x-card-home>
-            </div>
-            <div class="col col-lg-3 col-md-12 col-sm-12 mb-4">
+            <div class="col col-lg--3 col-md-4 col-12 mb-4">
                 <x-card-home class="card card-home ">
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">

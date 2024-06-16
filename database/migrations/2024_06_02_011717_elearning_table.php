@@ -28,9 +28,11 @@ return new class extends Migration
         // Tabel untuk menyimpan data siswa
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('id_kelas')->nullable();
+            $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->string('foto')->nullable();
             $table->string('nisn')->nullable();
-            $table->unsignedBigInteger('user_id');
             $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('tempat_lahir')->nullable();
             $table->date('tanggal_lahir')->nullable();
@@ -42,8 +44,7 @@ return new class extends Migration
             $table->string('sekolah_sebelumnya')->nullable();
             $table->string('kelas_sekarang')->nullable();
             $table->string('phone')->nullable();
-            $table->unsignedBigInteger('id_kelas')->nullable();
-            $table->unsignedBigInteger('id_ruangKelas')->nullable();
+
             $table->timestamps();
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('cascade');
             $table->foreign('id_ruangKelas')->references('id')->on('tbl_ruangKelas')->onDelete('set null');
@@ -53,8 +54,8 @@ return new class extends Migration
         // Tabel untuk menyimpan data guru
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
-            $table->string('nipn')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->string('nipn')->nullable();
             $table->string('photo')->nullable();
             $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable();
             $table->string('tempat_lahir')->nullable();
@@ -70,14 +71,15 @@ return new class extends Migration
         });
         Schema::create('tbl_mapel', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('id_siswa')->nullable();
             $table->unsignedBigInteger('id_kelas')->nullable();
             $table->string('mata_pelajaran');
             $table->text('deskripsi')->nullable();
+            $table->text('tingkat_kelas')->nullable();
             $table->timestamps();
 
             // Create a foreign key constraint linking to the users table
-            // $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('set null');
             $table->foreign('id_kelas')->references('id')->on('tbl_kelas')->onDelete('set null');
         });
 
@@ -179,10 +181,10 @@ return new class extends Migration
         Schema::create('tbl_penghargaan', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_siswa');
-            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->string('judul');
             $table->text('deskripsi')->nullable();
             $table->date('tanggal_diterima');
+            $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -212,6 +214,7 @@ return new class extends Migration
             $table->id();
             $table->enum('jenis', ['tugas', 'UTS', 'UAS', 'UN'])->nullable();
             $table->decimal('nilai', 5, 2);
+            $table->unsignedBigInteger('id_mapel')->nullable();
             $table->unsignedBigInteger('id_siswa');
             $table->unsignedBigInteger('id_materi');
             $table->unsignedBigInteger('id_pertanyaan')->nullable();
@@ -220,6 +223,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_ruangKelas')->nullable();
             $table->timestamps();
 
+            $table->foreign('id_mapel')->references('id')->on('tbl_mapel')->onDelete('cascade');
             $table->foreign('id_siswa')->references('id')->on('tbl_siswa')->onDelete('cascade');
             $table->foreign('id_materi')->references('id')->on('tbl_materi')->onDelete('cascade');
             $table->foreign('id_pertanyaan')->references('id')->on('tbl_pertanyaan')->onDelete('cascade');
