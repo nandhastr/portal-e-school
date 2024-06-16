@@ -1,4 +1,5 @@
-<ul class="nav nav-treeview">
+{{-- sidebar elearning --}}
+{{-- <ul class="nav nav-treeview">
     <li class="nav-item">
         <a href="{{ route('data-mapel-page') }}"
             class="nav-link {{ request()->is('data-mapel-page') ? 'active' : '' }}">
@@ -43,22 +44,34 @@
         </a>
     </li>
 
-</ul>
+</ul> --}}
 
-<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+
+{{-- sidebar portal --}}
+<ul class="nav nav-treeview">
     <li class="nav-item">
-        <x-nav-link href="/akademi" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <p>Portal<i class="fas fa-angle-left right"></i></p>
-        </x-nav-link>
-        <ul class="nav nav-treeview">
-            <li class="nav-item">
-                <a href="/data-pengumuman-page"
-                    class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pengumuman</p>
-                </a>
-            </li>
-        </ul>
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Pengumuman</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Berita</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Article</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Porfile Sekolah</p>
+        </a>
     </li>
 </ul>

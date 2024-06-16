@@ -80,13 +80,9 @@ class CrudRuanganController extends Controller
      */
     public function destroy(string $id)
     {
-        try {
-            $ruang = RuangKelas::findOrFail($id);
-            $ruang->delete();
+        $ruang = RuangKelas::findOrFail($id);
+        $ruang->delete();
 
-            return redirect()->route('data-ruangan-page')->with('success', 'Ruang Kelas berhasil dihapus.');
-        } catch (\Exception $e) {
-            return redirect()->route('data-ruangan-page')->with('error', 'Gagal menghapus Ruang Kelas.');
-        }
+        return redirect()->route('data-ruangan-page')->with('success', 'Ruang Kelas berhasil dihapus.');
     }
 }

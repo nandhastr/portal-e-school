@@ -57,7 +57,7 @@ class ElearningController extends Controller
             'siswa' => $siswa,
         ];
 
-        return view('elearning.dashboard-page', $data);
+        return view('portal.dashboard-page', $data);
     }
 
 

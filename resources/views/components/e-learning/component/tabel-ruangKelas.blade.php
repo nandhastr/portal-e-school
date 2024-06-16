@@ -51,9 +51,11 @@
                                         <td>{{ $row->kelas->tingkat }}</td>
                                         <td>{{ $row->nama }}</td>
                                         <td>
+                                            {{-- tombol edit --}}
                                             <button class="btn bg-success btn-edit" data-toggle="modal"
                                                 data-target="#modal-update_{{ $row->id }}"><i
                                                     class="fa-regular fa-pen-to-square"></i></button>
+                                            {{-- tombol delete --}}
                                             <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
                                                 data-target="#modal-delete_{{ $row->id }}"><i
                                                     class="fa-regular fa-trash-can"></i></a>
