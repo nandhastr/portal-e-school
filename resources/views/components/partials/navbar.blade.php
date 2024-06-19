@@ -29,14 +29,8 @@
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="/sejarah">Sejarah
                                         Sekolah</a>
                                 </li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/visi">Visi & Misi</a>
-                                </li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2"
-                                        href="/struktur-organisasi">Struktur
-                                        Organisasi</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/tendik">Guru Dan
-                                        Karyawan</a>
-                                </li>
+                                        href="/struktur-organisasi">Kepengurusan</a></li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="/program">Program
                                         Sekolah</a>
                                 </li>
@@ -45,29 +39,34 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <x-nav-link href="/album"
-                            class="nav-link {{ request()->is('album') ? 'active' : '' }} px-5 a-nav">
+                        <x-nav-link href="/siswa"
+                            class="nav-link {{ request()->is('siswa') ? 'active' : '' }} px-5 a-nav">
+                            SISWA</x-nav-link>
+                    </li>
+                    <li class="nav-item">
+                        <x-nav-link href="/visi"
+                            class="nav-link {{ request()->is('visi') ? 'active' : '' }} px-5 a-nav">
                             VISI & MISI</x-nav-link>
                     </li>
                     <li class="nav-item ">
                         <div class="dropdown ">
                             <x-nav-link
-                                class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
-                                href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('direktori') ? 'active' : '' }}"
+                                href="direktori" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 DIREKTORI
                             </x-nav-link>
                             <ul class="dropdown-menu">
 
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/alumni">Direktori Alumni</a>
-                                </li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="/tendik">Direktori Tenaga
                                         Pendidik</a>
+                                </li>
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/alumni">Direktori Alumni</a>
                                 </li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <div class="dropdown a-nav">
+                        <div class="dropdown">
                             <x-nav-link
                                 class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
                                 href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -88,24 +87,24 @@
                     </li> --}}
 
                     <li class="nav-item ">
-                        <div class="dropdown a-nav">
+                        <div class="dropdown ">
                             <x-nav-link
                                 class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
                                 href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 KEGIATAN
                             </x-nav-link>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-berjualan">Kegiatan
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-uks">Kegiatan
                                         UKS</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-marketing">Kegiatan
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-osis">Kegiatan
                                         OSIS</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="article-bisnis">Kegiatan
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-pramuka">Kegiatan
                                         Pramuka</a></li>
                             </ul>
                         </div>
                     </li>
                     <li class="nav-item ">
-                        <div class="dropdown a-nav">
+                        <div class="dropdown">
                             <x-nav-link
                                 class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
                                 href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center align-items-center">
+<div class="d-flex justify-content-center align-items-center mb-2">
   <button class="btn btn-outline-info btn-show-data-alumni" type="button" data-bs-toggle="collapse"
     data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
     Lihat Data

@@ -17,11 +17,11 @@
                         <span>Jl. suka suka kecamatan aku suka desa suka kamu</span>
                     </div>
                     <div class="col">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
-                        </button>
+                        </button> --}}
                         <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                             <div class="navbar-nav ">
                                 <span class="nav-link text-lg fw-bold"><i class="fa-regular fa-envelope"></i>
@@ -32,7 +32,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- <a class="navbar-brand text-white text-xl" href="#">E-School</a> --}}
 
             </nav>
         </div>

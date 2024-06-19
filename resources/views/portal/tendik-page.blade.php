@@ -1,30 +1,66 @@
-<x-main.tamplate-info class="navbar navbar-expand-lg fixed-top">
-    <div class="container tendik-page">
-        <div class="container-fluid">
-            <h1 class="text-center">Galeri Foto</h1>
-            <div class="gallery-grid mt-4">
-                <div class="gallery-item">
-                    <img src="{{ asset('assets/dist/img/user6-128x128.jpg') }}" alt="Deskripsi Gambar 1"
-                        class="gallery-img">
-                </div>
-                <div class="gallery-item">
-                    <img src="path-to-your-image2.jpg" alt="Deskripsi Gambar 2" class="gallery-img">
-                </div>
-                <div class="gallery-item">
-                    <img src="path-to-your-image3.jpg" alt="Deskripsi Gambar 3" class="gallery-img">
-                </div>
-                <div class="gallery-item">
-                    <img src="path-to-your-image4.jpg" alt="Deskripsi Gambar 4" class="gallery-img">
-                </div>
-                <div class="gallery-item">
-                    <img src="path-to-your-image5.jpg" alt="Deskripsi Gambar 5" class="gallery-img">
-                </div>
-                <div class="gallery-item">
-                    <img src="path-to-your-image6.jpg" alt="Deskripsi Gambar 6" class="gallery-img">
+<x-main.app class="navbar navbar-expand-lg ">
+    <div class="container container-fluid " style="height: 100vh">
+        <x-hr-gradient>
+            Dikrektori Guru dan Tenaga Kependidikan
+        </x-hr-gradient>
+        <div class="row ">
+            <div class="col-6">
+                <div class="row justify-content-center">
+                    <div class="card h-100 border border-secondary rounded-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://cms.sekolahku.web.id/media_library/employees/06ec31139c806a2495d96c631040acd3.png"
+                                    class="card-img border border-secondary rounded-0 m-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body pt-2 pb-2">
+                                    <dl class="row">
+                                        <dt class="col-sm-5">Nama Lengkap</dt>
+                                        <dd class="col-sm-7">Abigayle Hartmann</dd>
+                                        <dt class="col-sm-5">Jenis Kelamin</dt>
+                                        <dd class="col-sm-7">Laki-laki</dd>
+                                        <dt class="col-sm-5">Tempat Lahir</dt>
+                                        <dd class="col-sm-7">DuBuqueberg</dd>
+                                        <dt class="col-sm-5">Tanggal Lahir</dt>
+                                        <dd class="col-sm-7">01 Juni 1975</dd>
+                                        <dt class="col-sm-5">Jenis GTK</dt>
+                                        <dd class="col-sm-7">Guru BK</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            <div class="col-6 ">
+                <div class="row justify-content-center">
+                    <div class="card h-100 border border-secondary rounded-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://cms.sekolahku.web.id/media_library/employees/06ec31139c806a2495d96c631040acd3.png"
+                                    class="card-img border border-secondary rounded-0 m-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body pt-2 pb-2">
+                                    <dl class="row">
+                                        <dt class="col-sm-5">Nama Lengkap</dt>
+                                        <dd class="col-sm-7">Abigayle Hartmann</dd>
+                                        <dt class="col-sm-5">Jenis Kelamin</dt>
+                                        <dd class="col-sm-7">Laki-laki</dd>
+                                        <dt class="col-sm-5">Tempat Lahir</dt>
+                                        <dd class="col-sm-7">DuBuqueberg</dd>
+                                        <dt class="col-sm-5">Tanggal Lahir</dt>
+                                        <dd class="col-sm-7">01 Juni 1975</dd>
+                                        <dt class="col-sm-5">Jenis GTK</dt>
+                                        <dd class="col-sm-7">Guru BK</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-</x-main.tamplate-info>
+    </x-main.tamplate-info>

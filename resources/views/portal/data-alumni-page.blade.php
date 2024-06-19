@@ -1,6 +1,6 @@
 <x-main.app class="navbar navbar-expand-lg ">
     {{-- container album --}}
-    <div class="container ">
+    <div class="container container-fluid " style="height : 100vh">
         <div class="col-12">
             <x-hr-gradient>
                 Alumni
@@ -19,48 +19,66 @@
             </div>
         </div>
         <x-collaps></x-collaps>
-        <div class="row justify-content-center mt-4">
-            <div class="col col-md-3 col-sm-6">
-                <x-card-home class="card-app">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the
-                            card's
-                            content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="row ">
+            <div class="col-6">
+                <div class="row justify-content-center">
+                    <div class="card h-100 border border-secondary rounded-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://cms.sekolahku.web.id/media_library/employees/06ec31139c806a2495d96c631040acd3.png"
+                                    class="card-img border border-secondary rounded-0 m-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body pt-2 pb-2">
+                                    <dl class="row">
+                                        <dt class="col-sm-5">Nama Lengkap</dt>
+                                        <dd class="col-sm-7">Abigayle Hartmann</dd>
+                                        <dt class="col-sm-5">NIK</dt>
+                                        <dd class="col-sm-7">201903110075</dd>
+                                        <dt class="col-sm-5">Jenis Kelamin</dt>
+                                        <dd class="col-sm-7">Laki-laki</dd>
+                                        <dt class="col-sm-5">Tempat Lahir</dt>
+                                        <dd class="col-sm-7">DuBuqueberg</dd>
+                                        <dt class="col-sm-5">Tanggal Lahir</dt>
+                                        <dd class="col-sm-7">01 Juni 1975</dd>
+                                        <dt class="col-sm-5">Jenis GTK</dt>
+                                        <dd class="col-sm-7">Guru BK</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </x-card-home>
+                </div>
             </div>
-            <div class="col col-md-3 col-sm-6">
-                <x-card-home class="card-app">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the
-                            card's
-                            content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+            <div class="col-6 ">
+                <div class="row justify-content-center">
+                    <div class="card h-100 border border-secondary rounded-0">
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <img src="https://cms.sekolahku.web.id/media_library/employees/06ec31139c806a2495d96c631040acd3.png"
+                                    class="card-img border border-secondary rounded-0 m-2">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body pt-2 pb-2">
+                                    <dl class="row">
+                                        <dt class="col-sm-5">Nama Lengkap</dt>
+                                        <dd class="col-sm-7">Abigayle Hartmann</dd>
+                                        <dt class="col-sm-5">NIK</dt>
+                                        <dd class="col-sm-7">201903110075</dd>
+                                        <dt class="col-sm-5">Jenis Kelamin</dt>
+                                        <dd class="col-sm-7">Laki-laki</dd>
+                                        <dt class="col-sm-5">Tempat Lahir</dt>
+                                        <dd class="col-sm-7">DuBuqueberg</dd>
+                                        <dt class="col-sm-5">Tanggal Lahir</dt>
+                                        <dd class="col-sm-7">01 Juni 1975</dd>
+                                        <dt class="col-sm-5">Jenis GTK</dt>
+                                        <dd class="col-sm-7">Guru BK</dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </x-card-home>
-            </div>
-            <div class="col col-md-3 col-sm-6">
-                <x-card-home class="card-app">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the
-                            card's
-                            content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </x-card-home>
+                </div>
             </div>
         </div>
     </div>

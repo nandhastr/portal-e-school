@@ -1,7 +1,13 @@
-<x-main.tamplate-info class="navbar navbar-expand-lg fixed-top">
-    <div class="container sejarah-page">
+<x-main.app class="navbar navbar-expand-lg ">
+    <div class="container" style="height: 100vh">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-12">
+                    <x-hr-gradient>
+                        Sejarah Sekolah
+                    </x-hr-gradient>
+
+                </div>
                 <div class="col">
                     <x-card-home class=" ">
                         <img src="{{ asset('assets/img/school.png') }}" class="card-img-top img-pengumuman" alt="...">
@@ -36,4 +42,4 @@
 
 
 
-</x-main.tamplate-info>
+</x-main.app>

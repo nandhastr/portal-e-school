@@ -1,11 +1,11 @@
 <x-main.app class="navbar navbar-expand-lg fixed-top">
     <div class="container container-fluid" style="height: 100vh">
         <x-hr-gradient>
-            Program Sekolah
+            Unit Kegiatan Sekolah
         </x-hr-gradient>
         <div class="row">
             <div class="col-col-lg-6 col-md-6 col-sm-12">
-                <h3>Program Magang</h3>
+                <h3>test</h3>
                 <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi quisquam
                     repellat
                     saepe esse.
@@ -19,7 +19,7 @@
                     enim tempora.</p>
             </div>
             <div class="col-col-lg-6 col-md-6 col-sm-12 ">
-                <h3>Program Uji Kompetensi</h3>
+                <h3>tset 2</h3>
                 <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur
                     dolore officia.
                     Consequatur est laudantium officia explicabo molestiae vitae rem aut! Provident, quae? Aut eos
