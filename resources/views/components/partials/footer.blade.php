@@ -9,7 +9,7 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-<footer>
+<footer class="mb-0">
     <!-- To the right -->
     {{-- <div class=" float-right d-none d-sm-inline">
         Anything you want
@@ -61,7 +61,7 @@
     </div>
 </footer>
 {{-- copyright --}}
-<div class="copyright text-center">
+<div class="copyright text-center mb-0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -72,6 +72,15 @@
 </div>
 
 <!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<!-- Ekko Lightbox -->
+<script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<!-- Filterizr-->
+<script src="{{ asset('assets/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
 {{-- my js --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <!-- jQuery -->

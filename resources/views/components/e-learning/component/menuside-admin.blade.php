@@ -51,27 +51,83 @@
 {{-- sidebar portal --}}
 <ul class="nav nav-treeview">
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-profil-sekolah" class="nav-link {{ request()->is('data-profil-sekolah') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Pengumuman</p>
+            <p>Master Porfile Sekolah</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Berita</p>
+            <p>Master Pengumuman</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Article</p>
+            <p>Master Siswa</p>
         </a>
     </li>
     <li class="nav-item">
         <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Porfile Sekolah</p>
+            <p>Master Tendik</p>
         </a>
     </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Visi & Misi</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Direktori</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Galeri</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Kegiatan</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Komponen Sekolah</p>
+        </a>
+    </li>
+    {{-- <li class="nav-item has-treeview">
+        <x-nav-link href="#" class="nav-link {{ request()->is('kegiatan/*') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p class="text-primary fw-bold">Master Kegiatan<i class="right fas fa-angle-left"></i></p>
+        </x-nav-link>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="/kegiatan/uks" class="nav-link {{ request()->is('kegiatan/uks') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>UKS</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/kegiatan/osis" class="nav-link {{ request()->is('kegiatan/osis') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>OSIS</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="/kegiatan/pramuka" class="nav-link {{ request()->is('kegiatan/pramuka') ? 'active' : '' }}">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Pramuka</p>
+                </a>
+            </li>
+        </ul>
+    </li> --}}
 </ul>

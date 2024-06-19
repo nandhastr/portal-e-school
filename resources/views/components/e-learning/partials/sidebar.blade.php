@@ -19,8 +19,17 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                {{-- for elearning --}}
+                {{-- <li class="nav-item menu-open">
+                    <x-nav-link href="/" class="nav-link {{ request()->is('e-learning') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </x-nav-link>
+                </li> --}}
+
+                {{-- for portal --}}
                 <li class="nav-item menu-open">
-                    <x-nav-link href="/e-learning" class="nav-link {{ request()->is('e-learning') ? 'active' : '' }}">
+                    <x-nav-link href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </x-nav-link>
@@ -35,7 +44,9 @@
                     {{-- sidebar portla --}}
                     <x-nav-link href="" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
                         <i class="fa-regular fa-bookmark"></i>
-                        <p>Portal<i class="fas fa-angle-left right"></i></p>
+                        <p class="text-lg fw-bold text-primary">Master Portal<i
+                                class="fas fa-angle-left right text-lg"></i>
+                        </p>
                     </x-nav-link>
 
                     {{-- side bar admin --}}

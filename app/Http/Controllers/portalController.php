@@ -15,6 +15,12 @@ class portalController extends Controller
             'ttile' => 'Home'
         ]);
     }
+    public function siswa()
+    {
+        return view('portal.siswa-page', [
+            'ttile' => 'Siswa'
+        ]);
+    }
 
     public function album()
     {
@@ -82,6 +88,31 @@ class portalController extends Controller
         return view('portal.article-bisnis-page', [
             'title' => 'Article bisnis'
         ]);
+    }
+
+    public function keg_uks()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan Unit Kegiatan Sekolah'
+            ];
+        return view('portal.keg-uks-page', $data);
+    }
+    public function keg_osis()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan OSIS'
+            ];
+        return view('portal.keg-osis-page', $data);
+    }
+    public function keg_pramuka()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan Pramuka'
+            ];
+        return view('portal.keg-pramuka-page', $data);
     }
 
 
