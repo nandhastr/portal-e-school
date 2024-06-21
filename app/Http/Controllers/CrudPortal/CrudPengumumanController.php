@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\CrudPortal;
 
-use App\Models\PortalModel\ProfilSekolah;
+use App\Models\PortalModel\Pengumuman;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CrudProfileSekolahController extends Controller
+class CrudPengumumanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +16,12 @@ class CrudProfileSekolahController extends Controller
     {
          $user = Auth::user();
         $data = [
-            'title' => 'Halaman Profile Sekolah',
+            'title' => 'Halaman Data Pengumuman',
             'user'=> $user,
-            'profil' => ProfilSekolah::all(),
+            'pengumuman' => Pengumuman::all(),
         ];
-        return view('portal.admin.master-profil-sekolah', $data);
+        return view('portal.admin.data-pengumuman-page', $data);
+    
     }
 
     /**
@@ -34,99 +35,102 @@ class CrudProfileSekolahController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-   public function store(Request $request)
-{
-    try {
+    public function store(Request $request)
+    {
+        try {
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kategori' => 'required',
-            'konten' => 'required',
+            'judul' => 'required',
+            'isi' => 'required',
+            'tanggal' => 'required|date',
         ]);
 
         // proses gambar
         $gambar = $request->file('gambar');
         $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-        $gambar->move(base_path('public/assets/img/profil-sekolah'), $nama_gambar);
+        $gambar->move(base_path('public/assets/img/pengumuman'), $nama_gambar);
 
         // simpan ke db
-        $profil = new ProfilSekolah;
+        $pengumuman = new Pengumuman;
         
-        $profil->gambar = $nama_gambar; 
-        $profil->kategori = $request->kategori;
-        $profil->konten = $request->konten;
+        $pengumuman->gambar = $nama_gambar; 
+        $pengumuman->judul = $request->judul;
+        $pengumuman->isi = $request->isi;
+        $pengumuman->tanggal = $request->tanggal;
 
-        // dd($profil); 
+        // dd($pengumuman); 
 
-        $profil->save();
+        $pengumuman->save();
         
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     } catch (\Exception $e) {
         return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
     }
-}
+    }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+
+    // metod update
     public function update(Request $request, string $id)
     {
-    //    dd($request->all());
+        //  dd($request->all());
       try {
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'kategori' => 'required',
-            'konten' => 'required',
+            'judul' => 'required',
+            'isi' => 'required',
+            'tanggal' => 'required',
         ]);
 
         // Temukan record berdasarkan ID
-        $profil = ProfilSekolah::findOrFail($id);
+        $pengumuman = Pengumuman::findOrFail($id);
 
         // Periksa apakah file gambar ada dalam request
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada
-            if ($profil->gambar && file_exists(base_path('public/assets/img/profil-sekolah/' . $profil->gambar))) {
-                unlink(base_path('public/assets/img/profil-sekolah/' . $profil->gambar));
+            if ($pengumuman->gambar && file_exists(base_path('public/assets/img/pengumuman/' . $pengumuman->gambar))) {
+                unlink(base_path('public/assets/img/pengumuman/' . $pengumuman->gambar));
             }
 
             // Simpan gambar baru
             $gambar = $request->file('gambar');
             $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-            $gambar->move(base_path('public/assets/img/profil-sekolah'), $nama_gambar);
-            $profil->gambar = $nama_gambar;
+            $gambar->move(base_path('public/assets/img/pengumuman'), $nama_gambar);
+            $pengumuman->gambar = $nama_gambar;
         }
 
         // Perbarui data lainnya
-        $profil->kategori = $request->kategori;
-        $profil->konten = $request->konten;
+        $pengumuman->judul = $request->judul;
+        $pengumuman->isi = $request->isi;
+        $pengumuman->tanggal = $request->tanggal;
 
-        $profil->save();
+        $pengumuman->save();
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui');
     } catch (\Exception $e) {
         return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
     }
-
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+     public function destroy(string $id)
     {
         try {
         // Temukan record berdasarkan ID
-        $profil = ProfilSekolah::findOrFail($id);
+        $pengumuman = pengumuman::findOrFail($id);
 
         // Hapus gambar dari storage jika ada
-        if ($profil->gambar) {
-            $gambarPath = public_path('assets/img/profil-sekolah/' . $profil->gambar);
+        if ($pengumuman->gambar) {
+            $gambarPath = public_path('assets/img/pengumuman/' . $pengumuman->gambar);
             if (file_exists($gambarPath)) {
                 unlink($gambarPath);
             }
         }
 
         // Hapus record dari database
-        $profil->delete();
+        $pengumuman->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     } catch (\Exception $e) {
