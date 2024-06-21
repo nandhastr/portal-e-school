@@ -84,19 +84,19 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data Kegiatan</h4>
+                    <h4 class="modal-title">Tambah Data Penghargaan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
-                    <form action="" method="POST">
+                    <form action="{{ route('penghargaan-store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="siswa">Penghargaan Diberikan Kepada</label>
-                                <select name="siswa_id" id="siswa" class="form-control" required>
+                                <select name="id_siswa" id="siswa" class="form-control" required>
                                     <option value="">Pilih Siswa</option>
                                     @foreach ($reward as $s)
                                     <option value="{{ $s->siswa->user->user_id }}">{{ $s->siswa->user->name }}</option>
@@ -184,6 +184,7 @@
     @endforeach
 
     {{-- Modal delete --}}
+    @foreach ($reward as $s)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -209,7 +210,7 @@
             </div>
         </div>
     </div>
-
+    @endforeach
 </section>
 @section('script')
 {{-- cdn dataable --}}

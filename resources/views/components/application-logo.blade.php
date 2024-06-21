@@ -1,1 +1,1 @@
-<x-image-link src="{{ asset('assets/img/smklogo.png') }}"></x-image-link>
+<x-image-link src="{{ asset('assets/img/smklogo.png') }}" style="width: 20em"></x-image-link>

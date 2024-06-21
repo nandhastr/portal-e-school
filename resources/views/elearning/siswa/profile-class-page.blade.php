@@ -1,4 +1,6 @@
-<x-e-learning.master.layout :title="$title" :user="$user">
+<x-e-learning.master.layout :title="$title" :user="$user" :mapel="$mapel" :siswa="$siswa" :kelas="$kelas"
+    :penghargaan="$penghargaan" :kegiatan="$kegiatan" :tugas="$tugas :ruangKelas=" $ruangKelas">
+
     <hr class="border">
     <div class="row">
         <div class="col-auto">
@@ -8,8 +10,15 @@
                     <hr>
                     <div class="row">
                         <div class="col-8">
-                            <a href="" class="text-capitalize text-dark link-mapel hover"
-                                style="font-size: 10px">B.Indonesia</a>
+                            <div class="col-8">
+                                @foreach ($siswa->mapel as $mapel)
+                                <a href="#" class="text-capitalize text-dark link-mapel hover" style="font-size: 10px">
+                                    {{ $mapel->mata_pelajaran }}
+
+                                </a>
+                                @endforeach
+
+                            </div>
                         </div>
                         <div class="col-4">
                             <i class="fa-solid fa-chevron-right " style="font-size: 10px"></i>

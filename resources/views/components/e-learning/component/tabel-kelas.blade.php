@@ -10,61 +10,55 @@
                                 Tambah Data
                             </button>
                         </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Tingkat</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- {{ dd($kelas)}} --}}
-                                    @if(!empty($kelas))
-                                    @foreach ($kelas as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->tingkat }}</td>
-                                        <td>
-                                            <button class="btn bg-success btn-edit" data-toggle="modal"
-                                                data-target="#modal-update" data-kelasid="{{ $row->id }}"
-                                                data-tingkat="{{ $row->tingkat }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></button>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete"><i class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada kelas</p>
-                                    @endif
-                                </tbody>
-                            </table>
+                    {{-- alert --}}
+                    @if(session('success'))
+                    <script>
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: '{{ session('success') }}',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    </script>
+                    @endif
 
-                        </div>
+                    <div class="card-body">
+                        {{-- tabel mata pelajaran dashboard admin --}}
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Tingkat</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{-- Foreach untuk menampilkan data kelas --}}
+                                @forelse ($kelas as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $row->tingkat }}</td>
+                                    <td>
+                                        {{-- Tombol edit dengan modal --}}
+                                        <button class="btn bg-success btn-edit" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}">
+                                            <i class="fa-regular fa-pen-to-square"></i>
+                                        </button>
+                                        {{-- Tombol delete --}}
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}">
+                                            <i class="fa-regular fa-trash-can"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @empty
+                                tidak ada kelas
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -82,29 +76,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" id="createSubject">
+                    <form action="{{ route('kelas-store') }}" method="POST">
                         @csrf
-                        <div class="modal-body">
-                            <label for="">Kelas</label>
-                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                <option value="">Pilih Tingkat Kelas</option>
-                                @foreach (['X', 'XI', 'XII'] as $kelas)
-                                <option value="{{ $kelas }}">{{ $kelas }}</option>
-                                @endforeach
+                        <div class="form-group">
+                            <label for="tingkat">Tingkat</label>
+                            <select name="tingkat" id="tingkat" class="form-control">
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option>
                             </select>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Tambahkan</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    {{-- {{ dd($kelas) }} --}}
-    <!-- Modal Update -->
-    <div class="modal fade" id="modal-update">
+
+    {{-- Modal Update --}}
+    @foreach ($kelas as $row)
+    <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -113,73 +107,65 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="POST">
+                <form action="{{ route('kelas-update', ['id' => $row->id]) }}" method="POST">
                     @csrf
-                    @method('PUT')
-                    <input type="hidden" name="kelas_id" id="kelas_id">
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="tingkat_kelas">Tingkat</label>
-                            <select name="tingkat_kelas" id="tingkat_kelas" class="form-control">
-                                @foreach (['X', 'XI', 'XII'] as $kelas)
-                                <option value="{{ $kelas }}">{{ $kelas }}</option>
-                                @endforeach
+                            <label for="tingkat">Tingkat</label>
+                            <select name="tingkat" id="tingkat" class="form-control">
+                                <option value="X" {{ $row->tingkat == 'X' ? 'selected' : '' }}>X</option>
+                                <option value="XI" {{ $row->tingkat == 'XI' ? 'selected' : '' }}>XI</option>
+                                <option value="XII" {{ $row->tingkat == 'XII' ? 'selected' : '' }}>XII</option>
                             </select>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    @endforeach
 
-    {{-- Modal delete --}}
+    {{-- Modal Delete --}}
+    @foreach ($kelas as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus Data Mata Pelajaran</h4>
+                    <h4 class="modal-title">Hapus Data Kelas</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="deleteSubject">
+                    <form action="{{ route('kelas-delete', ['id' => $row->id]) }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Kelas ini?</p>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <input type="hidden" name="id" value="{{ $row->id }}">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Hapus</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 
 </section>
+
 @section('script')
-{{-- cdn dataable --}}
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
-
-        // script untuk kirim id ke modal
-        $('.btn-edit').click(function () {
-        var kelas_id = $(this).data('kelasid');
-        var tingkat_kelas = $(this).data('tingkat');
-        $('#kelas_id').val(kelas_id);
-        $('#tingkat_kelas').val(tingkat_kelas);
-        });
+        // Inisialisasi DataTable
+        $('#example').DataTable();
     });
 </script>
-
 @endsection

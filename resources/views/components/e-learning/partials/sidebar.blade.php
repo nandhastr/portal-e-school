@@ -19,29 +19,52 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                {{-- for elearning --}}
+                {{-- <li class="nav-item menu-open">
+                    <x-nav-link href="/" class="nav-link {{ request()->is('e-learning') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>Dashboard</p>
+                    </x-nav-link>
+                </li> --}}
+
+                {{-- for portal --}}
                 <li class="nav-item menu-open">
-                    <x-nav-link href="/e-learning" class="nav-link {{ request()->is('e-learning') ? 'active' : '' }}">
+                    <x-nav-link href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </x-nav-link>
                 </li>
                 <li class="nav-item">
-                    <x-nav-link href="/akademi" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
+                    {{-- sidebar untuk elearning --}}
+                    {{-- <x-nav-link href="/akademi" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
                         <i class="fa-solid fa-graduation-cap"></i>
                         <p>Akademi<i class="fas fa-angle-left right"></i></p>
+                    </x-nav-link> --}}
+
+                    {{-- sidebar portla --}}
+                    <x-nav-link href="" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
+                        <i class="fa-regular fa-bookmark"></i>
+                        <p class="text-lg fw-bold text-primary">Master Portal<i
+                                class="fas fa-angle-left right text-lg"></i>
+                        </p>
                     </x-nav-link>
-                    {{-- ini side bar untuk siswa --}}
-                    @if($user->role !== 'admin' && $user->role !== 'guru')
-                    <x-e-learning.component.menuside-siswa></x-e-learning.component.menuside-siswa>
-                    @endif
+
                     {{-- side bar admin --}}
                     @if($user->role !== 'siswa' && $user->role !== 'guru')
                     <x-e-learning.component.menuside-admin></x-e-learning.component.menuside-admin>
                     @endif
+
+
+
+                    {{-- isi side bar untuk user siswa dan guru --}}
+                    {{-- ini side bar untuk siswa --}}
+                    {{-- @if($user->role !== 'admin' && $user->role !== 'guru')
+                    <x-e-learning.component.menuside-siswa></x-e-learning.component.menuside-siswa>
+                    @endif --}}
                     {{-- side bar guru --}}
-                    @if($user->role !== 'siswa' && $user->role !== 'admin')
+                    {{-- @if($user->role !== 'siswa' && $user->role !== 'admin')
                     <x-e-learning.component.menuside-guru></x-e-learning.component.menuside-guru>
-                    @endif
+                    @endif --}}
                 </li>
             </ul>
         </nav>

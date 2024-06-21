@@ -9,7 +9,7 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-<footer>
+<footer class="mb-0">
     <!-- To the right -->
     {{-- <div class=" float-right d-none d-sm-inline">
         Anything you want
@@ -20,9 +20,10 @@
         <div class="container-fluid py-2">
             <div class="row m-4 row-footer ">
                 <div class="col col-footer col-md-3  text-light">
-                    <img src="" alt="Logo Sekolah">
+                    <x-image-link src="{{ asset('assets/img/smklogo.png') }}" class="img-thumbnail" style="width: 8em">
+                    </x-image-link>
                     <p>
-                        Sejarah singkat
+                        Sekolah Menengah Kejuruan Terakreditasi "B" Yang Menjadikannya Sekolah Favorit
                     </p>
                 </div>
                 <div class="col col-footer col-md-3  text-light">
@@ -60,7 +61,7 @@
     </div>
 </footer>
 {{-- copyright --}}
-<div class="copyright text-center">
+<div class="copyright text-center mb-0">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -71,6 +72,15 @@
 </div>
 
 <!-- REQUIRED SCRIPTS -->
+<!-- jQuery -->
+<script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap -->
+<script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<!-- Ekko Lightbox -->
+<script src="{{ asset('assets/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<!-- Filterizr-->
+<script src="{{ asset('assets/plugins/filterizr/jquery.filterizr.min.js') }}"></script>
 {{-- my js --}}
 <script src="{{ asset('assets/js/script.js') }}"></script>
 <!-- jQuery -->

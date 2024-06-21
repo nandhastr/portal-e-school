@@ -18,21 +18,22 @@ class DatabaseSeeder extends Seeder
         // Panggil seeder 
         $this->call([
             UserSeeder::class,
-            KelasSeeder::class,
-            RuangKelasSeeder::class,
-            SiswaSeeder::class,
-            GuruSeeder::class,
-            MapelSeeder::class,
-            MateriSeeder::class,
-            TugasSeeder::class,
-            PertanyaanSeeder::class,
-            OpsiSeeder::class,
-            JawabanPenggunaSeeder::class,
-            KegiatanPenggunaSeeder::class,
-            PenghargaanSeeder::class,
-            LogPenggunaSeeder::class,
-            PengumumanSeeder::class,
-            NilaiSeeder::class,
+            // KelasSeeder::class,
+            // RuangKelasSeeder::class,
+            // SiswaSeeder::class,
+            // GuruSeeder::class,
+            // MapelSeeder::class,
+            // MateriSeeder::class,
+            // TugasSeeder::class,
+            // PertanyaanSeeder::class,
+            // OpsiSeeder::class,
+            // JawabanPenggunaSeeder::class,
+            // KegiatanPenggunaSeeder::class,
+            // PenghargaanSeeder::class,
+            // LogPenggunaSeeder::class,
+            // PengumumanSeeder::class,
+            // NilaiSeeder::class,
+            // PivotTableSeeder::class
         ]);
     }
 }

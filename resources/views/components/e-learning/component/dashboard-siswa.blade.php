@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row mb-2">
-        <div class="col-lg-8 col-md-6 col-12">
+        <div class="col-12">
             <!-- small box -->
             <div class="small-box border">
                 <div class="row">
@@ -26,16 +26,18 @@
             </div>
         </div>
         <!-- ./col -->
-        <div class="col-lg-4 col-md-6 col-12">
+        {{-- <div class="col-lg-4 col-md-6 col-12">
             <!-- small box -->
             <div class="small-box border">
                 <div class="inner">
                     <h3 class="text-info">Pencapaianku</h3>
                     <div class="row justify-content-center align-items-center">
+                        @foreach($siswa as $s)
                         <div class="col-6 text-center">
                             <i class="fa-solid fa-book-open text-info "></i><br>
-                            <span class=" text-dark">Kelasku : XI A</span>
+                            <span class=" text-dark">kelasku : {{ $s->kelas_sekarang }}</span>
                         </div>
+                        @endforeach
                         <div class="col-6 text-center">
                             <i class="fa-solid fa-certificate text-info "></i><br>
                             <span class=" text-dark">Sertifikat</span>
@@ -51,7 +53,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- ./col -->
         <div class="col-lg-6 col-md-6 col-12">
             <!-- small box -->
@@ -61,11 +63,11 @@
                 </div>
                 <div class="row ">
                     @if(!empty($kegiatan))
-                    @foreach ($kegiatan as $kegiatans )
-                    {{-- {{ dd($kegiatans) }} --}}
+                    {{-- {{ dd($kegiatan) }} --}}
+                    @foreach ($kegiatan as $row )
                     <div class="col-6">
                         <ul>
-                            <li>{{ $kegiatans->kegiatan }}</li>
+                            <li>{{ $row->kegiatan }}</li>
                         </ul>
                     </div>
                     @endforeach
@@ -84,6 +86,7 @@
                 </div>
                 <div class="row ">
                     @if(!empty($penghargaan))
+                    {{-- {{ dd($penghargaan) }} --}}
                     @foreach ($penghargaan as $award )
                     <div class="col-6">
                         <ul>

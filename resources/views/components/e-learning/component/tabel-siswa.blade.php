@@ -29,6 +29,17 @@
                             </div> --}}
                         </div>
                     </div>
+                    @if(session('success'))
+                    <script>
+                        Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: '{{ session('success') }}',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                                });
+                    </script>
+                    @endif
                     <div style="overflow-x:auto; overflow-y:auto;">
                         <div class="card-body">
                             {{-- tabel mata pelajaran dashboard admin --}}
@@ -40,7 +51,6 @@
                                         <th>Foto</th>
                                         <th>NISN</th>
                                         <th>Nama</th>
-                                        <th>Kelas</th>
                                         <th>Angkatan</th>
                                         <th>status</th>
                                         <th>Jenis kelamin</th>
@@ -51,6 +61,8 @@
                                         <th>Asal Sekolah</th>
                                         <th>Alamat</th>
                                         <th>No Telpon</th>
+                                        <th>email</th>
+                                        <th>aktif sebagai</th>
                                         <th>aksi</th>
                                     </tr>
                                 </thead>
@@ -62,7 +74,6 @@
                                         <td>{{ $row->foto }}</td>
                                         <td>{{ $row->nisn }}</td>
                                         <td>{{ $row->user->name }}</td>
-                                        <td>{{ $row->kelas->tingkat}}</td>
                                         <td>{{ $row->angkatan }}</td>
                                         <td>{{ $row->status }}</td>
                                         <td>{{ $row->gender}}</td>
@@ -73,6 +84,8 @@
                                         <td>{{ $row->sekolah_sebelumnya}}</td>
                                         <td>{{ $row->alamat }}</td>
                                         <td>{{ $row->phone }}</td>
+                                        <td>{{ $row->user->email }}</td>
+                                        <td>{{ $row->user->role }}</td>
 
                                         <td>
                                             <button class="btn bg-success btn-edit" data-toggle="modal"
@@ -108,7 +121,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('siswa-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -121,14 +134,14 @@
                             </div>
                             <div class="form-group">
                                 <label for="nama">Nama</label>
-                                <input type="text" name="nama" id="nama" class="form-control" required>
+                                <input type="text" name="name" id="name" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="kelas">Kelas</label>
-                                <select name="kelas" id="kelas" class="form-control" required>
+                                <select name="id_kelas" id="kelas" class="form-control" required>
                                     <option value="">Pilih Kelas</option>
-                                    @foreach ((['X','XI','XII']) as $kelas)
-                                    <option value=" {{ $kelas }}">{{ $kelas }}</option>
+                                    @foreach ($kelas as $kelas_item)
+                                    <option value="{{ $kelas_item->id }}">{{ $kelas_item->tingkat }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -180,10 +193,26 @@
                                 <textarea name="alamat" id="alamat" class="form-control" rows="3" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="phone">No Telpon</label>
+                                <label for="phone">No Telepon</label>
                                 <input type="text" name="phone" id="phone" class="form-control" required>
                             </div>
-
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" name="email" id="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="role">Sebagai</label>
+                                <select name="role" id="role" class="form-control" required>
+                                    <option value="">Pilih Role user</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="guru">Guru</option>
+                                    <option value="siswa">Siswa</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

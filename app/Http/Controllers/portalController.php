@@ -11,68 +11,109 @@ class portalController extends Controller
      */
     public function index()
     {
-        return view ('home-page',[
+        return view('portal.home-page', [
             'ttile' => 'Home'
         ]);
     }
+    public function siswa()
+    {
+        return view('portal.siswa-page', [
+            'ttile' => 'Siswa'
+        ]);
+    }
 
-    public function album() {
-        return view ('album-page',[
-            'title'=>'album'
-        ]);
-        
-    }
-    public function alumni(){
-        return view ('data-alumni-page',[
-            'title'=>'Data alumni'
+    public function album()
+    {
+        return view('portal.album-page', [
+            'title' => 'album'
         ]);
     }
-    public function berita(){
-        return view('berita-page',[
-            'title'=>'Data Berita'
+    public function alumni()
+    {
+        return view('portal.data-alumni-page', [
+            'title' => 'Data alumni'
         ]);
     }
-    public function sejarah(){
-        return view ('sejarah-page',[
-            'title'=>'Halaman Sejarah'
+    public function berita()
+    {
+        return view('portal.berita-page', [
+            'title' => 'Data Berita'
         ]);
     }
-public function visi(){
-    return view('visi-page',[
-        'title'=>'Halaman sejarah'
-    ]);
-}
-public function struktur_organisasi(){
-        return view('struktur-organisasi-page', [
+    public function sejarah()
+    {
+        return view('portal.sejarah-page', [
+            'title' => 'Halaman Sejarah'
+        ]);
+    }
+    public function visi()
+    {
+        return view('portal.visi-page', [
+            'title' => 'Halaman sejarah'
+        ]);
+    }
+    public function struktur_organisasi()
+    {
+        return view('portal.struktur-organisasi-page', [
             'title' => 'Halaman struktur organisasi'
         ]);
-}
-public function tendik(){
-    return view('tendik-page',[
-        'title'=>'halaman tenaga pendidik'
-    ]);
-}
-public function program(){
-        return view('program-page', [
+    }
+    public function tendik()
+    {
+        return view('portal.tendik-page', [
+            'title' => 'halaman tenaga pendidik'
+        ]);
+    }
+    public function program()
+    {
+        return view('portal.program-page', [
             'title' => 'halaman program sekolah'
         ]);
-}
+    }
 
-public function article_berjualan(){
-        return view('article-berjualan-page', [
+    public function article_berjualan()
+    {
+        return view('portal.article-berjualan-page', [
             'title' => 'Article berjualan'
         ]);
-}
-public function article_marketing(){
-        return view('article-marketing-page', [
+    }
+    public function article_marketing()
+    {
+        return view('portal.article-marketing-page', [
             'title' => 'Article marketing'
         ]);
-}
-public function article_bisnis(){
-        return view('article-bisnis-page', [
+    }
+    public function article_bisnis()
+    {
+        return view('portal.article-bisnis-page', [
             'title' => 'Article bisnis'
         ]);
-}
+    }
+
+    public function keg_uks()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan Unit Kegiatan Sekolah'
+            ];
+        return view('portal.keg-uks-page', $data);
+    }
+    public function keg_osis()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan OSIS'
+            ];
+        return view('portal.keg-osis-page', $data);
+    }
+    public function keg_pramuka()
+    {
+        $data =
+            [
+                'title' => 'Kegiatan Pramuka'
+            ];
+        return view('portal.keg-pramuka-page', $data);
+    }
 
 
 
