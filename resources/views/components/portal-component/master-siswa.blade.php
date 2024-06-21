@@ -31,28 +31,35 @@
                     </div>
                     <div style="overflow-x:auto; overflow-y:auto;">
                         <div class="card-body">
+                            {{-- tabel mata pelajaran dashboard admin --}}
 
                             <table id="example" class="display table-hover text-xs" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Kategori</th>
-                                        <th>gambar</th>
-                                        <th>Konten</th>
+                                        <th>foto</th>
+                                        <th>NIS</th>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>tanggal lahir</th>
+                                        <th>Alamat</th>
                                         <th>aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($profil))
-                                    @foreach ($profil as $row)
+                                    @if(!empty($siswa))
+                                    @foreach ($siswa as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->kategori }}</td>
                                         <td>
-                                            <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
+                                            <img src="{{ asset('assets/img/siswa/' . $row->gambar) }}"
                                                 style="width: 50px; height: auto;" class="img-fluid">
                                         </td>
-                                        <td>{{ $row->konten }}</td>
+                                        <td>{{ $row->nis }}</td>
+                                        <td>{{ $row->nama }}</td>
+                                        <td>{{ $row->kelas }}</td>
+                                        <td>{{ $row->tanggal_lahir }}</td>
+                                        <td>{{ $row->alamat }}</td>
                                         <td>
                                             <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
                                                 data-target="#modal-update_{{ $row->id }}"><i
@@ -64,7 +71,7 @@
                                     </tr>
                                     @endforeach
                                     @else
-                                    <p>tidak ada data</p>
+                                    <p>tidak ada data siswa</p>
                                     @endif
                                 </tbody>
                             </table>
@@ -81,32 +88,48 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data</h4>
+                    <h4 class="modal-title">Tambah Data Siswa</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data-siswa-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
+                                required value="{{old('file')}}">
                         </div>
                         <div class="form-group">
-                            <label for="kategori">Tambah Data Untuk</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <option value="">Pilih untuk </option>
-                                @foreach ((['sejarah','program_sekolah']) as $row )
-                                <option value="{{ $row }}">{{ $row }}</option>
+                            <label for="nis">nis</label>
+                            <input type="text" name="nis" id="nis" class="form-control" placeholder="Enter nis" required
+                                value="{{old('nis')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter nama"
+                                required value="{{old('nama')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">tanggal_lahir</label>
+                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                                placeholder="Enter tanggal " required value="{{old('tanggal_la" hir')}}>
+                        </div>
+                        <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <select class="form-control" name="kelas">
+                                <option>Pilih Kelas</option>
+                                @foreach (['X','Xi','XII'] as $kls )
+                                <option value="{{ $kls }}">{{$kls}}</option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
-                            <label for="konten">Isi Konten</label>
-                            <textarea name="konten" id="konten" class="form-control" cols="30" rows="10" required
-                                placeholder="Enter Isi Kontent"></textarea>
+                            <label for="alamat">Alamat</label>
+                            <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" required
+                                value="{{old('alamat')}}" placeholder="Enter Alamat"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                     </form>
@@ -114,7 +137,7 @@
             </div>
         </div>
     </div>
-    @foreach ($profil as $row)
+    @foreach ($siswa as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
@@ -126,60 +149,72 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-update', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-siswa-update', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
-                            @if ($row->gambar)
-                            <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
-                            @endif
+                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
+                                value="{{old('file')}}">
+
                         </div>
                         <div class="form-group">
-                            <label for="kategori">Data untuk :</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <option value="{{ $row->kategori }}" selected>{{ $row->kategori }}</option>
-                                @foreach (['sejarah', 'program_sekolah'] as $value)
-                                <option value="{{ $value }}">{{ $value }}</option>
+                            <label for="nis">nis</label>
+                            <input type="text" name="nis" id="nis" class="form-control" placeholder="Enter nis" required
+                                value="{{$row->nis}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter nama"
+                                required value="{{$row->nama}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">tanggal_lahir</label>
+                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                                placeholder="Enter tanggal " required value="{{ $row->tanggal_lahir }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="kelas">Kelas</label>
+                            <select class="form-control" name="kelas">
+                                <option>{{$row->kelas}}</option>
+                                @foreach (['X','Xi','XII'] as $kls )
+                                <option value="{{ $kls }}">{{$kls}}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="konten">Isi Konten</label>
-                            <textarea name="konten" id="konten" cols="30" rows="10" class="form-control" required
-                                placeholder="Enter Isi Konten">{{ $row->konten }}</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </form>
 
+                        <div class="form-group">
+                            <label for="alamat">Alamat</label>
+                            <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" required
+                                value="{{old('alamat')}}" placeholder="Enter Alamat">{{ $row->alamat }}</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tambah siswa</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
     {{-- Modal delete --}}
-    @foreach ($profil as $row)
+    @foreach ($siswa as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus data</h4>
+                    <h4 class="modal-title">Hapus siswan</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-delete', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-siswa-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus Data Ini?</p>
-                            <h5>Kategori</h5>
-                            <h6>"<i>{{ $row->kategori }}</i>"</h6>
+                            <p>Apakah Anda yakin ingin menghapus siswa Ini?</p>
+                            <h5>Nama siswa</h5>
+                            <h6>"<i>{{ $row->nama }}</i>"</h6>
                             <input type="hidden" name="id" id="delete_subject_id">
                         </div>
                         <div class="modal-footer">

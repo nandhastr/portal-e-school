@@ -57,13 +57,13 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-pengumuman" class="nav-link {{ request()->is('data-pengumuman') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Pengumuman</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-siswa" class="nav-link {{ request()->is('data-siswa') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Siswa</p>
         </a>

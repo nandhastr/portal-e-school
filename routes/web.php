@@ -15,6 +15,8 @@ use App\Http\Controllers\ElearningController;
 use App\Http\Controllers\CrudRuanganController;
 use App\Http\Controllers\CrudPenghargaanController;
 use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
+use App\Http\Controllers\CrudPortal\CrudPengumumanController;
+use App\Http\Controllers\CrudPortal\SiswaCrudController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -48,7 +50,6 @@ Route::get('keg-pramuka', [portalController::class, 'keg_pramuka'])->name('keg-p
 
 // portal  dashboardadmin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth']);
-Route::get('/data-pengumuman-page', [AdminController::class, 'pengumuman_page'])->name('data-pengumuman-page');
 
 
 // crud portal sekolah
@@ -56,6 +57,17 @@ Route::get('/data-profil-sekolah', [CrudProfileSekolahController::class, 'index'
 Route::post('/data-profil-store', [CrudProfileSekolahController::class, 'store'])->name('data-profil-store');
 Route::post('/data-profil-update/{id}', [CrudProfileSekolahController::class, 'update'])->name('data-profil-update');
 Route::post('/data-profil-delete/{id}', [CrudProfileSekolahController::class, 'destroy'])->name('data-profil-delete');
+// crud pengumuman
+Route::get('/data-pengumuman', [CrudPengumumanController::class, 'index'])->name('data-pengumuman');
+Route::post('/data-pengumuman-store', [CrudPengumumanController::class, 'store'])->name('data-pengumuman-store');
+Route::post('/data-pengumuman-update/{id}', [CrudPengumumanController::class, 'update'])->name('data-pengumuman-update');
+Route::post('/data-pengumuman-delete/{id}', [CrudPengumumanController::class, 'destroy'])->name('data-pengumuman-delete');
+
+// crud data siswa
+Route::get('/data-siswa', [SiswaCrudController::class, 'index'])->name('data-siswa');
+Route::post('/data-siswa-store', [SiswaCrudController::class, 'store'])->name('data-siswa-store');
+Route::post('/data-siswa-update/{id}', [SiswaCrudController::class, 'update'])->name('data-siswa-update');
+Route::post('/data-siswa-delete/{id}', [SiswaCrudController::class, 'destroy'])->name('data-siswa-delete');
 
 
 
