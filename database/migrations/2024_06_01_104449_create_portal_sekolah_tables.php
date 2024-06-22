@@ -81,9 +81,7 @@ class CreatePortalSekolahTables extends Migration
         // Membuat tabel alumni
         Schema::create('tbl_alumni', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
             $table->year('tahun_lulus');
-            $table->string('kontak')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
         });
@@ -112,36 +110,39 @@ class CreatePortalSekolahTables extends Migration
         // Membuat tabel artikel
         Schema::create('tbl_artikel', function (Blueprint $table) {
             $table->id();
+            $table->string('gambar')->nullable();
+            $table->enum('jenis', ['artikel', 'berita']);
             $table->string('judul');
             $table->text('isi');
-            $table->string('gambar')->nullable();
-            $table->date('tanggal');
-            $table->timestamps();
-        });
-
-        // Membuat tabel berita
-        Schema::create('tbl_berita', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
-            $table->text('isi');
-            $table->string('gambar')->nullable();
             $table->date('tanggal');
             $table->timestamps();
         });
         Schema::create('tbl_struktur_org', function (Blueprint $table) {
             $table->id();
-            $table->enum('jabatan', ['kepala_sekolah', 'wakil_kepala_sekolah',  'guru', 'karyawan']);
+            $table->foreignId('id_guru')->constrained('tbl_guru')->onDelete('cascade');
+            $table->string('jabatan')->nullable();
             $table->string('email')->nullable();
             $table->string('telepon')->nullable();
-            $table->string('gambar')->nullable();
             $table->timestamps();
-            $table->foreignId('id_guru')->constrained('tbl_guru')->onDelete('cascade');
+        });
+        Schema::create('tbl_komponen', function (Blueprint $table) {
+            $table->id();
+            $table->string('instansi')->nullable();
+            $table->string('akreditas')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('email')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('gambar_logo')->nullable();
+            $table->string('link_fb')->nullable();
+            $table->string('link_ig')->nullable();
+            $table->string('link_yt')->nullable();
+            $table->string('link_tw')->nullable();
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('tbl_berita');
         Schema::dropIfExists('tbl_artikel');
         Schema::dropIfExists('tbl_kegiatan');
         Schema::dropIfExists('tbl_galeri_foto');
@@ -153,5 +154,6 @@ class CreatePortalSekolahTables extends Migration
         Schema::dropIfExists('tbl_profil_sekolah');
         Schema::dropIfExists('tbl_pengumuman');
         Schema::dropIfExists('tbl_struktur_org');
+        Schema::dropIfExists('tbl_komponen');
     }
 }

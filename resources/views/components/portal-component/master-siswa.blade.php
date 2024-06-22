@@ -213,9 +213,36 @@
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus siswa Ini?</p>
-                            <h5>Nama siswa</h5>
-                            <h6>"<i>{{ $row->nama }}</i>"</h6>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <h5>Detail data</h5>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Foto Siswa</th>
+                                    <td>
+                                        <img src="{{ asset('assets/img/siswa/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>NIS</th>
+                                    <td>{{ $row->nis }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Nama</th>
+                                    <td>{{ $row->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <th>kelas</th>
+                                    <td>{{ $row->kelas }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Tanggal lahir</th>
+                                    <td>{{ $row->tanggal_lahir }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Alamat</th>
+                                    <td>{{ $row->alamat }}</td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

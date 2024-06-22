@@ -31,28 +31,31 @@
                     </div>
                     <div style="overflow-x:auto; overflow-y:auto;">
                         <div class="card-body">
+                            {{-- tabel mata pelajaran dashboard admin --}}
 
                             <table id="example" class="display table-hover text-xs" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Kategori</th>
-                                        <th>gambar</th>
-                                        <th>Konten</th>
+                                        <th>foto</th>
+                                        <th>Nama</th>
+                                        <th>Prestasi</th>
+                                        <th>Tahun</th>
                                         <th>aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if(!empty($profil))
-                                    @foreach ($profil as $row)
+                                    @if(!empty($prestasi))
+                                    @foreach ($prestasi as $row)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->kategori }}</td>
                                         <td>
-                                            <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
+                                            <img src="{{ asset('assets/img/siswa/' . $row->siswa->gambar) }}"
                                                 style="width: 50px; height: auto;" class="img-fluid">
                                         </td>
-                                        <td>{{ $row->konten }}</td>
+                                        <td>{{ $row->siswa->nama }}</td>
+                                        <td>{{ $row->prestasi }}</td>
+                                        <td>{{ $row->tahun }}</td>
                                         <td>
                                             <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
                                                 data-target="#modal-update_{{ $row->id }}"><i
@@ -64,7 +67,7 @@
                                     </tr>
                                     @endforeach
                                     @else
-                                    <p>tidak ada data</p>
+                                    <p>tidak ada data prestasi</p>
                                     @endif
                                 </tbody>
                             </table>
@@ -81,32 +84,33 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data</h4>
+                    <h4 class="modal-title">Tambah Data prestasi</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data-prestasi-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="kategori">Tambah Data Untuk</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <option value="">Pilih untuk </option>
-                                @foreach ((['sejarah','program_sekolah']) as $row )
-                                <option value="{{ $row }}">{{ $row }}</option>
+                            <label for="siswa">Nama Siswa</label>
+                            <select class="form-control" name="siswa_id">
+                                <option>Pilih Nama Siswa</option>
+                                @foreach ($siswa as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="konten">Isi Konten</label>
-                            <textarea name="konten" id="konten" class="form-control" cols="30" rows="10" required
-                                placeholder="Enter Isi Kontent"></textarea>
+                            <label for="tahun">Tahun</label>
+                            <input type="YEAR" name="tahun" id="tahun" class="form-control"
+                                placeholder="Enter tahun. example :2001" required value="{{old('tahun')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="prestasi">Prestasi</label>
+                            <input type="text" name="prestasi" id="prestasi" class="form-control"
+                                placeholder="Enter presatsi " required value="{{old('prestasi')}}">
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah Data</button>
                     </form>
@@ -114,7 +118,7 @@
             </div>
         </div>
     </div>
-    @foreach ($profil as $row)
+    @foreach ($prestasi as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
@@ -126,54 +130,51 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-update', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-prestasi-update',['id'=>$row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
-                            @if ($row->gambar)
-                            <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            <label for="kategori">Data untuk :</label>
-                            <select name="kategori" id="kategori" class="form-control">
-                                <option value="{{ $row->kategori }}" selected>{{ $row->kategori }}</option>
-                                @foreach (['sejarah', 'program_sekolah'] as $value)
-                                <option value="{{ $value }}">{{ $value }}</option>
+                            <label for="siswa">Nama Siswa</label>
+                            <select class="form-control" name="siswa_id">
+                                <option>Pilih Nama Siswa</option>
+                                @foreach ($siswa as $sw)
+                                <option value="{{ $sw->id }}" @if ($row->siswa_id == $sw->id) selected @endif>{{
+                                    $sw->nama }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="konten">Isi Konten</label>
-                            <textarea name="konten" id="konten" cols="30" rows="10" class="form-control" required
-                                placeholder="Enter Isi Konten">{{ $row->konten }}</textarea>
+                            <label for="tahun">Tahun</label>
+                            <input type="YEAR" name="tahun" id="tahun" class="form-control"
+                                placeholder="Enter tahun. example :2001" required value="{{$row->tahun}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <div class="form-group">
+                            <label for="prestasi">Prestasi</label>
+                            <input type="text" name="prestasi" id="prestasi" class="form-control"
+                                placeholder="Enter presatsi " required value="{{$row->prestasi}}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ubah Data</button>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
     {{-- Modal delete --}}
-    @foreach ($profil as $row)
+    @foreach ($prestasi as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus data</h4>
+                    <h4 class="modal-title">Hapus prestasin</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-profil-delete', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-prestasi-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
@@ -181,17 +182,17 @@
                             <h5>Detail data</h5>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>gambar</th>
-                                    <td><img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
+                                    <th>Foto Siswa</th>
+                                    <td> <img src="{{ asset('assets/img/siswa/' . $row->siswa->gambar) }}"
                                             style="width: 50px; height: auto;" class="img-fluid"></td>
                                 </tr>
                                 <tr>
-                                    <th>Kategori</th>
-                                    <td>{{ $row->kategori }}</td>
+                                    <th>Nama</th>
+                                    <td>{{ $row->siswa->nama }}</td>
                                 </tr>
                                 <tr>
-                                    <th>konten</th>
-                                    <td>{{ $row->konten }}</td>
+                                    <th>Prestasi</th>
+                                    <td>{{ $row->prestasi }}</td>
                                 </tr>
                             </table>
                         </div>

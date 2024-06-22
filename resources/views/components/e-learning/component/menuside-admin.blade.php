@@ -51,6 +51,12 @@
 {{-- sidebar portal --}}
 <ul class="nav nav-treeview">
     <li class="nav-item">
+        <a href="/data-user" class="nav-link {{ request()->is('data-user') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Admin User</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="/data-profil-sekolah" class="nav-link {{ request()->is('data-profil-sekolah') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Porfile Sekolah</p>
@@ -63,43 +69,67 @@
         </a>
     </li>
     <li class="nav-item">
+        <a href="/data-artikel" class="nav-link {{ request()->is('data-artikel') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Artikel/berita</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-guru" class="nav-link {{ request()->is('data-guru') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Guru</p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="/data-siswa" class="nav-link {{ request()->is('data-siswa') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Siswa</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-alumni" class="nav-link {{ request()->is('data-alumni') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
-            <p>Master Tendik</p>
+            <p>Master Alumni</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-karyawan" class="nav-link {{ request()->is('data-karyawan') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master karyawan</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-struktur" class="nav-link {{ request()->is('data-struktur') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Struktur Organisasi</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-visimisi" class="nav-link {{ request()->is('data-visimisi') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Visi & Misi</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Master Direktori</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-galeri" class="nav-link {{ request()->is('data-galeri') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Galeri</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-kegiatan" class="nav-link {{ request()->is('data-kegiatan') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Kegiatan</p>
         </a>
     </li>
     <li class="nav-item">
-        <a href="/data-pengumuman-page" class="nav-link {{ request()->is('data-pengumuman-page') ? 'active' : '' }}">
+        <a href="/data-prestasi" class="nav-link {{ request()->is('data-prestasi') ? 'active' : '' }}">
+            <i class="far fa-circle nav-icon"></i>
+            <p>Master Siswa Berprestasi</p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="/data-komponenSekolah" class="nav-link {{ request()->is('data-komponenSekolah') ? 'active' : '' }}">
             <i class="far fa-circle nav-icon"></i>
             <p>Master Komponen Sekolah</p>
         </a>

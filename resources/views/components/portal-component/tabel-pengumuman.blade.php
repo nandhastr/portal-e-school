@@ -157,7 +157,7 @@
                             <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required
                                 placeholder="Enter Isi Pengumuman">{{$row->isi}}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah Pengumuman</button>
+                        <button type="submit" class="btn btn-primary">Ubah Pengumuman</button>
                     </form>
                 </div>
             </div>
@@ -182,9 +182,24 @@
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Pengumuman Ini?</p>
-                            <h5>Judul Pengumuman</h5>
-                            <h6>"<i>{{ $row->judul }}</i>"</h6>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <h5>Detail Data</h5>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Gambar</th>
+                                    <td>
+                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Judul Pengumuman</th>
+                                    <td>{{ $row->judul }}</td>
+                                </tr>
+                                <tr>
+                                    <th>isi Pengumuman</th>
+                                    <td>{{ $row->isi }}</td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
