@@ -1,4 +1,4 @@
-<x-e-learning.master.layout :title="$title" :user="$user">
+<x-e-learning.master.layout :title="$title" :user="$user" :komponen="$komponen">
     {{-- box small untuk e-learning --}}
     {{--
     <x-e-learning.component.box-small :kelas="$kelas" :user="$user" :penghargaan="$penghargaan" :siswa="$siswa"

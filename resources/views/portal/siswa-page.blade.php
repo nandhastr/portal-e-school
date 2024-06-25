@@ -11,63 +11,29 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+            @foreach ($prestasi as $win)
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card p-3" style="width: 18rem;">
+                    <img src="{{ asset('assets/img/siswa/' . $win->siswa->gambar) }}" style=" height: auto;"
+                        class="img-fluid">
+                    <hr>
                     <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
+                        <h5>{{ $win->prestasi }} - {{$win->tahun}}</h5>
                         <p class="card-text">
                         <div class="col-12">
 
-                            Nama : Muhammad Fajar
+                            Nama : {{ $win->siswa->nama }}
                         </div>
                         <div class="col-12">
 
-                            Kelas : XII RPL 1
+                            Kelas : {{ $win->siswa->kelas }}
                         </div>
 
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
-                        <p class="card-text">
-                        <div class="col-12">
-
-                            Nama : Muhammad Fajar
-                        </div>
-                        <div class="col-12">
-
-                            Kelas : XII RPL 1
-                        </div>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
-                        <p class="card-text">
-                        <div class="col-12">
-
-                            Nama : Muhammad Fajar
-                        </div>
-                        <div class="col-12">
-
-                            Kelas : XII RPL 1
-                        </div>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         {{-- end row --}}
     </div>

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\PortalModel\Komponen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -11,78 +15,77 @@ class UserController extends Controller
      */
     public function index()
     {
-         $user = Auth::user();
+        $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data user',
-            'user'=> $user,
-            'user' => User::all(),
+            'user' => $user,
+            'level' => User::where('role', 'admin')->get(),
         ];
         return view('portal.admin.data-user-page', $data);
     }
 
-    
 
     public function store(Request $request)
     {
         // dd($request->all());
-       try {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'role' => 'required',
-            'password' => 'required',
-        ]);
-        // simpan ke db
-        $user = new User;
-        
-        $user->nama = $request->nama;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->password = $request->password;
+        try {
+            $request->validate([
+                 'name' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'role' => 'required',
+                'password' => 'required',
+            ]);
+            // simpan ke db
+            $user = new User;
 
-        // dd($user); 
-    // Save  ke database
-    $user->save();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->password = Hash::make($request->password);
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+            // dd($user); 
+            // Save  ke database
+            $user->save();
 
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
-    }
-
+            return redirect()->back()->with('success', 'Data berhasil disimpan');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-     public function update(Request $request, string $id)
+    public function update(Request $request, string $id)
     {
-    //    dd($request->all());
-      try {
-        $request->validate([
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-             'nis' => 'required',
-            'nama' => 'required',
-            'kelas' => 'required',
-            'tanggal_lahir' => 'required|date',
-            'alamat' => 'required',
-        ]);
+        //    dd($request->all());
+        try {
+            $request->validate([
+                'name' => 'required',
+                'email' => 'nullable|email',
+                'role' => 'required',
+                'password' => 'nullable',
+            ]);
 
-        // Temukan record berdasarkan ID
-        $user = User::findOrFail($id);
-        // Perbarui data lainnya
-         $user->nama = $request->nama;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->password = $request->password;
+            // Temukan record berdasarkan ID
+            $user = User::findOrFail($id);
+            // Perbarui data lainnya
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+           
+            // dd($user);
+             // update password 
+            if ($request->filled('password')) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
 
-        $user->save();
-
-        return redirect()->back()->with('success', 'Data berhasil diperbarui');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
-    }
-
+            return redirect()->back()->with('success', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal memperbarui data: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -91,15 +94,14 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         try {
-        // Temukan record berdasarkan ID
-        $user = User::findOrFail($id);
-        // Hapus record dari database
-        $user->delete();
+            // Temukan record berdasarkan ID
+            $user = User::findOrFail($id);
+            // Hapus record dari database
+            $user->delete();
 
-        return redirect()->back()->with('success', 'Data berhasil dihapus');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
-    };
+            return redirect()->back()->with('success', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
+        };
     }
 }
-

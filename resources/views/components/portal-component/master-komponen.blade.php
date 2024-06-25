@@ -29,65 +29,62 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Logo</th>
-                                        <th>Nama Instansi Pendidikan</th>
-                                        <th>terakreditas</th>
-                                        <th>Alamat</th>
-                                        <th>Email</th>
-                                        <th>Telepon</th>
-                                        <th>Facebook</th>
-                                        <th>Instagram</th>
-                                        <th>Youtube</th>
-                                        <th>Twitter</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($komponen))
-                                    @foreach ($komponen as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('assets/img/komponen/' . $row->gambar_logo) }}"
-                                                style="width: 50px; height: auto;" class="img-fluid">
-                                        </td>
-                                        <td>{{ $row->instansi }}</td>
-                                        <td>{{ $row->akreditas }}</td>
-                                        <td>{{ $row->alamat }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->telepon }}</td>
-                                        <td><a href="{{ $row->link_fb }}">{{ $row->link_fb }}</a></td>
-                                        <td><a href="{{ $row->link_ig }}">{{ $row->link_ig }}</a></td>
-                                        <td><a href="{{ $row->link_yt }}">{{ $row->link_yt }}</a></td>
-                                        <td><a href="{{ $row->link_tw }}">{{ $row->link_tw }}</a></td>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Logo</th>
+                                    <th>Nama Instansi Pendidikan</th>
+                                    <th>terakreditas</th>
+                                    <th>Alamat</th>
+                                    <th>Email</th>
+                                    <th>Telepon</th>
+                                    <th>Facebook</th>
+                                    <th>Instagram</th>
+                                    <th>Youtube</th>
+                                    <th>Twitter</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($komponen))
+                                @foreach ($komponen as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/komponen/' . $row->gambar_logo) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->instansi }}</td>
+                                    <td>{{ $row->akreditas }}</td>
+                                    <td>{{ $row->alamat }}</td>
+                                    <td>{{ $row->email }}</td>
+                                    <td>{{ $row->telepon }}</td>
+                                    <td><a href="{{ $row->link_fb }}">{{ $row->link_fb }}</a></td>
+                                    <td><a href="{{ $row->link_ig }}">{{ $row->link_ig }}</a></td>
+                                    <td><a href="{{ $row->link_yt }}">{{ $row->link_yt }}</a></td>
+                                    <td><a href="{{ $row->link_tw }}">{{ $row->link_tw }}</a></td>
 
-                                        <td>
-                                            <small>
-                                                <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                    data-target="#modal-update_{{ $row->id }}"><i
-                                                        class="fa-regular fa-pen-to-square"></i></a>
-                                                <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                    data-target="#modal-delete_{{ $row->id }}"><i
-                                                        class="fa-regular fa-trash-can"></i></a>
-                                            </small>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada data komponen</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                                    <td>
+                                        <small>
+                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                                data-target="#modal-update_{{ $row->id }}"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a>
+                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                                data-target="#modal-delete_{{ $row->id }}"><i
+                                                    class="fa-regular fa-trash-can"></i></a>
+                                        </small>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada data komponen</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -11,21 +11,22 @@ use Illuminate\Support\Facades\Route;
 // use App\Http\Controllers\ElearningController;
 // use App\Http\Controllers\CrudRuanganController;
 // use App\Http\Controllers\CrudPenghargaanController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\portalController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
-use App\Http\Controllers\CrudPortal\CrudPengumumanController;
-use App\Http\Controllers\CrudPortal\SiswaCrudController;
 use App\Http\Controllers\CrudPortal\GuruCrudController;
-use App\Http\Controllers\CrudPortal\KaryawanCrudController;
-use App\Http\Controllers\CrudPortal\VisimisiCrudController;
-use App\Http\Controllers\CrudPortal\GaleriCrudController;
-use App\Http\Controllers\CrudPortal\PrestasiCrudController;
-use App\Http\Controllers\CrudPortal\CrudStrukturController;
-use App\Http\Controllers\CrudPortal\KomponenCrudController;
+use App\Http\Controllers\CrudPortal\SiswaCrudController;
 use App\Http\Controllers\CrudPortal\AlumniCrudController;
+use App\Http\Controllers\CrudPortal\GaleriCrudController;
 use App\Http\Controllers\CrudPortal\ArtikelCrudController;
+use App\Http\Controllers\CrudPortal\CrudStrukturController;
+use App\Http\Controllers\CrudPortal\KaryawanCrudController;
+use App\Http\Controllers\CrudPortal\KomponenCrudController;
+use App\Http\Controllers\CrudPortal\PrestasiCrudController;
+use App\Http\Controllers\CrudPortal\VisimisiCrudController;
+use App\Http\Controllers\CrudPortal\CrudPengumumanController;
+use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -43,7 +44,7 @@ Route::get('/siswa', [portalController::class, 'siswa'])->name('siswa');
 Route::get('/album', [portalController::class, 'album'])->name('album');
 Route::get('/alumni', [portalController::class, 'alumni'])->name('alumni');
 Route::get('/berita', [portalController::class, 'berita'])->name('berita');
-Route::get('/sejarah', [portalController::class, 'sejarah'])->name('sejarah');
+Route::get('/about', [portalController::class, 'about'])->name('about');
 Route::get('/visi', [portalController::class, 'visi'])->name('visi');
 Route::get('/struktur-organisasi', [portalController::class, 'struktur_organisasi'])->name('struktur-organisasi');
 Route::get('/tendik', [portalController::class, 'tendik'])->name('tendik');
@@ -57,9 +58,13 @@ Route::get('keg-osis', [portalController::class, 'keg_osis'])->name('keg-osis');
 Route::get('keg-pramuka', [portalController::class, 'keg_pramuka'])->name('keg-pramuka');
 
 
-// portal  dashboardadmin
-Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware(['auth']);
 
+Route::middleware('auth','role:admin')->group(function (){
+});
+
+
+// portal  dashboardadmin
+Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('auth');
 
 // crud portal sekolah
 Route::get('/data-user', [UserController::class, 'index'])->name('data-user');
@@ -100,6 +105,10 @@ Route::get('/data-alumni', [AlumniCrudController::class, 'index'])->name('data-a
 Route::post('/data-alumni-store', [AlumniCrudController::class, 'store'])->name('data-alumni-store');
 Route::post('/data-alumni-update/{id}', [AlumniCrudController::class, 'update'])->name('data-alumni-update');
 Route::post('/data-alumni-delete/{id}', [AlumniCrudController::class, 'destroy'])->name('data-alumni-delete');
+
+// filter alumni berdasarkan tahun
+Route::post('/filter-data-alumni/{year}', [AlumniCrudController::class, 'filterByYear'])->name('filter-data-alumni');
+
 
 // crud karyawan
 Route::get('/data-karyawan', [KaryawanCrudController::class, 'index'])->name('data-karyawan');

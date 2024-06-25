@@ -29,43 +29,40 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Visi</th>
-                                        <th>Isi</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($visi))
-                                    @foreach ($visi as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->kategori }}</td>
-                                        <td style="white-space: pre-wrap;">{{ $row->konten }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada visi</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Visi</th>
+                                    <th>Isi</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($visi))
+                                @foreach ($visi as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $row->kategori }}</td>
+                                    <td style="white-space: pre-wrap;">{{ $row->konten }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada visi</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -120,7 +117,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-visimisi-store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data-visimisi-update', ['id' => $row->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="kategori">Visi/Misi</label>
@@ -165,7 +163,7 @@
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Data Ini?</p>
                             <h5>Detail Data</h5>
-                             <table class="table table-bordered">
+                            <table class="table table-bordered">
                                 <tr>
                                     <th>Kategori</th>
                                     <td>{{ $row->kategori }}</td>

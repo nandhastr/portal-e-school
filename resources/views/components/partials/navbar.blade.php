@@ -26,7 +26,7 @@
                                 PROFILE
                             </x-nav-link>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/sejarah">Sejarah
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/about">Tentang
                                         Sekolah</a>
                                 </li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2"

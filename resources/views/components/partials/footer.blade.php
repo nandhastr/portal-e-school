@@ -1,3 +1,4 @@
+</div>
 <!-- Control Sidebar -->
 
 {{-- <aside class="control-sidebar control-sidebar-dark w-auto h-auto">
@@ -9,14 +10,14 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-<footer class="mb-0">
+{{-- <footer class="mb-0 " style="margin-top: 6em; margin-bottom:0px;"> --}}
     <!-- To the right -->
     {{-- <div class=" float-right d-none d-sm-inline">
         Anything you want
     </div>
     <!-- Default to the left -->
     <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-    <div class="footer-menu  ">
+    {{-- <div class="footer-menu  ">
         <div class="container-fluid py-2">
             <div class="row m-4 row-footer ">
                 <div class="col col-footer col-md-3  text-light">
@@ -59,17 +60,16 @@
             <hr>
         </div>
     </div>
-</footer>
-{{-- copyright --}}
-<div class="copyright text-center mb-0">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center">Copyright &copy; 2024 <a href="">Nama Sekolah.</p>
+    <div class="copyright text-center mb-0" style="margin-bottom: 0px">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="text-center">Copyright &copy; 2024 <a href="">Nama Sekolah.</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</footer> --}}
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

@@ -3,166 +3,227 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PortalModel\Guru;
+
+use App\Models\PortalModel\Komponen;
+use App\Models\PortalModel\Karyawan;
+use App\Models\PortalModel\Pengumuman;
+use App\Models\PortalModel\Struktur_org;
+use App\Models\PortalModel\ProfilSekolah;
+use App\Models\PortalModel\SiswaBerprestasi;
+use App\Models\PortalModel\VisiMisi;
+use App\Models\PortalModel\Alumni;
+use App\Models\PortalModel\Galeri;
 
 class portalController extends Controller
 {
     /**
      * Display a listing of the resource.
+     
+     
      */
     public function index()
     {
-        return view('portal.home-page', [
-            'ttile' => 'Home'
-        ]);
+        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(4)->get();
+        $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
+        $data = [
+            'title' => 'Home',
+            'pengumuman_terbaru' => $pengumuman->first(),
+            'pengumuman' => $pengumuman,
+            'komponen' => Komponen::all(),
+            'kepsek' => $guruKepsek,
+        ];
+
+        return view('portal.home-page', $data);
     }
+
+
     public function siswa()
     {
-        return view('portal.siswa-page', [
-            'ttile' => 'Siswa'
-        ]);
+        $prestasi = SiswaBerprestasi::all();
+        $data = [
+            'title' => 'Siswa',
+            'prestasi' => $prestasi,
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.siswa-page', $data);
     }
+
+
 
     public function album()
     {
-        return view('portal.album-page', [
-            'title' => 'album'
-        ]);
+        $album = Galeri::all();
+        $data = [
+            'title' => 'album',
+            'album'=>$album,
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.album-page', $data);
     }
+
+
     public function alumni()
     {
-        return view('portal.data-alumni-page', [
-            'title' => 'Data alumni'
-        ]);
+        $countAlumni = Alumni::count();
+        $data = [
+            'countAlumni'=>$countAlumni,
+            'alumni'=> Alumni::all(),
+            'title' => 'Data alumni',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.data-alumni-page', $data);
     }
+    // filter data alumni by tahun
+    
+    public function filterByYear($year)
+    {
+        $filterAlumni = Alumni::where('tahun_lulus', $year)->get();
+        $countAlumni = Alumni::count();
+        $data = [
+            'countAlumni'=>$countAlumni,
+            'filterAlumni' =>$filterAlumni,
+        ];
+        return view('portal.admin.data-alumni-page',$data);
+    }
+
+
     public function berita()
     {
-        return view('portal.berita-page', [
-            'title' => 'Data Berita'
-        ]);
+        $data = [
+            'title' => 'Data Berita',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.berita-page', $data);
     }
-    public function sejarah()
+
+
+    public function about()
     {
-        return view('portal.sejarah-page', [
-            'title' => 'Halaman Sejarah'
-        ]);
+        $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
+        $about = ProfilSekolah::orderBy('created_at', 'asc')->where('kategori', 'tentang_sekolah')->get();
+        $data = [
+            'about' => $about->first(),
+            'title' => 'Halaman About',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.about-page', $data);
     }
-    public function visi()
-    {
-        return view('portal.visi-page', [
-            'title' => 'Halaman sejarah'
-        ]);
-    }
-    public function struktur_organisasi()
-    {
-        return view('portal.struktur-organisasi-page', [
-            'title' => 'Halaman struktur organisasi'
-        ]);
-    }
-    public function tendik()
-    {
-        return view('portal.tendik-page', [
-            'title' => 'halaman tenaga pendidik'
-        ]);
-    }
+
+
     public function program()
     {
-        return view('portal.program-page', [
-            'title' => 'halaman program sekolah'
-        ]);
+        $program = ProfilSekolah::orderBy('created_at', 'asc')->where('kategori', 'program_sekolah')->get();
+        $data = [
+            'title' => 'halaman program sekolah',
+            'program' => $program->first(),
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.program-page', $data);
     }
+
+    public function visi()
+    {
+        $visi = VisiMisi::where('kategori', 'visi')->get();
+        $misi = VisiMisi::where('kategori', 'misi')->get();
+        $data = [
+            'visi' => $visi,
+            'misi' => $misi,
+            'title' => 'Halaman visi misi',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.visi-page', $data);
+    }
+
+
+    public function struktur_organisasi()
+    {
+        $struktur = Struktur_org::orderBy('created_at', 'asc')->get();
+        $data = [
+            'title' => 'Halaman struktur organisasi',
+            'struktur' => $struktur,
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.struktur-organisasi-page', $data);
+    }
+
+
+
+
+    public function tendik()
+    {
+        $guru = Guru::all();
+        $karyawan = Karyawan::all();
+        $data = [
+            'guru'=>$guru,
+            'karyawan' =>$karyawan,
+            'title' => 'halaman tenaga pendidik',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.tendik-page', $data);
+    }
+
+
+
+
 
     public function article_berjualan()
     {
-        return view('portal.article-berjualan-page', [
-            'title' => 'Article berjualan'
-        ]);
+        $data = [
+            'title' => 'Article berjualan',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.article-berjualan-page', $data);
     }
+
+
     public function article_marketing()
     {
-        return view('portal.article-marketing-page', [
-            'title' => 'Article marketing'
-        ]);
+        $data = [
+            'title' => 'Article marketing',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.article-marketing-page', $data);
     }
+
+
     public function article_bisnis()
     {
-        return view('portal.article-bisnis-page', [
-            'title' => 'Article bisnis'
-        ]);
+        $data = [
+            'title' => 'Article bisnis',
+            'komponen' => Komponen::all(),
+        ];
+        return view('portal.article-bisnis-page', $data);
     }
+
+
 
     public function keg_uks()
     {
-        $data =
-            [
-                'title' => 'Kegiatan Unit Kegiatan Sekolah'
-            ];
+        $data = [
+            'title' => 'Kegiatan Unit Kegiatan Sekolah',
+            'komponen' => Komponen::all(),
+        ];
         return view('portal.keg-uks-page', $data);
     }
+
+
     public function keg_osis()
     {
-        $data =
-            [
-                'title' => 'Kegiatan OSIS'
-            ];
+        $data = [
+            'title' => 'Kegiatan OSIS',
+            'komponen' => Komponen::all(),
+        ];
         return view('portal.keg-osis-page', $data);
     }
+
+
     public function keg_pramuka()
     {
-        $data =
-            [
-                'title' => 'Kegiatan Pramuka'
-            ];
+        $data = [
+            'title' => 'Kegiatan Pramuka',
+            'komponen' => Komponen::all(),
+        ];
         return view('portal.keg-pramuka-page', $data);
-    }
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

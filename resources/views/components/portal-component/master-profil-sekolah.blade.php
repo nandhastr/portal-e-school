@@ -29,47 +29,43 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Kategori</th>
-                                        <th>gambar</th>
-                                        <th>Konten</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($profil))
-                                    @foreach ($profil as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->kategori }}</td>
-                                        <td>
-                                            <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
-                                                style="width: 50px; height: auto;" class="img-fluid">
-                                        </td>
-                                        <td>{{ $row->konten }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada data</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Kategori</th>
+                                    <th>gambar</th>
+                                    <th>Konten</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($profil))
+                                @foreach ($profil as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $row->kategori }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->konten }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada data</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -98,7 +94,7 @@
                             <label for="kategori">Tambah Data Untuk</label>
                             <select name="kategori" id="kategori" class="form-control">
                                 <option value="">Pilih untuk </option>
-                                @foreach ((['sejarah','program_sekolah']) as $row )
+                                @foreach ((['tentang_sekolah','program_sekolah']) as $row )
                                 <option value="{{ $row }}">{{ $row }}</option>
                                 @endforeach
                             </select>
@@ -143,7 +139,7 @@
                             <label for="kategori">Data untuk :</label>
                             <select name="kategori" id="kategori" class="form-control">
                                 <option value="{{ $row->kategori }}" selected>{{ $row->kategori }}</option>
-                                @foreach (['sejarah', 'program_sekolah'] as $value)
+                                @foreach (['tentang_sekolah', 'program_sekolah'] as $value)
                                 <option value="{{ $value }}">{{ $value }}</option>
                                 @endforeach
                             </select>

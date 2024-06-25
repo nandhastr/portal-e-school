@@ -14,7 +14,7 @@
                     <div class="col-auto">
                         <h4 class="text-white fw-bold">SMK PGRI PAMIJAHAN Bogor</h4>
                         <h5 class="text-gold fw-bold">Akreditas "B"</h5>
-                        <span>Jl. suka suka kecamatan aku suka desa suka kamu</span>
+                        <span>Jl. gunung salak Endah desa gunung sari PAMIJAHAN Bogor</span>
                     </div>
                     <div class="col">
                         {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -24,10 +24,13 @@
                         </button> --}}
                         <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
                             <div class="navbar-nav ">
-                                <span class="nav-link text-lg fw-bold"><i class="fa-regular fa-envelope"></i>
-                                    email@gmail.com</span>
+                                <a hre="smkpgripamijahan707@gmail.com
+" class="nav-link text-lg fw-bold"><i class="fa-regular fa-envelope"></i>
+                                    smkpgripamijahan707@gmail.com
+</a>
                                 <span class="nav-link text-lg fw-bold"><i class="fa-solid fa-phone"></i>
-                                    +6241434234</span>
+                                    085719938765
+</span>
                             </div>
                         </div>
                     </div>

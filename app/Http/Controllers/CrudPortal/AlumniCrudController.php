@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\Alumni;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class AlumniCrudController extends Controller
     {
          $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data alumni',
             'user'=> $user,
             'alumni' => Alumni::all(),
@@ -124,4 +126,6 @@ class AlumniCrudController extends Controller
         return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
     };
     }
+
+  
 }

@@ -14,24 +14,23 @@
                                 <th>Nama</th>
                             </tr>
                         </thead>
+
+                        @if (!empty($struktur))
+                        @foreach ($struktur as $row)
                         <tbody>
                             <tr>
                                 <td class="text-center">
-                                    <img src="{{ asset('assets/img/user1.jpg') }}" alt="Foto 1" class="card-img-top "
-                                        style="width: 5em;">
+                                    <img src="{{ asset('assets/img/guru/' . $row->guru->gambar) }}" alt="Foto 1"
+                                        class="card-img-top " style="width: 5em;">
                                 </td>
-                                <td>Kepala Sekolah</td>
-                                <td>Nama Kepala Sekolah</td>
+                                <td>{{ $row->jabatan }}</td>
+                                <td>{{ $row->guru->nama }}</td>
                             </tr>
-                            <tr>
-                                <td class="text-center">
-                                    <img src="path_to_photo2.jpg" alt="Foto 2" class="card-img-top">
-                                </td>
-                                <td>Wakil Kepala Sekolah</td>
-                                <td>Nama Wakil Kepala Sekolah</td>
-                            </tr>
-                            <!-- Tambahkan baris lainnya sesuai kebutuhan -->
                         </tbody>
+                        @endforeach
+                        @else
+                        Tidak ada Data
+                        @endif
                     </table>
                 </div>
             </div>

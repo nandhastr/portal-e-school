@@ -83,15 +83,15 @@ class KomponenCrudController extends Controller
       try {
         $request->validate([
             'gambar_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-             'instansi' => 'required',
-            'akreditas' => 'required',
-            'alamat' => 'required',
-            'email' => 'required|email',
-            'telepon' => 'required',
-            'link_fb' => 'required',
-            'link_ig' => 'required',
-            'link_yt' => 'required',
-            'link_tw' => 'required',
+             'instansi' => 'nullable',
+            'akreditas' => 'nullable',
+            'alamat' => 'nullable',
+            'email' => 'nullable|email',
+            'telepon' => 'nullable',
+            'link_fb' => 'nullable',
+            'link_ig' => 'nullable',
+            'link_yt' => 'nullable',
+            'link_tw' => 'nullable',
         ]);
 
         // Temukan record berdasarkan ID

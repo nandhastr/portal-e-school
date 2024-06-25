@@ -1,6 +1,6 @@
 <x-partials.header></x-partials.header>
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white nav-learning  navbar-light">
+<nav class="main-header  navbar navbar-expand nav-learning  navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">

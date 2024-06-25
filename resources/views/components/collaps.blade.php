@@ -6,6 +6,10 @@
 </div>
 <div class="collapse" id="collapseExample">
   <div class="d-flex justify-content-center align-items-center">
-    <h1 class="m-4">123456</h1>
+    @if($countAlumni)
+    <h4 class="m-4">{{number_format($countAlumni)}}</h4>
+    @else
+    <h5 class="m-4">{{__('Tidak ada data alumni')}}</h5>
+    @endif
   </div>
 </div>
