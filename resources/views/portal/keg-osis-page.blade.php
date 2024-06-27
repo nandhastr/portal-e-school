@@ -1,35 +1,72 @@
-<x-main.app class="navbar navbar-expand-lg fixed-top">
-    <div class="container container-fluid" style="height: 100vh">
-        <x-hr-gradient>
-            OSIS
-        </x-hr-gradient>
-        <div class="row">
-            <div class="col-col-lg-6 col-md-6 col-sm-12">
-                <h3>test</h3>
-                <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi quisquam
-                    repellat
-                    saepe esse.
-                    Blanditiis aliquid iure aperiam libero adipisci illum nobis quae explicabo facilis perferendis
-                    voluptatum hic, laboriosam accusamus odit delectus tempora, eum veritatis sapiente repellat.
-                    Adipisci quos ipsa, expedita sequi ea corporis voluptates reiciendis assumenda explicabo
-                    molestiae quod impedit! Velit adipisci enim tenetur blanditiis architecto placeat veritatis
-                    provident inventore quos odit molestiae sint amet veniam nemo quaerat soluta porro ullam
-                    deserunt obcaecati optio vitae quas, tempora earum. Esse iusto eos, aliquam mollitia molestias
-                    aperiam repellat nam voluptatibus, ipsa saepe in earum fuga libero labore, possimus aut corrupti
-                    enim tempora.</p>
-            </div>
-            <div class="col-col-lg-6 col-md-6 col-sm-12 ">
-                <h3>tset 2</h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur
-                    dolore officia.
-                    Consequatur est laudantium officia explicabo molestiae vitae rem aut! Provident, quae? Aut eos
-                    explicabo animi corrupti voluptates atque consequatur tenetur tempore veritatis assumenda neque
-                    voluptas, facilis sint inventore autem! Voluptas enim cupiditate molestias quam et sed repellat
-                    fugiat!</p>
-            </div>
+<x-main.app class="navbar navbar-expand-lg">
+    <x-slot name="title">{{ $title }}</x-slot>
+    <div class="container mt-5 mb-5 container-fluid">
+        <div class="col-12">
+            <x-hr-gradient>
+                Informasi Kegiatan OSIS
+            </x-hr-gradient>
         </div>
+        @if ($pengumuman_osis_terbaru && $osis->IsNotEmpty())
+        <div class="row justify-content-center">
+            <div class="col">
+                <x-card-home class="card card-home ">
+                    <h1 class="text-center">Pengumuman</h1>
+                    @if($pengumuman_osis_terbaru)
+                    @if($pengumuman_osis_terbaru->gambar)
+                    <img src="{{ asset('assets/img/kegiatan/' . $pengumuman_osis_terbaru->gambar) }}"
+                        class="card-img-top mb-3 img-pengumuman " alt="{{ $pengumuman_osis_terbaru->judul }}">
+                    @endif
+                    <h5 class="card-title fw-bold text-pengumuman p-3">{{ $pengumuman_osis_terbaru->judul }}</h5>
+                    <span class="p-3">Pelaksanaan acara :
+                        @if ($pengumuman_osis_terbaru->tanggal)
+                        {{ $pengumuman_osis_terbaru->tanggal }}
+                        @else
+                        -
+                        @endif
+                    </span>
+                    <hr>
+                    <p class="card-text p-3">
+                        {{ Str::limit($pengumuman_osis_terbaru->deskripsi, 1000) }}
+                    </p>
+                    @else
+                    <p>Tidak ada pengumuman terbaru.</p>
+                    @endif
+                </x-card-home>
+            </div>
+            <div class="col-12">
+                <x-hr-gradient>
+                    Riwayat Pengumuman
+                </x-hr-gradient>
+            </div>
+            @foreach($osis as $item)
+            <div class="col col-lg-3 col-md-4 col-12 mb-4">
+                <x-card-home class="card card-home">
+                    @if($item->gambar)
+                    <img src="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" class="card-img-top img-thumbnail"
+                        alt="{{ $item->judul }}" style="width: auto;">
+                    @else
+                    tidak ada gambar
+                    @endif
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold">{{ $item->judul }}</h5>
+                        <span>Pelaksanaan acara :
+                            @if ($item->tanggal)
+                            {{ $item->tanggal }}
+                            @else
+                            -
+                            @endif
+                        </span>
+                        <hr>
+                        <p class="card-text">{{ Str::limit($item->deskripsi, 100) }}</p>
+                        {{-- <a href="{{ route('announcement.show', $item->id) }}" class="btn btn-primary">Baca
+                            Selengkapnya</a> --}}
+                    </div>
+                </x-card-home>
+            </div>
+            @endforeach
+        </div>
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
     </div>
-
-
-
 </x-main.app>

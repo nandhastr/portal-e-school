@@ -1,4 +1,5 @@
 <x-partials.header></x-partials.header>
+
 <x-top></x-top>
 
 @if(!request()->is('album','alumni','struktur-organisasi','about','visi','tendik','program','siswa','article-berjualan','article-marketing','article-bisnis','keg-uks','keg-osis','keg-pramuka'))

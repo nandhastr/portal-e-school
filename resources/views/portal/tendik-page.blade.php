@@ -3,6 +3,7 @@
         <x-hr-gradient>
             Dikrektori Guru dan Tenaga Kependidikan
         </x-hr-gradient>
+        @if ($guru && $karyawan -> isNotEmpty())
         <div class="row ">
             <div class="col-6">
                 <div class="row justify-content-center">
@@ -77,6 +78,10 @@
                 </div>
             </div>
         </div>
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
+
     </div>
 
     </x-main.tamplate-info>

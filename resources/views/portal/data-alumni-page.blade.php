@@ -8,6 +8,7 @@
                 Alumni
             </x-hr-gradient>
         </div>
+        @if ($alumni->isNotEmpty())
         <div class="row justify-content-center align-items-center mb-2">
             <div class="col-md-6 col-sm-12 text-center">
                 <select class="btn btn-outline-success btn-option-album" name="year" id="yearSelect">
@@ -17,9 +18,12 @@
                 </select>
             </div>
         </div>
+
+        @if ($countAlumni > 0)
         <x-collaps :countAlumni='$countAlumni'></x-collaps>
+        @endif
         <div class="row">
-            @forelse ($alumni as $alum)
+            @foreach ($alumni as $alum)
             <div class="col-md-4 mb-3">
                 <div class="card">
                     <img src="{{ asset('assets/img/alumni/' . $alum->gambar) }}" class="img-fluid card-img-top p-4">
@@ -29,12 +33,11 @@
                     </div>
                 </div>
             </div>
-            @empty
-            <div class="col-12">
-                <p class="text-center">Tidak ada data alumni untuk tahun yang dipilih.</p>
-            </div>
-            @endforelse
+            @endforeach
         </div>
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
     </div>
 </x-main.app>
 

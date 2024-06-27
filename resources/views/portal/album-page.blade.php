@@ -9,6 +9,7 @@
                 </x-hr-gradient>
             </div>
         </div>
+        @if ($album -> isNotEmpty())
         <div class="row justify-content-center">
             <div class="card-body">
                 <div class="row">
@@ -51,6 +52,10 @@
                 </div>
             </div>
         </div>
+        @else
+        <x-image-not-data></x-image-not-data>
+
+        @endif
     </div>
 </x-main.app>
 

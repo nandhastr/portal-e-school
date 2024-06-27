@@ -1,8 +1,9 @@
 <x-main.app class="navbar navbar-expand-lg fixed-top">
-    <div class="container container-fluid">
+    <div class="container container-fluid" style="height: 100vh">
         <x-hr-gradient>
             Program Sekolah
         </x-hr-gradient>
+        @if ($program && $porgam->isNotEmpty())
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="content-container">
@@ -48,6 +49,10 @@
                 </div>
             </div>
         </div>
+
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
     </div>
 
 

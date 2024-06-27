@@ -3,6 +3,7 @@
         <x-hr-gradient>
             Kepengurusan Sekolah SMK PGRI PAMIJAHAN BOGOR
         </x-hr-gradient>
+        @if ($struktur->isNotEmpty())
         <div class="row mb-4">
             <div class="col">
                 <div class="card-body">
@@ -35,5 +36,9 @@
                 </div>
             </div>
         </div>
+
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
     </div>
 </x-main.app>

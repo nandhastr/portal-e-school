@@ -10,14 +10,13 @@
 <!-- /.control-sidebar -->
 
 <!-- Main Footer -->
-{{-- <footer class="mb-0 " style="margin-top: 6em; margin-bottom:0px;"> --}}
+<footer class="mb-0 " style="margin-top: 6em; margin-bottom:0px;">
     <!-- To the right -->
-    {{-- <div class=" float-right d-none d-sm-inline">
+    <div class=" float-right d-none d-sm-inline">
         Anything you want
     </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved. --}}
-    {{-- <div class="footer-menu  ">
+    
+     <div class="footer-menu  ">
         <div class="container-fluid py-2">
             <div class="row m-4 row-footer ">
                 <div class="col col-footer col-md-3  text-light">
@@ -69,7 +68,7 @@
             </div>
         </div>
     </div>
-</footer> --}}
+</footer>
 
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->

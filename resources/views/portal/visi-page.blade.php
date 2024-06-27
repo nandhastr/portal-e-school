@@ -1,8 +1,9 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid " style="height: 100vh">
+    <div class="container container-fluid ">
         <x-hr-gradient>
             Visi Dan Misi
         </x-hr-gradient>
+        @if ($visi && $misi -> isNotEmpty())
         <div class="row">
             {{-- visi --}}
             @if ($visi)
@@ -34,5 +35,9 @@
             data kosong
             @endif
         </div>
+
+        @else
+       <x-image-not-data></x-image-not-data>
+        @endif
     </div>
 </x-main.app>

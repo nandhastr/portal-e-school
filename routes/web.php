@@ -27,6 +27,7 @@ use App\Http\Controllers\CrudPortal\PrestasiCrudController;
 use App\Http\Controllers\CrudPortal\VisimisiCrudController;
 use App\Http\Controllers\CrudPortal\CrudPengumumanController;
 use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
+use App\Http\Controllers\CrudPortal\KegiatanCrudController;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -53,7 +54,6 @@ Route::get('/program', [portalController::class, 'program'])->name('program');
 Route::get('/article-berjualan', [portalController::class, 'article_berjualan'])->name('article-berjualan');
 Route::get('/article-marketing', [portalController::class, 'article_marketing'])->name('article-marketing');
 Route::get('/article-bisnis', [portalController::class, 'article_bisnis'])->name('article-bisnis');
-Route::get('keg-uks', [portalController::class, 'keg_uks'])->name('keg-uks');
 Route::get('keg-osis', [portalController::class, 'keg_osis'])->name('keg-osis');
 Route::get('keg-pramuka', [portalController::class, 'keg_pramuka'])->name('keg-pramuka');
 
@@ -140,6 +140,11 @@ Route::get('/data-komponenSekolah', [KomponenCrudController::class, 'index'])->n
 Route::post('/data-komponenSekolah-store', [KomponenCrudController::class, 'store'])->name('data-komponenSekolah-store');
 Route::post('/data-komponenSekolah-update/{id}', [KomponenCrudController::class, 'update'])->name('data-komponenSekolah-update');
 Route::post('/data-komponenSekolah-delete/{id}', [KomponenCrudController::class, 'destroy'])->name('data-komponenSekolah-delete');
+// crud kegiatan Sekolah
+Route::get('/data-kegiatan', [KegiatanCrudController::class, 'index'])->name('data-kegiatan');
+Route::post('/data-kegiatan-store', [KegiatanCrudController::class, 'store'])->name('data-kegiatan-store');
+Route::post('/data-kegiatan-update/{id}', [KegiatanCrudController::class, 'update'])->name('data-kegiatan-update');
+Route::post('/data-kegiatan-delete/{id}', [KegiatanCrudController::class, 'destroy'])->name('data-kegiatan-delete');
 
 
 // view e-learning dashboard

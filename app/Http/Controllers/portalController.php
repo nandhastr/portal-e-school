@@ -14,6 +14,7 @@ use App\Models\PortalModel\SiswaBerprestasi;
 use App\Models\PortalModel\VisiMisi;
 use App\Models\PortalModel\Alumni;
 use App\Models\PortalModel\Galeri;
+use App\Models\PortalModel\Kegiatan;
 
 class portalController extends Controller
 {
@@ -169,6 +170,7 @@ class portalController extends Controller
 
     public function article_berjualan()
     {
+        $artikel_jualan = Artikel::where('jenis','artikel')->get();
         $data = [
             'title' => 'Article berjualan',
             'komponen' => Komponen::all(),
@@ -197,20 +199,13 @@ class portalController extends Controller
     }
 
 
-
-    public function keg_uks()
-    {
-        $data = [
-            'title' => 'Kegiatan Unit Kegiatan Sekolah',
-            'komponen' => Komponen::all(),
-        ];
-        return view('portal.keg-uks-page', $data);
-    }
-
-
     public function keg_osis()
     {
+         $osis = Kegiatan::orderBy('created_at', 'desc')->take(4)->where('kategori','osis')->get();
         $data = [
+          
+            'pengumuman_osis_terbaru' => $osis->first(),
+            'osis' => $osis,
             'title' => 'Kegiatan OSIS',
             'komponen' => Komponen::all(),
         ];
@@ -220,8 +215,12 @@ class portalController extends Controller
 
     public function keg_pramuka()
     {
+        $pramuka = Kegiatan::orderBy('created_at', 'desc')->take(4)->where('kategori','pramuka')->get();
         $data = [
-            'title' => 'Kegiatan Pramuka',
+          
+            'pengumuman_pramuka_terbaru' => $pramuka->first(),
+            'pramuka' => $pramuka,
+            'title' => 'Kegiatan pramuka',
             'komponen' => Komponen::all(),
         ];
         return view('portal.keg-pramuka-page', $data);

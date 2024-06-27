@@ -451,3 +451,13 @@ hr {
 .modal-tugas {
     display: none;
 }
+
+
+.marque{
+    position: sticky;
+    color: #000;
+    z-index: 200;
+    top: 3rem;
+    background-color: var(--waring-color);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}

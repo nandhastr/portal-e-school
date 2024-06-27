@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\CrudPortal;
 
-use App\Models\PortalModel\Pengumuman;
-use App\Models\PortalModel\Komponen;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\PortalModel\Kegiatan;
+use App\Models\PortalModel\Komponen;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 
-class CrudPengumumanController extends Controller
+class KegiatanCrudController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,11 +18,11 @@ class CrudPengumumanController extends Controller
          $user = Auth::user();
         $data = [
             'komponen'=>Komponen::all(),
-            'title' => 'Halaman Data Pengumuman',
+            'title' => 'Halaman Data kegiatan',
             'user'=> $user,
-            'pengumuman' => Pengumuman::all(),
+            'kegiatan' => Kegiatan::all(),
         ];
-        return view('portal.admin.data-pengumuman-page', $data);
+        return view('portal.admin.data-kegiatan-page', $data);
     
     }
     /**
@@ -34,26 +34,28 @@ class CrudPengumumanController extends Controller
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'judul' => 'required',
-            'isi' => 'required',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
             'tanggal' => 'required|date',
         ]);
 
         // proses gambar
         $gambar = $request->file('gambar');
         $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-        $gambar->move(base_path('public/assets/img/pengumuman'), $nama_gambar);
+        $gambar->move(base_path('public/assets/img/kegiatan'), $nama_gambar);
 
         // simpan ke db
-        $pengumuman = new Pengumuman;
+        $kegiatan = new Kegiatan;
         
-        $pengumuman->gambar = $nama_gambar; 
-        $pengumuman->judul = $request->judul;
-        $pengumuman->isi = $request->isi;
-        $pengumuman->tanggal = $request->tanggal;
+        $kegiatan->gambar = $nama_gambar; 
+        $kegiatan->judul = $request->judul;
+        $kegiatan->kategori = $request->kategori;
+        $kegiatan->deskripsi = $request->deskripsi;
+        $kegiatan->tanggal = $request->tanggal;
 
-        // dd($pengumuman); 
+        // dd($kegiatan); 
 
-        $pengumuman->save();
+        $kegiatan->save();
         
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     } catch (\Exception $e) {
@@ -71,33 +73,35 @@ class CrudPengumumanController extends Controller
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'judul' => 'required',
-            'isi' => 'required',
-            'tanggal' => 'required',
+            'kategori' => 'required',
+            'deskripsi' => 'required',
+            'tanggal' => 'required|date',
         ]);
 
         // Temukan record berdasarkan ID
-        $pengumuman = Pengumuman::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id);
 
         // Periksa apakah file gambar ada dalam request
         if ($request->hasFile('gambar')) {
             // Hapus gambar lama jika ada
-            if ($pengumuman->gambar && file_exists(base_path('public/assets/img/pengumuman/' . $pengumuman->gambar))) {
-                unlink(base_path('public/assets/img/pengumuman/' . $pengumuman->gambar));
+            if ($kegiatan->gambar && file_exists(base_path('public/assets/img/kegiatan/' . $kegiatan->gambar))) {
+                unlink(base_path('public/assets/img/kegiatan/' . $kegiatan->gambar));
             }
 
             // Simpan gambar baru
             $gambar = $request->file('gambar');
             $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-            $gambar->move(base_path('public/assets/img/pengumuman'), $nama_gambar);
-            $pengumuman->gambar = $nama_gambar;
+            $gambar->move(base_path('public/assets/img/kegiatan'), $nama_gambar);
+            $kegiatan->gambar = $nama_gambar;
         }
 
         // Perbarui data lainnya
-        $pengumuman->judul = $request->judul;
-        $pengumuman->isi = $request->isi;
-        $pengumuman->tanggal = $request->tanggal;
+        $kegiatan->judul = $request->judul;
+        $kegiatan->kategori = $request->kategori;
+        $kegiatan->deskripsi = $request->deskripsi;
+        $kegiatan->tanggal = $request->tanggal;
 
-        $pengumuman->save();
+        $kegiatan->save();
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui');
     } catch (\Exception $e) {
@@ -112,18 +116,18 @@ class CrudPengumumanController extends Controller
     {
         try {
         // Temukan record berdasarkan ID
-        $pengumuman = pengumuman::findOrFail($id);
+        $kegiatan = Kegiatan::findOrFail($id);
 
         // Hapus gambar dari storage jika ada
-        if ($pengumuman->gambar) {
-            $gambarPath = public_path('assets/img/pengumuman/' . $pengumuman->gambar);
+        if ($kegiatan->gambar) {
+            $gambarPath = public_path('assets/img/kegiatan/' . $kegiatan->gambar);
             if (file_exists($gambarPath)) {
                 unlink($gambarPath);
             }
         }
 
         // Hapus record dari database
-        $pengumuman->delete();
+        $kegiatan->delete();
 
         return redirect()->back()->with('success', 'Data berhasil dihapus');
     } catch (\Exception $e) {
