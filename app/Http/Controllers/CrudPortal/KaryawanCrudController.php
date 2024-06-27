@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\Karyawan;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class KaryawanCrudController extends Controller
     {
          $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data karyawan',
             'user'=> $user,
             'karyawan' => Karyawan::all(),
@@ -32,10 +34,16 @@ class KaryawanCrudController extends Controller
        try {
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'nama' => 'required',
-            'jabatan' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
+            'nip' => 'required',
+                'nama' => 'required',
+                'jabatan' => 'required',
+                'status' => 'required',
+                'genre' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required',
+                'email' => 'required',
+                'telepon' => 'required',
+            
         ]);
 
         // proses gambar
@@ -47,10 +55,15 @@ class KaryawanCrudController extends Controller
         $karyawan = new Karyawan;
         
         $karyawan->gambar = $nama_gambar; 
-        $karyawan->nama = $request->nama;
-        $karyawan->jabatan = $request->jabatan;
-        $karyawan->email = $request->email;
-        $karyawan->telepon = $request->telepon;
+         $karyawan->nip = $request->nip;
+            $karyawan->nama = $request->nama;
+            $karyawan->jabatan = $request->jabatan;
+            $karyawan->status = $request->status;
+            $karyawan->genre = $request->genre;
+            $karyawan->tempat_lahir = $request->tempat_lahir;
+            $karyawan->tanggal_lahir = $request->tanggal_lahir;
+            $karyawan->email = $request->email;
+            $karyawan->telepon = $request->telepon;
 
         // dd($karyawan); 
     // Save  ke database
@@ -73,10 +86,15 @@ class KaryawanCrudController extends Controller
       try {
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'nama' => 'required',
-            'jabatan' => 'required',
-            'email' => 'required',
-            'telepon' => 'required',
+             'nip' => 'required',
+                'nama' => 'required',
+                'jabatan' => 'required',
+                'status' => 'required',
+                'genre' => 'required',
+                'tempat_lahir' => 'required',
+                'tanggal_lahir' => 'required',
+                'email' => 'required',
+                'telepon' => 'required',
         ]);
 
         // Temukan record berdasarkan ID
@@ -97,10 +115,15 @@ class KaryawanCrudController extends Controller
         }
 
         // Perbarui data lainnya
-        $karyawan->nama = $request->nama;
-        $karyawan->jabatan = $request->jabatan;
-        $karyawan->email = $request->email;
-        $karyawan->telepon = $request->telepon;
+        $karyawan->nip = $request->nip;
+            $karyawan->nama = $request->nama;
+            $karyawan->jabatan = $request->jabatan;
+            $karyawan->status = $request->status;
+            $karyawan->genre = $request->genre;
+            $karyawan->tempat_lahir = $request->tempat_lahir;
+            $karyawan->tanggal_lahir = $request->tanggal_lahir;
+            $karyawan->email = $request->email;
+            $karyawan->telepon = $request->telepon;
 
         $karyawan->save();
 

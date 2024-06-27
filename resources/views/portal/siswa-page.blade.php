@@ -1,5 +1,5 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid " style="height: 100vh">
+    <div class="container container-fluid ">
         <x-hr-gradient>
             Informasi Seputar Siswa/i SMK PGRI PAMIJAHAN
         </x-hr-gradient>
@@ -10,65 +10,32 @@
                 </x-hr-gradient>
             </div>
         </div>
+        @if ($prestasi->isNotEmpty())
         <div class="row">
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
+            @foreach ($prestasi as $win)
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="card p-3" style="width: 18rem;">
+                    <img src="{{ asset('assets/img/siswa/' . $win->siswa->gambar) }}" style="height: auto;"
+                        class="img-fluid">
+                    <hr>
                     <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
+                        <h5>{{ $win->prestasi }} - {{ $win->tahun }}</h5>
                         <p class="card-text">
                         <div class="col-12">
-
-                            Nama : Muhammad Fajar
+                            Nama : {{ $win->siswa->nama }}
                         </div>
                         <div class="col-12">
-
-                            Kelas : XII RPL 1
+                            Kelas : {{ $win->siswa->kelas }}
                         </div>
-
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
-                        <p class="card-text">
-                        <div class="col-12">
-
-                            Nama : Muhammad Fajar
-                        </div>
-                        <div class="col-12">
-
-                            Kelas : XII RPL 1
-                        </div>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card" style="width: 18rem;">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h3>Juara 1 Lomba Puisi Se-JABODETABEK</h3>
-                        <p class="card-text">
-                        <div class="col-12">
-
-                            Nama : Muhammad Fajar
-                        </div>
-                        <div class="col-12">
-
-                            Kelas : XII RPL 1
-                        </div>
-
-                        </p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
-        {{-- end row --}}
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
+
     </div>
 </x-main.app>

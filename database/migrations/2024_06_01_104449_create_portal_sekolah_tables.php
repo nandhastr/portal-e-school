@@ -21,7 +21,7 @@ class CreatePortalSekolahTables extends Migration
         // Membuat tabel profil_sekolah
         Schema::create('tbl_profil_sekolah', function (Blueprint $table) {
             $table->id();
-            $table->enum('kategori', ['sejarah', 'program_sekolah']);
+            $table->enum('kategori', ['tentang_sekolah', 'program_sekolah']);
             $table->text('konten');
             $table->string('gambar')->nullable();
             $table->timestamps();
@@ -30,9 +30,11 @@ class CreatePortalSekolahTables extends Migration
         // Membuat tabel siswa
         Schema::create('tbl_siswa', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
+            $table->string('nis')->nullable(); 
+            $table->string('nama')->nullable();
+            $table->enum('genre',['laki-laki','Perempuan']);
             $table->string('kelas')->nullable();
-            $table->string('nis')->unique(); // Nomor Induk Siswa
+            $table->string('tempat_lahir');
             $table->date('tanggal_lahir')->nullable();
             $table->text('alamat')->nullable();
             $table->string('gambar')->nullable();
@@ -60,24 +62,35 @@ class CreatePortalSekolahTables extends Migration
         // Membuat tabel guru
         Schema::create('tbl_guru', function (Blueprint $table) {
             $table->id();
+            $table->string('nip');
             $table->string('nama');
+            $table->string('status');
+            $table->enum('genre',['laki-laki','Perempuan']);
+            $table->string('tempat_lahir')->nullable();
+            $table->date('tanggal_lahir')->nullable();
             $table->string('jabatan');
             $table->string('email')->nullable();
             $table->string('telepon')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
         });
-
         // Membuat tabel karyawan
         Schema::create('tbl_karyawan', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('jabatan');
-            $table->string('email')->nullable();
-            $table->string('telepon')->nullable();
-            $table->string('gambar')->nullable();
-            $table->timestamps();
-        });
+            $table->string('nip');
+           $table->string('nama');
+           $table->string('status');
+           $table->enum('genre',['laki-laki','Perempuan']);
+           $table->string('tempat_lahir')->nullable();
+           $table->date('tanggal_lahir')->nullable();
+           $table->string('jabatan');
+           $table->string('email')->nullable();
+           $table->string('telepon')->nullable();
+           $table->string('gambar')->nullable();
+           $table->timestamps();
+       });
+
+        
         // Membuat tabel alumni
         Schema::create('tbl_alumni', function (Blueprint $table) {
             $table->id();

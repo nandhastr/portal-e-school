@@ -29,50 +29,47 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Gambar</th>
-                                        <th>Judul Pengumuman</th>
-                                        <th>Tanggal Edar</th>
-                                        <th>Isi Pengumuman</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($pengumuman))
-                                    @foreach ($pengumuman as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
-                                                style="width: 50px; height: auto;" class="img-fluid">
-                                        </td>
-                                        <td>{{ $row->judul }}</td>
-                                        <td>{{ $row->tanggal }}</td>
-                                        <td>{{ $row->isi }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada pengumuman</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Gambar</th>
+                                    <th>Judul Pengumuman</th>
+                                    <th>Tanggal Pelaksanaan</th>
+                                    <th>Isi Pengumuman</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($pengumuman))
+                                @foreach ($pengumuman as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->judul }}</td>
+                                    <td>{{ $row->tanggal }}</td>
+                                    <td>{{ $row->isi }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada pengumuman</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -98,7 +95,7 @@
                                 required>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">Tanggal</label>
+                            <label for="tanggal">Tanggal Pelaksanaan</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control"
                                 placeholder="Pilih tanggal" required>
                         </div>
@@ -143,9 +140,9 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">Tanggal</label>
+                            <label for="tanggal">Tanggal Pelaksanaan</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required>
+                                placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul Pengumuman</label>

@@ -29,52 +29,59 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>foto</th>
-                                        <th>Nama</th>
-                                        <th>Jabatan</th>
-                                        <th>Email</th>
-                                        <th>Telpon</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($karyawan))
-                                    @foreach ($karyawan as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('assets/img/karyawan/' . $row->gambar) }}"
-                                                style="width: 50px; height: auto;" class="img-fluid">
-                                        </td>
-                                        <td>{{ $row->nama }}</td>
-                                        <td>{{ $row->jabatan }}</td>
-                                        <td>{{ $row->email }}</td>
-                                        <td>{{ $row->telepon }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada data karyawan</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>foto</th>
+                                    <th>NIP</th>
+                                    <th>Nama</th>
+                                    <th>Status</th>
+                                    <th>Jabatan</th>
+                                    <th>Jenis Kelamin</th>
+                                    <th>Tempat Lahir</th>
+                                    <th>Tanggal Lahir</th>
+                                    <th>Email</th>
+                                    <th>Telpon</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($karyawan))
+                                @foreach ($karyawan as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/karyawan/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->nip }}</td>
+                                    <td>{{ $row->nama }}</td>
+                                    <td>{{ $row->status }}</td>
+                                    <td>{{ $row->jabatan }}</td>
+                                    <td>{{ $row->genre }}</td>
+                                    <td>{{ $row->tempat_lahir }}</td>
+                                    <td>{{ $row->tanggal_lahir }}</td>
+                                    <td>{{ $row->email }}</td>
+                                    <td>{{ $row->telepon }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada data karyawan</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -100,14 +107,44 @@
                                 required value="{{old('file')}}">
                         </div>
                         <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input type="text" name="nip" id="nip" class="form-control" placeholder="Enter nip" required
+                                value="{{old('nip')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="nama">Nama</label>
                             <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter nama"
                                 required value="{{old('nama')}}">
                         </div>
                         <div class="form-group">
+                            <label for="status">Status</label>
+                            <input type="text" name="status" id="status" class="form-control" placeholder="status "
+                                required value="{{old('status')}}">
+                        </div>
+                        <div class="form-group">
                             <label for="jabatan">Jabatan</label>
                             <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                placeholder="Enter Jabatan " required value="{{old('jabatan')}}">
+                                placeholder="peran sebagai " required value="{{old('jabatan')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre">Jenis Kelamin</label>
+                            <select class="form-control" name="genre" required>
+                                <option value="">Jenis Kelamin</option>
+
+                                <option value="laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat lahir</label>
+                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
+                                placeholder="Enter tempat " required value="{{old('tempat_lahir')}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal lahir</label>
+                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                                placeholder="Enter tanggal " required value="{{old('tanggal_lahir')}}">
                         </div>
                         <div class=" form-group">
                             <label for="email">Email</label>
@@ -143,28 +180,55 @@
                         @csrf
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
+                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar">
+                        </div>
+                        <div class="form-group">
+                            <label for="nip">NIP</label>
+                            <input type="text" name="nip" id="nip" class="form-control" placeholder="Enter nip" required value="{{ $row->nip}}">
                         </div>
                         <div class="form-group">
                             <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter nama"
-                                required value="{{ $row->nama}}">
+                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Enter nama" required
+                                value="{{ $row->nama}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="status">Status</label>
+                            <input type="text" name="status" id="status" class="form-control" placeholder="Enter status " required
+                                value="{{$row->status}}">
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                placeholder="Enter Jabatan " required value="{{$row->jabatan}}">
+                            <input type="text" name="jabatan" id="jabatan" class="form-control" placeholder="Enter Jabatan " required
+                                value="{{$row->jabatan}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="genre">Jenis Kelamin</label>
+                            <select class="form-control" name="genre">
+                                @foreach (['laki-laki','perempuan'] as $jns )
+                                <option value="{{ $jns }}" {{ $row->genre == $jns ? 'selected' : '' }}>{{ $jns }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat_lahir">Tempat lahir</label>
+                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control" placeholder="Enter Tempat lahir "
+                                required value="{{ $row->tempat_lahir }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal_lahir">Tanggal lahir</label>
+                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" placeholder="Enter tanggal lahir "
+                                required value="{{ $row->tanggal_lahir }}">
                         </div>
                         <div class=" form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter email "
-                                required value="{{$row->email}}">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter email " required
+                                value="{{$row->email}}">
                         </div>
                         <div class=" form-group">
                             <label for="telepon">Telepon</label>
-                            <input type="text" name="telepon" id="telepon" class="form-control"
-                                placeholder="Enter telepon " required value="{{$row->telepon}}">
+                            <input type="text" name="telepon" id="telepon" class="form-control" placeholder="Enter telepon " required
+                                value="{{$row->telepon}}">
                         </div>
 
                         <button type=" submit" class="btn btn-primary">Ubah Data</button>

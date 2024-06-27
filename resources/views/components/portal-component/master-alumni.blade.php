@@ -29,47 +29,46 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>foto</th>
-                                        <th>Tahun Lulus</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($alumni))
-                                    @foreach ($alumni as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('assets/img/alumni/' . $row->gambar) }}"
-                                                style="width: 50px; height: auto;" class="img-fluid">
-                                        </td>
-                                        <td>{{ $row->tahun_lulus }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada data alumni</p>
-                                    @endif
-                                </tbody>
-                            </table>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>foto</th>
+                                    <th>Tahun Lulus</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($alumni))
+                                @foreach ($alumni as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/alumni/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->tahun_lulus }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada data alumni</p>
+                                @endif
+                            </tbody>
+                        </table>
 
-                        </div>
                     </div>
+
                 </div>
             </div>
         </div>

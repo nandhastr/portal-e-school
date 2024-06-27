@@ -3,31 +3,56 @@
         <x-hr-gradient>
             Program Sekolah
         </x-hr-gradient>
+        @if ($program && $porgam->isNotEmpty())
         <div class="row">
-            <div class="col-col-lg-6 col-md-6 col-sm-12">
-                <h3>Program Magang</h3>
-                <p class="text-justify">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi quisquam
-                    repellat
-                    saepe esse.
-                    Blanditiis aliquid iure aperiam libero adipisci illum nobis quae explicabo facilis perferendis
-                    voluptatum hic, laboriosam accusamus odit delectus tempora, eum veritatis sapiente repellat.
-                    Adipisci quos ipsa, expedita sequi ea corporis voluptates reiciendis assumenda explicabo
-                    molestiae quod impedit! Velit adipisci enim tenetur blanditiis architecto placeat veritatis
-                    provident inventore quos odit molestiae sint amet veniam nemo quaerat soluta porro ullam
-                    deserunt obcaecati optio vitae quas, tempora earum. Esse iusto eos, aliquam mollitia molestias
-                    aperiam repellat nam voluptatibus, ipsa saepe in earum fuga libero labore, possimus aut corrupti
-                    enim tempora.</p>
-            </div>
-            <div class="col-col-lg-6 col-md-6 col-sm-12 ">
-                <h3>Program Uji Kompetensi</h3>
-                <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati consequuntur
-                    dolore officia.
-                    Consequatur est laudantium officia explicabo molestiae vitae rem aut! Provident, quae? Aut eos
-                    explicabo animi corrupti voluptates atque consequatur tenetur tempore veritatis assumenda neque
-                    voluptas, facilis sint inventore autem! Voluptas enim cupiditate molestias quam et sed repellat
-                    fugiat!</p>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="content-container">
+                    <h3>Program Magang</h3>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        @if ($program)
+                        <img src="{{ asset('assets/img/profil-sekolah/'. $program->gambar) }}"
+                            class="card-img-top img-pengumuman" alt="...">
+
+                        @else
+                        Data Kosong
+                        @endif
+                    </div>
+                    @if($program)
+                    <div class="content-program">
+                        <div class="content-text">
+                            @php
+                            // Ambil konten dan pecah menjadi array kata
+                            $words = explode(' ', $program->konten);
+                            $paragraphs = [];
+                            $temp = [];
+
+                            // Loop melalui kata-kata dan buat paragraf
+                            foreach ($words as $index => $word) {
+                            $temp[] = $word;
+                            if (($index + 1) % 110 == 0 || $index == count($words) - 1) {
+                            $paragraphs[] = implode(' ', $temp);
+                            $temp = [];
+                            }
+                            }
+                            @endphp
+
+                            @foreach ($paragraphs as $paragraph)
+                            <p class="card-text text-justify">
+                                {{ $paragraph }}
+                            </p>
+                            @endforeach
+                        </div>
+                    </div>
+                    @else
+                    <p>Tidak ada Detail</p>
+                    @endif
+                </div>
             </div>
         </div>
+
+        @else
+        <x-image-not-data></x-image-not-data>
+        @endif
     </div>
 
 

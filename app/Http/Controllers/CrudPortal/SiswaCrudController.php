@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\Siswa;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class SiswaCrudController extends Controller
     {
          $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data Siswa',
             'user'=> $user,
             'siswa' => Siswa::all(),
@@ -35,7 +37,9 @@ class SiswaCrudController extends Controller
             'nis' => 'required',
             'nama' => 'required',
             'kelas' => 'required',
-            'tanggal_lahir' => 'required|date',
+            'genre' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
             'alamat' => 'required',
         ]);
 
@@ -46,21 +50,25 @@ class SiswaCrudController extends Controller
 
         // simpan ke db
         $siswa = new Siswa;
-        
         $siswa->gambar = $nama_gambar; 
         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
         $siswa->kelas = $request->kelas;
+        $siswa->genre = $request->genre;
+        $siswa->tempat_lahir = $request->tempat_lahir;
         $siswa->tanggal_lahir = $request->tanggal_lahir;
         $siswa->alamat = $request->alamat;
-
-        // dd($siswa); 
-    // Save  ke database
-    $siswa->save();
+// dd($siswa)
+        // Save ke database
+        $siswa->save();
 
         return redirect()->back()->with('success', 'Data berhasil disimpan');
 
     } catch (\Exception $e) {
+        // Hapus file gambar jika ada kesalahan
+        if (isset($nama_gambar)) {
+            unlink(base_path('public/assets/img/siswa/' . $nama_gambar));
+        }
         return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
     }
 
@@ -75,10 +83,12 @@ class SiswaCrudController extends Controller
       try {
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-             'nis' => 'required',
+            'nis' => 'required',
             'nama' => 'required',
             'kelas' => 'required',
-            'tanggal_lahir' => 'required|date',
+            'genre' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
             'alamat' => 'required',
         ]);
 
@@ -100,11 +110,14 @@ class SiswaCrudController extends Controller
         }
 
         // Perbarui data lainnya
-        $siswa->nis = $request->nis;
+         $siswa->nis = $request->nis;
         $siswa->nama = $request->nama;
         $siswa->kelas = $request->kelas;
+        $siswa->genre = $request->genre;
+        $siswa->tempat_lahir = $request->tempat_lahir;
         $siswa->tanggal_lahir = $request->tanggal_lahir;
         $siswa->alamat = $request->alamat;
+// dd($siswa)
 
         $siswa->save();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\SiswaBerprestasi;
 use App\Models\PortalModel\Siswa;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class PrestasiCrudController extends Controller
          $user = Auth::user();
          $prestasi = SiswaBerprestasi::with('siswa')->get();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data Siswa Berprestasi',
             'user'=> $user,
             'siswa'=> Siswa::all(),

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\Struktur_org;
+use App\Models\PortalModel\komponen;
 use App\Models\PortalModel\Guru;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +20,7 @@ class CrudStrukturController extends Controller
          $user = Auth::user();
          $struktur = Struktur_org::with('guru')->get();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data Struktur Organisasi',
             'user'=> $user,
             'struktur' => $struktur,

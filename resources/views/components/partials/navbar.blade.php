@@ -26,7 +26,7 @@
                                 PROFILE
                             </x-nav-link>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/sejarah">Sejarah
+                                <li class="nav-item"><a class="dropdown-item a-nav2" href="/about">Tentang
                                         Sekolah</a>
                                 </li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2"
@@ -94,8 +94,6 @@
                                 KEGIATAN
                             </x-nav-link>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-uks">Kegiatan
-                                        UKS</a></li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-osis">Kegiatan
                                         OSIS</a></li>
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-pramuka">Kegiatan
@@ -103,7 +101,7 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item ">
+                    {{-- <li class="nav-item ">
                         <div class="dropdown">
                             <x-nav-link
                                 class="px-5 dropdown-toggle drop-link a-nav a-nav2 {{ request()->is('lainnya') ? 'active' : '' }}"
@@ -119,7 +117,7 @@
                                         Sekolah</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\Artikel;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ArtikelCrudController extends Controller
     {
         $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Data artikel',
             'user' => $user,
             'artikel' => Artikel::all(),

@@ -131,17 +131,56 @@ a {
     background-color: var(--primary-color);
     color: var(--bg-white) !important;
 }
-.sidebar {
-    background-color: var(--primary-color);
-}
+
 .main-sidebar {
-    background-color: var(--primary-color);
-    position: fixed !important;
-    top: 0;
+    background-color: var(--primary-color) !important;
+}
+.sidebar {
+    position: absolute;
+    top: 10rem;
+    bottom: 10rem;
     left: 0;
+    padding-bottom: 20rem;
+    z-index: 100;
+    background-color: var(--primary-color) !important;
+    overflow-y: auto; /* Agar sidebar scrollable jika kontennya lebih panjang dari tinggi viewport */
+}
+
+/* html, body {
     height: 100%;
+    margin: 0;
     overflow: hidden;
-    z-index: 1000;
+} */
+
+.content {
+    height: calc(100vh - 56px); /* 56px sesuaikan dengan tinggi navbar */
+    overflow-y: auto;
+}
+
+.content-wrapper {
+    overflow-y: hidden; /* Mengatur agar tidak ada overflow di content-wrapper */
+}
+
+/* .card-body {
+    max-height: calc(100vh - 200px); 
+    overflow-y: auto; 
+} */
+
+/* .table-wrapper {
+    padding: 15px;
+} */
+
+/* .nav-learning{
+    position: fixed; 
+    z-index: 1000;"
+}
+.nav-link { 
+    color: #ffffff;
+}
+
+        /* Example styling for active sidebar link */
+.nav-link.active {
+    font-weight: bold;
 }
 
 .navbar {
@@ -198,10 +237,13 @@ a {
 } */
 
 /* footer */
+footer {
+    margin-top: auto;
+    margin-bottom: 0 !important;
+}
 .footer-menu {
     background-color: rgb(22, 22, 22);
     width: auto;
-    height: auto;
 }
 .copyright {
     background-color: rgb(64, 64, 64) !important;
@@ -408,4 +450,14 @@ hr {
 
 .modal-tugas {
     display: none;
+}
+
+
+.marque{
+    position: sticky;
+    color: #000;
+    z-index: 200;
+    top: 3rem;
+    background-color: var(--waring-color);
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
