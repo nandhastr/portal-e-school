@@ -9,5 +9,6 @@ class Guru extends Model
 {
     use HasFactory;
     protected $table = 'tbl_guru';
+
     protected $guarded = [];
 }

@@ -5,11 +5,9 @@ namespace App\Models\PortalModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Berita extends Model
+class Komponen extends Model
 {
     use HasFactory;
-
-    protected $table = 'tbl_berita';
-
-    protected $guarded  = [];
+    protected $table = "tbl_komponen";
+    protected $guarded = [];
 }

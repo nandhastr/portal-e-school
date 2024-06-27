@@ -1,6 +1,6 @@
 <x-partials.header :title="$title"></x-partials.header>
 <x-e-learning.partials.navbar></x-e-learning.partials.navbar>
-<x-e-learning.partials.sidebar :user="$user"></x-e-learning.partials.sidebar>
+<x-e-learning.partials.sidebar :user="$user" :komponen="$komponen"></x-e-learning.partials.sidebar>
 
 <!-- content -->
 <x-e-learning.partials.header-content>

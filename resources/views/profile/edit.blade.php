@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            <a class="btn" href="{{route('e-learning')}}"><i class="fas fa-arrow-circle-left"></i>Back</a>
+            <a class="btn" href="{{route('admin')}}"><i class="fas fa-arrow-circle-left"></i>Back</a>
         </h2>
     </x-slot>
 

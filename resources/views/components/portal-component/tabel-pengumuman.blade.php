@@ -29,47 +29,47 @@
                             </div> --}}
                         </div>
                     </div>
-                    <div style="overflow-x:auto; overflow-y:auto;">
-                        <div class="card-body">
-                            {{-- tabel mata pelajaran dashboard admin --}}
+                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        {{-- tabel mata pelajaran dashboard admin --}}
 
-                            <table id="example" class="display table-hover text-xs" style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th>No.</th>
-                                        <th>Gambar</th>
-                                        <th>Pengumuman untuk</th>
-                                        <th>Nama Pengumuman</th>
-                                        <th>Isi Pengumuman</th>
-                                        <th>aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @if(!empty($pengumuman))
-                                    @foreach ($pengumuman as $row)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $row->gambar }}</td>
-                                        <td>{{ $row->jenis }}</td>
-                                        <td>{{ $row->judul }}</td>
-                                        <td>{{ $row->konten }}</td>
-                                        <td>
-                                            <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
-                                                data-target="#modal-update_{{ $row->id }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a>
-                                            <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
-                                                data-target="#modal-delete_{{ $row->id }}"><i
-                                                    class="fa-regular fa-trash-can"></i></a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <p>tidak ada pengumuman</p>
-                                    @endif
-                                </tbody>
-                            </table>
-
-                        </div>
+                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>No.</th>
+                                    <th>Gambar</th>
+                                    <th>Judul Pengumuman</th>
+                                    <th>Tanggal Edar</th>
+                                    <th>Isi Pengumuman</th>
+                                    <th>aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(!empty($pengumuman))
+                                @foreach ($pengumuman as $row)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                    <td>{{ $row->judul }}</td>
+                                    <td>{{ $row->tanggal }}</td>
+                                    <td>{{ $row->isi }}</td>
+                                    <td>
+                                        <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
+                                            data-target="#modal-update_{{ $row->id }}"><i
+                                                class="fa-regular fa-pen-to-square"></i></a>
+                                        <a class="btn bg-danger btn-delete" href="#" data-toggle="modal"
+                                            data-target="#modal-delete_{{ $row->id }}"><i
+                                                class="fa-regular fa-trash-can"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @else
+                                <p>tidak ada pengumuman</p>
+                                @endif
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('data-pengumuman-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
@@ -95,12 +95,9 @@
                                 required>
                         </div>
                         <div class="form-group">
-                            <label for="jenis">Pengumuman untuk :</label>
-                            <select name="jenis" id="jenis" class="form-control">
-                                @foreach ((['portal','elearning']) as $row )
-                                <option value="{{ $row }}">{{ $row }}</option>
-                                @endforeach
-                            </select>
+                            <label for="tanggal">Tanggal</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                placeholder="Pilih tanggal" required>
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul Pengumuman</label>
@@ -108,8 +105,8 @@
                                 placeholder="Enter Judul Pengumuman"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="konten">Isi Pengumuman</label>
-                            <textarea name="konten" id="konten" class="form-control" cols="30" rows="10" required
+                            <label for="isi">Isi Pengumuman</label>
+                            <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required
                                 placeholder="Enter Isi Pengumuman"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah Pengumuman</button>
@@ -130,41 +127,41 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST">
+                    <form action="{{ route('data-pengumuman-update', ['id' => $row->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
+                            <input type="file" name="gambar" id="gambar" class="form-control"
+                                placeholder="Pilih Gambar">
+                            @if ($row->gambar)
+                            <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                style="width: 30px; height: auto;" class="img-fluid mt-2">
+                            @endif
                         </div>
                         <div class="form-group">
-                            <label for="jenis">Pengumuman untuk :</label>
-                            <select name="jenis" id="jenis" class="form-control">
-                                <option value="{{ $row->jenis }}">{{ $row->jenis }}</option>
-                                @foreach ((['portal','elearning']) as $to )
-                                <option value="{{ $to }}">{{ $to }}</option>
-                                @endforeach
-                            </select>
+                            <label for="tanggal">Tanggal</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul Pengumuman</label>
                             <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul Pengumuman">{{ $row->judul }}</textarea>
+                                placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="konten">Isi Pengumuman</label>
-                            <textarea name="konten" id="konten" cols="30" rows="10" class="form-control" required
-                                placeholder="Enter Isi Pengumuman">
-                            {{ $row->konten }}
-                            </textarea>
+                            <label for="isi">Isi Pengumuman</label>
+                            <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required
+                                placeholder="Enter Isi Pengumuman">{{$row->isi}}</textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Ubah Pengumuman</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
     {{-- Modal delete --}}
     @foreach ($pengumuman as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
@@ -177,13 +174,29 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="deleteSubject">
+                    <form action="{{ route('data-pengumuman-delete', ['id' => $row->id]) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Pengumuman Ini?</p>
-                            <h5>Judul Pengumuman</h5>
-                            <h6>"<i>{{ $row->judul }}</i>"</h6>
-                            <input type="hidden" name="id" id="delete_subject_id">
+                            <h5>Detail Data</h5>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Gambar</th>
+                                    <td>
+                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Judul Pengumuman</th>
+                                    <td>{{ $row->judul }}</td>
+                                </tr>
+                                <tr>
+                                    <th>isi Pengumuman</th>
+                                    <td>{{ $row->isi }}</td>
+                                </tr>
+                            </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

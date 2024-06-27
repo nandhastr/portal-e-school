@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\Materi;
 use App\Models\Penghargaan;
 use App\Models\Pengumuman;
+use App\Models\PortalModel\Komponen;
 use App\Models\RuangKelas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,7 @@ class AdminController extends Controller
                 // 'siswa' => $siswa,
 
                 // portal first
+                'komponen'=>Komponen::all(),
                 'user' => $user,
                 'title' => 'Dashboard',
             ];

@@ -1,18 +1,33 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4 ">
     <!-- Brand Logo -->
-    <a href="{{ route('/') }}" class="brand-link">
-        <img src="{{ asset('assets/dist/img/avatar.png') }}" alt="" class="brand-image img-circle elevation-3"
-            style="opacity: .8">
-        <span class="brand-text font-weight-light">E-School</span>
+    @php
+    $item = $komponen->first();
+    @endphp
+
+    <a href="{{ route('/') }}" class="brand-link d-flex justify-content-center align-items-center">
+        @if ($item)
+        <img src="{{ asset('assets/img/komponen/' . $item->gambar_logo) }}" style="width: 10rem; height: auto;"
+            class="img-fluid">
+        @else
+        tidak ada logo
+        @endif
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel  pb-3 pl-0 mb-3 d-flex justify-content-center align-items-center">
             <div class="info">
-                <a href="{{ route('/') }}" class="d-block">SMK PGRI Pamijahan Bogor</a>
+                @php
+                $instansis = $komponen->first();
+                @endphp
+                @if ($instansis)
+                <a href="{{ route('/') }}" class="d-block text-light fw-bold ">{{ $instansis->instansi }}</a>
+
+                @else
+                tidak ada instansi
+                @endif
             </div>
         </div>
 

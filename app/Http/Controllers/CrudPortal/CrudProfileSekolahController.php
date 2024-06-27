@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\CrudPortal;
 
 use App\Models\PortalModel\ProfilSekolah;
+use App\Models\PortalModel\Komponen;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class CrudProfileSekolahController extends Controller
     {
          $user = Auth::user();
         $data = [
+            'komponen'=>Komponen::all(),
             'title' => 'Halaman Profile Sekolah',
             'user'=> $user,
             'profil' => ProfilSekolah::all(),
@@ -64,22 +66,6 @@ class CrudProfileSekolahController extends Controller
         return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
     }
 }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
