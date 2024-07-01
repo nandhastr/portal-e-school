@@ -178,18 +178,18 @@ return [
             'required' => ':attributes Harus Diisi!',
         ],
         'email' => [
-'required'=> ':attributes Harus Diisi',
-'unique'=>':attributes Sudah Terdaftar',
-'email'=> ':attributes Harus Berupa Email (@gmail.com,@yahoo.com dll)',
-];
-'role'=> [
-            'required'=>':attributes Harus Diisi',
+            'required' => ':attributes Harus Diisi',
+            'unique' => ':attributes Sudah Terdaftar',
+            'email' => ':attributes Harus Berupa Email (@gmail.com,@yahoo.com dll)',
+        ],
+        'role' => [
+            'required' => ':attributes Harus Diisi',
 
-];
-'password'=> [
-    'required' => ' :attributes harus di isi'
-]
-    
+        ],
+        'password' => [
+            'required' => ' :attributes harus di isi'
+        ]
+
     ],
 
     /*
@@ -205,9 +205,9 @@ return [
 
     'attributes' => [
         'name' => 'Nama',
-        'email'=> 'Email',
-        'role'=> 'Role',
-        'password'=>' Password'
+        'email' => 'Email',
+        'role' => 'Role',
+        'password' => ' Password'
     ],
 
 

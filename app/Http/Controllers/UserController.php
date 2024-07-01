@@ -20,7 +20,7 @@ class UserController extends Controller
             'komponen'=>Komponen::all(),
             'title' => 'Halaman Data user',
             'user' => $user,
-            'level' => User::where('role', 'admin')->get(),
+            'level' => User::all(),
         ];
         return view('portal.admin.data-user-page', $data);
     }

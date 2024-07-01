@@ -57,13 +57,20 @@ Route::get('/article-bisnis', [portalController::class, 'article_bisnis'])->name
 Route::get('keg-osis', [portalController::class, 'keg_osis'])->name('keg-osis');
 Route::get('keg-pramuka', [portalController::class, 'keg_pramuka'])->name('keg-pramuka');
 
+// Route::middleware(['auth','AdminMiddleware'])->group(function () {
+//     Route::get('/admin', [AdminController::class, 'index']);
+//     // Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('auth');
+// });
 
-
-Route::middleware('auth','role:admin')->group(function (){
+Route::middleware(['auth', 'Admin'])->group(function () {
+    // crud portal sekolah
+    Route::get('/data-user', [UserController::class, 'index'])->name('data-user');
+    Route::post('/data-user-store', [UserController::class, 'store'])->name('data-user-store');
+    Route::post('/data-user-update/{id}', [UserController::class, 'update'])->name('data-user-update');
+    Route::post('/data-user-delete/{id}', [UserController::class, 'destroy'])->name('data-user-delete');
 });
 
-
-// portal  dashboardadmin
+//portal  dashboardadmin
 Route::get('/admin', [AdminController::class, 'index'])->name('admin')->middleware('auth');
 
 // crud portal sekolah
@@ -72,6 +79,11 @@ Route::post('/data-user-store', [UserController::class, 'store'])->name('data-us
 Route::post('/data-user-update/{id}', [UserController::class, 'update'])->name('data-user-update');
 Route::post('/data-user-delete/{id}', [UserController::class, 'destroy'])->name('data-user-delete');
 
+// crud portal sekolah
+// Route::get('/data-user', [UserController::class, 'index'])->name('data-user');
+// Route::post('/data-user-store', [UserController::class, 'store'])->name('data-user-store');
+// Route::post('/data-user-update/{id}', [UserController::class, 'update'])->name('data-user-update');
+// Route::post('/data-user-delete/{id}', [UserController::class, 'destroy'])->name('data-user-delete');
 
 // crud portal sekolah
 Route::get('/data-profil-sekolah', [CrudProfileSekolahController::class, 'index'])->name('data-profil-sekolah');

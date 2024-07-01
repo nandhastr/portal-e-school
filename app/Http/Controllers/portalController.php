@@ -5,33 +5,32 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PortalModel\Guru;
 
-use App\Models\PortalModel\Komponen;
+use App\Models\PortalModel\Alumni;
+use App\Models\PortalModel\Galeri;
+use App\Models\PortalModel\Artikel;
 use App\Models\PortalModel\Karyawan;
+use App\Models\PortalModel\Kegiatan;
+use App\Models\PortalModel\Komponen;
+use App\Models\PortalModel\VisiMisi;
 use App\Models\PortalModel\Pengumuman;
 use App\Models\PortalModel\Struktur_org;
 use App\Models\PortalModel\ProfilSekolah;
 use App\Models\PortalModel\SiswaBerprestasi;
-use App\Models\PortalModel\VisiMisi;
-use App\Models\PortalModel\Alumni;
-use App\Models\PortalModel\Galeri;
-use App\Models\PortalModel\Kegiatan;
 
 class portalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     
-     
-     */
+
     public function index()
     {
         $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(4)->get();
         $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
+        $komponen = Komponen::all();
+
         $data = [
             'title' => 'Home',
             'pengumuman_terbaru' => $pengumuman->first(),
             'pengumuman' => $pengumuman,
-            'komponen' => Komponen::all(),
+            'komponen' => $komponen,
             'kepsek' => $guruKepsek,
         ];
 

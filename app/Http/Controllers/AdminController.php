@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Guru;
-use App\Models\Kegiatan_pengguna;
-use App\Models\Kelas;
-use App\Models\Mapel;
-use App\Models\Siswa;
-use App\Models\Materi;
-use App\Models\Penghargaan;
-use App\Models\Pengumuman;
-use App\Models\PortalModel\Komponen;
+// use App\Models\Guru;
+// use App\Models\Kegiatan_pengguna;
+// use App\Models\Kelas;
+// use App\Models\Mapel;
+// use App\Models\Siswa;
+// use App\Models\Materi;
+// use App\Models\Penghargaan;
+// use App\Models\Pengumuman;
+use App\Models\User;
 use App\Models\RuangKelas;
 use Illuminate\Http\Request;
+use App\Models\PortalModel\Guru;
+use App\Models\PortalModel\Siswa;
+use App\Models\PortalModel\Alumni;
+use App\Models\PortalModel\Komponen;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PortalModel\Pengumuman;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -54,6 +59,10 @@ class AdminController extends Controller
             //     $penghargaan = Penghargaan::all();
             // }
 
+            $siswa = Siswa::count();
+            $guru = Guru::count();
+            $alumni = Alumni::count();
+            // $user = User::count();
             // Data yang akan dikirimkan ke tampilan
             $data = [
                 // 'penghargaan' => $penghargaan,
@@ -63,7 +72,11 @@ class AdminController extends Controller
                 // 'siswa' => $siswa,
 
                 // portal first
-                'komponen'=>Komponen::all(),
+                'siswa' => $siswa,
+                'guru' => $guru,
+                'alumni' => $alumni,
+                // 'Totaluser' => $user,
+                'komponen' => Komponen::all(),
                 'user' => $user,
                 'title' => 'Dashboard',
             ];

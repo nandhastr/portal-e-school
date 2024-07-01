@@ -8,7 +8,8 @@
 @endif
 {{-- dashboard admin --}}
 @if($user->role !== 'siswa' && $user->role !== 'guru')
-<x-e-learning.component.dashboard-admin></x-e-learning.component.dashboard-admin>
+<x-e-learning.component.dashboard-admin :user="$user" :siswa="$siswa" :alumni="$alumni" :guru="$guru">
+</x-e-learning.component.dashboard-admin>
 
 @endif
 {{-- dashboard guru --}}

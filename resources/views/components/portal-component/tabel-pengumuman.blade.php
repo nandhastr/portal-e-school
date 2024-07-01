@@ -39,7 +39,9 @@
                                     <th>Gambar</th>
                                     <th>Judul Pengumuman</th>
                                     <th>Tanggal Pelaksanaan</th>
-                                    <th>Isi Pengumuman</th>
+                                    <th>Waktu Pelaksanaan</th>
+                                    <th>Tempat Pelaksanaan</th>
+                                    <th>keterangan Pengumuman</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
@@ -54,7 +56,9 @@
                                     </td>
                                     <td>{{ $row->judul }}</td>
                                     <td>{{ $row->tanggal }}</td>
-                                    <td>{{ $row->isi }}</td>
+                                    <td>{{ $row->tempat }}</td>
+                                    <td>{{ $row->waktu }}</td>
+                                    <td>{{ $row->keterangan }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
                                             data-target="#modal-update_{{ $row->id }}"><i
@@ -95,9 +99,19 @@
                                 required>
                         </div>
                         <div class="form-group">
+                            <label for="tempat">Tempat</label>
+                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                placeholder="Enter tempat Pengumuman"></textarea>
+                        </div>
+                        <div class="form-group">
                             <label for="tanggal">Tanggal Pelaksanaan</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control"
                                 placeholder="Pilih tanggal" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu</label>
+                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
+                                required>
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul Pengumuman</label>
@@ -105,9 +119,9 @@
                                 placeholder="Enter Judul Pengumuman"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="isi">Isi Pengumuman</label>
-                            <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required
-                                placeholder="Enter Isi Pengumuman"></textarea>
+                            <label for="keterangan">keterangan Pengumuman</label>
+                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
+                                required placeholder="Enter keterangan Pengumuman"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah Pengumuman</button>
                     </form>
@@ -140,6 +154,16 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            <label for="tempat">Tempat</label>
+                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                placeholder="Enter tempat Pengumuman">{{$row->tempat}}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu</label>
+                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
+                                value="{{ $row->waktu }}" required>
+                        </div>
+                        <div class="form-group">
                             <label for="tanggal">Tanggal Pelaksanaan</label>
                             <input type="date" name="tanggal" id="tanggal" class="form-control"
                                 placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
@@ -150,9 +174,9 @@
                                 placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="isi">Isi Pengumuman</label>
-                            <textarea name="isi" id="isi" class="form-control" cols="30" rows="10" required
-                                placeholder="Enter Isi Pengumuman">{{$row->isi}}</textarea>
+                            <label for="keterangan">keterangan Pengumuman</label>
+                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
+                                required placeholder="Enter keterangan Pengumuman">{{$row->keterangan}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Ubah Pengumuman</button>
                     </form>
@@ -193,8 +217,8 @@
                                     <td>{{ $row->judul }}</td>
                                 </tr>
                                 <tr>
-                                    <th>isi Pengumuman</th>
-                                    <td>{{ $row->isi }}</td>
+                                    <th>keterangan Pengumuman</th>
+                                    <td>{{ $row->keterangan }}</td>
                                 </tr>
                             </table>
                         </div>

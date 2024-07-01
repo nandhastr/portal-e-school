@@ -37,18 +37,21 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Level</th>
+                                    <th>User Level</th>
                                     <th>Email</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($level as $row)
-                                @if ($row->role == 'admin')
+                                @foreach ($level as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->name }}</td>
-                                    <td>{{ $row->role }}</td>
+                                    <td>@if ($row->role == 'osis')
+                                        Ketua Osis
+                                        @else
+                                        {{ $row->role }}
+                                        @endif</td>
                                     <td>{{ $row->email }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
@@ -61,12 +64,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                @endif
-                                @empty
-                                <tr>
-                                    <td colspan="6">Tidak ada data users</td>
-                                </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -85,6 +83,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
                     <form action="{{ route('data-user-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
@@ -93,8 +92,7 @@
                             <select class="form-control" name="role">
                                 <option>Pilih Level Users</option>
                                 <option value="admin">Admin</option>
-                                {{-- <option value="guru">Guru</option>
-                                <option value="siswa">Siswa</option> --}}
+                                <option value="osis">Ketua Osis</option>
 
                             </select>
                         </div>
@@ -140,7 +138,9 @@
                             <select class="form-control" name="role" id="role">
                                 <option>Pilih Level Users</option>
                                 <option value="admin" {{ $row->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                {{-- Tambahkan opsi lainnya jika diperlukan --}}
+                                <option value="admin">Admin</option>
+                                <option value="osis">Ketua Osis</option>
+
                             </select>
                         </div>
                         <div class="form-group">
