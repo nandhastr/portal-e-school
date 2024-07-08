@@ -30,25 +30,28 @@
                         </div>
                     </div>
                     <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
+                        {{-- tabel dashboard admin --}}
 
                         <table id="example" class="display table-hover text-xs" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Level</th>
+                                    <th>User Level</th>
                                     <th>Email</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($level as $row)
-                                @if ($row->role == 'admin')
+                                @foreach ($level as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $row->name }}</td>
-                                    <td>{{ $row->role }}</td>
+                                    <td>@if ($row->role == 'osis')
+                                        Ketua Osis
+                                        @else
+                                        {{ $row->role }}
+                                        @endif</td>
                                     <td>{{ $row->email }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
@@ -61,12 +64,7 @@
                                         </a>
                                     </td>
                                 </tr>
-                                @endif
-                                @empty
-                                <tr>
-                                    <td colspan="6">Tidak ada data users</td>
-                                </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -85,36 +83,55 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+
                 <div class="modal-body">
+
                     <form action="{{ route('data-user-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{asset('assets/img/gift/loading.gif')}}" style="display: none ; width:100px"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="role">Level</label>
-                            <select class="form-control" name="role">
+                            <select type="text" class="form-control @error('role') is-invalid @enderror" name="role">
                                 <option>Pilih Level Users</option>
                                 <option value="admin">Admin</option>
-                                {{-- <option value="guru">Guru</option>
-                                <option value="siswa">Siswa</option> --}}
-
+                                <option value="osis">Ketua Osis</option>
                             </select>
+                            @error('role')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="name">Nama</label>
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Enter nama "
+                            <input type="text" name="name" id="name"
+                                class="form-control @error('name') is-invalid @enderror" placeholder="Enter nama "
                                 required value="{{old('name')}}">
+                            @error('name')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class=" form-group">
                             <label for="email">Email</label>
-                            <input name="email" id="email" class="form-control" required value="{{old('email')}}"
-                                placeholder="Enter email">
+                            <input type="email" name="email" id="email"
+                                class="form-control @error('email') is-invalid @enderror" required
+                                value="{{old('email')}}" placeholder="Enter email">
+                            @error('email')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input name="password" id="password" class="form-control" required
+                            <input type="password" name="password" id="password"
+                                class="form-control @error('password') is-invalid @enderror" required
                                 value="{{old('password')}}" placeholder="Enter password">
+                            @error('password')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -135,12 +152,18 @@
                     <form action="{{ route('data-user-update', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{asset('assets/img/gift/loading.gif')}}" style="display: none ; width:100px"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="role">Level</label>
                             <select class="form-control" name="role" id="role">
                                 <option>Pilih Level Users</option>
                                 <option value="admin" {{ $row->role == 'admin' ? 'selected' : '' }}>Admin</option>
-                                {{-- Tambahkan opsi lainnya jika diperlukan --}}
+                                <option value="admin">Admin</option>
+                                <option value="osis">Ketua Osis</option>
+
                             </select>
                         </div>
                         <div class="form-group">
@@ -161,7 +184,7 @@
                             <small class="form-text text-muted">Biarkan kosong jika tidak ingin mengubah
                                 password</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Ubah users</button>
+                        <button type="button" id="" class="btnEdit btn btn-primary">Ubah users</button>
                     </form>
                 </div>
             </div>
@@ -185,6 +208,10 @@
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img src="{{asset('assets/img/gift/loading.gif')}}" style="display: none ; width:100px"
+                                    class="loading">
+                            </div>
                             <p>Apakah Anda yakin ingin menghapus users Ini?</p>
                             <h5>Detail data</h5>
                             <table class="table table-bordered">
@@ -199,7 +226,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -216,6 +243,88 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+
+        // alert tambah data 
+        $('#btnSave').click(function (e) {
+        e.preventDefault();
+        swal.close();
+        
+        // Cek apakah ada inputan form yang kosong
+        let emptyFields = $(this).closest('form').find('input[type="text"], input[type="email"], input[type="password"], select').filter(function () {
+        return $.trim($(this).val()) == '';
+        });
+        
+        // Jika ada kolom input yang kosong
+        if (emptyFields.length > 0) {
+            $('.loading').show()
+            Swal.fire({
+                position: "top-end",
+                icon: "warning",
+                title: "Data Gagal Di Tambahkan, Silahkan Cek Kembali Form",
+                showConfirmButton: true,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $(this).closest('form').submit();
+                }
+                });
+            } else {
+                Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Data berhasil di tambah",
+                showConfirmButton: true,
+                });
+                    setTimeout(() => {
+                    $(this).closest('form').submit();
+                    }, 1500);
+                    $('.loading').show()
+                }
+            });
+
+            // alert edit data
+            $('.btnEdit').click(function (e) {
+            e.preventDefault();
+            swal.close();
+           
+           let btnEdit = $(this); 
+            
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Data berhasil di ubah",
+            showConfirmButton: false,
+            timer: 1500
+            });
+            
+            setTimeout(() => {
+            btnEdit.closest('form').submit(); 
+            }, 1500);
+            $('.loading').show()
+            });
+    
+            // alert delete
+            $('.btnDelete').click(function (e) {
+            e.preventDefault();
+            swal.close();
+           
+           let btnDelete = $(this); 
+            
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Data berhasil di hapus",
+            showConfirmButton: false,
+            timer: 1500
+            });
+            
+            setTimeout(() => {
+            btnDelete.closest('form').submit(); 
+            }, 1500);
+            $('.loading').show()
+            
+            
+        });
+
     });
 </script>
 

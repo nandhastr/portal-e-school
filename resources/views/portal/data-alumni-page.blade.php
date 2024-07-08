@@ -8,7 +8,8 @@
                 Alumni
             </x-hr-gradient>
         </div>
-        @if ($alumni->isNotEmpty())
+        @if ($alumni)
+
         <div class="row justify-content-center align-items-center mb-2">
             <div class="col-md-6 col-sm-12 text-center">
                 <select class="btn btn-outline-success btn-option-album" name="year" id="yearSelect">

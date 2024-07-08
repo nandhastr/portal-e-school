@@ -12,11 +12,25 @@ class CreatePortalSekolahTables extends Migration
         Schema::create('tbl_pengumuman', function (Blueprint $table) {
             $table->id();
             $table->string('judul');
-            $table->text('isi');
-            $table->string('gambar')->nullable();
+            $table->text('keterangan');
             $table->date('tanggal');
+            $table->time('waktu');
+            $table->string('tempat')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
+
+        // membuat tabel event kalender
+        Schema::create('tbl_event', function (Blueprint $table) {
+    $table->id();
+    $table->string('title');
+    $table->dateTime('start');
+    $table->dateTime('end')->nullable();
+    $table->string('backgroundColor')->nullable();
+    $table->string('borderColor')->nullable();
+    $table->timestamps();
+});
+
 
         // Membuat tabel profil_sekolah
         Schema::create('tbl_profil_sekolah', function (Blueprint $table) {
@@ -114,9 +128,11 @@ class CreatePortalSekolahTables extends Migration
             $table->id();
             $table->enum('kategori', ['uks', 'osis', 'pramuka']);
             $table->string('judul');
+            $table->string('tempat');
+            $table->time('waktu');
+            $table->date('tanggal');
             $table->text('deskripsi');
             $table->string('gambar')->nullable();
-            $table->date('tanggal');
             $table->timestamps();
         });
 
@@ -160,13 +176,14 @@ class CreatePortalSekolahTables extends Migration
         Schema::dropIfExists('tbl_kegiatan');
         Schema::dropIfExists('tbl_galeri_foto');
         Schema::dropIfExists('tbl_alumni');
+        Schema::dropIfExists('tbl_struktur_org');
         Schema::dropIfExists('tbl_guru');
         Schema::dropIfExists('tbl_karyawan');
         Schema::dropIfExists('tbl_siswa_berprestasi');
         Schema::dropIfExists('tbl_siswa');
         Schema::dropIfExists('tbl_profil_sekolah');
         Schema::dropIfExists('tbl_pengumuman');
-        Schema::dropIfExists('tbl_struktur_org');
         Schema::dropIfExists('tbl_komponen');
+        Schema::dropIfExists('tbl_event');
     }
 }

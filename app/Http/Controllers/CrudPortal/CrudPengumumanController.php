@@ -34,8 +34,10 @@ class CrudPengumumanController extends Controller
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'judul' => 'required',
-            'isi' => 'required',
+            'keterangan' => 'required',
             'tanggal' => 'required|date',
+            'waktu' => 'required',
+            'tempat' => 'required',
         ]);
 
         // proses gambar
@@ -48,8 +50,10 @@ class CrudPengumumanController extends Controller
         
         $pengumuman->gambar = $nama_gambar; 
         $pengumuman->judul = $request->judul;
-        $pengumuman->isi = $request->isi;
+        $pengumuman->keterangan = $request->keterangan;
         $pengumuman->tanggal = $request->tanggal;
+        $pengumuman->tempat = $request->tempat;
+        $pengumuman->waktu = $request->waktu;
 
         // dd($pengumuman); 
 
@@ -71,8 +75,10 @@ class CrudPengumumanController extends Controller
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'judul' => 'required',
-            'isi' => 'required',
-            'tanggal' => 'required',
+            'keterangan' => 'required',
+            'tanggal' => 'required|date',
+            'waktu' => 'required',
+            'tempat' => 'required',
         ]);
 
         // Temukan record berdasarkan ID
@@ -94,8 +100,10 @@ class CrudPengumumanController extends Controller
 
         // Perbarui data lainnya
         $pengumuman->judul = $request->judul;
-        $pengumuman->isi = $request->isi;
+        $pengumuman->keterangan = $request->keterangan;
         $pengumuman->tanggal = $request->tanggal;
+        $pengumuman->tempat = $request->tempat;
+        $pengumuman->waktu = $request->waktu;
 
         $pengumuman->save();
 

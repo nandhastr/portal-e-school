@@ -123,8 +123,12 @@
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                placeholder="peran sebagai " required value="{{old('jabatan')}}">
+                            <select name="jabatan" class="form-control" required>
+                                <option>Jabatan</option>
+                                <option value="guru">Guru</option>
+                                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                                <option value="Wakil Kepala Sekolah">Wakil Kepala Sekolah</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="genre">Jenis Kelamin</label>

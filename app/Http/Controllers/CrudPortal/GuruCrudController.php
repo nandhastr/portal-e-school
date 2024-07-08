@@ -41,7 +41,7 @@ class GuruCrudController extends Controller
                 'genre' => 'required',
                 'tempat_lahir' => 'required',
                 'tanggal_lahir' => 'required',
-                'email' => 'required',
+                'email' => 'required|email',
                 'telepon' => 'required',
             ]);
 

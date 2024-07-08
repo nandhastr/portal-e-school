@@ -175,21 +175,154 @@ return [
     'custom' => [
         // form tabel user
         'name' => [
-            'required' => ':attributes Harus Diisi!',
+            'required' => ':attribute Harus Diisi!',
         ],
         'email' => [
-'required'=> ':attributes Harus Diisi',
-'unique'=>':attributes Sudah Terdaftar',
-'email'=> ':attributes Harus Berupa Email (@gmail.com,@yahoo.com dll)',
-];
-'role'=> [
-            'required'=>':attributes Harus Diisi',
+            'required' => ':attribute Harus Diisi',
+            'unique' => ':attribute Sudah Terdaftar',
+            'email' => ':attribute Harus Berupa Email (@gmail.com,@yahoo.com dll)',
+        ],
+        'role' => [
+            'required' => ':attribute Harus Diisi',
 
-];
-'password'=> [
-    'required' => ' :attributes harus di isi'
-]
-    
+        ],
+        'password' => [
+            'required' => ' :attribute harus di isi'
+        ],
+        'url'=>[
+            'required'=>'Pilih :attribute ',
+                    'image'=>':attribute Harus berupa jpeg,png,jpg,gif',
+                    'max'=>'file :attribute jangan lebih dari 2mb',
+        ],
+        'gambar_logo'=>[
+            'required'=>'Pilih :attribute ',
+            'image'=>':attribute Harus berupa jpeg,png,jpg,gif',
+            'max'=>'file :attribute jangan lebih dari 2mb',
+        ],
+        // alumni
+        'gambar'=>[
+            'required'=>'Pilih :attribute ',
+            'image'=>':attribute Harus berupa jpeg,png,jpg,gif',
+            'max'=>'file :attribute jangan lebih dari 2mb',
+        ],
+        //artikel
+        'judul'=>[
+            'required' => ':attribute harus diisi',
+        ],
+        'jenis'=>[
+            ':attribute Harus diisi',
+        ],
+        'tanggal'=>[
+            'required'=>':attribute harus diisi',
+            'date'=>':attribute harus berupa tanggal',
+        ],
+        // pengumuman
+        'keterangan'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'waktu'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'tempat'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        // prfile sekola
+        'kategori'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'konten'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        // struktur organigram
+        'id_guru'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'jabatan'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'telepon'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        // event
+        'title'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'start'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'end'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'backgroundColor'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'borderColor'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        //galeri
+        'deskripsi'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'tanggal_upload'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        //guru
+        'nip'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'nama'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'status'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'genre'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'tempat_lahir'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'tanggal_lahir'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        // komponen
+        'instansi'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'akreditas'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'alamat'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        //    prestasi siswa
+        'prestasi'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'tahun'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'siswa_id'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        // siswa
+        'nis'=>[
+            'required'=>':attribute harus diisi',
+        ],
+        'kelas'=>[
+            'required'=>':attribute harus diisi',
+        ],
+
+
+
+
+
+
+
+
+
+
+
     ],
 
     /*
@@ -204,10 +337,60 @@ return [
     */
 
     'attributes' => [
+        'url'=>'Gambar',
+        'gambar'=>"Gambar",
+        'gambar_logo'=>"Gambar Logo",
+        // user
         'name' => 'Nama',
-        'email'=> 'Email',
-        'role'=> 'Role',
-        'password'=>' Password'
+        'email' => 'Email',
+        'role' => 'Role',
+        'password' => ' Password',
+        // alumni
+        'tahun_lulus'=>"Tahun Lulus",
+        // artikel
+        'judul'=> 'Judul',
+        'jenis' =>'Jenis',
+        'isi'=> 'Isi',
+        'tanggal'=>'Tanggal',
+        // pengumuman
+        'keterangan'=>'Keterangan',
+        'waktu'=>'Waktu',
+        'tempat'=>'Tempat',
+        // profil sekolah
+        'kategori'=>'Kategori',
+        'konten'=>'Konten',
+        // struktur
+        'id_guru'=> 'ID Guru',
+        'jabatan'=>'Jabatan',
+        'telepon'=>'Telepon',
+        // event
+        'title'=>'Title',
+        'start'=>'Tanggal Mulai',
+        'backgroundColor'=>'Kode warna',
+        'borderColor'=>'Warna garis',
+        // galeri
+        'url'=>'Gambar',
+        'deskripsi'=>'Deskripsi',
+        'tanggal_upload'=>'Tanggal Uploaad',
+        // guru
+        'nip'=>'NIP',
+        'nama'=>'Nama',
+        'status'=>'Status',
+        'genre'=>'Genre',
+        'tempat_lahir'=>'Tempat Lahir',
+        'tanggal_lahir'=>'Tanggal Lahir',
+        
+        // komponen
+        'instansi'=>'Instansi',
+        'akreditas'=>'Akreditas',
+        
+        // prestasi
+        'prestasi'=>'Prestasi',
+        'siswa_id'=>'ID siswa',
+
+        // siswa
+        'nis'=>'NIS',
+        'kelas'=>'Kelas',
     ],
 
 

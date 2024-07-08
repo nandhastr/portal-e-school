@@ -43,26 +43,20 @@
                 </li> --}}
 
                 {{-- for portal --}}
+                {{-- @if($user->role !== 'admin') --}}
                 <li class="nav-item menu-open">
                     <x-nav-link href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </x-nav-link>
                 </li>
+                {{-- @endif --}}
                 <li class="nav-item">
                     {{-- sidebar untuk elearning --}}
                     {{-- <x-nav-link href="/akademi" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
                         <i class="fa-solid fa-graduation-cap"></i>
                         <p>Akademi<i class="fas fa-angle-left right"></i></p>
                     </x-nav-link> --}}
-
-                    {{-- sidebar portla --}}
-                    <x-nav-link href="" class="nav-link {{ request()->is('akademi') ? 'active' : '' }}">
-                        <i class="fa-regular fa-bookmark"></i>
-                        <p class="text-lg fw-bold text-primary">Master Portal<i
-                                class="fas fa-angle-left right text-lg"></i>
-                        </p>
-                    </x-nav-link>
 
                     {{-- side bar admin --}}
                     @if($user->role !== 'siswa' && $user->role !== 'guru')

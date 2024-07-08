@@ -33,10 +33,12 @@ class KegiatanCrudController extends Controller
         try {
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'judul' => 'required',
             'kategori' => 'required',
-            'deskripsi' => 'required',
+            'judul' => 'required',
+            'tempat' => 'required',
+            'waktu' => 'required',
             'tanggal' => 'required|date',
+            'deskripsi' => 'required',
         ]);
 
         // proses gambar
@@ -48,11 +50,13 @@ class KegiatanCrudController extends Controller
         $kegiatan = new Kegiatan;
         
         $kegiatan->gambar = $nama_gambar; 
-        $kegiatan->judul = $request->judul;
         $kegiatan->kategori = $request->kategori;
-        $kegiatan->deskripsi = $request->deskripsi;
+        $kegiatan->judul = $request->judul;
+        $kegiatan->tempat = $request->tempat;
+        $kegiatan->waktu = $request->waktu;
         $kegiatan->tanggal = $request->tanggal;
-
+        $kegiatan->deskripsi = $request->deskripsi;
+        
         // dd($kegiatan); 
 
         $kegiatan->save();
@@ -72,10 +76,12 @@ class KegiatanCrudController extends Controller
       try {
         $request->validate([
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+             'kategori' => 'required',
             'judul' => 'required',
-            'kategori' => 'required',
-            'deskripsi' => 'required',
+            'tempat' => 'required',
+            'waktu' => 'required',
             'tanggal' => 'required|date',
+            'deskripsi' => 'required',
         ]);
 
         // Temukan record berdasarkan ID
@@ -96,11 +102,13 @@ class KegiatanCrudController extends Controller
         }
 
         // Perbarui data lainnya
-        $kegiatan->judul = $request->judul;
         $kegiatan->kategori = $request->kategori;
-        $kegiatan->deskripsi = $request->deskripsi;
+        $kegiatan->judul = $request->judul;
+        $kegiatan->tempat = $request->tempat;
+        $kegiatan->waktu = $request->waktu;
         $kegiatan->tanggal = $request->tanggal;
-
+        $kegiatan->deskripsi = $request->deskripsi;
+        // dd($kegiatan);
         $kegiatan->save();
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui');

@@ -8,7 +8,9 @@
                 </x-hr-gradient>
 
             </div>
-            @if ($about && $about->isNotEmpty())
+            @if (empty($about))
+            <x-image-not-data></x-image-not-data>
+            @else
             <div class="col">
                 <x-card-home class=" ">
                     @if ($about)
@@ -45,8 +47,7 @@
                     </div>
                 </x-card-home>
             </div>
-            @else
-            <x-image-not-data></x-image-not-data>
+
             @endif
         </div>
 

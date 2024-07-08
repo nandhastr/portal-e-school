@@ -36,29 +36,25 @@
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Gambar</th>
-                                    <th>Judul Pengumuman</th>
-                                    <th>Tanggal Pelaksanaan</th>
-                                    <th>Waktu Pelaksanaan</th>
-                                    <th>Tempat Pelaksanaan</th>
-                                    <th>keterangan Pengumuman</th>
+                                    <th>Title</th>
+                                    <th>Mulai</th>
+                                    <th>Berakhir</th>
+                                    <th>Kode Warna</th>
+                                    <th>Warna Garis</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(!empty($pengumuman))
-                                @foreach ($pengumuman as $row)
+                                @if(!empty($event))
+                                @foreach ($event as $row)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
-                                            style="width: 50px; height: auto;" class="img-fluid">
+                                    <td>{{ $row->title }}</td>
+                                    <td>{{ $row->start }}</td>
+                                    <td>{{ $row->end }}</td>
+                                    <td style="background-color: {{$row->backgroundColor}}">{{ $row->backgroundColor }}
                                     </td>
-                                    <td>{{ $row->judul }}</td>
-                                    <td>{{ $row->tanggal }}</td>
-                                    <td>{{ $row->tempat }}</td>
-                                    <td>{{ $row->waktu }}</td>
-                                    <td>{{ $row->keterangan }}</td>
+                                    <td style="border: 4px solid {{$row->borderColor}}">{{$row->borderColor }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
                                             data-target="#modal-update_{{ $row->id }}"><i
@@ -70,7 +66,7 @@
                                 </tr>
                                 @endforeach
                                 @else
-                                <p>tidak ada pengumuman</p>
+                                <p>tidak ada event</p>
                                 @endif
                             </tbody>
                         </table>
@@ -85,100 +81,88 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Pengumuman</h4>
+                    <h4 class="modal-title">Tambah Event </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-pengumuman-store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('data-event-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
+                            <label for="title">judul event</label>
+                            <input type="text" name="title" id="title" class="form-control" required
+                                placeholder="Enter title event">
                         </div>
                         <div class="form-group">
-                            <label for="tempat">Tempat</label>
-                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
-                                placeholder="Enter tempat Pengumuman"></textarea>
+                            <label for="backgroundColor">Kode Warna</label>
+                            <input type="color" name="backgroundColor" id="backgroundColor" class="form-control"
+                                placeholder="Pilih backgroundColor" required>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">Tanggal Pelaksanaan</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required>
+                            <label for="borderColor">Garis Warna</label>
+                            <input type="color" name="borderColor" id="borderColor" class="form-control"
+                                placeholder="Pilih borderColor" required>
+
                         </div>
                         <div class="form-group">
-                            <label for="waktu">Waktu</label>
-                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
-                                required>
+                            <label for="start">Mulai :</label>
+                            <input type="datetime-local" name="start" id="start" class="form-control"
+                                placeholder="Pilih start" required>
                         </div>
                         <div class="form-group">
-                            <label for="judul">Judul Pengumuman</label>
-                            <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul Pengumuman"></textarea>
+                            <label for="end">Berakhir :</label>
+                            <input type="datetime-local" name="end" id="end" class="form-control"
+                                placeholder="Pilih end" required>
                         </div>
-                        <div class="form-group">
-                            <label for="keterangan">keterangan Pengumuman</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
-                                required placeholder="Enter keterangan Pengumuman"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Tambah Pengumuman</button>
+                        <button type="submit" class="btn btn-primary">Tambah event</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    @foreach ($pengumuman as $row)
+    @foreach ($event as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Ubah Pengumuman</h4>
+                    <h4 class="modal-title">Ubah event</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-pengumuman-update', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-event-update', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
-                            @if ($row->gambar)
-                            <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
-                            @endif
+                            <label for="title">judul event</label>
+                            <input type="text" name="title" id="title" class="form-control" required
+                                placeholder="Enter title event" value="{{$row->title}}">
                         </div>
                         <div class="form-group">
-                            <label for="tempat">Tempat</label>
-                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
-                                placeholder="Enter tempat Pengumuman">{{$row->tempat}}</textarea>
+                            <label for="backgroundColor">Kode Warna</label>
+                            <input type="color" name="backgroundColor" id="backgroundColor" class="form-control"
+                                placeholder="Pilih backgroundColor" value="{{$row->backgroundColor}}">
                         </div>
                         <div class="form-group">
-                            <label for="waktu">Waktu</label>
-                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
-                                value="{{ $row->waktu }}" required>
+                            <label for="borderColor">Garis Warna</label>
+                            <input type="color" name="borderColor" id="borderColor" class="form-control"
+                                placeholder="Pilih borderColor" value="{{$row->borderColor}}">
+
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">Tanggal Pelaksanaan</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
+                            <label for="start">Mulai :</label>
+                            <input type="datetime-local" name="start" id="start" class="form-control"
+                                placeholder="Pilih start" required value="{{$row->start}}">
                         </div>
                         <div class="form-group">
-                            <label for="judul">Judul Pengumuman</label>
-                            <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
+                            <label for="end">Berakhir :</label>
+                            <input type="datetime-local" name="end" id="end" class="form-control" placeholder="Pilih end"
+                                required value="{{$row->end}}">
                         </div>
-                        <div class="form-group">
-                            <label for="keterangan">keterangan Pengumuman</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
-                                required placeholder="Enter keterangan Pengumuman">{{$row->keterangan}}</textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Ubah Pengumuman</button>
+                        <button type="submit" class="btn btn-primary">Ubah event</button>
                     </form>
                 </div>
             </div>
@@ -187,38 +171,39 @@
     @endforeach
 
     {{-- Modal delete --}}
-    @foreach ($pengumuman as $row)
+    @foreach ($event as $row)
     <div class="modal fade" id="modal-delete_{{ $row->id }}">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus Pengumumann</h4>
+                    <h4 class="modal-title">Hapus event</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-pengumuman-delete', ['id' => $row->id]) }}" method="POST"
+                    <form action="{{ route('data-event-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
-                            <p>Apakah Anda yakin ingin menghapus Pengumuman Ini?</p>
+                            <p>Apakah Anda yakin ingin menghapus event Ini?</p>
                             <h5>Detail Data</h5>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>Gambar</th>
-                                    <td>
-                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
-                                            style="width: 50px; height: auto;" class="img-fluid">
-                                    </td>
+                                    <th>Judul event</th>
+                                    <td>{{ $row->title }}</td>
                                 </tr>
                                 <tr>
-                                    <th>Judul Pengumuman</th>
-                                    <td>{{ $row->judul }}</td>
+                                    <th>Tanggal mulai event</th>
+                                    <td>{{ $row->start }}</td>
                                 </tr>
                                 <tr>
-                                    <th>keterangan Pengumuman</th>
-                                    <td>{{ $row->keterangan }}</td>
+                                    <th>Tanggal berakhir event</th>
+                                    <td>{{ $row->end }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kode warna event</th>
+                                    <td style="background-color: {{ $row->backgroundColor }}">{{ $row->backgroundColor }}</td>
                                 </tr>
                             </table>
                         </div>

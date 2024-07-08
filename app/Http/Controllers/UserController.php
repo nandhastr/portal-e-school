@@ -20,7 +20,7 @@ class UserController extends Controller
             'komponen'=>Komponen::all(),
             'title' => 'Halaman Data user',
             'user' => $user,
-            'level' => User::where('role', 'admin')->get(),
+            'level' => User::all(),
         ];
         return view('portal.admin.data-user-page', $data);
     }
@@ -29,7 +29,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
-        try {
             $request->validate([
                  'name' => 'required',
                 'email' => 'required|email|unique:users,email',
@@ -46,13 +45,18 @@ class UserController extends Controller
 
             // dd($user); 
             // Save  ke database
-            $user->save();
-
-            return redirect()->back()->with('success', 'Data berhasil disimpan');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
-        }
+            
+            if($user->save()){
+                return redirect()->back()->with('success', 'Data berhasil Di tambahkan');
+            }else{
+            return redirect()->back()->withInput();
+            }
     }
+
+        // } catch (\Exception $e) {
+        //     return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+        // }
+    
 
     /**
      * Update the specified resource in storage.
@@ -64,7 +68,7 @@ class UserController extends Controller
             $request->validate([
                 'name' => 'required',
                 'email' => 'nullable|email',
-                'role' => 'required',
+                'role' => 'nullable',
                 'password' => 'nullable',
             ]);
 

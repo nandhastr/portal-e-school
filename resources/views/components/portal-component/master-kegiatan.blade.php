@@ -39,8 +39,10 @@
                                     <th>Gambar</th>
                                     <th>Kategori</th>
                                     <th>Judul kegiatan</th>
-                                    <th>Jadwal Kegiatan</th>
-                                    <th>Informasi</th>
+                                    <th>Tempat Kegiatan</th>
+                                    <th>Tanggal Kegiatan</th>
+                                    <th>Waktu Kegiatan</th>
+                                    <th>Deskripsi</th>
                                     <th>aksi</th>
                                 </tr>
                             </thead>
@@ -55,7 +57,9 @@
                                     </td>
                                     <td>{{ $row->kategori }}</td>
                                     <td>{{ $row->judul }}</td>
+                                    <td>{{ $row->tempat }}</td>
                                     <td>{{ $row->tanggal }}</td>
+                                    <td>{{ $row->waktu }}</td>
                                     <td>{{ $row->deskripsi }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
@@ -94,29 +98,38 @@
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
+                                required value="{{old('gambar')}}">
                         </div>
                         <div class="form-group">
-                            <label for="kategori">Kategori Kegiatan Osis/Pramuka</label>
+                            <label for="kategori">Kategori Kegiatan Osis</label>
                             <select name="kategori" class="form-control">
                                 <option value="osis">Osis</option>
-                                <option value="pramuka">Pramuka</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal">DIlaksanakan Pada Tanggal :</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required>
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul kegiatan</label>
                             <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul kegiatan"></textarea>
+                                value="{{old('judul')}}" placeholder="Enter Judul kegiatan"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="tempat">Tempat kegiatan</label>
+                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                value="{{old('tempat')}}" placeholder="Enter tempat kegiatan"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu kegiatan</label>
+                            <input name="waktu" id="waktu" type="time" class="form-control" required
+                                value="{{old('waktu')}}" placeholder="Enter waktu kegiatan">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">DIlaksanakan Pada Tanggal :</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                placeholder="Pilih tanggal" required value="{{old('tanggal')}}">
                         </div>
                         <div class="form-group">
                             <label for="deskripsi">deskripsi kegiatan</label>
                             <textarea name="deskripsi" id="deskripsi" class="form-control" cols="30" rows="10" required
-                                placeholder="Enter deskripsi kegiatan"></textarea>
+                                value="{{old('deskripsi')}}" placeholder="Enter deskripsi kegiatan"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Tambah kegiatan</button>
                     </form>
@@ -143,26 +156,14 @@
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar" class="form-control"
                                 placeholder="Pilih Gambar">
-                            @if ($row->gambar)
                             <img src="{{ asset('assets/img/kegiatan/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
-                            @endif
+                                style="width: 50px; height: auto;" class="img-fluid">
                         </div>
                         <div class="form-group">
-                            <label for="kategori">Kategori Kegiatan Osis/Pramuka</label>
+                            <label for="kategori">Kategori Kegiatan Osis</label>
                             <select name="kategori" class="form-control">
-                                @foreach ($kegiatan as $keg )
-                                <option value="{{$keg->id}}" @if ($row->kategori == $keg->id) selected
-                                    @endif>{{ $keg->kategori }}</option>
-                                @endforeach
                                 <option value="osis">Osis</option>
-                                <option value="pramuka">Pramuka</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
                         </div>
                         <div class="form-group">
                             <label for="judul">Judul kegiatan</label>
@@ -170,7 +171,22 @@
                                 placeholder="Enter Judul kegiatan">{{$row->judul}}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="deskripsi">Isi kegiatan</label>
+                            <label for="tempat">Tempat kegiatan</label>
+                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                placeholder="Enter tempat kegiatan">{{ $row->tempat }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="waktu">Waktu kegiatan</label>
+                            <input name="waktu" id="waktu" type="time" class="form-control" required
+                                placeholder="Enter waktu kegiatan" value="{{$row->waktu}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="tanggal">DIlaksanakan Pada Tanggal :</label>
+                            <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                placeholder="Pilih tanggal" required value="{{$row->tanggal}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="deskripsi">deskripsi kegiatan</label>
                             <textarea name="deskripsi" id="deskripsi" class="form-control" cols="30" rows="10" required
                                 placeholder="Enter deskripsi kegiatan">{{$row->deskripsi}}</textarea>
                         </div>
