@@ -16,6 +16,7 @@ use App\Models\PortalModel\Pengumuman;
 use App\Models\PortalModel\Struktur_org;
 use App\Models\PortalModel\ProfilSekolah;
 use App\Models\PortalModel\SiswaBerprestasi;
+use App\Models\PortalModel\Event;
 
 class portalController extends Controller
 {
@@ -31,6 +32,8 @@ class portalController extends Controller
             'pengumuman_terbaru' => $pengumuman->first(),
             'pengumuman' => $pengumuman,
             'komponen' => $komponen,
+            'event'=>Event::all(),
+            'kegiatan'=>Kegiatan::all(),
             'kepsek' => $guruKepsek,
         ];
 

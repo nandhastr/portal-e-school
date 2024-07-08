@@ -19,6 +19,7 @@ use App\Models\PortalModel\Alumni;
 use App\Models\PortalModel\Komponen;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PortalModel\Pengumuman;
+use App\Models\PortalModel\Kegiatan;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -62,6 +63,7 @@ class AdminController extends Controller
             $siswa = Siswa::count();
             $guru = Guru::count();
             $alumni = Alumni::count();
+            $kegiatan = Kegiatan::count();
             // $user = User::count();
             // Data yang akan dikirimkan ke tampilan
             $data = [
@@ -75,7 +77,7 @@ class AdminController extends Controller
                 'siswa' => $siswa,
                 'guru' => $guru,
                 'alumni' => $alumni,
-                // 'Totaluser' => $user,
+                'kegiatan' => $kegiatan,
                 'komponen' => Komponen::all(),
                 'user' => $user,
                 'title' => 'Dashboard',
@@ -205,54 +207,4 @@ class AdminController extends Controller
     //     return view('elearning.admin.data-kegiatan-page', $data);
     // }
 
-
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

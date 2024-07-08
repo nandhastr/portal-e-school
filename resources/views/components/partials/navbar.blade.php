@@ -96,8 +96,6 @@
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-osis">Kegiatan
                                         OSIS</a></li>
-                                <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-pramuka">Kegiatan
-                                        Pramuka</a></li>
                             </ul>
                         </div>
                     </li>

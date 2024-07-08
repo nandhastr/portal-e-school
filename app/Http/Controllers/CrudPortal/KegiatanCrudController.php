@@ -101,15 +101,14 @@ class KegiatanCrudController extends Controller
             $kegiatan->gambar = $nama_gambar;
         }
 
-            // Perbarui data lainnya
-            $kegiatan->gambar = $nama_gambar;
-            $kegiatan->kategori = $request->kategori;
-            $kegiatan->judul = $request->judul;
-            $kegiatan->tempat = $request->tempat;
-            $kegiatan->waktu = $request->waktu;
-            $kegiatan->tanggal = $request->tanggal;
-            $kegiatan->deskripsi = $request->deskripsi;
-
+        // Perbarui data lainnya
+        $kegiatan->kategori = $request->kategori;
+        $kegiatan->judul = $request->judul;
+        $kegiatan->tempat = $request->tempat;
+        $kegiatan->waktu = $request->waktu;
+        $kegiatan->tanggal = $request->tanggal;
+        $kegiatan->deskripsi = $request->deskripsi;
+        // dd($kegiatan);
         $kegiatan->save();
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui');

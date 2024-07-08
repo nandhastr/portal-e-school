@@ -1,4 +1,5 @@
-<div class="container-fluid">
+{{-- dashbioard elearning --}}
+{{-- <div class="container-fluid">
     <div class="row mb-2">
         <div class="col-12">
             <!-- small box -->
@@ -26,35 +27,6 @@
             </div>
         </div>
         <!-- ./col -->
-        {{-- <div class="col-lg-4 col-md-6 col-12">
-            <!-- small box -->
-            <div class="small-box border">
-                <div class="inner">
-                    <h3 class="text-info">Pencapaianku</h3>
-                    <div class="row justify-content-center align-items-center">
-                        @foreach($siswa as $s)
-                        <div class="col-6 text-center">
-                            <i class="fa-solid fa-book-open text-info "></i><br>
-                            <span class=" text-dark">kelasku : {{ $s->kelas_sekarang }}</span>
-                        </div>
-                        @endforeach
-                        <div class="col-6 text-center">
-                            <i class="fa-solid fa-certificate text-info "></i><br>
-                            <span class=" text-dark">Sertifikat</span>
-                        </div>
-                        <div class="col-6 text-center">
-                            <span class="text-info text-lg fw-bold">12</span><br>
-                            <span class=" text-dark">Kompetisi diikuti</span>
-                        </div>
-                        <div class="col-6 text-center">
-                            <span class="text-info text-lg fw-bold">12</span><br>
-                            <span class=" text-dark">Acara diikuti</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- ./col -->
         <div class="col-lg-6 col-md-6 col-12">
             <!-- small box -->
             <div class="small-box border ">
@@ -63,7 +35,7 @@
                 </div>
                 <div class="row ">
                     @if(!empty($kegiatan))
-                    {{-- {{ dd($kegiatan) }} --}}
+
                     @foreach ($kegiatan as $row )
                     <div class="col-6">
                         <ul>
@@ -86,7 +58,7 @@
                 </div>
                 <div class="row ">
                     @if(!empty($penghargaan))
-                    {{-- {{ dd($penghargaan) }} --}}
+
                     @foreach ($penghargaan as $award )
                     <div class="col-6">
                         <ul>
@@ -118,4 +90,66 @@
             </div>
         </div>
     </div>
+</div> --}}
+
+<div class="container-fluid bg-content mb-4">
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a href="">
+                <div class="info-box">
+                    <span class="info-box-icon bg-info"><i class="fa-solid fa-user-large"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Info Kegiatan Yang di Share</span>
+                        <span class="info-box-number">
+                            @if ($kegiatan)
+                            {{ $kegiatan }}
+                            @else
+                            tidak ada data
+                            @endif
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a href="">
+                <div class="info-box bg-success">
+                    <span class="info-box-icon "><i class="fa-solid fa-user-tie"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Guru</span>
+                        <span class="info-box-number">
+                            @if ($guru)
+                            {{ $guru }}
+                            @else
+                            tidak ada data
+                            @endif
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <a href="">
+                <div class="info-box bg-gradient-warning">
+                    <span class="info-box-icon text-dark"><i class="fa-solid fa-user-graduate"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Alumni</span>
+                        <span class="info-box-number">
+                            @if ($alumni)
+                            {{ $alumni }}
+                            @else
+                            tidak ada data
+                            @endif
+                        </span>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- ./col -->
+    </div>
+    <!-- /.row -->
 </div>

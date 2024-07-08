@@ -6,7 +6,8 @@
 
 
     {{-- box small untuk portal informasi kegaiatan sekolah --}}
-    <x-e-learning.component.box-small :user="$user" :siswa="$siswa" :alumni="$alumni" :guru="$guru">
+    <x-e-learning.component.box-small :kegiatan="$kegiatan" :user="$user" :siswa="$siswa" :alumni="$alumni"
+        :guru="$guru">
     </x-e-learning.component.box-small>
 
 </x-e-learning.master.layout>

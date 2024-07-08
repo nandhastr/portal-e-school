@@ -28,10 +28,11 @@ use App\Http\Controllers\CrudPortal\VisimisiCrudController;
 use App\Http\Controllers\CrudPortal\CrudPengumumanController;
 use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
 use App\Http\Controllers\CrudPortal\KegiatanCrudController;
+use App\Http\Controllers\CrudPortal\EventController;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -157,6 +158,11 @@ Route::get('/data-kegiatan', [KegiatanCrudController::class, 'index'])->name('da
 Route::post('/data-kegiatan-store', [KegiatanCrudController::class, 'store'])->name('data-kegiatan-store');
 Route::post('/data-kegiatan-update/{id}', [KegiatanCrudController::class, 'update'])->name('data-kegiatan-update');
 Route::post('/data-kegiatan-delete/{id}', [KegiatanCrudController::class, 'destroy'])->name('data-kegiatan-delete');
+// crud event kelender
+Route::get('/data-event', [EventController::class, 'index'])->name('data-event');
+Route::post('/data-event-store', [EventController::class, 'store'])->name('data-event-store');
+Route::post('/data-event-update/{id}', [EventController::class, 'update'])->name('data-event-update');
+Route::post('/data-event-delete/{id}', [EventController::class, 'destroy'])->name('data-event-delete');
 
 
 // view e-learning dashboard

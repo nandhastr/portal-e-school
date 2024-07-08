@@ -3,6 +3,7 @@
     <div class="marque">
         {{-- <x-marque></x-marque> --}}
     </div>
+    {{-- {{dd($event)}} --}}
 
     <div class="container mt-5 mb-5 container-fluid">
         @if ($pengumuman && $pengumuman_terbaru)
@@ -27,31 +28,9 @@
                         <h6 class="p-3">Pelaksanaan acara :</h6>
                         <div class="row">
                             <div class="col-6">
-                                <span class="p-3">Tempat :
-                                    @if ($pengumuman_terbaru->tempat)
-                                    {{ $pengumuman_terbaru->tempat }}
-                                    @else
-                                    -
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="col-6">
-                                <span class="p-3">Tanggal :
-                                    @if ($pengumuman_terbaru->tanggal)
-                                    {{ $pengumuman_terbaru->tanggal }}
-                                    @else
-                                    -
-                                    @endif
-                                </span>
-                            </div>
-                            <div class="col-6">
-                                <span class="p-3">Waktu :
-                                    @if ($pengumuman_terbaru->waktu)
-                                    {{ $pengumuman_terbaru->waktu }}
-                                    @else
-                                    -
-                                    @endif
-                                </span>
+                                <span class="p-3">Tempat : {{ $pengumuman_terbaru->tempat }}</span><br>
+                                <span class="p-3">Tanggal : {{ $pengumuman_terbaru->tanggal }}</span><br>
+                                <span class="p-3">Waktu : {{ $pengumuman_terbaru->waktu }}</span><br>
                             </div>
                         </div>
                         <hr>
@@ -73,7 +52,7 @@
                 </x-hr-gradient>
             </div>
             <div class="col-12">
-                <x-calender />
+                <x-calender :event="$event" />
             </div>
         </div>
         <div class="col-12">

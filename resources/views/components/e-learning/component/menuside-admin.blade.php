@@ -49,6 +49,7 @@
 
 
 {{-- sidebar portal --}}
+@if (Auth::user()->role == 'admin')
 <li class="nav-item">
     <a href="#" class="nav-link">
         <i class="fa-solid fa-database"></i>
@@ -156,6 +157,21 @@
                 <p>Master Komponen Sekolah</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="/data-event" class="nav-link {{ request()->is('data-event') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Event Kalender</p>
+            </a>
+        </li>
     </ul>
 </li>
+@elseif (Auth::user()->role == 'osis')
+<li class="nav-item">
+    <a href="/data-kegiatan" class="nav-link {{ request()->is('data-kegiatan') ? 'active' : '' }}">
+        <i class="far fa-circle nav-icon"></i>
+        <p>Master Kegiatan</p>
+    </a>
+</li>
+
+@endif
 </ul>

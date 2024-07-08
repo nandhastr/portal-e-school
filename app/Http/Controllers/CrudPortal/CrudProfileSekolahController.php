@@ -38,7 +38,7 @@ class CrudProfileSekolahController extends Controller
      */
    public function store(Request $request)
 {
-    try {
+  
         $request->validate([
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'kategori' => 'required',
@@ -58,13 +58,13 @@ class CrudProfileSekolahController extends Controller
         $profil->konten = $request->konten;
 
         // dd($profil); 
-
-        $profil->save();
         
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
-    }
+        if($profil->save()){
+                return redirect()->back()->with('success', 'Data berhasil Di tambahkan');
+            }else{
+            return redirect()->back()->withInput();
+            }
+    
 }
 
     /**
