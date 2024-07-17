@@ -236,13 +236,9 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
-var Toast = Swal.mixin({
-toast: true,
-position: "top-end",
-showConfirmButton: false,
-timer: 3000,
-});
-       $('#btnSave').click(function (e) {
+
+
+     $('#btnSave').click(function (e) {
     e.preventDefault();
     swal.close();
     
@@ -259,7 +255,7 @@ timer: 3000,
     emptyFields.each(function() {
     let placeholder = $(this).attr('placeholder');
     let fieldName = $(this).attr('name');
-    let message = placeholder  ; 
+    let message = placeholder + ' !' ; 
     $('#' + fieldName + '_error').text(message); 
     });
     } else {
@@ -396,9 +392,9 @@ timer: 3000,
             });
         }
     });
-});
+    });
 
-});
+    });
 </script>
 
 @endsection

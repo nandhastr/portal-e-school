@@ -85,20 +85,35 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-alumni-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-alumni-store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required value="{{old('file')}}">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
                         </div>
                         <div class=" form-group">
                             <label for="tahun_lulus">Tahun lulus</label>
-                            <input type="YEAR" name="tahun_lulus" id="tahun_lulus" class="form-control"
+                            <input type="YEAR" name="tahun_lulus" id="tahun_lulus"
+                                class="form-control @error('tahun_lulus') is-invalid @enderror"
                                 placeholder="Enter tahun lulus " required value="{{old('tahun_lulus')}}">
+                            <small id="tahun_lulus_error" class="text-red is-invalid"></small>
+                            @error('tahun_lulus')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="gambar">Gambar</label>
+                            <input type="file" name="gambar" id="gambar"
+                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
+                                required value="{{old('file')}}">
+                            <small id="gambar_error" class="text-red is-invalid"></small>
+                            @error('gambar')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
 
-                        <button type=" submit" class="btn btn-primary">Tambah Data</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -119,6 +134,10 @@
                     <form action="{{ route('data-alumni-update', ['id'=> $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar" class="form-control"
@@ -130,7 +149,7 @@
                                 placeholder="Enter tahun lulus " required value="{{$row->tahun_lulus}}">
                         </div>
 
-                        <button type=" submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
                     </form>
                 </div>
             </div>
@@ -153,6 +172,9 @@
                     <form action="{{ route('data-alumni-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;" class="loading">
+                        </div>
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus alumni Ini?</p>
                             <h5>Detail data</h5>
@@ -170,7 +192,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelet btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -185,9 +207,164 @@
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
+    // datatable
+    new DataTable('#example');
+    
+    // alert tambah data
+    $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"],input[type="file"],input[type="YEAR"],input[type="email"],select,select, textarea').filter(function () {
+    return $.trim($(this).val()) == '';
     });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !';
+    $('#' + fieldName + '_error').text(message);
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $('#dataForm')[0]; // Pastikan menggunakan selector yang benar
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil ditambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    $('#dataForm')[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]);
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+    
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form')[0];
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    form.reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: form.serialize(),
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil dihapus!",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    form.closest('.modal').modal('hide');
+    $('.loading').hide();
+    location.reload();
+    }
+    });
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    });
+
 </script>
 
 @endsection

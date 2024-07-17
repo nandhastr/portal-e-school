@@ -20,7 +20,7 @@
                                             placeholder="Search" value="{{ $request->get('search') }}">
 
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="button" class="btn btn-primary">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
@@ -87,29 +87,47 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-prestasi-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-prestasi-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="siswa">Nama Siswa</label>
-                            <select class="form-control" name="siswa_id">
-                                <option>Pilih Nama Siswa</option>
+                            <select class="form-control @error('siswa_id') is-invalid @enderror" name="siswa_id"
+                                placeholder="Pilih Siswa">
+                                <option value="">Pilih Siswa</option>
                                 @foreach ($siswa as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama }}</option>
                                 @endforeach
                             </select>
+                            <small id="siswa_id_error" class="text-red is-invalid"></small>
+                            @error('siswa_id')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="tahun">Tahun</label>
-                            <input type="YEAR" name="tahun" id="tahun" class="form-control"
+                            <input type="YEAR" name="tahun" id="tahun"
+                                class="form-control @error('tahun') is-invalid @enderror"
                                 placeholder="Enter tahun. example :2001" required value="{{old('tahun')}}">
+                            <small id="tahun_error" class="text-red is-invalid"></small>
+                            @error('tahun')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="prestasi">Prestasi</label>
-                            <input type="text" name="prestasi" id="prestasi" class="form-control"
+                            <input type="text" name="prestasi" id="prestasi"
+                                class="form-control @error('prestasi') is-invalid @enderror"
                                 placeholder="Enter presatsi " required value="{{old('prestasi')}}">
+                            <small id="prestasi_error" class="text-red is-invalid"></small>
+                            @error('prestasi')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -130,7 +148,10 @@
                     <form action="{{ route('data-prestasi-update',['id'=>$row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
-
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="siswa">Nama Siswa</label>
                             <select class="form-control" name="siswa_id">
@@ -151,7 +172,7 @@
                             <input type="text" name="prestasi" id="prestasi" class="form-control"
                                 placeholder="Enter presatsi " required value="{{$row->prestasi}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
                     </form>
                 </div>
             </div>
@@ -174,6 +195,10 @@
                     <form action="{{ route('data-prestasi-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Data Ini?</p>
                             <h5>Detail data</h5>
@@ -195,7 +220,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -210,9 +235,164 @@
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
+    // datatable
+    new DataTable('#example');
+    
+    // alert tambah data
+    $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"],input[type="YEAR"],input[type="date"], select, textarea').filter(function () {
+    return $.trim($(this).val()) == '';
     });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !';
+    $('#' + fieldName + '_error').text(message);
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $('#dataForm')[0]; // Pastikan menggunakan selector yang benar
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil ditambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    $('#dataForm')[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]);
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+    
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form')[0];
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    form.reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: form.serialize(),
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil dihapus!",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    form.closest('.modal').modal('hide');
+    $('.loading').hide();
+    location.reload();
+    }
+    });
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    });
+
 </script>
 
 @endsection
