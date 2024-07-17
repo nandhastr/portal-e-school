@@ -86,7 +86,8 @@
 
                 <div class="modal-body">
 
-                    <form action="{{ route('data-user-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-user-store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="d-flex justify-content-center align-items-center">
                             <img src="{{asset('assets/img/gift/loading.gif')}}" style="display: none ; width:100px"
@@ -94,11 +95,13 @@
                         </div>
                         <div class="form-group">
                             <label for="role">Level</label>
-                            <select type="text" class="form-control @error('role') is-invalid @enderror" name="role">
+                            <select class="form-control @error('role') is-invalid @enderror" name="role"
+                                placeholder="Pilih role">
                                 <option>Pilih Level Users</option>
                                 <option value="admin">Admin</option>
                                 <option value="osis">Ketua Osis</option>
                             </select>
+                            <small id="role_error" class="text-red is-invalid"></small>
                             @error('role')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
@@ -108,6 +111,7 @@
                             <input type="text" name="name" id="name"
                                 class="form-control @error('name') is-invalid @enderror" placeholder="Enter nama "
                                 required value="{{old('name')}}">
+                            <small id="name_error" class="text-red is-invalid"></small>
                             @error('name')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
@@ -118,6 +122,7 @@
                             <input type="email" name="email" id="email"
                                 class="form-control @error('email') is-invalid @enderror" required
                                 value="{{old('email')}}" placeholder="Enter email">
+                            <small id="email_error" class="text-red is-invalid"></small>
                             @error('email')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
@@ -127,6 +132,7 @@
                             <input type="password" name="password" id="password"
                                 class="form-control @error('password') is-invalid @enderror" required
                                 value="{{old('password')}}" placeholder="Enter password">
+                            <small id="password_error" class="text-red is-invalid"></small>
                             @error('password')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
@@ -241,91 +247,164 @@
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
-
-        // alert tambah data 
-        $('#btnSave').click(function (e) {
-        e.preventDefault();
-        swal.close();
-        
-        // Cek apakah ada inputan form yang kosong
-        let emptyFields = $(this).closest('form').find('input[type="text"], input[type="email"], input[type="password"], select').filter(function () {
-        return $.trim($(this).val()) == '';
-        });
-        
-        // Jika ada kolom input yang kosong
-        if (emptyFields.length > 0) {
-            $('.loading').show()
-            Swal.fire({
-                position: "top-end",
-                icon: "warning",
-                title: "Data Gagal Di Tambahkan, Silahkan Cek Kembali Form",
-                showConfirmButton: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(this).closest('form').submit();
-                }
-                });
-            } else {
-                Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Data berhasil di tambah",
-                showConfirmButton: true,
-                });
-                    setTimeout(() => {
-                    $(this).closest('form').submit();
-                    }, 1500);
-                    $('.loading').show()
-                }
-            });
-
-            // alert edit data
-            $('.btnEdit').click(function (e) {
-            e.preventDefault();
-            swal.close();
-           
-           let btnEdit = $(this); 
-            
-            Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Data berhasil di ubah",
-            showConfirmButton: false,
-            timer: 1500
-            });
-            
-            setTimeout(() => {
-            btnEdit.closest('form').submit(); 
-            }, 1500);
-            $('.loading').show()
-            });
+    // datatable
+    new DataTable('#example');
     
-            // alert delete
-            $('.btnDelete').click(function (e) {
-            e.preventDefault();
-            swal.close();
-           
-           let btnDelete = $(this); 
-            
-            Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Data berhasil di hapus",
-            showConfirmButton: false,
-            timer: 1500
-            });
-            
-            setTimeout(() => {
-            btnDelete.closest('form').submit(); 
-            }, 1500);
-            $('.loading').show()
-            
-            
-        });
-
+    // alert tambah data
+    $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"], input[type="email"], input[type="password"], select').filter(function () {
+    return $.trim($(this).val()) == '';
     });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !';
+    $('#' + fieldName + '_error').text(message);
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $('#dataForm')[0]; // Pastikan menggunakan selector yang benar
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil ditambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    $('#dataForm')[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]);
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+    
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form')[0];
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    form.reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: form.serialize(),
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil dihapus!",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    form.closest('.modal').modal('hide');
+    $('.loading').hide();
+    location.reload();
+    }
+    });
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    });
+
 </script>
 
 @endsection

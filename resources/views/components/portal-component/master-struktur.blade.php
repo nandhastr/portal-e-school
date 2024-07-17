@@ -89,34 +89,58 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-struktur-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-struktur-store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="id_guru">Nama</label>
-                            <select name="id_guru" class="form-control">
+                            <select name="id_guru" class="form-control @error('id_guru') is-invalid @enderror" required>
                                 <option>Pilih Nama Guru</option>
                                 @foreach ($guru as $item )
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
                             </select>
+                            <small id="id_guru_error" class="text-red is-invalid"></small>
+                            @error('id_guru')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                placeholder="Enter Jabatan " required value="{{old('jabatan')}}">
+                            <input type="text" name="jabatan" id="jabatan"
+                                class="form-control @error('jabatan') is-invalid @enderror" placeholder="Enter Jabatan "
+                                required value="{{old('jabatan')}}">
+                            <small id="jabatan_error" class="text-red is-invalid"></small>
+                            @error('jabatan')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class=" form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Enter email "
+                            <input type="email" name="email" id="email"
+                                class="form-control @error('email') is-invalid @enderror" placeholder="Enter email "
                                 required value="{{old('email')}}">
+                            <small id="email_error" class="text-red is-invalid"></small>
+                            @error('email')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class=" form-group">
                             <label for="telepon">Telepon</label>
-                            <input type="text" name="telepon" id="telepon" class="form-control"
-                                placeholder="Enter telepon " required value="{{old('telepon')}}">
+                            <input type="text" name="telepon" id="telepon"
+                                class="form-control @error('telepon') is-invalid @enderror" placeholder="Enter telepon "
+                                required value="{{old('telepon')}}">
+                            <small id="telepon_error" class="text-red is-invalid"></small>
+                            @error('telepon')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
 
-                        <button type=" submit" class="btn btn-primary">Tambah Data</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -137,6 +161,10 @@
                     <form action="{{ route('data-struktur-update', ['id'=> $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="id_guru">Nama</label>
                             <select name="id_guru" class="form-control">
@@ -163,7 +191,7 @@
                                 placeholder="Enter telepon " required value="{{$row->telepon}}">
                         </div>
 
-                        <button type=" submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
                     </form>
                 </div>
             </div>
@@ -186,6 +214,10 @@
                     <form action="{{ route('data-struktur-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus data Ini?</p>
                             <h5>Detail data</h5>
@@ -209,7 +241,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -224,9 +256,164 @@
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
+    // datatable
+    new DataTable('#example');
+    
+    // alert tambah data
+    $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"],input[type="file"],input[type="email"], select, textarea').filter(function () {
+    return $.trim($(this).val()) == '';
     });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !';
+    $('#' + fieldName + '_error').text(message);
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $('#dataForm')[0]; // Pastikan menggunakan selector yang benar
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil ditambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    $('#dataForm')[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]);
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+    
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form')[0];
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    form.reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: form.serialize(),
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil dihapus!",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    form.closest('.modal').modal('hide');
+    $('.loading').hide();
+    location.reload();
+    }
+    });
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    });
+
 </script>
 
 @endsection

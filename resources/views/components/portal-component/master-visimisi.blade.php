@@ -80,26 +80,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-visimisi-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-visimisi-store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="kategori">Visi/Misi</label>
-                            <select name="kategori" class="form-control">
+                            <select name="kategori" class="form-control @error('kategori') is-invalid @enderror">
                                 @foreach (['visi','misi'] as $vm)
                                 <option value="{{$vm}}">{{$vm}}</option>
                                 @endforeach
                             </select>
+                            <small id="kategori_error" class="text-red is-invalid"></small>
+                            @error('kategori')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="konten">Visi/Misi</label>
-                            <textarea name="konten" id="summernote" placeholder="Enter visi/misi" class="form-control"
-                                rows="10">
+                            <textarea name="konten" id="summernote" placeholder="Enter visi/misi"
+                                class="form-control @error('konten') is-invalid @enderror" rows="10">
 
                                           </textarea>
                             <small class="form-text text-muted">Separate each point with a new line and use • for bullet
                                 points.</small>
+                            <small id="konten_error" class="text-red is-invalid"></small>
+                            @error('konten')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -120,6 +133,10 @@
                     <form action="{{ route('data-visimisi-update', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="kategori">Visi/Misi</label>
                             <select name="kategori" class="form-control">
@@ -137,7 +154,7 @@
                                 bullet
                                 points.</small> --}}
                         </div>
-                        <button type="submit" class="btn btn-primary">Ubah Data</button>
+                        <button type="button" class=" btnEdit btn btn-primary">Ubah Data</button>
                     </form>
                 </div>
             </div>
@@ -160,6 +177,10 @@
                     <form action="{{ route('data-visimisi-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus Data Ini?</p>
                             <h5>Detail Data</h5>
@@ -176,7 +197,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -191,74 +212,164 @@
 <script src='https://cdn.datatables.net/2.0.8/js/dataTables.js'> </script>
 <script>
     $(document).ready(function () {
-        // datatabel
-        new DataTable('#example');
+    // datatable
+    new DataTable('#example');
+    
+    // alert tambah data
+    $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"],input[type="file"],input[type="date"], select, textarea').filter(function () {
+    return $.trim($(this).val()) == '';
+    });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !';
+    $('#' + fieldName + '_error').text(message);
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $('#dataForm')[0]; // Pastikan menggunakan selector yang benar
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil ditambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    $('#dataForm')[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]);
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+    
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form')[0];
+    let formData = new FormData(form);
+    
+    $.ajax({
+    url: $(form).attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide');
+    location.reload();
+    }
+    });
+    form.reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+    
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: form.serialize(),
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil dihapus!",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    form.closest('.modal').modal('hide');
+    $('.loading').hide();
+    location.reload();
+    }
+    });
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
     });
 
-    // point bullet di textarea
-    $('#konten').keydown(function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            const cursorPos = this.selectionStart;
-            const textBefore = $(this).val().substring(0, cursorPos);
-            const textAfter = $(this).val().substring(cursorPos);
-            $(this).val(textBefore + '\n• ' + textAfter);
-            this.selectionEnd = cursorPos + 3; 
-        }
-    });
-
-//     // Summernote
-//    $('#summernote').summernote({
-//     height: 200, // set the height of the editor
-//     placeholder: 'Enter visi/misi',
-//     });
-    
-//     // Handle form submission
-//     $('form').on('submit', function() {
-//     var htmlContent = $('#summernote').val();
-//     var plainText = convertHtmlToPlainText(htmlContent);
-//     $('#summernote').val(plainText);
-//     });
-    
-//     function convertHtmlToPlainText(htmlContent) {
-//     var tempDiv = document.createElement('div');
-//     tempDiv.innerHTML = htmlContent;
-//     var plainText = '';
-    
-//     function traverseNodes(node) {
-//     if (node.nodeType === 3) { // Text node
-//     plainText += node.nodeValue.trim();
-//     } else if (node.nodeType === 1) { // Element node
-//     switch (node.tagName) {
-//     case 'P':
-//     plainText += node.innerText.trim() + '\n\n';
-//     break;
-//     case 'LI':
-//     plainText += '• ' + node.innerText.trim() + '\n';
-//     break;
-//     case 'OL':
-//     Array.from(node.children).forEach(function(li) {
-//     plainText += (Array.from(node.children).indexOf(li) + 1) + '. ' + li.innerText.trim() + '\n';
-//     });
-//     break;
-//     case 'UL':
-//     Array.from(node.children).forEach(function(li) {
-//     plainText += '• ' + li.innerText.trim() + '\n';
-//     });
-//     break;
-//     default:
-//     Array.from(node.childNodes).forEach(traverseNodes);
-//     break;
-//     }
-//     }
-//     }
-    
-//     Array.from(tempDiv.childNodes).forEach(traverseNodes);
-//     return plainText.trim();
-//     }
-    
-
-    
 </script>
 
 @endsection

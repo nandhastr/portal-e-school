@@ -20,7 +20,7 @@
                                             placeholder="Search" value="{{ $request->get('search') }}">
 
                                         <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="button" class="btn btn-primary">
                                                 <i class="fas fa-search"></i>
                                             </button>
                                         </div>
@@ -87,35 +87,65 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('data-event-store') }}" method="POST" enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-event-store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="title">judul event</label>
-                            <input type="text" name="title" id="title" class="form-control" required
+                            <input type="text" name="title" id="title"
+                                class="form-control @error('title') is-invalid @enderror" required
                                 placeholder="Enter title event">
+                            <small id="title_error" class="text-red"></small>
+                            @error('title')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="backgroundColor">Kode Warna</label>
-                            <input type="color" name="backgroundColor" id="backgroundColor" class="form-control"
+                            <input type="color" name="backgroundColor" id="backgroundColor"
+                                class="form-control @error('backgroundColor') is-invalid @enderror"
                                 placeholder="Pilih backgroundColor" required>
+                            <small id="backgroundColor_error" class="text-red"></small>
+                            @error('backgroundColor')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="borderColor">Garis Warna</label>
-                            <input type="color" name="borderColor" id="borderColor" class="form-control"
+                            <input type="color" name="borderColor" id="borderColor"
+                                class="form-control @error('borderColor') is-invalid @enderror"
                                 placeholder="Pilih borderColor" required>
+                            <small id="borderColor_error" class="text-red"></small>
+                            @error('borderColor')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
 
                         </div>
                         <div class="form-group">
                             <label for="start">Mulai :</label>
-                            <input type="datetime-local" name="start" id="start" class="form-control"
-                                placeholder="Pilih start" required>
+                            <input type="datetime-local" name="start" id="start"
+                                class="form-control @error('start') is-invalid @enderror" placeholder="Pilih start"
+                                required>
+                            <small id="start_error" class="text-red"></small>
+                            @error('start')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="end">Berakhir :</label>
-                            <input type="datetime-local" name="end" id="end" class="form-control"
-                                placeholder="Pilih end" required>
+                            <input type="datetime-local" name="end" id="end"
+                                class="form-control @error('end') is-invalid @enderror" placeholder="Pilih end"
+                                required>
+                            <small id="end_error" class="text-red"></small>
+                            @error('end')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary">Tambah event</button>
+                        <button type="button" id="btnSave" class="btn btn-primary">Tambah event</button>
                     </form>
                 </div>
             </div>
@@ -136,6 +166,10 @@
                     <form action="{{ route('data-event-update', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="title">judul event</label>
                             <input type="text" name="title" id="title" class="form-control" required
@@ -159,10 +193,10 @@
                         </div>
                         <div class="form-group">
                             <label for="end">Berakhir :</label>
-                            <input type="datetime-local" name="end" id="end" class="form-control" placeholder="Pilih end"
-                                required value="{{$row->end}}">
+                            <input type="datetime-local" name="end" id="end" class="form-control"
+                                placeholder="Pilih end" required value="{{$row->end}}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Ubah event</button>
+                        <button type="button" class="btnEdit btn btn-primary">Ubah event</button>
                     </form>
                 </div>
             </div>
@@ -185,6 +219,10 @@
                     <form action="{{ route('data-event-delete', ['id' => $row->id]) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
+                                class="loading">
+                        </div>
                         <div class="modal-body">
                             <p>Apakah Anda yakin ingin menghapus event Ini?</p>
                             <h5>Detail Data</h5>
@@ -203,13 +241,14 @@
                                 </tr>
                                 <tr>
                                     <th>Kode warna event</th>
-                                    <td style="background-color: {{ $row->backgroundColor }}">{{ $row->backgroundColor }}</td>
+                                    <td style="background-color: {{ $row->backgroundColor }}">{{ $row->backgroundColor
+                                        }}</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>
@@ -226,6 +265,164 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+
+
+     $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"], input[type="color"],input[type="datetime-local"], select, textarea').filter(function () { 
+        return $.trim($(this).val()) == '';
+    });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !' ; 
+    $('#' + fieldName + '_error').text(message); 
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $(this).closest('form');
+    let formData = new FormData(form[0]);
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil di tambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide'); 
+    location.reload(); 
+    }
+    });
+    $('#dataForm')[0].reset(); 
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]); 
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+
+
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    let formData = new FormData(form[0]);
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+        $('#modal-create').modal('hide'); 
+        location.reload();
+        }
+    });
+    form[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+
+
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+
+    $.ajax({
+        url: form.attr('action'),
+        method: 'POST',
+        data: form.serialize(),
+        beforeSend: function() {
+            $('.loading').show();
+        },
+        success: function(response) {
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Data Berhasil di Hapus !.",
+            showConfirmButton: true,
+            }).then((result)=>{
+                if (result.isConfirmed){
+                    form.closest('.modal').modal('hide');
+                    $('.loading').hide();
+                    location.reload(); 
+                }
+            });
+        },
+        error: function(xhr) {
+            $('.loading').hide();
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Terjadi kesalahan. Silakan coba lagi.",
+                showConfirmButton: true,
+            });
+        }
+    });
+    });
+
     });
 </script>
 
