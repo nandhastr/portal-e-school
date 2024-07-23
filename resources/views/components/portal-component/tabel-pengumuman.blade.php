@@ -103,6 +103,10 @@
                             <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
                                 required>
                             <small id="gambar_error" class="text-red"></small>
+
+                            @error('gambar')
+                                <small class="text-red">{{ $message }}</small>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="tempat">Tempat</label>
@@ -262,6 +266,7 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+        $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
 
         
      $('#btnSave').click(function (e) {
@@ -278,12 +283,12 @@
     
     // Jika ada kolom input yang kosong
     if (emptyFields.length > 0) {
-    emptyFields.each(function() {
-    let placeholder = $(this).attr('placeholder');
-    let fieldName = $(this).attr('name');
-    let message = placeholder + ' !' ; 
-    $('#' + fieldName + '_error').text(message); 
-    });
+        emptyFields.each(function() {
+            let placeholder = $(this).attr('placeholder');
+            let fieldName = $(this).attr('name');
+            let message = placeholder + ' !' ; 
+            $('#' + fieldName + '_error').text(message); 
+        });
     } else {
     // Kirim form dengan AJAX
     let form = $(this).closest('form');

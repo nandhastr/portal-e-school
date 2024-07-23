@@ -23,7 +23,8 @@
                 $instansis = $komponen->first();
                 @endphp
                 @if ($instansis)
-                <a href="{{ route('/') }}" class="d-block text-light fw-bold ">{{ $instansis->instansi }}</a>
+                <a href="{{ route('/') }}" class="d-block text-light fw-bold " style="font-size: 0.8rem">{{
+                    $instansis->instansi }}</a>
 
                 @else
                 tidak ada instansi
@@ -45,10 +46,10 @@
                 {{-- for portal --}}
                 {{-- @if($user->role !== 'admin') --}}
                 <li class="nav-item menu-open">
-                    <x-nav-link href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
+                    <a href="/admin" class="nav-link {{ request()->is('admin') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
-                    </x-nav-link>
+                    </a>
                 </li>
                 {{-- @endif --}}
                 <li class="nav-item">

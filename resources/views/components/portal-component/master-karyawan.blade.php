@@ -353,6 +353,7 @@
     $(document).ready(function () {
     // datatable
     new DataTable('#example');
+    $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
     
     // alert tambah data
     $('#btnSave').click(function (e) {

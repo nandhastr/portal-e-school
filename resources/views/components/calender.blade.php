@@ -1,14 +1,13 @@
 <!-- Main content -->
-<section class="content">
+<section class="content mt-3 mb-3">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-4">
         <div class=" mb-3">
-          <div class="card">
+          <div class="card card-body card-outline card-success">
             <div class="card-header">
               <h4 class="card-title">Jadwal Kegiatan</h4>
             </div>
-            <div class="card-body">
               <!-- the events -->
               <div id="external-events">
                 <ul>
@@ -23,19 +22,17 @@
                   @endif
                 </ul>
               </div>
-            </div>
+            
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
         </div>
       </div>
       <!-- /.col -->
-      <div class="col">
-        <div class="card card-primary">
-          <div class="card-body p-0">
+      <div class="col-md-8">
+        <div class="card-body card card-primary card-outline">
             <!-- THE CALENDAR -->
             <div id="calendar"></div>
-          </div>
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
@@ -48,6 +45,11 @@
 <!-- /.content -->
 
 @section('script')
+<!--Css FullCalendar -->
+  <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/main.css') }}">
+  <!-- FullCalendar -->
+  <script src="{{ asset('assets/plugins/moment/moment.min.js') }}"></script>
+  <script src="{{ asset('assets/plugins/fullcalendar/main.js') }}"></script>
 
 <script>
   $(function () {

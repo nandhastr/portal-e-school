@@ -26,8 +26,6 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.css">
 
-    <!-- FullCalendar -->
-    <link rel="stylesheet" href="{{ asset('assets/plugins/fullcalendar/main.css') }}">
 
     <!-- FontAwesome Free -->
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">

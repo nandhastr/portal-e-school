@@ -1,8 +1,19 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid ">
+    <div class="container container-fluid mt-5 ">
+        <div class="col-12">
         <x-hr-gradient>
             Informasi Seputar Siswa/i SMK PGRI PAMIJAHAN
         </x-hr-gradient>
+    </div>
+        contoh :
+        <div class="row">
+            <div class="col-6">
+                prestasi akadmik
+            </div>
+            <div class="col-6">
+                prestasi non akademik
+            </div>
+        </div>
         <div class="row">
             <div class="col col-lg-6 col-md-6 col-12">
                 <x-hr-gradient>
@@ -11,14 +22,14 @@
             </div>
         </div>
         @if ($prestasi->isNotEmpty())
-        <div class="row">
+        <div class="row mt-3">
             @foreach ($prestasi as $win)
             <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                <div class="card p-3" style="width: 18rem;">
+                <div class="card card-body p-3 card-outline card-success" style="width: 15rem;">
                     <img src="{{ asset('assets/img/siswa/' . $win->siswa->gambar) }}" style="height: auto;"
-                        class="img-fluid">
+                        class="img-fluid img-circle">
                     <hr>
-                    <div class="card-body">
+                    <div class="">
                         <h5>{{ $win->prestasi }} - {{ $win->tahun }}</h5>
                         <p class="card-text">
                         <div class="col-12">

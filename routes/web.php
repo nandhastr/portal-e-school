@@ -29,6 +29,7 @@ use App\Http\Controllers\CrudPortal\CrudPengumumanController;
 use App\Http\Controllers\CrudPortal\CrudProfileSekolahController;
 use App\Http\Controllers\CrudPortal\KegiatanCrudController;
 use App\Http\Controllers\CrudPortal\EventController;
+use App\Http\Controllers\CrudPortal\SliderCrudController;
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -102,6 +103,12 @@ Route::post('/data-artikel-store', [ArtikelCrudController::class, 'store'])->nam
 Route::post('/data-artikel-update/{id}', [ArtikelCrudController::class, 'update'])->name('data-artikel-update');
 Route::post('/data-artikel-delete/{id}', [ArtikelCrudController::class, 'destroy'])->name('data-artikel-delete');
 
+// crud gambar slider
+Route::get('/data-slider', [SliderCrudController::class, 'index'])->name('data-slider');
+Route::post('/data-slider-store', [SliderCrudController::class, 'store'])->name('data-slider-store');
+Route::post('/data-slider-update/{id}', [SliderCrudController::class, 'update'])->name('data-slider-update');
+Route::post('/data-slider-delete/{id}', [SliderCrudController::class, 'destroy'])->name('data-slider-delete');
+
 // crud data siswa
 Route::get('/data-siswa', [SiswaCrudController::class, 'index'])->name('data-siswa');
 Route::post('/data-siswa-store', [SiswaCrudController::class, 'store'])->name('data-siswa-store');
@@ -115,6 +122,7 @@ Route::post('/data-guru-update/{id}', [GuruCrudController::class, 'update'])->na
 Route::post('/data-guru-delete/{id}', [GuruCrudController::class, 'destroy'])->name('data-guru-delete');
 // crud alumni
 Route::get('/data-alumni', [AlumniCrudController::class, 'index'])->name('data-alumni');
+Route::get('/filter-alumni', [AlumniCrudController::class, 'filterAlumni'])->name('filter-alumni');
 Route::post('/data-alumni-store', [AlumniCrudController::class, 'store'])->name('data-alumni-store');
 Route::post('/data-alumni-update/{id}', [AlumniCrudController::class, 'update'])->name('data-alumni-update');
 Route::post('/data-alumni-delete/{id}', [AlumniCrudController::class, 'destroy'])->name('data-alumni-delete');

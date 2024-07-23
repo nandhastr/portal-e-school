@@ -1,10 +1,10 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid ">
+    <div class="container container-fluid mt-5">
         <x-hr-gradient>
             Visi Dan Misi
         </x-hr-gradient>
         @if ($visi && $misi -> isNotEmpty())
-        <div class="row">
+        <div class="row mt-3">
             {{-- visi --}}
             @if ($visi)
             @foreach ($visi as $vis)
@@ -23,7 +23,7 @@
             {{-- misi --}}
             @if ($misi)
             @foreach ($misi as $mis)
-            <div class="col col-lg-6 col-md-6 col-12">
+            <div class="col col-lg-6 col-md-6 col-12 mt-3">
                 <h2 class="fw-bold">{{ $mis->kategori }}</h2>
                 <p clas="text-center">
                     {{ $mis->konten}}

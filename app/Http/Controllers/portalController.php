@@ -15,6 +15,7 @@ use App\Models\PortalModel\VisiMisi;
 use App\Models\PortalModel\Pengumuman;
 use App\Models\PortalModel\Struktur_org;
 use App\Models\PortalModel\ProfilSekolah;
+use App\Models\PortalModel\Gambar_slide;
 use App\Models\PortalModel\SiswaBerprestasi;
 use App\Models\PortalModel\Event;
 
@@ -23,7 +24,8 @@ class portalController extends Controller
 
     public function index()
     {
-        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(4)->get();
+        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(6)->get();
+        $slide = Gambar_slide::orderBy('created_at', 'desc')->take(1)->get();
         $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
         $komponen = Komponen::all();
 
@@ -33,6 +35,7 @@ class portalController extends Controller
             'pengumuman' => $pengumuman,
             'komponen' => $komponen,
             'event'=>Event::all(),
+            'slide'=> $slide,
             'kegiatan'=>Kegiatan::all(),
             'kepsek' => $guruKepsek,
         ];

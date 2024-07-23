@@ -20,6 +20,7 @@ use App\Models\PortalModel\Komponen;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PortalModel\Pengumuman;
 use App\Models\PortalModel\Kegiatan;
+use App\Models\PortalModel\Event;
 use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
@@ -79,6 +80,7 @@ class AdminController extends Controller
                 'alumni' => $alumni,
                 'kegiatan' => $kegiatan,
                 'komponen' => Komponen::all(),
+                'event'=> Event::all(),
                 'user' => $user,
                 'title' => 'Dashboard',
             ];

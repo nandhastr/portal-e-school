@@ -236,6 +236,165 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+        $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
+
+        
+     $('#btnSave').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    // Hapus pesan error sebelumnya
+    $('.text-red').text('');
+    
+    // Cek apakah ada inputan form yang kosong
+    let emptyFields = $('#dataForm').find('input[type="text"],input[type="file"],input[type="date"],input[type="time"], select, textarea').filter(function () { 
+        return $.trim($(this).val()) == '';
+    });
+    
+    // Jika ada kolom input yang kosong
+    if (emptyFields.length > 0) {
+    emptyFields.each(function() {
+    let placeholder = $(this).attr('placeholder');
+    let fieldName = $(this).attr('name');
+    let message = placeholder + ' !' ; 
+    $('#' + fieldName + '_error').text(message); 
+    });
+    } else {
+    // Kirim form dengan AJAX
+    let form = $(this).closest('form');
+    let formData = new FormData(form[0]);
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil di tambahkan",
+    showConfirmButton: true,
+    }).then((result) => {
+    if (result.isConfirmed) {
+    $('#modal-create').modal('hide'); 
+    location.reload(); 
+    }
+    });
+    $('#dataForm')[0].reset(); 
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    if (xhr.status === 422) { // Error validasi
+    let errors = xhr.responseJSON.errors;
+    $.each(errors, function(key, value) {
+    $('#' + key + '_error').text(value[0]); 
+    });
+    } else {
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    }
+    });
+    }
+    });
+
+
+    // btn edit
+    $('.btnEdit').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    let formData = new FormData(form[0]);
+    
+    $.ajax({
+    url: form.attr('action'),
+    method: 'POST',
+    data: formData,
+    processData: false,
+    contentType: false,
+    beforeSend: function() {
+    $('.loading').show();
+    },
+    success: function(response) {
+    Swal.fire({
+    position: "top-end",
+    icon: "success",
+    title: "Data berhasil diperbarui",
+    showConfirmButton: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+        $('#modal-create').modal('hide'); 
+        location.reload();
+        }
+    });
+    form[0].reset();
+    $('.loading').hide();
+    },
+    error: function(xhr) {
+    $('.loading').hide();
+    Swal.fire({
+    position: "top-end",
+    icon: "error",
+    title: "Terjadi kesalahan. Silakan coba lagi.",
+    showConfirmButton: true,
+    });
+    }
+    });
+    });
+
+
+    // btn delete
+    $('.btnDelete').click(function (e) {
+    e.preventDefault();
+    swal.close();
+    
+    let form = $(this).closest('form');
+    
+
+    $.ajax({
+        url: form.attr('action'),
+        method: 'POST',
+        data: form.serialize(),
+        beforeSend: function() {
+            $('.loading').show();
+        },
+        success: function(response) {
+            Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Data Berhasil di Hapus !.",
+            showConfirmButton: true,
+            }).then((result)=>{
+                if (result.isConfirmed){
+                    form.closest('.modal').modal('hide');
+                    $('.loading').hide();
+                    location.reload(); 
+                }
+            });
+        },
+        error: function(xhr) {
+            $('.loading').hide();
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "Terjadi kesalahan. Silakan coba lagi.",
+                showConfirmButton: true,
+            });
+        }
+    });
+    });
+
     });
 </script>
 

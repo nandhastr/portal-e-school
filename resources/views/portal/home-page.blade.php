@@ -1,5 +1,10 @@
 <x-top :komponen="$komponen"></x-top>
-<x-main.app class="navbar navbar-expand-lg">
+{{-- gambar slider --}}
+@if(!request()->is('album','alumni','struktur-organisasi','about','visi','tendik','program','siswa','article-berjualan','article-marketing','article-bisnis','keg-uks','keg-osis','keg-pramuka'))
+<x-carousel-banner :slide="$slide"></x-carousel-banner>
+@endif
+
+<x-main.app class="navbar navbar-expand-lg" id="homesecond">
     <div class="marque">
         {{-- <x-marque></x-marque> --}}
     </div>
@@ -13,11 +18,11 @@
             <div class="row justify-content-center">
                 <div class="col col-lg-3 col-md-12 col-sm-12  mb-4">
                     <x-card-kepsek :kepsek="$kepsek"></x-card-kepsek>
-                    {{-- <x-profile-sekolah></x-profile-sekolah> --}}
+                    {{-- <x-profile-sekolah :test="$jfgd"></x-profile-sekolah> --}}
                 </div>
                 {{-- pengumuman --}}
                 <div class="col-12 col-lg-9 col-md-12 col-sm-12">
-                    <x-card-home class="card card-home ">
+                    <x-card-home class="card  card-home card-outline card-primary">
                         <h1 class="text-center">Pengumuman</h1>
                         @if($pengumuman_terbaru)
                         @if($pengumuman_terbaru->gambar)
@@ -44,7 +49,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-5">
             {{-- kalender --}}
             <div class="col-12">
                 <x-hr-gradient>
@@ -60,27 +65,26 @@
                 Riwayat Pengumuman
             </x-hr-gradient>
         </div>
-        <div class="row">
+        <div class="row mt-5">
             @foreach($pengumuman as $item)
-            <div class="col col-lg-3 col-md-4 col-12 mb-4">
-                <x-card-home class="card card-home">
+            <div class="col col-lg-2 col-md-4 col-12 mb-4 ">
+                <x-card-home class="card-home card-body card-outline card-primary">
+                    <div class="card-header ">
                     @if($item->gambar)
-                    <img src="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" class="card-img-top img-thumbnail"
-                        alt="{{ $item->judul }}" style="width: auto; height:20rem">
+                        <img src="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" class="card-img-top img-thumbnail"
+                            alt="{{ $item->judul }}" style="width: auto; height: 10rem">
+                    
                     @else
                     tidak ada gambar
                     @endif
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">{{ $item->judul }}</h5><br>
-                        <span>Pelaksanaan acara :</span><br>
-                        <span>Tempat : {{ $item->tempat }}</span><br>
-                        <span>Tanggal : {{ $item->tanggal }}</span><br>
-                        <span>Waktu : {{ $item->waktu }}</span><br>
+                    <hr>
+                    <div class="mt-3">
+                        <h5 class="card-title text-center fw-bold">{{ $item->judul }}</h5><br><br>
 
                         <hr>
-                        <p class="card-text">{{ Str::limit($item->keterangan, 100) }}</p>
-                        {{-- <a href="{{ route('announcement.show', $item->id) }}" class="btn btn-primary">Baca
-                            Selengkapnya</a> --}}
+                        {{-- <p class="card-text">{{ Str::limit($item->keterangan, 100) }}</p> --}}
+                        <a href="" class="btn btn-primary mx-auto d-block">Lihat</a>
+                        </div>
                     </div>
                 </x-card-home>
             </div>
@@ -92,3 +96,4 @@
     @endif
     </div>
 </x-main.app>
+<x-content-footer :komponen="$komponen"></x-content-footer>

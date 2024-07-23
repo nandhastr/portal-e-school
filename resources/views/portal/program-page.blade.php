@@ -1,17 +1,16 @@
 <x-main.app class="navbar navbar-expand-lg fixed-top">
-    <div class="container container-fluid" style="height: 100vh">
+    <div class="container container-fluid mt-5" style="height: 100vh">
         <x-hr-gradient>
-            Program Sekolah
+            Program Magang
         </x-hr-gradient>
         @if ($program )
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="content-container">
-                    <h3>Program Magang</h3>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         @if ($program)
                         <img src="{{ asset('assets/img/profil-sekolah/'. $program->gambar) }}"
-                            class="card-img-top img-pengumuman" alt="...">
+                            class="card-img-top img-pengumuman mb-2" alt="...">
 
                         @else
                         Data Kosong
