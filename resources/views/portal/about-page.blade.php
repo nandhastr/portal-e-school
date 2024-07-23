@@ -1,5 +1,5 @@
-<x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid" style="height: 100vh">
+<x-main.app class="navbar navbar-expand-lg">
+    <div class="container container-fluid mt-5" style="height: 100vh">
 
         <div class="row">
             <div class="col-12">
@@ -11,13 +11,12 @@
             @if (empty($about))
             <x-image-not-data></x-image-not-data>
             @else
-            <div class="col">
-                <x-card-home class=" ">
+            <div class="col mt-3">
+                <div class=" p-3">
                     @if ($about)
                     <img src="{{ asset('assets/img/profil-sekolah/'. $about->gambar) }}"
                         class="card-img-top img-pengumuman" alt="...">
                     @endif
-                    <div class="card-body">
                         <h5 class="card-title fw-bold text-pengumuman">Tentang SMK PGRI PAMIJAHAN</h5>
                         @if ($about)
                         @php
@@ -37,7 +36,7 @@
                         @endphp
 
                         @foreach ($paragraphs as $paragraph)
-                        <p class="card-text text-align-justify">
+                        <p class="card-text text-align-justify mt-4">
                             {{ $paragraph }}
                         </p>
                         @endforeach
@@ -45,9 +44,8 @@
                         Tidak ada Detail
                         @endif
                     </div>
-                </x-card-home>
+                    
             </div>
-
             @endif
         </div>
 

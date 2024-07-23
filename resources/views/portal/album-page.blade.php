@@ -1,19 +1,17 @@
 <x-main.app class="navbar navbar-expand-lg ">
     {{-- container album --}}
     {{-- --}}
-    <div class="container container-fluid" style="height: 100vh">
-        <div class="row justify-content-center align-items-center mb-2">
+    <div class="container container-fluid mt-5" style="height: 100vh">
             <div class="col-12">
                 <x-hr-gradient>
                     Galeri Foto
                 </x-hr-gradient>
             </div>
-        </div>
         @if (empty($album))
         <x-image-not-data></x-image-not-data>
         @else
-        <div class="row justify-content-center">
-            <div class="card-body">
+        <div class="row justify-content-center mt-3">
+            <div class="card card-body card-info card-outline">
                 <div class="row">
                     @if($album)
                     @foreach($album as $row)

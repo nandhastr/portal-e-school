@@ -84,7 +84,7 @@
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">
-        <i class="fa-solid fa-database"></i>
+        <i class="fa-solid fa-users"></i>
         <p>Data Personil<i class="right fas fa-angle-left"></i></p>
     </a>
     <ul class="nav nav-treeview">
@@ -116,7 +116,7 @@
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">
-        <i class="fa-solid fa-database"></i>
+        <i class="fa-solid fa-swatchbook"></i>
         <p>Data Sekolah<i class="right fas fa-angle-left"></i></p>
     </a>
     <ul class="nav nav-treeview">
@@ -163,6 +163,12 @@
                 <p>Master Event Kalender</p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="/data-slider" class="nav-link {{ request()->is('data-slider') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Master Gambar Slide</p>
+            </a>
+        </li>
     </ul>
 </li>
 @elseif (Auth::user()->role == 'osis')
@@ -174,4 +180,3 @@
 </li>
 
 @endif
-</ul>

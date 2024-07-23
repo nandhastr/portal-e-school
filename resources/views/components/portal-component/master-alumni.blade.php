@@ -79,7 +79,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Tambah Data alumni</h4>
+                    <h4 class="modal-title">Tambah Data Alumni</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -92,12 +92,12 @@
                             <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
                                 class="loading">
                         </div>
-                        <div class=" form-group">
-                            <label for="tahun_lulus">Tahun lulus</label>
-                            <input type="YEAR" name="tahun_lulus" id="tahun_lulus"
+                        <div class="form-group">
+                            <label for="tahun_lulus">Tahun Lulus</label>
+                            <input type="year" name="tahun_lulus" id="tahun_lulus"
                                 class="form-control @error('tahun_lulus') is-invalid @enderror"
-                                placeholder="Enter tahun lulus " required value="{{old('tahun_lulus')}}">
-                            <small id="tahun_lulus_error" class="text-red is-invalid"></small>
+                                placeholder="Enter tahun lulus" required value="{{ old('tahun_lulus') }}">
+                            <small id="tahun_lulus_error" class="text-red"></small>
                             @error('tahun_lulus')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
@@ -106,19 +106,19 @@
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar"
                                 class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
-                                required value="{{old('file')}}">
-                            <small id="gambar_error" class="text-red is-invalid"></small>
+                                required>
+                            <small id="gambar_error" class="text-red"></small>
                             @error('gambar')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
                         </div>
-
                         <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     @foreach ($alumni as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
@@ -209,6 +209,7 @@
     $(document).ready(function () {
     // datatable
     new DataTable('#example');
+    $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
     
     // alert tambah data
     $('#btnSave').click(function (e) {

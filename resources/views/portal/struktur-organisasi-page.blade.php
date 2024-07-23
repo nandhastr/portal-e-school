@@ -1,15 +1,15 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid" style="height: 100vh">
+    <div class="container container-fluid mt-5" style="height: 100vh">
         <x-hr-gradient>
             Kepengurusan Sekolah SMK PGRI PAMIJAHAN BOGOR
         </x-hr-gradient>
         @if ($struktur->isNotEmpty())
-        <div class="row mb-4">
+        <div class="row mb-4 ">
             <div class="col">
-                <div class="card-body">
-                    <table class="table table-bordered w-100">
+                <div class="card card-body card-outline card-success mt-3">
+                    <table class="table table-bordered w-100 ">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>Foto</th>
                                 <th>Jabatan</th>
                                 <th>Nama</th>

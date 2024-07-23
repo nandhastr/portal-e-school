@@ -16,7 +16,7 @@ class AlumniCrudController extends Controller
      */
     public function index()
     {
-         $user = Auth::user();
+        $user = Auth::user();
         $data = [
             'komponen'=>Komponen::all(),
             'title' => 'Halaman Data alumni',
@@ -26,38 +26,53 @@ class AlumniCrudController extends Controller
         return view('portal.admin.data-alumni-page', $data);
     }
 
-    
+    public function filterAlumni(Request $request)
+    {
+        $user = Auth::user();
+        $year = $request->input('year');
+        $query = Alumni::query();
+
+        if ($year) {
+            $query->where('tahun_lulus', $year);
+        }
+
+        $alumni = $query->get();
+        $countAlumni = $alumni->count();
+
+        $data = [
+            'komponen' => Komponen::all(),
+            'title' => 'Halaman Data alumni',
+            'user' => $user,
+            'alumni' => $alumni,
+            'countAlumni' => $countAlumni,
+            'selectedYear' => $year
+        ];
+        return view('portal.data-alumni-page', $data);
+    }
 
     public function store(Request $request)
     {
-        // dd($request->all());
-       try {
-        $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'tahun_lulus' => 'required',
-        ]);
+        try {
+            $request->validate([
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'tahun_lulus' => 'required',
+            ]);
 
-        // proses gambar
-        $gambar = $request->file('gambar');
-        $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-        $gambar->move(base_path('public/assets/img/alumni'), $nama_gambar);
+            $gambar = $request->file('gambar');
+            $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
+            $gambar->move(base_path('public/assets/img/alumni'), $nama_gambar);
 
-        // simpan ke db
-        $alumni = new Alumni;
-        
-        $alumni->gambar = $nama_gambar; 
-        $alumni->tahun_lulus = $request->tahun_lulus;
+            // simpan ke db
+            $alumni = new Alumni;
+            $alumni->gambar = $nama_gambar; 
+            $alumni->tahun_lulus = $request->tahun_lulus;
+            $alumni->save();
 
-        // dd($alumni); 
-    // Save  ke database
-    $alumni->save();
+            return redirect()->back()->with('success', 'Data berhasil disimpan');
 
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
-
-    } catch (\Exception $e) {
-        return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
-    }
-
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Gagal menyimpan data: ' . $e->getMessage());
+        }
     }
 
     /**

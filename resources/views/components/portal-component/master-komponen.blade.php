@@ -380,6 +380,7 @@
     $(document).ready(function () {
         // datatabel
         new DataTable('#example');
+        $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
 
 
      $('#btnSave').click(function (e) {

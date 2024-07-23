@@ -1,22 +1,22 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid " style="height: 100vh">
+    <div class="container container-fluid mt-5 " style="height: 100vh">
         <x-hr-gradient>
             Dikrektori Guru dan Tenaga Kependidikan
         </x-hr-gradient>
         @if ($guru && $karyawan -> isNotEmpty())
-        <div class="row ">
-            <div class="col-6">
+        <div class="row mt-3">
+            <div class="col-6 ">
                 <div class="row justify-content-center">
                     @if($guru)
                     @foreach ($guru as $gr)
-                    <div class="card h-100 border border-secondary rounded-0 mb-3">
+                    <div class="card card-body h-100 border border-secondary rounded-0 mb-3">
                         <div class="row no-gutters ">
-                            <div class="col-md-4">
+                            <div class="col-md-4 px-4">
                                 <img src="{{ asset('assets/img/guru/' . $gr->gambar) }}"
-                                    class="img-fluid card-img border border-secondary rounded-0 m-2">
+                                    class="img-fluid  border border-info img-circle  m-2">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body pt-2 pb-2">
+                                <div class=" pt-2 pb-2">
                                     <dl class="row">
                                         <dt class="col-sm-5">Nama Lengkap</dt>
                                         <dd class="col-sm-7">{{ $gr->nama }}</dd>
@@ -45,14 +45,14 @@
                 <div class="row justify-content-center">
                     @if($karyawan)
                     @foreach ($karyawan as $kr)
-                    <div class="card h-100 border border-secondary rounded-0 mb-3">
+                    <div class="card card-body h-100 border border-secondary rounded-0 mb-3">
                         <div class="row no-gutters">
-                            <div class="col-md-4">
+                            <div class="col-md-4 px-4">
                                 <img src="{{ asset('assets/img/karyawan/' . $kr->gambar) }}"
-                                    class="img-fluid card-img border border-secondary rounded-0 m-2">
+                                    class="img-fluid border border-success img-circle m-2">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body pt-2 pb-2">
+                                <div class=" pt-2 pb-2">
                                     <dl class="row">
                                         <dt class="col-sm-5">Nama Lengkap</dt>
                                         <dd class="col-sm-7">{{ $kr->nama }}</dd>

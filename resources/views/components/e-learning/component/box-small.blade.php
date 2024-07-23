@@ -3,11 +3,12 @@
 
 {{-- ini dashboard untuk osis --}}
 @if($user->role !== 'admin')
-<x-e-learning.component.dashboard-siswa :kegiatan="$kegiatan" :user="$user" :siswa="$siswa" :alumni="$alumni" :guru="$guru"> </x-e-learning.component.dashboard-siswa>
+<x-e-learning.component.dashboard-siswa :kegiatan="$kegiatan" :user="$user" :siswa="$siswa" :alumni="$alumni"
+    :guru="$guru"> </x-e-learning.component.dashboard-siswa>
 @endif
 {{-- dashboard admin --}}
 @if($user->role !== 'osis' && $user->role !== 'guru')
-<x-e-learning.component.dashboard-admin :user="$user" :siswa="$siswa" :alumni="$alumni" :guru="$guru">
+<x-e-learning.component.dashboard-admin :user="$user" :event="$event" :siswa="$siswa" :alumni="$alumni" :guru="$guru">
 </x-e-learning.component.dashboard-admin>
 
 @endif

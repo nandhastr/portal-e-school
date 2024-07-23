@@ -184,7 +184,6 @@ return [
         ],
         'role' => [
             'required' => ':attribute Harus Diisi',
-
         ],
         'password' => [
             'required' => ' :attribute harus di isi'
@@ -312,17 +311,6 @@ return [
         'kelas'=>[
             'required'=>':attribute harus diisi',
         ],
-
-
-
-
-
-
-
-
-
-
-
     ],
 
     /*

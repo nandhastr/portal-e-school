@@ -2,7 +2,7 @@
 <!-- Content Wrapper. Contains page content -->
 
 <div class="fixed top-bar">
-    <div class="container-fluid pl-5">
+    <div class="container-fluid pl-5" id="homefirst">
         <div class="row justify-content-center align-items-center">
             <nav class="navbar navbar-expand-lg">
                 @foreach ($komponen as $row )

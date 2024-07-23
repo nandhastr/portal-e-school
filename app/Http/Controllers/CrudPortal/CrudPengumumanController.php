@@ -54,9 +54,6 @@ class CrudPengumumanController extends Controller
         $pengumuman->tanggal = $request->tanggal;
         $pengumuman->tempat = $request->tempat;
         $pengumuman->waktu = $request->waktu;
-
-        // dd($pengumuman); 
-
         $pengumuman->save();
         
         return redirect()->back()->with('success', 'Data berhasil disimpan');

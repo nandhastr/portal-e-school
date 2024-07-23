@@ -7,9 +7,9 @@
             </x-hr-gradient>
         </div>
         @if ($pengumuman_osis_terbaru && $osis->IsNotEmpty())
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mt-3">
             <div class="col">
-                <x-card-home class="card card-home ">
+                <x-card-home class="card-body card-info card-outline card-home ">
                     <h1 class="text-center">Pengumuman</h1>
                     @if($pengumuman_osis_terbaru)
                     @if($pengumuman_osis_terbaru->gambar)
@@ -33,22 +33,22 @@
                     @endif
                 </x-card-home>
             </div>
-            <div class="col-12">
+            <div class="col-12 mt-3">
                 <x-hr-gradient>
                     Riwayat Pengumuman
                 </x-hr-gradient>
             </div>
             @foreach($osis as $item)
             <div class="col col-lg-3 col-md-4 col-12 mb-4">
-                <x-card-home class="card card-home">
+                <x-card-home class="card card-body card-info card-outline card-home">
                     @if($item->gambar)
                     <img src="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" class="card-img-top img-thumbnail"
                         alt="{{ $item->judul }}" style="width: auto;">
                     @else
                     tidak ada gambar
                     @endif
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">{{ $item->judul }}</h5>
+                    <div class="">
+                        <h5 class="card-title fw-bold">{{ $item->judul }}</h5><br>
                         <span>Pelaksanaan acara :
                             @if ($item->tanggal)
                             {{ $item->tanggal }}

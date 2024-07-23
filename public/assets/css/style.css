@@ -19,15 +19,33 @@ summary {
 a {
     text-decoration: none !important;
 }
+.a-foot:hover{
+    text-decoration: underline !important;
+}
 
 .btn-them {
     cursor: pointer;
 }
 .card-body{
-    box-shadow: 3px 3px 6px gray;
+    box-shadow: 4px 3px 10px gray;
 }
 /* hover tombol */
 
+.navActive {
+    height: auto;
+    border-radius: 20px;
+    position: relative; 
+}
+.navActive::after {
+    content: '';
+    position: absolute; 
+    bottom: -2px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: 50%;
+    height: 2px; 
+    background-color: var(--waring-color); 
+}
 .btn {
     position: relative;
     text-decoration: none;
@@ -37,7 +55,7 @@ a {
     border: none;
     font-family: inherit;
     color: black;
-    background-color: white;
+    /* background-color: white; */
 }
 
 .btn:hover {
@@ -61,10 +79,6 @@ a {
     left: 0;
     z-index: -1;
     transition: all 0.4s;
-}
-
-.btn::after {
-    background-color: #fff;
 }
 
 .btn:hover::after {
@@ -187,15 +201,8 @@ a {
     filter: drop-shadow(3px 3px 6px #f000);
 }
 
-.active {
-    height: auto;
-    /* background-color: var(--bg-white); */
-    /* text-decoration: underline; */
-    /* text-decoration-color: var(--underline-linear-color); */
-    color: var(--waring-color) !important;
-    border-radius: 20px;
-    filter: drop-shadow(2px 3px 3px var(--waring-color));
-}
+
+
 /* Mengubah warna ikon hamburger menjadi hitam */
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
@@ -233,7 +240,8 @@ footer {
     margin-bottom: 0 !important;
 }
 .footer-menu {
-    background-color: rgb(22, 22, 22);
+    /* background-color: rgb(22, 22, 22); */
+    background-color: #134B70;
     width: auto;
 }
 .copyright {
@@ -266,7 +274,7 @@ b {
 .p-cuan,
 .h-market,
 .p-market {
-    border-radius: 20px;
+    border-radius: 10px;
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.5s ease-out, transform 0.4s ease-out;
@@ -280,11 +288,11 @@ b {
     width: auto !important;
 } */
 .card-home {
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid var(--primary-color);
 }
 .card-app {
-    border-radius: 20px;
+    border-radius: 10px;
     border: none;
     border: 1px solid var(--primary-color);
 }
@@ -300,13 +308,20 @@ b {
     border: 1px solid var(--primary-color);
 }
 .img-berita {
-    /* border: 2px solid black; */
     width: 10rem;
-    /* position: absolute; */
-    /* margin-left: 30% !important; */
     z-index: -1;
 
     opacity: 0.5;
+}
+.img-alumni {
+    width: 100%;
+    /* height: 200px; */ 
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.img-alumni:hover {
+    transform: scale(1.1) rotate(-2deg);
 }
 .text-berita {
     top: 0;
