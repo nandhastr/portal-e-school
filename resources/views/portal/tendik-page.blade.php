@@ -9,7 +9,7 @@
                 <div class="row justify-content-center">
                     @if($guru)
                     @foreach ($guru as $gr)
-                    <div class="card card-body h-100 border border-secondary rounded-0 mb-3">
+                    <div class="card card-body h-100 border border-secondary rounded-0 m-3">
                         <div class="row no-gutters ">
                             <div class="col-md-4 px-4">
                                 <img src="{{ asset('assets/img/guru/' . $gr->gambar) }}"
@@ -45,7 +45,7 @@
                 <div class="row justify-content-center">
                     @if($karyawan)
                     @foreach ($karyawan as $kr)
-                    <div class="card card-body h-100 border border-secondary rounded-0 mb-3">
+                    <div class="card card-body h-100 border border-secondary rounded-0 m-3">
                         <div class="row no-gutters">
                             <div class="col-md-4 px-4">
                                 <img src="{{ asset('assets/img/karyawan/' . $kr->gambar) }}"

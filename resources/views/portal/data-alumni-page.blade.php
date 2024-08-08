@@ -40,6 +40,10 @@
             <div class="col-md-3 mb-3">
                 <div class="card card-body card-outline border border-warning">
                     <img src="{{ asset('assets/img/alumni/' . $alum->gambar) }}" class="img-fluid card-img-top img-alumni p-4">
+                     <a href="{{ asset('assets/img/alumni/' . $alum->gambar) }}" download="{{ $alum->judul }}"
+                            class="btn btn-info position-absolute" style="bottom: 10px; right: 10px;">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
                     <hr>
                         <h6 class="text-center">Tahun Lulus : {{ $alum->tahun_lulus }}</h6>
                    

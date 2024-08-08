@@ -32,7 +32,7 @@ class CrudPengumumanController extends Controller
     {
         try {
         $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,pdf,doc,docx,xls,xlsx|max:2048',
             'judul' => 'required',
             'keterangan' => 'required',
             'tanggal' => 'required|date',

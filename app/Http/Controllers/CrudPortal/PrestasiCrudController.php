@@ -37,6 +37,7 @@ class PrestasiCrudController extends Controller
        try {
         $request->validate([
             'prestasi' => 'required',
+            'kategori' => 'required',
             'tahun' => 'required',
             'siswa_id' => 'required',
         ]);
@@ -44,6 +45,7 @@ class PrestasiCrudController extends Controller
         $prestasi = new SiswaBerprestasi;
         
         $prestasi->prestasi = $request->prestasi;
+        $prestasi->kategori = $request->kategori;
         $prestasi->siswa_id = $request->siswa_id;
         $prestasi->tahun = $request->tahun;
 
@@ -68,6 +70,7 @@ class PrestasiCrudController extends Controller
       try {
         $request->validate([
             'prestasi' => 'required',
+            'kategori' => 'required',
             'tahun' => 'required',
             'siswa_id' => 'required',
         ]);
@@ -77,6 +80,7 @@ class PrestasiCrudController extends Controller
 
         // Perbarui data lainnya
          $prestasi->prestasi = $request->prestasi;
+         $prestasi->kategori = $request->kategori;
         $prestasi->siswa_id = $request->siswa_id;
         $prestasi->tahun = $request->tahun;
 

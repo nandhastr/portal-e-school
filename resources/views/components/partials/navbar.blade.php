@@ -51,26 +51,16 @@
                 </li>
                 <li class="nav-item mx-3">
                     <div class="dropdown">
-                        <x-nav-link
-                            class=" dropdown-toggle nav-link a-nav a-nav2 {{ request()->is('lainnya') ? 'navActive' : '' }}"
-                            href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            GALERI
-                        </x-nav-link>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item a-nav2" href="/album">GALERI FOTO</a></li>
-                        </ul>
+                        <x-nav-link href="/album" class="nav-link {{ request()->is('album') ? 'navActive' : '' }} a-nav">
+                        GALERI FOTO
+                    </x-nav-link>
                     </div>
                 </li>
                 <li class="nav-item mx-3">
                     <div class="dropdown">
-                        <x-nav-link
-                            class=" dropdown-toggle nav-link a-nav a-nav2 {{ request()->is('lainnya') ? 'navActive' : '' }}"
-                            href="lainnya" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            KEGIATAN
-                        </x-nav-link>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item a-nav2" href="keg-osis">KEGIATAN OSIS</a></li>
-                        </ul>
+                        <x-nav-link href="/keg-osis" class="nav-link {{ request()->is('keg-osis') ? 'navActive' : '' }} a-nav">
+                        KEGIATAN
+                    </x-nav-link>
                     </div>
                 </li>
             </ul>

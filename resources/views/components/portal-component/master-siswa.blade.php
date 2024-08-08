@@ -10,24 +10,6 @@
                                 Tambah Data
                             </button>
                         </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
                     </div>
                     <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
                         {{-- tabel mata pelajaran dashboard admin --}}
@@ -102,96 +84,102 @@
                             <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
                                 class="loading">
                         </div>
-                        <div class="form-group">
-                            <label for="nis">nis</label>
-                            <input type="text" name="nis" id="nis"
-                                class="form-control @error('nis') is-invalid @enderror" placeholder="Enter nis" required
-                                value="{{old('nis')}}">
-                            <small id="nis_error" class="text-red is-invalid"></small>
-                            @error('nis')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama"
-                                class="form-control @error('nama') is-invalid @enderror" placeholder="Pilih nama"
-                                required value="{{old('nama')}}">
-                            <small id="nama_error" class="text-red is-invalid"></small>
-                            @error('nama')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="tempat_lahir">Tempat lahir</label>
-                            <input type="text" name="tempat_lahir" id="tempat_lahir"
-                                class="form-control  @error('tempat_lahir') is-invalid @enderror"
-                                placeholder="Pilih tempat " required value="{{old('tempat_lahir')}}">
-                            <small id="tempat_lahir_error" class="text-red is-invalid"></small>
-                            @error('tempat_lahir')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal lahir</label>
-                            <input type="date" name="tanggal_lahir" id="tanggal_lahir"
-                                class="form-control @error('tanggal_lahir') is-invalid @enderror"
-                                placeholder="Pilih tanggal " required value="{{old('tanggal_lahir')}}">
-                            <small id="tanggal_lahir_error" class="text-red is-invalid"></small>
-                            @error('tanggal_lahir')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="genre">Jenis Kelamin</label>
-                            <select class="form-control @error('genre') is-invalid @enderror" name="genre"
-                                placeholder="Pilih jenis kelamin">
-                                <option value="">Jenis Kelamin</option>
-                                <option value="laki-laki">Laki-laki</option>
-                                <option value="Perempuan">Perempuan</option>
-                            </select>
-                            <small id="genre_error" class="text-red is-invalid"></small>
-                            @error('genre')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="kelas">Kelas</label>
-                            <select class="form-control @error('kelas') is-invalid @enderror" name="kelas"
-                                placeholder="Pili Kelas">
-                                <option>Pilih Kelas</option>
-                                @foreach (['X','XI','XII'] as $kls )
-                                <option value="{{ $kls }}">{{$kls}}</option>
-                                @endforeach
-                            </select>
-                            <small id="kelas_error" class="text-red is-invalid"></small>
-                            @error('kelas')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="nis">nis</label>
+                                    <input type="text" name="nis" id="nis"
+                                        class="form-control @error('nis') is-invalid @enderror" placeholder="Enter nis" required
+                                        value="{{old('nis')}}">
+                                    <small id="nis_error" class="text-red is-invalid"></small>
+                                    @error('nis')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" name="nama" id="nama"
+                                        class="form-control @error('nama') is-invalid @enderror" placeholder="Pilih nama"
+                                        required value="{{old('nama')}}">
+                                    <small id="nama_error" class="text-red is-invalid"></small>
+                                    @error('nama')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="tempat_lahir">Tempat lahir</label>
+                                    <input type="text" name="tempat_lahir" id="tempat_lahir"
+                                        class="form-control  @error('tempat_lahir') is-invalid @enderror"
+                                        placeholder="Pilih tempat " required value="{{old('tempat_lahir')}}">
+                                    <small id="tempat_lahir_error" class="text-red is-invalid"></small>
+                                    @error('tempat_lahir')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal_lahir">Tanggal lahir</label>
+                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir"
+                                        class="form-control @error('tanggal_lahir') is-invalid @enderror"
+                                        placeholder="Pilih tanggal " required value="{{old('tanggal_lahir')}}">
+                                    <small id="tanggal_lahir_error" class="text-red is-invalid"></small>
+                                    @error('tanggal_lahir')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="genre">Jenis Kelamin</label>
+                                    <select class="form-control @error('genre') is-invalid @enderror" name="genre"
+                                        placeholder="Pilih jenis kelamin">
+                                        <option value="">Jenis Kelamin</option>
+                                        <option value="laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                    <small id="genre_error" class="text-red is-invalid"></small>
+                                    @error('genre')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="kelas">Kelas</label>
+                                    <select class="form-control @error('kelas') is-invalid @enderror" name="kelas"
+                                        placeholder="Pili Kelas">
+                                        <option value="">Pilih Kelas</option>
+                                        @foreach (['X','XI','XII'] as $kls )
+                                        <option value="{{ $kls }}">{{$kls}}</option>
+                                        @endforeach
+                                    </select>
+                                    <small id="kelas_error" class="text-red is-invalid"></small>
+                                    @error('kelas')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="alamat">Alamat</label>
+                                    <textarea name="alamat" id="alamat"
+                                        class="form-control @error('alamat') is-invalid @enderror" cols="30" rows="10" required
+                                        value="{{old('alamat')}}" placeholder="Enter Alamat"></textarea>
+                                    <small id="alamat_error" class="text-red is-invalid"></small>
+                                    @error('alamat')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" name="gambar" id="gambar"
+                                        class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
+                                        required value="{{old('file')}}">
+                                    <small id="gambar_error" class="text-red is-invalid"></small>
+                                    @error('gambar')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                         </div>
 
-                        <div class="form-group">
-                            <label for="alamat">Alamat</label>
-                            <textarea name="alamat" id="alamat"
-                                class="form-control @error('alamat') is-invalid @enderror" cols="30" rows="10" required
-                                value="{{old('alamat')}}" placeholder="Enter Alamat"></textarea>
-                            <small id="alamat_error" class="text-red is-invalid"></small>
-                            @error('alamat')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar"
-                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
-                                required value="{{old('file')}}">
-                            <small id="gambar_error" class="text-red is-invalid"></small>
-                            @error('gambar')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
@@ -216,57 +204,64 @@
                             <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
                                 class="loading">
                         </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                value="{{old('file')}}">
-
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="nis">nis</label>
+                                    <input type="text" name="nis" id="nis" class="form-control" placeholder="Pilih nis" required
+                                        value="{{$row->nis}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">Nama</label>
+                                    <input type="text" name="nama" id="nama" class="form-control" placeholder="Pilih nama"
+                                        required value="{{$row->nama}}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tempat_lahir">Tempat lahir</label>
+                                    <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
+                                        placeholder="Pilih Tempat lahir " required value="{{ $row->tempat_lahir }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal_lahir">Tanggal Lahir</label>
+                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
+                                        placeholder="Pilih tanggal lahir " required value="{{ $row->tanggal_lahir }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="genre">Jenis Kelamin</label>
+                                    <select class="form-control" name="genre">
+                                        @foreach (['laki-laki','perempuan'] as $jns )
+                                        <option value="{{ $jns }}" {{ $row->genre == $jns ? 'selected' : '' }}>{{ $jns }}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="kelas">Kelas</label>
+                                    <select class="form-control" name="kelas">
+                                        <option>{{$row->kelas}}</option>
+                                        @foreach (['X','XI','XII'] as $kls )
+                                        <option value="{{ $kls }}" {{$row->kelas == $kls ? 'selected': ''}}>{{$kls}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Alamat</label>
+                                    <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" required
+                                        value="{{old('alamat')}}" placeholder="Pilih Alamat">{{ $row->alamat }}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
+                                        value="{{old('file')}}">
+                                        <img src="{{ asset('assets/img/siswa/' . $row->gambar) }}"
+                                            style="width: 100px; height: auto;" class="img-fluid">
+                                </div>
+                            </div>
+                            <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
                         </div>
-                        <div class="form-group">
-                            <label for="nis">nis</label>
-                            <input type="text" name="nis" id="nis" class="form-control" placeholder="Pilih nis" required
-                                value="{{$row->nis}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control" placeholder="Pilih nama"
-                                required value="{{$row->nama}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="tempat_lahir">Tempat lahir</label>
-                            <input type="text" name="tempat_lahir" id="tempat_lahir" class="form-control"
-                                placeholder="Pilih Tempat lahir " required value="{{ $row->tempat_lahir }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal_lahir">Tanggal Lahir</label>
-                            <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control"
-                                placeholder="Pilih tanggal lahir " required value="{{ $row->tanggal_lahir }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="genre">Jenis Kelamin</label>
-                            <select class="form-control" name="genre">
-                                @foreach (['laki-laki','perempuan'] as $jns )
-                                <option value="{{ $jns }}" {{ $row->genre == $jns ? 'selected' : '' }}>{{ $jns }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="kelas">Kelas</label>
-                            <select class="form-control" name="kelas">
-                                <option>{{$row->kelas}}</option>
-                                @foreach (['X','XI','XII'] as $kls )
-                                <option value="{{ $kls }}" {{$row->kelas == $kls ? 'selected': ''}}>{{$kls}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="alamat">Alamat</label>
-                            <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="10" required
-                                value="{{old('alamat')}}" placeholder="Pilih Alamat">{{ $row->alamat }}</textarea>
-                        </div>
-                        <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
+                        
                     </form>
                 </div>
             </div>

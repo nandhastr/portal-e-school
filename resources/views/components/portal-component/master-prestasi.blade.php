@@ -39,6 +39,7 @@
                                     <th>foto</th>
                                     <th>Nama</th>
                                     <th>Prestasi</th>
+                                    <th>Kategori</th>
                                     <th>Tahun</th>
                                     <th>aksi</th>
                                 </tr>
@@ -54,6 +55,13 @@
                                     </td>
                                     <td>{{ $row->siswa->nama }}</td>
                                     <td>{{ $row->prestasi }}</td>
+                                    <td>
+                                        @if($row->kategori == 'non_akademik')
+                                        Non Akademik
+                                        @elseif($row->kategori== 'akademik')
+                                        Akademik
+                                        @endif
+                                    </td>
                                     <td>{{ $row->tahun }}</td>
                                     <td>
                                         <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
@@ -127,6 +135,20 @@
                             <small class="text-red">{{ $message }}</small>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori Prestasi</label>
+                            <select class="form-control @error('kategori') is-invalid @enderror" name="kategori"
+                                placeholder="Pilih kategori">
+                                <option value="">Pilih Kategori</option>
+                                <option value="akademik">Akademik</option>
+                                <option value="non_akademik">non Akademik</option>
+                            </select>
+                            <small id="kategori_error" class="text-red is-invalid"></small>
+                            @error('kategori')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
+                        </div>
+
                         <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
@@ -155,7 +177,7 @@
                         <div class="form-group">
                             <label for="siswa">Nama Siswa</label>
                             <select class="form-control" name="siswa_id">
-                                <option>Pilih Nama Siswa</option>
+                                <option value="">Pilih Nama Siswa</option>
                                 @foreach ($siswa as $sw)
                                 <option value="{{ $sw->id }}" @if ($row->siswa_id == $sw->id) selected @endif>{{
                                     $sw->nama }}</option>
@@ -172,6 +194,15 @@
                             <input type="text" name="prestasi" id="prestasi" class="form-control"
                                 placeholder="Enter presatsi " required value="{{$row->prestasi}}">
                         </div>
+                        <div class="form-group">
+                            <label for="kategori">Kategori Prestasi</label>
+                            <select class="form-control" name="kategori">
+                                <option value="">Pilih kategori</option>
+                                    <option value="akademik">Akademik</option>
+                                    <option value="non_akademik">non Akademik</option>
+                            </select>
+                        </div>
+
                         <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
                     </form>
                 </div>
@@ -215,6 +246,15 @@
                                 <tr>
                                     <th>Prestasi</th>
                                     <td>{{ $row->prestasi }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Kategori Prestasi</th>
+                                    <td>@if($row->kategori == 'non_akademik')
+                                        Non Akademik
+                                        @elseif($row->kategori == 'akademik')
+                                        Akademik
+                                        @endif
+                                    </td>
                                 </tr>
                             </table>
                         </div>

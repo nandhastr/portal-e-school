@@ -10,24 +10,6 @@
                                 Tambah Data
                             </button>
                         </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
                     </div>
                     <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
                         {{-- tabel mata pelajaran dashboard admin --}}
@@ -42,6 +24,7 @@
                                     <th>Alamat</th>
                                     <th>Email</th>
                                     <th>Telepon</th>
+                                    <th>Titik Google Maps</th>
                                     <th>Facebook</th>
                                     <th>Instagram</th>
                                     <th>Youtube</th>
@@ -63,11 +46,11 @@
                                     <td>{{ $row->alamat }}</td>
                                     <td>{{ $row->email }}</td>
                                     <td>{{ $row->telepon }}</td>
-                                    <td><a href="{{ $row->link_fb }}">{{ $row->link_fb }}</a></td>
-                                    <td><a href="{{ $row->link_ig }}">{{ $row->link_ig }}</a></td>
-                                    <td><a href="{{ $row->link_yt }}">{{ $row->link_yt }}</a></td>
-                                    <td><a href="{{ $row->link_tw }}">{{ $row->link_tw }}</a></td>
-
+                                    <td><a target="_blank" href="{{ $row->link_map }}">link Google Maps</a></td>
+                                    <td><a target="_blank" href="{{ $row->link_fb }}">Link Facebook</a></td>
+                                    <td><a target="_blank" href="{{ $row->link_ig }}">Link Instagram</a></td>
+                                    <td><a target="_blank" href="{{ $row->link_yt }}">Link Youtube</a></td>
+                                    <td><a target="_blank" href="{{ $row->link_tw }}">{{ $row->link_tw }}Link Twitter
                                     <td>
                                         <small>
                                             <a class="btn bg-success btn-edit" href="#" data-toggle="modal"
@@ -111,16 +94,6 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="gambar_logo">Gambar logo</label>
-                                    <input type="file" name="gambar_logo" id="gambar_logo"
-                                        class="form-control @error('gambar_logo') is-invalid @enderror"
-                                        placeholder="Pilih Gambar logo" required value="{{old('file')}}">
-                                    <small id="gambar_logo_error" class="text-red is-invalid"></small>
-                                    @error('gambar_logo')
-                                    <small class="text-red">{{ $message }}</small>
-                                    @enderror
-                                </div>
                                 <div class="form-group">
                                     <label for="instansi">Instansi</label>
                                     <input type="text" name="instansi" id="instansi"
@@ -181,6 +154,16 @@
 
                             <div class="col-md-6">
                                 <div class="form-group">
+                                    <label for="link_map">link Google Map</label>
+                                    <input type="text" name="link_map" id="link_map"
+                                        class="form-control @error('link_map') is-invalid @enderror"
+                                        placeholder="Enter link google map" value="{{old('link_map')}}">
+                                    <small id="link_map_error" class="text-red is-invalid"></small>
+                                    @error('link_map')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="link_fb">Facebook link</label>
                                     <input type="text" name="link_fb" id="link_fb"
                                         class="form-control @error('link_fb') is-invalid @enderror"
@@ -220,6 +203,16 @@
                                     <small class="text-red">{{ $message }}</small>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="gambar_logo">Gambar logo</label>
+                                    <input type="file" name="gambar_logo" id="gambar_logo"
+                                        class="form-control @error('gambar_logo') is-invalid @enderror" placeholder="Pilih Gambar logo" required
+                                        value="{{old('file')}}">
+                                    <small id="gambar_logo_error" class="text-red is-invalid"></small>
+                                    @error('gambar_logo')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
                             </div>
                             <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                         </div>
@@ -247,13 +240,6 @@
                             <!-- Kolom pertama -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="gambar_logo">Gambar logo</label>
-                                    <input type="file" name="gambar_logo" id="gambar_logo" class="form-control"
-                                        placeholder="Pilih Gambar logo">
-                                    <img src="{{ asset('assets/img/komponen/' . $row->gambar_logo) }}"
-                                        style="width: 100px; height: auto;" class="img-fluid">
-                                </div>
-                                <div class="form-group">
                                     <label for="instansi">Instansi</label>
                                     <input type="text" name="instansi" id="instansi" class="form-control"
                                         placeholder="Enter instansi" required value="{{ $row->instansi }}">
@@ -272,20 +258,25 @@
                                     <label for="alamat">Alamat</label>
                                     <textarea name="alamat" id="alamat" class="form-control" cols="30" rows="5" required
                                         placeholder="Enter Alamat">{{ $row->alamat }}</textarea>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" name="email" id="email" class="form-control"
+                                                placeholder="Enter email" required value="{{ $row->email }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="telepon">Telepon</label>
+                                            <input type="text" name="telepon" id="telepon" class="form-control"
+                                                placeholder="Enter telepon" required value="{{ $row->telepon }}">
+                                        </div>
                                 </div>
                             </div>
 
                             <!-- Kolom kedua -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control"
-                                        placeholder="Enter email" required value="{{ $row->email }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="telepon">Telepon</label>
-                                    <input type="text" name="telepon" id="telepon" class="form-control"
-                                        placeholder="Enter telepon" required value="{{ $row->telepon }}">
+                                    <label for="link_map">link Google Maps</label>
+                                    <input type="text" name="link_map" id="link_map" class="form-control"
+                                        placeholder="Enter link google map" value="{{ $row->link_map }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="link_fb">Facebook link</label>
@@ -306,6 +297,12 @@
                                     <label for="link_tw">Twitter link</label>
                                     <input type="text" name="link_tw" id="link_tw" class="form-control"
                                         placeholder="Enter link Twitter" value="{{ $row->link_tw }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar_logo">Gambar logo</label>
+                                    <input type="file" name="gambar_logo" id="gambar_logo" class="form-control" placeholder="Pilih Gambar logo">
+                                    <img src="{{ asset('assets/img/komponen/' . $row->gambar_logo) }}" style="width: 100px; height: auto;"
+                                        class="img-fluid">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Ubah Data</button>

@@ -98,47 +98,52 @@
                             <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
                                 class="loading">
                         </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
-                                required>
-                            <small id="gambar_error" class="text-red"></small>
-
-                            @error('gambar')
-                                <small class="text-red">{{ $message }}</small>
-                            @enderror
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tempat">Tempat</label>
+                                    <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                        placeholder="Enter tempat Pengumuman"></textarea>
+                                    <small id="tempat_error" class="text-red"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal">Tanggal Pelaksanaan</label>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                        placeholder="Pilih tanggal" required>
+                                    <small id="tanggal_error" class="text-red"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="waktu">Waktu</label>
+                                    <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
+                                        required>
+                                    <small id="waktu_error" class="text-red"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="judul">Judul Pengumuman</label>
+                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
+                                        placeholder="Enter Judul Pengumuman"></textarea>
+                                    <small id="judul_error" class="text-red"></small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="keterangan">keterangan Pengumuman</label>
+                                    <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
+                                        required placeholder="Enter keterangan Pengumuman"></textarea>
+                                    <small id="keterangan_error" class="text-red"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar" required>
+                                    <small id="gambar_error" class="text-red"></small>
+                                
+                                    @error('gambar')
+                                    <small class="text-red">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                            <button type="button" id="btnSave" class=" btn btn-primary">Tambah Pengumuman</button>
                         </div>
-                        <div class="form-group">
-                            <label for="tempat">Tempat</label>
-                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
-                                placeholder="Enter tempat Pengumuman"></textarea>
-                            <small id="tempat_error" class="text-red"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal Pelaksanaan</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required>
-                            <small id="tanggal_error" class="text-red"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="waktu">Waktu</label>
-                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
-                                required>
-                            <small id="waktu_error" class="text-red"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="judul">Judul Pengumuman</label>
-                            <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul Pengumuman"></textarea>
-                            <small id="judul_error" class="text-red"></small>
-                        </div>
-                        <div class="form-group">
-                            <label for="keterangan">keterangan Pengumuman</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
-                                required placeholder="Enter keterangan Pengumuman"></textarea>
-                            <small id="keterangan_error" class="text-red"></small>
-                        </div>
-                        <button type="button" id="btnSave" class=" btn btn-primary">Tambah Pengumuman</button>
                     </form>
                 </div>
             </div>
@@ -163,41 +168,46 @@
                             <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
                                 class="loading">
                         </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
-                            @if ($row->gambar)
-                            <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
-                            @endif
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tempat">Tempat</label>
+                                    <textarea name="tempat" id="tempat" cols="30" class="form-control" required
+                                        placeholder="Enter tempat Pengumuman">{{$row->tempat}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="waktu">Waktu</label>
+                                    <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
+                                        value="{{ $row->waktu }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tanggal">Tanggal Pelaksanaan</label>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control"
+                                        placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="judul">Judul Pengumuman</label>
+                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
+                                        placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="keterangan">keterangan Pengumuman</label>
+                                    <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
+                                        required placeholder="Enter keterangan Pengumuman">{{$row->keterangan}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="gambar">Gambar</label>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar">
+                                    @if ($row->gambar)
+                                    <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}" style="width: 100px; height: auto;"
+                                        class="img-fluid mt-2">
+                                    @endif
+                                </div>
+                            </div>
+                            <button type="butoon" class="btnEdit btn btn-primary">Ubah Pengumuman</button>
                         </div>
-                        <div class="form-group">
-                            <label for="tempat">Tempat</label>
-                            <textarea name="tempat" id="tempat" cols="30" class="form-control" required
-                                placeholder="Enter tempat Pengumuman">{{$row->tempat}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="waktu">Waktu</label>
-                            <input type="time" name="waktu" id="waktu" class="form-control" placeholder="Pilih waktu"
-                                value="{{ $row->waktu }}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tanggal">Tanggal Pelaksanaan</label>
-                            <input type="date" name="tanggal" id="tanggal" class="form-control"
-                                placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
-                        </div>
-                        <div class="form-group">
-                            <label for="judul">Judul Pengumuman</label>
-                            <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="keterangan">keterangan Pengumuman</label>
-                            <textarea name="keterangan" id="keterangan" class="form-control" cols="30" rows="10"
-                                required placeholder="Enter keterangan Pengumuman">{{$row->keterangan}}</textarea>
-                        </div>
-                        <button type="butoon" class="btnEdit btn btn-primary">Ubah Pengumuman</button>
                     </form>
                 </div>
             </div>

@@ -46,10 +46,12 @@ class portalController extends Controller
 
     public function siswa()
     {
-        $prestasi = SiswaBerprestasi::all();
+        $prestasi_non_akademik = SiswaBerprestasi::where('kategori', 'non_akademik')->get();
+        $prestasi_akademik = SiswaBerprestasi::where('kategori', 'akademik')->get();
         $data = [
             'title' => 'Siswa',
-            'prestasi' => $prestasi,
+            'prestasi_non_akademik' => $prestasi_non_akademik,
+            'prestasi_akademik' => $prestasi_akademik,
             'komponen' => Komponen::all(),
         ];
         return view('portal.siswa-page', $data);
@@ -108,10 +110,13 @@ class portalController extends Controller
     {
         $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
         $about = ProfilSekolah::orderBy('created_at', 'asc')->where('kategori', 'tentang_sekolah')->get();
+       $link_map = Komponen::whereNotNull('link_map')->where('link_map', '!=', '')->latest('created_at')->first();
         $data = [
             'about' => $about->first(),
             'title' => 'Halaman About',
             'komponen' => Komponen::all(),
+            'map'=>$link_map,
+
         ];
         return view('portal.about-page', $data);
     }

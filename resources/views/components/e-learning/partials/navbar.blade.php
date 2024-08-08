@@ -16,9 +16,10 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
+            <div class="flex justify-between ">
+                {{-- <x-pop-up-acount/> --}}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
+                    <a class="nav-link dropdown-toggle btn-warning" href="#" id="navbarDropdown4" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="nav-link fa-solid fa-user"></i>
                     </a>
@@ -29,7 +30,7 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-dropdown-link class="dropdown-item" :href="route('logout')" onclick="event.preventDefault();
+                            <x-dropdown-link class="dropdown-item text-danger" :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>

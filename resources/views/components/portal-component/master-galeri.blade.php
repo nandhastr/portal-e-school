@@ -10,24 +10,6 @@
                                 Tambah Data
                             </button>
                         </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
                     </div>
 
                     <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
@@ -98,16 +80,6 @@
                                 class="loading">
                         </div>
                         <div class="form-group">
-                            <label for="url">Gambar</label>
-                            <input type="file" name="url" id="url"
-                                class="form-control @error('url') is-invalid @enderror" placeholder="Pilih Gambar"
-                                required value="{{old('file')}}">
-                            <small id="url_error" class="text-red is-invalid"></small>
-                            @error('url')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="form-group">
                             <label for="judul">Judul</label>
                             <input type="text" name="judul" id="judul"
                                 class="form-control @error('judul') is-invalid @enderror" placeholder="Enter judul"
@@ -133,6 +105,15 @@
                                 placeholder="Pilih tanggal upload " required value="{{old('tanggal_upload')}}">
                             <small id="tanggal_upload_error" class="text-red is-invalid"></small>
                             @error('tanggal_upload')
+                            <small class="text-red">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label for="url">Gambar</label>
+                            <input type="file" name="url" id="url" class="form-control @error('url') is-invalid @enderror"
+                                placeholder="Pilih Gambar" required value="{{old('file')}}">
+                            <small id="url_error" class="text-red is-invalid"></small>
+                            @error('url')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
                         </div>

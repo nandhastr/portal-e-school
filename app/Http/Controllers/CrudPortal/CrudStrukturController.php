@@ -110,4 +110,10 @@ class CrudStrukturController extends Controller
         return redirect()->back()->with('error', 'Gagal menghapus data: ' . $e->getMessage());
     };
     }
+
+    public function getGuruById($id)
+    {
+        $guru = Guru::find($id);
+        return response()->json($guru);
+    }
 }

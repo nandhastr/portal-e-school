@@ -10,7 +10,7 @@
             @foreach ($visi as $vis)
             <div class="col col-lg-6 col-md-6 col-12">
                 <h2 class="fw-bold">{{ $vis->kategori }}</h2>
-                <p clas="text-center">
+                <p clas="text-justify p-visi">
                     {{ $vis->konten}}
                 </p>
             </div>
@@ -25,7 +25,7 @@
             @foreach ($misi as $mis)
             <div class="col col-lg-6 col-md-6 col-12 mt-3">
                 <h2 class="fw-bold">{{ $mis->kategori }}</h2>
-                <p clas="text-center">
+                <p clas="text-justify p-misi">
                     {{ $mis->konten}}
                 </p>
             </div>
