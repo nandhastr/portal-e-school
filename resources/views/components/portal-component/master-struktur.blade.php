@@ -11,23 +11,6 @@
                             </button>
                         </h3>
 
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
                     </div>
                     <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
                         {{-- tabel mata pelajaran dashboard admin --}}
@@ -89,17 +72,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="dataForm" action="{{ route('data-struktur-store') }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form id="dataForm" action="{{ route('data-struktur-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <div class="d-flex justify-content-center align-items-center">
-                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;"
-                                class="loading">
-                        </div>
                         <div class="form-group">
                             <label for="id_guru">Nama</label>
-                            <select name="id_guru" class="form-control @error('id_guru') is-invalid @enderror" required>
-                                <option>Pilih Nama Guru</option>
+                            <select name="id_guru" class="form-control @error('id_guru') is-invalid @enderror" required placeholder="Pilih Guru">
+                                <option value="">Pilih Nama Guru</option>
                                 @foreach ($guru as $item )
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                                 @endforeach
@@ -111,41 +89,55 @@
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" name="jabatan" id="jabatan"
-                                class="form-control @error('jabatan') is-invalid @enderror" placeholder="Enter Jabatan "
-                                required value="{{old('jabatan')}}">
-                            <small id="jabatan_error" class="text-red is-invalid"></small>
-                            @error('jabatan')
-                            <small class="text-red">{{ $message }}</small>
-                            @enderror
+                                <select name="jabatan" id="jabatan" class="form-control @error('jabatan') is-invalid @enderror" placeholder="Pilih Jabatan">
+                                    <option value="">Pilih Jabatan</option>
+                                    <option value="Kepala Sekolah">Kepala Sekolah</option>
+                                    <option value="Wakil Kepala Sekolah">Wakil Kepala Sekolah</option>
+                                    <option value="Sekretaris">Sekretaris</option>
+                                    <option value="Bendahara">Bendahara</option>
+                                    <option value="Keamanan">Keamanan</option>
+                                    <option value="Kepala Bagian Kurikulum">Kepala Bagian Kurikulum</option>
+                                    <option value="Kepala Bagian Kesiswaan">Kepala Bagian Kesiswaan</option>
+                                    <option value="Kepala Bagian Sarana dan Prasarana">Kepala Bagian Sarana dan Prasarana</option>
+                                    <option value="Guru">Guru</option>
+                                    <option value="Guru BK">Guru BK</option>
+                                    <option value="Pembina OSIS">Pembina OSIS</option>
+                                </select>
+
+                                @error('jabatan')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                                <small id="jabatan_error" class="text-red is-invalid"></small>
+                                @error('jabatan')
+                                <small class="text-red">{{ $message }}</small>
+                                @enderror
                         </div>
-                        <div class=" form-group">
+                        <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email"
-                                class="form-control @error('email') is-invalid @enderror" placeholder="Enter email "
-                                required value="{{old('email')}}">
+                            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                                placeholder="Enter email " required value="{{old('email')}}">
                             <small id="email_error" class="text-red is-invalid"></small>
                             @error('email')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class=" form-group">
+                        <div class="form-group">
                             <label for="telepon">Telepon</label>
-                            <input type="text" name="telepon" id="telepon"
-                                class="form-control @error('telepon') is-invalid @enderror" placeholder="Enter telepon "
-                                required value="{{old('telepon')}}">
+                            <input type="text" name="telepon" id="telepon" class="form-control @error('telepon') is-invalid @enderror"
+                                placeholder="Enter telepon " required value="{{old('telepon')}}">
                             <small id="telepon_error" class="text-red is-invalid"></small>
                             @error('telepon')
                             <small class="text-red">{{ $message }}</small>
                             @enderror
                         </div>
-
+                    
                         <button type="button" id="btnSave" class="btn btn-primary">Tambah Data</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
     @foreach ($struktur as $row)
     {{-- Modal update --}}
     <div class="modal fade" id="modal-update_{{ $row->id }}">
@@ -167,18 +159,38 @@
                         </div>
                         <div class="form-group">
                             <label for="id_guru">Nama</label>
-                            <select name="id_guru" class="form-control">
-                                <option>Pilih Nama Guru</option>
+                            <select name="id_guru" id="id_guru" class="form-control @error('id_guru') is-invalid @enderror">
+                                <option value="">Pilih Nama Guru</option>
                                 @foreach ($guru as $gr)
-                                <option value="{{ $gr->id }}" @if ($row->id_guru == $gr->id) selected
-                                    @endif>{{$gr->nama}}</option>
+                                <option value="{{ $gr->id }}" {{ old('id_guru', $row->id_guru) == $gr->id ? 'selected' : '' }}>
+                                    {{ $gr->nama }}
+                                </option>
                                 @endforeach
                             </select>
+                            @error('id_guru')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
-                            <input type="text" name="jabatan" id="jabatan" class="form-control"
-                                placeholder="Enter Jabatan " required value="{{$row->jabatan}}">
+                            <select name="jabatan" id="jabatan" class="form-control">
+                                <option value="">Pilih Jabatan</option>
+                                <option value="Kepala Sekolah" {{ $row->jabatan == 'Kepala Sekolah' ? 'selected' : '' }}>Kepala Sekolah</option>
+                                <option value="Wakil Kepala Sekolah" {{ $row->jabatan == 'Wakil Kepala Sekolah' ? 'selected' : '' }}>Wakil Kepala
+                                    Sekolah</option>
+                                <option value="Sekretaris" {{ $row->jabatan == 'Sekretaris' ? 'selected' : '' }}>Sekretaris</option>
+                                <option value="Bendahara" {{ $row->jabatan == 'Bendahara' ? 'selected' : '' }}>Bendahara</option>
+                                <option value="Keamanan" {{ $row->jabatan == 'Keamanan' ? 'selected' : '' }}>Keamanan</option>
+                                <option value="Kepala Bagian Kurikulum" {{ $row->jabatan == 'Kepala Bagian Kurikulum' ? 'selected' : '' }}>Kepala
+                                    Bagian Kurikulum</option>
+                                <option value="Kepala Bagian Kesiswaan" {{ $row->jabatan == 'Kepala Bagian Kesiswaan' ? 'selected' : '' }}>Kepala
+                                    Bagian Kesiswaan</option>
+                                <option value="Kepala Bagian Sarana dan Prasarana" {{ $row->jabatan == 'Kepala Bagian Sarana dan Prasarana' ?
+                                    'selected' : '' }}>Kepala Bagian Sarana dan Prasarana</option>
+                                <option value="Guru" {{ $row->jabatan == 'Guru' ? 'selected' : '' }}>Guru</option>
+                                <option value="Guru BK" {{ $row->jabatan == 'Guru BK' ? 'selected' : '' }}>Guru BK</option>
+                                <option value="Pembina OSIS" {{ $row->jabatan == 'Pembina OSIS' ? 'selected' : '' }}>Pembina OSIS</option>
+                            </select>
                         </div>
                         <div class=" form-group">
                             <label for="email">Email</label>
@@ -259,7 +271,35 @@
     // datatable
     new DataTable('#example');
     $('#example').find('.dt-type-numeric').removeClass('dt-type-numeric');
-    
+
+    // ambill data email dan teelepon guru
+    $('select[name="id_guru"]').on('change', function() {
+    var guruId = $(this).val();
+    if (guruId) {
+    $.ajax({
+    url: '/get-guru/' + guruId,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+    $('input[name="email"]').val(data.email);
+    $('input[name="telepon"]').val(data.telepon);
+    },
+    error: function() {
+    Swal.fire({
+    icon: 'error',
+    title: 'Oops...',
+    text: 'Terjadi kesalahan saat mengambil data guru!',
+    });
+    }
+    });
+    } else {
+    $('input[name="email"]').val('');
+    $('input[name="telepon"]').val('');
+    }
+    });
+    // end
+
+
     // alert tambah data
     $('#btnSave').click(function (e) {
     e.preventDefault();

@@ -18,37 +18,15 @@
                     <div class="col-sm-2">
                         <img src="{{ asset('assets/img/galeri/' . $row->url) }}" class="p-3 img-fluid mb-2 img-galeri"
                             alt="white sample" />
+                        <a href="{{ asset('ssets/img/galeri/' . $row->url) }}" download="{{ $row->url }}"
+                            class="  position-absolute" style="bottom: 10px; right: 10px;">
+                            <i class="fa-solid fa-download"></i>
                         </a>
                     </div>
                     @endforeach
                     @else
                     Tidak ada data
                     @endif
-                    <div class="col-sm-2">
-                        <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2 img-galeri"
-                            alt="black sample" />
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2 img-galeri"
-                            alt="white sample" />
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2 img-galeri"
-                            alt="black sample" />
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <img src="https://via.placeholder.com/300/FFFFFF?text=1" class="img-fluid mb-2 img-galeri"
-                            alt="white sample" />
-                        </a>
-                    </div>
-                    <div class="col-sm-2">
-                        <img src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2 img-galeri"
-                            alt="black sample" />
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

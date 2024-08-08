@@ -11,25 +11,6 @@
                                 </button>
                             </h3>
 
-                            <div class="card-tools">
-                                {{-- <div class="input-group mt-2">
-                                    <form action="{{ route('subjectDashboard')}}" method="GET">
-                                        @csrf
-                                        <div class="input-group">
-                                            <input type="text" name="search" class="form-control float-right"
-                                                placeholder="Search" value="{{ $request->get('search') }}">
-
-                                            <div class="input-group-append">
-                                                <button type="submit" class="btn btn-primary">
-                                                    <i class="fas fa-search"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div> --}}
-                            </div>
-                        </div>
-
                         <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
                             {{-- tabel mata pelajaran dashboard admin --}}
 

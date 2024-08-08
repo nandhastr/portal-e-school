@@ -37,6 +37,7 @@ class KomponenCrudController extends Controller
             'alamat' => 'required',
             'email' => 'required|email',
             'telepon' => 'required',
+            'link_map' => 'nullable',
             'link_fb' => 'nullable',
             'link_ig' => 'nullable',
             'link_yt' => 'nullable',
@@ -57,6 +58,7 @@ class KomponenCrudController extends Controller
         $komponen->alamat = $request->alamat;
         $komponen->telepon = $request->telepon;
         $komponen->email = $request->email;
+        $komponen->link_map = $request->link_map;
         $komponen->link_fb = $request->link_fb;
         $komponen->link_ig = $request->link_ig;
         $komponen->link_yt = $request->link_yt;
@@ -88,6 +90,7 @@ class KomponenCrudController extends Controller
             'alamat' => 'nullable',
             'email' => 'nullable|email',
             'telepon' => 'nullable',
+            'link_map' => 'nullable',
             'link_fb' => 'nullable',
             'link_ig' => 'nullable',
             'link_yt' => 'nullable',
@@ -117,6 +120,7 @@ class KomponenCrudController extends Controller
         $komponen->alamat = $request->alamat;
         $komponen->telepon = $request->telepon;
         $komponen->email = $request->email;
+        $komponen->link_map = $request->link_map;
         $komponen->link_fb = $request->link_fb;
         $komponen->link_ig = $request->link_ig;
         $komponen->link_yt = $request->link_yt;

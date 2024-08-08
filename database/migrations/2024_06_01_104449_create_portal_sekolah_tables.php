@@ -55,14 +55,7 @@ class CreatePortalSekolahTables extends Migration
             $table->timestamps();
         });
 
-        // Membuat tabel siswa_berprestasi
-        Schema::create('tbl_siswa_berprestasi', function (Blueprint $table) {
-            $table->id();
-            $table->string('prestasi');
-            $table->year('tahun');
-            $table->timestamps();
-            $table->foreignId('siswa_id')->constrained('tbl_siswa')->onDelete('cascade');
-        });
+        
 
         // Membuat tabel visi_misi
         Schema::create('tbl_visi_misi', function (Blueprint $table) {
@@ -154,20 +147,7 @@ class CreatePortalSekolahTables extends Migration
             $table->string('telepon')->nullable();
             $table->timestamps();
         });
-        Schema::create('tbl_komponen', function (Blueprint $table) {
-            $table->id();
-            $table->string('instansi')->nullable();
-            $table->string('akreditas')->nullable();
-            $table->string('alamat')->nullable();
-            $table->string('email')->nullable();
-            $table->string('telepon')->nullable();
-            $table->string('gambar_logo')->nullable();
-            $table->string('link_fb')->nullable();
-            $table->string('link_ig')->nullable();
-            $table->string('link_yt')->nullable();
-            $table->string('link_tw')->nullable();
-            $table->timestamps();
-        });
+        
     }
 
     public function down()
@@ -179,7 +159,6 @@ class CreatePortalSekolahTables extends Migration
         Schema::dropIfExists('tbl_struktur_org');
         Schema::dropIfExists('tbl_guru');
         Schema::dropIfExists('tbl_karyawan');
-        Schema::dropIfExists('tbl_siswa_berprestasi');
         Schema::dropIfExists('tbl_siswa');
         Schema::dropIfExists('tbl_profil_sekolah');
         Schema::dropIfExists('tbl_pengumuman');

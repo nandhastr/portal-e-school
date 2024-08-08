@@ -142,6 +142,7 @@
                             <label for="gambar">Gambar</label>
                             <input type="file" name="gambar" id="gambar" class="form-control"
                                 placeholder="Pilih Gambar">
+                                
                         </div>
                         <div class=" form-group">
                             <label for="tahun_lulus">Tahun lulus</label>
@@ -163,7 +164,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Hapus alumnin</h4>
+                    <h4 class="modal-title">Hapus alumni</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -192,7 +193,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btnDelet btn btn-danger">Delete</button>
+                            <button type="button" class="btnDelete btn btn-danger">Delete</button>
                         </div>
                     </form>
                 </div>

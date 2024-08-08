@@ -74,12 +74,6 @@
                 <p>Master Pengumuman</p>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="/data-artikel" class="nav-link {{ request()->is('data-artikel') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Master Artikel/Berita</p>
-            </a>
-        </li>
     </ul>
 </li>
 <li class="nav-item">
@@ -163,12 +157,12 @@
                 <p>Master Event Kalender</p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="/data-slider" class="nav-link {{ request()->is('data-slider') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Gambar Slide</p>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </li>
 @elseif (Auth::user()->role == 'osis')

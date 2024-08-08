@@ -1,8 +1,5 @@
 <x-top :komponen="$komponen"></x-top>
-{{-- gambar slider --}}
-@if(!request()->is('album','alumni','struktur-organisasi','about','visi','tendik','program','siswa','article-berjualan','article-marketing','article-bisnis','keg-uks','keg-osis','keg-pramuka'))
-<x-carousel-banner :slide="$slide"></x-carousel-banner>
-@endif
+
 
 <x-main.app class="navbar navbar-expand-lg" id="homesecond">
     <div class="marque">
@@ -66,34 +63,76 @@
             </x-hr-gradient>
         </div>
         <div class="row mt-5">
-            @foreach($pengumuman as $item)
-            <div class="col col-lg-2 col-md-4 col-12 mb-4 ">
-                <x-card-home class="card-home card-body card-outline card-primary">
-                    <div class="card-header ">
+           @foreach($pengumuman as $item)
+        <div class="col col-lg-2 col-md-4 col-12 mb-4 ">
+            <x-card-home class="card-home card-body card-outline card-primary">
+                <div class="card-header ">
                     @if($item->gambar)
-                        <img src="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" class="card-img-top img-thumbnail"
-                            alt="{{ $item->judul }}" style="width: auto; height: 10rem">
-                    
+                    <img src="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" class="card-img-top img-thumbnail"
+                        alt="{{ $item->judul }}" style="width: auto; height: 10rem">
                     @else
                     tidak ada gambar
                     @endif
                     <hr>
                     <div class="mt-3">
                         <h5 class="card-title text-center fw-bold">{{ $item->judul }}</h5><br><br>
-
                         <hr>
-                        {{-- <p class="card-text">{{ Str::limit($item->keterangan, 100) }}</p> --}}
-                        <a href="" class="btn btn-primary mx-auto d-block">Lihat</a>
-                        </div>
+                        <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal"
+                            data-target="#modal-detail-{{ $item->id }}">Lihat</button>
                     </div>
-                </x-card-home>
-            </div>
-            @endforeach
+                </div>
+            </x-card-home>
+        </div>
+        @endforeach
         </div>
     </div>
     @else
     <x-image-not-data></x-image-not-data>
     @endif
     </div>
+
+    {{-- modal --}}
+    @foreach($pengumuman as $item)
+    <!-- Modal Detail Pengumuman -->
+    <div class="modal fade" id="modal-detail-{{ $item->id }}" tabindex="-1"
+        aria-labelledby="modal-detail-{{ $item->id }}-label" aria-hidden="true">
+        <div class="modal-dialog modal-xm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    @if($item->gambar)
+                    <img src="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" class="img-fluid img-thumbnail mb-3"
+                        alt="{{ $item->judul }}" style="width:auto">
+                        <a href="{{ asset('assets/img/pengumuman/' . $item->gambar) }}" download="{{ $item->judul }}"
+                            class="btn btn-info position-absolute" style="bottom: 10px; right: 10px;">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    @else
+                    <p>Tidak ada gambar</p>
+                    @endif
+                </div>
+                <div class="text-center">
+                    <h5>{{ $item->judul }}</h5>
+                    <p><strong>Tanggal:</strong> {{ $item->tanggal }}</p>
+                    <p><strong>Waktu:</strong> {{ $item->waktu }}</p>
+                    <p><strong>Tempat:</strong> {{ $item->tempat }}</p>
+                    <hr>
+                    <h6>Detail :</h6>
+                </div>
+                <div class="text-justify text-start m-3">
+                    <p>{{ $item->keterangan }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach 
 </x-main.app>
 <x-content-footer :komponen="$komponen"></x-content-footer>

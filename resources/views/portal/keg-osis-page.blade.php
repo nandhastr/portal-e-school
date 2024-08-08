@@ -57,9 +57,8 @@
                             @endif
                         </span>
                         <hr>
-                        <p class="card-text">{{ Str::limit($item->deskripsi, 100) }}</p>
-                        {{-- <a href="{{ route('announcement.show', $item->id) }}" class="btn btn-primary">Baca
-                            Selengkapnya</a> --}}
+                        <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal"
+                            data-target="#modal-detail-{{ $item->id }}">Lihat</button>
                     </div>
                 </x-card-home>
             </div>
@@ -69,4 +68,47 @@
         <x-image-not-data></x-image-not-data>
         @endif
     </div>
+    {{-- modal --}}
+    @foreach($osis as $item)
+    <!-- Modal Detail osis -->
+    <div class="modal fade" id="modal-detail-{{ $item->id }}" tabindex="-1"
+        aria-labelledby="modal-detail-{{ $item->id }}-label" aria-hidden="true">
+        <div class="modal-dialog modal-xm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center align-items-center">
+                    @if($item->gambar)
+                    <img src="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" class="img-fluid img-thumbnail mb-3"
+                        alt="{{ $item->judul }}" style="width:auto">
+                        <a href="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" download="{{ $item->judul }}"
+                            class="btn btn-info position-absolute" style="bottom: 10px; right: 10px;">
+                            <i class="fa-solid fa-download"></i>
+                        </a>
+                    @else
+                    <p>Tidak ada gambar</p>
+                    @endif
+                </div>
+                <div class="text-center">
+                    <h5>{{ $item->judul }}</h5>
+                    <p><strong>Tanggal:</strong> {{ $item->tanggal }}</p>
+                    <p><strong>Waktu:</strong> {{ $item->waktu }}</p>
+                    <p><strong>Tempat:</strong> {{ $item->tempat }}</p>
+                    <hr>
+                    <h6>Detail :</h6>
+                </div>
+                <div class="text-justify text-start m-3">
+                    <p>{{ $item->deskripsi }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
 </x-main.app>

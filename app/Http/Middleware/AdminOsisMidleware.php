@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-class AdminMiddleware
+class AdminOsisMidleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role !== 'admin') {
+        // Pastikan user memiliki role 'admin' atau 'osis'
+        if (Auth::check() && !in_array(Auth::user()->role, ['admin', 'osis'])) {
             abort(403, 'Oops! You do not have permission to access.');
         }
         return $next($request);
