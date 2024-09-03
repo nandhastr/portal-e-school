@@ -31,35 +31,6 @@ class AdminController extends Controller
     public function index()
     { {
             $user = Auth::user();
-            // $siswa = null; // Variabel $siswa diinisialisasi dengan null
-
-            // Cek apakah pengguna adalah admin atau guru
-            // if ($user->role === 'admin' || $user->role === 'guru') {
-            //     // Jika admin atau guru, ambil data siswa
-            //     $siswa = Siswa::all();
-            // }
-
-            // Inisialisasi variabel penghargaan, kegiatan, nilai, dan kelas
-            // $penghargaan = [];
-            // $kegiatan = [];
-            // $nilai = [];
-            // $kelas = [];
-
-            // // Jika pengguna memiliki relasi siswa, ambil data yang terkait
-            // if ($user->role === 'siswa') {
-            //     $siswa = $user->siswa;
-            //     $siswa->load('penghargaan', 'nilai', 'kegiatan_pengguna', 'kelas');
-
-            //     $penghargaan = $siswa->penghargaan;
-            //     $kelas = $siswa->kelas;
-            //     $nilai = $siswa->nilai;
-            //     $kegiatan = $siswa->kegiatan_pengguna;
-            // }
-
-            // // Jika ada siswa yang terkait, ambil semua data penghargaan
-            // if ($siswa) {
-            //     $penghargaan = Penghargaan::all();
-            // }
 
             $siswa = Siswa::count();
             $guru = Guru::count();

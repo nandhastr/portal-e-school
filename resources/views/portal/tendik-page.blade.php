@@ -12,8 +12,13 @@
                     <div class="card card-body h-100 border border-secondary rounded-0 m-3">
                         <div class="row no-gutters ">
                             <div class="col-md-4 px-4">
+                                @if(!empty($gr->gambar))
                                 <img src="{{ asset('assets/img/guru/' . $gr->gambar) }}"
                                     class="img-fluid  border border-info img-circle  m-2">
+                                @else
+                                <img src="{{ asset('assets/img/guru/default.png') }}"
+                                    class="img-fluid  border border-info img-circle  m-2">
+                                @endif
                             </div>
                             <div class="col-md-8">
                                 <div class=" pt-2 pb-2">
@@ -22,10 +27,8 @@
                                         <dd class="col-sm-7">{{ $gr->nama }}</dd>
                                         <dt class="col-sm-5">Jenis Kelamin</dt>
                                         <dd class="col-sm-7">{{ $gr->genre }}</dd>
-                                        <dt class="col-sm-5">Temmpat lahir</dt>
+                                        <dt class="col-sm-5">Tempat lahir</dt>
                                         <dd class="col-sm-7">{{ $gr->tempat_lahir }}</dd>
-                                        <dt class="col-sm-5">Tanggal lahir</dt>
-                                        <dd class="col-sm-7">{{ $gr->tanggal_lahir }}</dd>
                                         <dt class="col-sm-5">Status</dt>
                                         <dd class="col-sm-7">{{ $gr->status }}</dd>
                                         <dt class="col-sm-5">Jabatan</dt>
@@ -48,8 +51,13 @@
                     <div class="card card-body h-100 border border-secondary rounded-0 m-3">
                         <div class="row no-gutters">
                             <div class="col-md-4 px-4">
+                                @if(!empty($kr->gambar))
                                 <img src="{{ asset('assets/img/karyawan/' . $kr->gambar) }}"
                                     class="img-fluid border border-success img-circle m-2">
+                                @else
+                                <img src="{{ asset('assets/img/karyawan/default.png') }}"
+                                    class="img-fluid border border-success img-circle m-2">
+                                @endif
                             </div>
                             <div class="col-md-8">
                                 <div class=" pt-2 pb-2">
@@ -58,10 +66,8 @@
                                         <dd class="col-sm-7">{{ $kr->nama }}</dd>
                                         <dt class="col-sm-5">Jenis Kelamin</dt>
                                         <dd class="col-sm-7">{{ $kr->genre }}</dd>
-                                        <dt class="col-sm-5">Temmpat lahir</dt>
+                                        <dt class="col-sm-5">Tempat lahir</dt>
                                         <dd class="col-sm-7">{{ $kr->tempat_lahir }}</dd>
-                                        <dt class="col-sm-5">Tanggal lahir</dt>
-                                        <dd class="col-sm-7">{{ $kr->tanggal_lahir }}</dd>
                                         <dt class="col-sm-5">Status</dt>
                                         <dd class="col-sm-7">{{ $kr->status }}</dd>
                                         <dt class="col-sm-5">Jabatan</dt>

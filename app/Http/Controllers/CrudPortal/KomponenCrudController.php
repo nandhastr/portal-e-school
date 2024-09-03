@@ -31,7 +31,7 @@ class KomponenCrudController extends Controller
         // dd($request->all());
        try {
         $request->validate([
-            'gambar_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar_logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:512',
             'instansi' => 'required',
             'akreditas' => 'required',
             'alamat' => 'required',
@@ -84,7 +84,7 @@ class KomponenCrudController extends Controller
     //    dd($request->all());
       try {
         $request->validate([
-            'gambar_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
              'instansi' => 'nullable',
             'akreditas' => 'nullable',
             'alamat' => 'nullable',

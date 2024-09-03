@@ -2,19 +2,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-create">
+                <div class="card-outline">
+                    <div class="card card-header">
+                        <div class="card-title mt-2">
+                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
                                 Tambah Data
                             </button>
-                        </h3>
+                        </div>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
-
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                    <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -37,8 +34,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <img src="{{ asset('assets/img/karyawan/' . $row->gambar) }}"
+                                            @if(!empty($row->gambar))
+                                            <img src="{{ asset('assets/img/karyawan/' . $row->gambar) }}"
                                             style="width: 50px; height: auto;" class="img-fluid">
+                                            @else
+                                            <img src="{{ asset('assets/img/karyawan/default.png') }}" style="width: 200px; height: auto;" class="img-fluid mt-2">
+                                            @endif
                                     </td>
                                     <td>{{ $row->nip }}</td>
                                     <td>{{ $row->nama }}</td>
@@ -186,9 +187,10 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="gambar">Gambar</label>
+                                    <label for="gambar">Gambar</label> <br>
+                                    <span><i class="text-sm">File maks: 500kb !</i></span>
                                     <input type="file" name="gambar" id="gambar"
-                                        class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
+                                        class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar maks:500kb"
                                         required value="{{old('file')}}">
                                     <small id="gambar_error" class="text-red is-invalid"></small>
                                     @error('gambar')
@@ -275,8 +277,9 @@
                                         placeholder="Enter telepon " required value="{{$row->telepon}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="gambar">Gambar</label>
-                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar">
+                                    <label for="gambar">Gambar</label> <br>
+                                    <span><i class="text-sm">File maks: 500kb !</i></span>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar maks:500kb">
                                     <img src="{{ asset('assets/img/karyawan/' . $row->gambar) }}" style="width: 150px; height: auto;" class="img-fluid">
                                 </div>
                             </div>

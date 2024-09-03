@@ -1,18 +1,18 @@
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row card-body">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                <div class="card-outline">
+                    <div class="card card-header">
+                        <div class="card-title mt-2">
+                            <button type="button" class="btn btn-primary " data-toggle="modal"
                                 data-target="#modal-create">
                                 Tambah Data
                             </button>
-                        </h3>
+                        </div>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                    <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -73,9 +73,10 @@
                                 class="loading">
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Gambar</label> <br>
+                            <span><i class="text-sm">File maks: 500kb !</i></span>
                             <input type="file" name="gambar" id="gambar"
-                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
+                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar maks:500kb"
                                 required>
                             <small id="gambar_error" class="text-red"></small>
                             @error('gambar')
@@ -132,12 +133,13 @@
                                 class="loading">
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Gambar</label> <br>
+                            <span><i class="text-sm">File maks: 500kb !</i></span>
                             <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
+                                placeholder="Pilih Gambar maks:500kb">
                             @if ($row->gambar)
                             <img src="{{ asset('assets/img/profil-sekolah/' . $row->gambar) }}"
-                                style="width: 30px; height: auto;" class="img-fluid mt-2">
+                                style="width: 200px; height: auto;" class="img-fluid mt-2">
                             @endif
                         </div>
                         <div class="form-group">

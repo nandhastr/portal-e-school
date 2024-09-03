@@ -17,10 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         // Panggil seeder 
         $this->call([
-            UserSeeder::class,
+            //UserSeeder::class,
             // KelasSeeder::class,
             // RuangKelasSeeder::class,
             // SiswaSeeder::class,
+            // SiswaBerprestasiSeeder::class,
+            // KaryawanSeeder::class,
             // GuruSeeder::class,
             // MapelSeeder::class,
             // MateriSeeder::class,
@@ -31,7 +33,7 @@ class DatabaseSeeder extends Seeder
             // KegiatanPenggunaSeeder::class,
             // PenghargaanSeeder::class,
             // LogPenggunaSeeder::class,
-            // PengumumanSeeder::class,
+            //PengumumanSeeder::class,
             // NilaiSeeder::class,
             // PivotTableSeeder::class
         ]);

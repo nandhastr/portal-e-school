@@ -2,53 +2,34 @@
 
 namespace Database\Seeders;
 
-use App\Models\Siswa;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class SiswaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Siswa::create([
-            'id_kelas' => 1,
-            'user_id' => 2,
-            'id_ruangKelas' => 1,
-            'angkatan' => '2022',
-            'status' => 'Aktif',
-            'tempat_lahir' => 'Jakarta',
-            'tanggal_lahir' => '2005-05-10',
-            'alamat' => 'Jl. Raya No. 123',
-            'nama_ibu' => 'Ibu Siswa',
-            'foto' => 'siswa1.jpg',
-            'sekolah_sebelumnya' => 'SMP Negeri 1 Jakarta',
-            'nisn' => '1234567890',
-            'phone' => '081234567890',
-            'gender' => 'Laki-laki',
-            'tahun_masuk' => '2022',
-            'kelas_sekarang' => 'XII',
-        ]);
+        $data = [];
 
-        Siswa::create([
-            'id_kelas' => 2,
-            'user_id' => 3,
-            'id_ruangKelas' => 2,
-            'angkatan' => '2023',
-            'status' => 'Aktif',
-            'tempat_lahir' => 'Bandung',
-            'tanggal_lahir' => '2006-08-15',
-            'alamat' => 'Jl. Mawar No. 456',
-            'nama_ibu' => 'Ibu Siswa 2',
-            'foto' => 'siswa2.jpg',
-            'sekolah_sebelumnya' => 'SMP Negeri 2 Bandung',
-            'nisn' => '0987654321',
-            'phone' => '085678901234',
-            'gender' => 'Perempuan',
-            'tahun_masuk' => '2023',
-            'kelas_sekarang' => 'XI',
-        ]);
+        for ($i = 1; $i <= 30; $i++) {
+            $genre = $i % 2 == 0 ? 'laki-laki' : 'Perempuan';
+            $nama = $genre == 'laki-laki' ? 'Siswa Laki-laki ' . $i : 'Siswa Perempuan ' . $i;
+
+            $data[] = [
+                'nis' => 'NIS' . str_pad($i, 6, '0', STR_PAD_LEFT),
+                'nama' => $nama,
+                'genre' => $genre,
+                'kelas' => 'Kelas ' . chr(64 + ($i % 3) + 1), // Menghasilkan kelas A, B, atau C
+                'tempat_lahir' => 'Kota ' . $i,
+                'tanggal_lahir' => now()->subYears(rand(15, 18))->format('Y-m-d'),
+                'alamat' => 'Alamat siswa ' . $i . ', Jalan ' . Str::random(10),
+                'gambar' => $i % 5 == 0 ? 'siswa' . $i . '.jpg' : null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('tbl_siswa')->insert($data);
     }
 }

@@ -2,29 +2,29 @@
 
 namespace Database\Seeders;
 
-use App\Models\Pengumuman;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class PengumumanSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Pengumuman::create([
-            'gambar' => 'gambar 1',
-            'jenis' => 'portal',
-            'judul' => 'Libur Nasional',
-            'konten' => 'Sekolah akan libur pada tanggal 17 Agustus 2023 untuk memperingati Hari Kemerdekaan.',
-        ]);
+        $data = [];
 
-        Pengumuman::create([
-            'gambar' => 'gambar 2',
-            'jenis' => 'elearning',
-            'judul' => 'Pembagian Rapor',
-            'konten' => 'Pembagian rapor semester ganjil akan dilaksanakan pada tanggal 20 Desember 2023.',
-        ]);
+        for ($i = 1; $i <= 30; $i++) {
+            $data[] = [
+                'judul' => 'Pengumuman ' . $i,
+                'keterangan' => 'Ini adalah keterangan pengumuman ke-' . $i . '. ' . Str::random(50),
+                'tanggal' => now()->subDays(rand(0, 365))->format('Y-m-d'),
+                'waktu' => now()->subMinutes(rand(0, 1440))->format('H:i:s'),
+                'tempat' => $i % 2 == 0 ? 'Aula Sekolah' : null,
+                'gambar' => $i % 3 == 0 ? 'gambar' . $i . '.jpg' : null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('tbl_pengumuman')->insert($data);
     }
 }

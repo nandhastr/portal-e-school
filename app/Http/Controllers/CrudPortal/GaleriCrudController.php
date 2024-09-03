@@ -33,7 +33,7 @@ class GaleriCrudController extends Controller
         // dd($request->all());
        try {
         $request->validate([
-            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url' => 'required|image|mimes:jpeg,png,jpg,gif|max:512',
             'judul' => 'required',
             'deskripsi' => 'required',
             'tanggal_upload' => 'required',
@@ -72,7 +72,7 @@ class GaleriCrudController extends Controller
     //    dd($request->all());
       try {
         $request->validate([
-            'url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
             'judul' => 'required',
             'deskripsi' => 'required',
             'tanggal_upload' => 'required',

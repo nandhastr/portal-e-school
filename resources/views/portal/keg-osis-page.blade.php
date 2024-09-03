@@ -12,10 +12,12 @@
                 <x-card-home class="card-body card-info card-outline card-home ">
                     <h1 class="text-center">Pengumuman</h1>
                     @if($pengumuman_osis_terbaru)
-                    @if($pengumuman_osis_terbaru->gambar)
-                    <img src="{{ asset('assets/img/kegiatan/' . $pengumuman_osis_terbaru->gambar) }}"
-                        class="card-img-top mb-3 img-pengumuman " alt="{{ $pengumuman_osis_terbaru->judul }}">
-                    @endif
+                        @if($pengumuman_osis_terbaru->gambar)
+                        <img src="{{ asset('assets/img/kegiatan/' . $pengumuman_osis_terbaru->gambar) }}"
+                            class="card-img-top mb-3 img-pengumuman " alt="{{ $pengumuman_osis_terbaru->judul }}">
+                            @else
+                            <img src="{{ asset('assets/img/kegiatan/default.jpeg') }}" class="card-img-top mb-3 img-pengumuman " alt="{{ $pengumuman_osis_terbaru->judul}}">
+                        @endif
                     <h5 class="card-title fw-bold text-pengumuman p-3">{{ $pengumuman_osis_terbaru->judul }}</h5>
                     <span class="p-3">Pelaksanaan acara :
                         @if ($pengumuman_osis_terbaru->tanggal)
@@ -41,24 +43,28 @@
             @foreach($osis as $item)
             <div class="col col-lg-3 col-md-4 col-12 mb-4">
                 <x-card-home class="card card-body card-info card-outline card-home">
-                    @if($item->gambar)
-                    <img src="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" class="card-img-top img-thumbnail"
-                        alt="{{ $item->judul }}" style="width: auto;">
-                    @else
-                    tidak ada gambar
-                    @endif
-                    <div class="">
-                        <h5 class="card-title fw-bold">{{ $item->judul }}</h5><br>
-                        <span>Pelaksanaan acara :
-                            @if ($item->tanggal)
-                            {{ $item->tanggal }}
-                            @else
-                            -
-                            @endif
-                        </span>
-                        <hr>
-                        <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal"
-                            data-target="#modal-detail-{{ $item->id }}">Lihat</button>
+                    <div class="row">
+                            <div class="col-6">
+                                @if($item->gambar)
+                                <img src="{{ asset('assets/img/kegiatan/' . $item->gambar) }}" class="card-img-top img-thumbnail"
+                                    alt="{{ $item->judul }}" style="width: auto;">
+                                @else
+                                <img src="{{ asset('assets/img/kegiatan/default.jpeg') }}" class="card-img-top img-thumbnail"
+                                    alt="{{ $item->judul }}" style="width: auto;">
+                                @endif
+                            </div>
+                            <div class="col-6">
+                                <h5 class="card-title fw-bold">{{ $item->judul }}</h5><br>
+                                <span>
+                                    @if ($item->tanggal)
+                                    {{ $item->tanggal }}
+                                    @else
+                                    -
+                                    @endif
+                                </span>
+                            </div>
+                            <button type="button" class="btn btn-primary mx-auto d-block" data-toggle="modal"
+                                data-target="#modal-detail-{{ $item->id }}">Lihat</button>
                     </div>
                 </x-card-home>
             </div>
@@ -90,7 +96,8 @@
                             <i class="fa-solid fa-download"></i>
                         </a>
                     @else
-                    <p>Tidak ada gambar</p>
+                    <img src="{{ asset('assets/img/kegiatan/default.jpeg') }}" class="card-img-top img-thumbnail" alt="{{ $item->judul }}"
+                        style="width: auto;">
                     @endif
                 </div>
                 <div class="text-center">

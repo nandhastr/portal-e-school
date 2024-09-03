@@ -2,20 +2,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-create">
-                                Tambah Data
-                            </button>
-                        </h3>
-
+                <div class="card card-header">
+                    <div class="card-title mt-2">
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
+                            Tambah Data
+                        </button>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
-
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                </div>
+                <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                    <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -74,6 +69,9 @@
                 <div class="modal-body">
                     <form id="dataForm" action="{{ route('data-struktur-store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                        <div class="d-flex justify-content-center align-items-center">
+                            <img src="{{ asset('assets/img/gift/loading.gif') }}" style="display: none; width: 100px;" class="loading">
+                        </div>
                         <div class="form-group">
                             <label for="id_guru">Nama</label>
                             <select name="id_guru" class="form-control @error('id_guru') is-invalid @enderror" required placeholder="Pilih Guru">

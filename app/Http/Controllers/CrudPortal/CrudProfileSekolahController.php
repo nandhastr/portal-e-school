@@ -31,7 +31,7 @@ class CrudProfileSekolahController extends Controller
 {
   
         $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:512',
             'kategori' => 'required',
             'konten' => 'required',
         ]);
@@ -66,7 +66,7 @@ class CrudProfileSekolahController extends Controller
     //    dd($request->all());
       try {
         $request->validate([
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
             'kategori' => 'required',
             'konten' => 'required',
         ]);
