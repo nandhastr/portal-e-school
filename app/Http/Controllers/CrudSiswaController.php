@@ -35,7 +35,7 @@ class CrudSiswaController extends Controller
         // dd($request->all());
         // Validasi input
         $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:512',
             'nisn' => 'required|unique:tbl_siswa,nisn',
             'id_kelas' => 'required',
             'name' => 'required',

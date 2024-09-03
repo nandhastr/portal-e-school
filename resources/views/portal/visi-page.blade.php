@@ -1,43 +1,44 @@
 <x-main.app class="navbar navbar-expand-lg ">
-    <div class="container container-fluid mt-5">
+    <div class="container container-fluid mt-4 p-4">
         <x-hr-gradient>
-            Visi Dan Misi
+            <h2 class="fw-bold">Visi & Misi</h2>
         </x-hr-gradient>
         @if ($visi && $misi -> isNotEmpty())
         <div class="row mt-3">
             {{-- visi --}}
             @if ($visi)
             @foreach ($visi as $vis)
-            <div class="col col-lg-6 col-md-6 col-12">
-                <h2 class="fw-bold">{{ $vis->kategori }}</h2>
+            <div class="col col-12">
+                <h3 class=" text-uppercase">{{ $vis->kategori }}</h3>
                 <p clas="text-justify p-visi">
                     {{ $vis->konten}}
                 </p>
             </div>
-
             @endforeach
             @else
             data kosong
             @endif
 
             {{-- misi --}}
-            @if ($misi)
-            @foreach ($misi as $mis)
-            <div class="col col-lg-6 col-md-6 col-12 mt-3">
-                <h2 class="fw-bold">{{ $mis->kategori }}</h2>
-                <p clas="text-justify p-misi">
-                    {{ $mis->konten}}
-                </p>
+            @if ($misi && $misi->count() > 0)
+            <div class="col-12 mt-3">
+                <ol class="list-misi">
+                    <h3 class=" text-uppercase">misi</h3>
+                    @foreach ($misi as $index => $mis)
+                    <li>
+                        <p class="text-justify p-misi">
+                            {{ $mis->konten }}
+                        </p>
+                    </li>
+                    @endforeach
+                </ol>
             </div>
-
-            @endforeach
             @else
-            data kosong
+            <x-image-not-data></x-image-not-data>
             @endif
-        </div>
+            @else
+            <p>Data visi atau misi kosong</p>
+            @endif
 
-        @else
-       <x-image-not-data></x-image-not-data>
-        @endif
-    </div>
+        </div>
 </x-main.app>

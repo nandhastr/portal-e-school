@@ -2,45 +2,36 @@
 
 namespace Database\Seeders;
 
-use App\Models\Guru;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class GuruSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Guru::create([
-            'nipn' => '123634636',
-            'user_id' => 3,
-            'photo' => 'guru1.jpg',
-            'gender' => 'Laki-laki',
-            'tempat_lahir' => 'Surabaya',
-            'tanggal_lahir' => '1980-10-20',
-            'alamat' => 'Jl. Kebon Sirih No. 789',
-            'phone' => '087654321098',
-            'pendidikan_terakhir' => 's2',
-            'spesialisasi' => 'Matematika',
-            'kualifikasi' => 'S2 Pendidikan Matematika',
-            'pengalaman' => '2 tahun',
-        ]);
+        $data = [];
 
-        Guru::create([
-            'nipn' => '145445463',
-            'user_id' => 3,
-            'photo' => 'guru2.jpg',
-            'gender' => 'Perempuan',
-            'tempat_lahir' => 'Semarang',
-            'tanggal_lahir' => '1975-03-15',
-            'alamat' => 'Jl. Diponegoro No. 123',
-            'phone' => '082345678901',
-            'pendidikan_terakhir' => 's1',
-            'spesialisasi' => 'Bahasa Inggris',
-            'kualifikasi' => 'S1 Pendidikan Bahasa Inggris',
-            'pengalaman' => '5 tahun',
-        ]);
+        for ($i = 1; $i <= 30; $i++) {
+            $genre = $i % 2 == 0 ? 'laki-laki' : 'Perempuan';
+            $nama = $genre == 'laki-laki' ? 'Guru Laki-laki ' . $i : 'Guru Perempuan ' . $i;
+
+            $data[] = [
+                'nip' => 'NIP' . str_pad($i, 6, '0', STR_PAD_LEFT),
+                'nama' => $nama,
+                'status' => $i % 3 == 0 ? 'Tetap' : 'Honorer',
+                'genre' => $genre,
+                'tempat_lahir' => $i % 2 == 0 ? 'Kota ' . $i : null,
+                'tanggal_lahir' => $i % 2 == 0 ? now()->subYears(rand(25, 40))->format('Y-m-d') : null,
+                'jabatan' => 'Guru ' . Str::random(5),
+                'email' => 'guru' . $i . '@sekolah.ac.id',
+                'telepon' => '0812' . rand(1000000, 9999999),
+                'gambar' => $i % 4 == 0 ? 'guru' . $i . '.jpg' : null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+
+        DB::table('tbl_guru')->insert($data);
     }
 }

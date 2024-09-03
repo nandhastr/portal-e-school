@@ -51,19 +51,37 @@
                 </li>
                 <li class="nav-item mx-3">
                     <div class="dropdown">
-                        <x-nav-link href="/album" class="nav-link {{ request()->is('album') ? 'navActive' : '' }} a-nav">
-                        GALERI FOTO
-                    </x-nav-link>
+                        <x-nav-link href="/album"
+                            class="nav-link {{ request()->is('album') ? 'navActive' : '' }} a-nav">
+                            GALERI FOTO
+                        </x-nav-link>
                     </div>
                 </li>
                 <li class="nav-item mx-3">
                     <div class="dropdown">
-                        <x-nav-link href="/keg-osis" class="nav-link {{ request()->is('keg-osis') ? 'navActive' : '' }} a-nav">
-                        KEGIATAN
-                    </x-nav-link>
+                        <x-nav-link href="/keg-osis"
+                            class="nav-link {{ request()->is('keg-osis') ? 'navActive' : '' }} a-nav">
+                            KEGIATAN
+                        </x-nav-link>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+{{-- @section('script')
+<script>
+    $(document).ready(function() {
+    $('.nav-item').hover(
+        function() { // Mouse enter
+            $(this).find('.dropdown-menu').stop(true, true).slideDown(300).animate({ opacity: 1 }, { queue: false, duration: 300 });
+        },
+        function() { // Mouse leave
+            $(this).find('.dropdown-menu').stop(true, true).slideUp(300).animate({ opacity: 0 }, { queue: false, duration: 300 });
+        }
+    );
+});
+
+</script>
+@endsection --}}

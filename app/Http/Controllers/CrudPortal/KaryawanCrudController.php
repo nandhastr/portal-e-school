@@ -33,7 +33,7 @@ class KaryawanCrudController extends Controller
         // dd($request->all());
        try {
         $request->validate([
-            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:512',
             'nip' => 'required',
                 'nama' => 'required',
                 'jabatan' => 'required',
@@ -85,7 +85,7 @@ class KaryawanCrudController extends Controller
     //    dd($request->all());
       try {
         $request->validate([
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
              'nip' => 'required',
                 'nama' => 'required',
                 'jabatan' => 'required',

@@ -1,52 +1,3 @@
-{{-- sidebar elearning --}}
-{{-- <ul class="nav nav-treeview">
-    <li class="nav-item">
-        <a href="{{ route('data-mapel-page') }}"
-            class="nav-link {{ request()->is('data-mapel-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Mata Pelajaran</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-kelas-page" class="nav-link {{ request()->is('data-kelas-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Kelas</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-siswa-page" class="nav-link {{ request()->is('data-siswa-page*') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Siswa/I</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-guru-page" class="nav-link {{ request()->is('data-guru-page*') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Guru</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-ruangan-page" class="nav-link {{ request()->is('data-ruangan-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Ruang kelas</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-penghargaan-page" class="nav-link {{ request()->is('data-penghargaan-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Penghargaan</p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="/data-kegiatan-page" class="nav-link {{ request()->is('data-kegiatan-page') ? 'active' : '' }}">
-            <i class="far fa-circle nav-icon"></i>
-            <p>Kegiatan</p>
-        </a>
-    </li>
-
-</ul> --}}
-
-
 
 {{-- sidebar portal --}}
 @if (Auth::user()->role == 'admin')
@@ -157,12 +108,12 @@
                 <p>Master Event Kalender</p>
             </a>
         </li>
-        {{-- <li class="nav-item">
+        <li class="nav-item">
             <a href="/data-slider" class="nav-link {{ request()->is('data-slider') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Master Gambar Slide</p>
             </a>
-        </li> --}}
+        </li>
     </ul>
 </li>
 @elseif (Auth::user()->role == 'osis')

@@ -2,19 +2,15 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-outline">
-                        <div class="card-header">
-                            <h3 class="card-title mt-2">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#modal-create">
-                                    Tambah Data
-                                </button>
-                            </h3>
-
-                        <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                            {{-- tabel mata pelajaran dashboard admin --}}
-
-                            <table id="example" class="table table-bordered table-hover text-xs text-center" style="width:100% ">
+                    <div class="card card-header">
+                        <div class="card-title mt-2">
+                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
+                                Tambah Data
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -72,8 +68,9 @@
                                     class="loading">
                             </div>
                             <div class="form-group">
-                                <label for="gambar">Gambar</label>
-                                <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar" required>
+                                <label for="gambar">Gambar</label> <br>
+                                <span><i class="text-sm">Ukuran Gambar : 1920x815, maks: 1mb !</i></span>
+                                <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar maks:1mb" required>
                                 <small id="gambar_error" class="text-red"></small>
                                 @error('gambar')
                                     <small class="text-red">{{ $message }}</small>
@@ -106,8 +103,9 @@
                                     class="loading">
                             </div>
                             <div class="form-group">
-                                <label for="gambar">Gambar</label>
-                                <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar"
+                                <label for="gambar">Gambar</label><br>
+                                <span><i class="text-sm">Ukuran Gambar : 1920x815, maks: 1mb !</i></span>
+                                <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar maks:1mb"
                                     value="{{old('file')}}">
                             </div>
                             <button type="button" class="btnEdit btn btn-primary">Ubah Data</button>
@@ -143,8 +141,9 @@
                                 <table class="table table-bordered">
                                     <tr>
                                         <th>Gambar</th>
-                                        <td><img src="{{ asset('assets/img/gambarSlide/' . $row->url) }}"
-                                                style="width: 100px; height: auto;" class="img-fluid"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="{{ asset('assets/img/gambarSlide/' . $row->gambar) }}" style="width: 200px; height: auto;" class="img-fluid"></td>
                                     </tr>
                                 </table>
                             </div>

@@ -3,11 +3,11 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="">
+            <a href="/data-siswa">
                 <div class="info-box">
                     <span class="info-box-icon bg-info"><i class="fa-solid fa-user-large"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Siswa</span>
+                        <span class="info-box-text">Data Siswa</span>
                         <span class="info-box-number">
                             @if ($siswa)
                             {{ $siswa }}
@@ -21,11 +21,11 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="">
+            <a href="/data-guru">
                 <div class="info-box ">
                     <span class="info-box-icon bg-success "><i class="fa-solid fa-user-tie"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Guru</span>
+                        <span class="info-box-text">Data Guru</span>
                         <span class="info-box-number">
                             @if ($guru)
                             {{ $guru }}
@@ -39,11 +39,11 @@
         </div>
         <div class="col-lg-3 col-6">
             <!-- small box -->
-            <a href="">
+            <a href="/data-alumni">
                 <div class="info-box ">
                     <span class="info-box-icon bg-warning"><i class="fa-solid fa-user-graduate"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Alumni</span>
+                        <span class="info-box-text">Data Alumni</span>
                         <span class="info-box-number">
                             @if ($alumni)
                             {{ $alumni }}

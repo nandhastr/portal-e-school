@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PortalModel\Guru;
+use Carbon\Carbon;
 
 use App\Models\PortalModel\Alumni;
 use App\Models\PortalModel\Galeri;
@@ -24,8 +25,8 @@ class portalController extends Controller
 
     public function index()
     {
-        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(6)->get();
-        $slide = Gambar_slide::orderBy('created_at', 'desc')->take(1)->get();
+        $pengumuman = Pengumuman::orderBy('created_at', 'desc')->take(8)->get();
+        $slide = Gambar_slide::all();
         $guruKepsek = Guru::where('jabatan', 'Kepala Sekolah')->first();
         $komponen = Komponen::all();
 
@@ -34,7 +35,7 @@ class portalController extends Controller
             'pengumuman_terbaru' => $pengumuman->first(),
             'pengumuman' => $pengumuman,
             'komponen' => $komponen,
-            'event'=>Event::all(),
+            'event'=> Event::all(),
             'slide'=> $slide,
             'kegiatan'=>Kegiatan::all(),
             'kepsek' => $guruKepsek,
@@ -211,7 +212,7 @@ class portalController extends Controller
 
     public function keg_osis()
     {
-         $osis = Kegiatan::orderBy('created_at', 'desc')->take(4)->where('kategori','osis')->get();
+         $osis = Kegiatan::orderBy('created_at', 'desc')->take(8)->where('kategori','osis')->get();
         $data = [
           
             'pengumuman_osis_terbaru' => $osis->first(),

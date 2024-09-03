@@ -2,37 +2,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-create">
+                <div class="card-outline">
+                    <div class="card card-header">
+                        <div class="card-title mt-2">
+                            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
                                 Tambah Data
                             </button>
-                        </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
                         </div>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
-
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                    <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                        <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -103,10 +82,12 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Gambar</label> <br>
+                            <span><i class="text-sm">File maks: 500kb !</i></span>
                             <input type="file" name="gambar" id="gambar"
-                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar"
+                                class="form-control @error('gambar') is-invalid @enderror" placeholder="Pilih Gambar maks:500kb"
                                 required>
+                                
                             <small id="gambar_error" class="text-red"></small>
                             @error('gambar')
                             <small class="text-red">{{ $message }}</small>
@@ -139,9 +120,11 @@
                                 class="loading">
                         </div>
                         <div class="form-group">
-                            <label for="gambar">Gambar</label>
+                            <label for="gambar">Gambar</label> <br>
+                            <span><i class="text-sm">File maks: 500kb !</i></span>
                             <input type="file" name="gambar" id="gambar" class="form-control"
-                                placeholder="Pilih Gambar">
+                                placeholder="Pilih Gambar maks:500kb">
+                                
                                 
                         </div>
                         <div class=" form-group">

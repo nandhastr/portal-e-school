@@ -34,7 +34,7 @@ class SliderCrudController extends Controller
         try {
             // Validasi gambar
             $request->validate([
-                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+                'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024'
             ]);
 
             // Proses gambar
@@ -53,38 +53,6 @@ class SliderCrudController extends Controller
         }
     }
 
-// public function update(Request $request, string $id)
-// {
-//     try {
-//         // Validasi gambar
-//         $request->validate([
-//             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048'
-//         ]);
-
-//         // Temukan record berdasarkan ID
-//         $gambarSlide = Gambar_slide::findOrFail($id);
-
-//         // Periksa apakah file gambar ada dalam request
-//         if ($request->hasFile('gambar')) {
-//             // Hapus gambar lama jika ada
-//             if ($gambarSlide->gambar && file_exists(public_path('assets/img/gambarSlide/' . $gambarSlide->gambar))) {
-//                 unlink(public_path('assets/img/gambarSlide/' . $gambarSlide->gambar));
-//             }
-
-//             // Simpan gambar baru
-//             $gambar = $request->file('gambar');
-//             $nama_gambar = date("YmdHis") . '-' . $gambar->getClientOriginalName();
-//             $gambar->move(public_path('assets/img/gambarSlide'), $nama_gambar);
-//             $gambarSlide->gambar = $nama_gambar;
-//         }
-
-//         // Simpan ke database
-//         $gambarSlide->save();
-
-//         return redirect()->back()->with('success', 'Data');
-//     }
-// }
-
     /**
      * Update the specified resource in storage.
      */
@@ -93,7 +61,7 @@ class SliderCrudController extends Controller
     //    dd($request->all());
       try {
         $request->validate([
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1048',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         ]);
 
         // Temukan record berdasarkan ID

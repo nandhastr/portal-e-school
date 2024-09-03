@@ -2,37 +2,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-create">
-                                Tambah Data
-                            </button>
-                        </h3>
-
-                        <div class="card-tools">
-                            {{-- <div class="input-group mt-2">
-                                <form action="{{ route('subjectDashboard')}}" method="GET">
-                                    @csrf
-                                    <div class="input-group">
-                                        <input type="text" name="search" class="form-control float-right"
-                                            placeholder="Search" value="{{ $request->get('search') }}">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">
-                                                <i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div> --}}
-                        </div>
+               <div class="card card-header">
+                    <div class="card-title mt-2">
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
+                            Tambah Data
+                        </button>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
-
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                </div>
+                <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                    <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>
@@ -51,8 +29,12 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
+                                        @if(!empty($row->gambar))
+                                            <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}"
                                             style="width: 50px; height: auto;" class="img-fluid">
+                                        @else
+                                            <img src="{{ asset('assets/img/pengumuman/default.jpeg') }}" style="width: 200px; height: auto;" class="img-fluid mt-2">
+                                        @endif
                                     </td>
                                     <td>{{ $row->judul }}</td>
                                     <td>{{ $row->tanggal }}</td>
@@ -101,6 +83,12 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label for="judul">Judul Pengumuman</label>
+                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
+                                        placeholder="Enter Judul Pengumuman"></textarea>
+                                    <small id="judul_error" class="text-red"></small>
+                                </div>
+                                <div class="form-group">
                                     <label for="tempat">Tempat</label>
                                     <textarea name="tempat" id="tempat" cols="30" class="form-control" required
                                         placeholder="Enter tempat Pengumuman"></textarea>
@@ -118,12 +106,7 @@
                                         required>
                                     <small id="waktu_error" class="text-red"></small>
                                 </div>
-                                <div class="form-group">
-                                    <label for="judul">Judul Pengumuman</label>
-                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                        placeholder="Enter Judul Pengumuman"></textarea>
-                                    <small id="judul_error" class="text-red"></small>
-                                </div>
+                                
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
@@ -133,8 +116,9 @@
                                     <small id="keterangan_error" class="text-red"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="gambar">Gambar</label>
-                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar" required>
+                                    <label for="gambar">Gambar</label> <br>
+                                    <span><i class="text-sm">File maks: 500kb !</i></span>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar maks:500kb" required>
                                     <small id="gambar_error" class="text-red"></small>
                                 
                                     @error('gambar')
@@ -171,6 +155,11 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label for="judul">Judul Pengumuman</label>
+                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
+                                        placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="tempat">Tempat</label>
                                     <textarea name="tempat" id="tempat" cols="30" class="form-control" required
                                         placeholder="Enter tempat Pengumuman">{{$row->tempat}}</textarea>
@@ -185,11 +174,7 @@
                                     <input type="date" name="tanggal" id="tanggal" class="form-control"
                                         placeholder="Pilih tanggal" required value="{{ $row->tanggal }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="judul">Judul Pengumuman</label>
-                                    <textarea name="judul" id="judul" cols="30" class="form-control" required
-                                        placeholder="Enter Judul Pengumuman">{{$row->judul}}</textarea>
-                                </div>
+                                
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
@@ -198,12 +183,14 @@
                                         required placeholder="Enter keterangan Pengumuman">{{$row->keterangan}}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="gambar">Gambar</label>
-                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar">
+                                    <label for="gambar">Gambar</label> <br>
+                                    <span><i class="text-sm">File maks: 500kb !</i></span>
+                                    <input type="file" name="gambar" id="gambar" class="form-control" placeholder="Pilih Gambar maks:500kb">
                                     @if ($row->gambar)
-                                    <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}" style="width: 100px; height: auto;"
+                                    <img src="{{ asset('assets/img/pengumuman/' . $row->gambar) }}" style="width: 200px; height: auto;"
                                         class="img-fluid mt-2">
                                     @endif
+                                    
                                 </div>
                             </div>
                             <button type="butoon" class="btnEdit btn btn-primary">Ubah Pengumuman</button>

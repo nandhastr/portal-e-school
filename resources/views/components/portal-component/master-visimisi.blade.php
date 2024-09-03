@@ -2,19 +2,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card card-outline">
-                    <div class="card-header">
-                        <h3 class="card-title mt-2">
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#modal-create">
-                                Tambah Data
-                            </button>
-                        </h3>
+                <div class="card card-header">
+                    <div class="card-title mt-2">
+                        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#modal-create">
+                            Tambah Data
+                        </button>
                     </div>
-                    <div class="card-body " style="max-height: calc(100vh - 200px); overflow-y: auto;">
-                        {{-- tabel mata pelajaran dashboard admin --}}
-
-                        <table id="example" class="display table-hover text-xs" style="width:100%">
+                </div>
+                <div class="card-body p-3" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                    <table id="example" class="display text-xs table table-bordered table-hover" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No.</th>

@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     // Animasi card dan img
     const $elements = $(
-        ".card, .h-sejarah, .p-sejarah, .img-sejarah, .h-berjualan, .p-berjualan, .h-cuan, .p-cuan, .h-market, .p-market, .p-misi, .p-visi, .p-map, .p-about"
+        ".card, .galeri, .h-sejarah, .p-sejarah, .img-sejarah, .h-berjualan, .p-berjualan, .h-cuan, .p-cuan, .h-market, .p-market, .p-misi, .p-visi, .p-map, .p-about"
     );
 
     function isInViewport($element) {
